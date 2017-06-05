@@ -15,32 +15,46 @@ import view.LeapUIApp;
 
 
 public class Control extends Controller {
-	
+	//put fields up here
+
+	static int dataLimit = 10000; //0.01s; time limit between data points
+	static int displayLimit = 10000; //0.01s; framelimit
+	static int testLimit = 30000000; // 30s; maximum time allowed for test
+	static double testThreshold = 0.9; // minimum score to end test; max score is 1
+
+	private long dataStamp;
+	private long displayStamp;
+	private boolean selecting = false;
+
+	FrameStore model;
+	Comparer comparer = new Comparer();
+	private ControlListener controlListener;
+	public Hand testHand = new Hand();
+	public boolean freeMode = true;			//is only true during freemode
+
+	private boolean countdown = false;
+	private long countdownStart;
+	static double countdownTime = 1000000; // 1s; time user must maintain hand for
+	private double finalscore=0;
+	private long finaltime;
+	private boolean success;
+	private double maxscore=0;
+
+	private long testTime = 0;
+	private boolean timeTracked = false;
+
+
+	//put methods here
 	public Control() {
 		super();
 		controlListener = new ControlListener(this);
 		addListener(controlListener);		
 	}
 	
-	static int dataLimit = 10000; //0.01s; time limit between data points
-	static int displayLimit = 10000; //0.01s; framelimit
-	static int testLimit = 30000000; // 30s; maximum time allowed for test
-	static double testThreshold = 0.9; // minimum score to end test; max score is 1
-	FrameStore model;
-	Comparer comparer = new Comparer();
-	private ControlListener controlListener;
-	public Hand testHand = new Hand();
-	public boolean freeMode = true;			//is only true during freemode
-		
-	private boolean countdown = false;
-	private long countdownStart;
-	static double countdownTime = 1000000; // 1s; time user must maintain hand for 
-	private double finalscore=0;
-	private long finaltime;
-	private boolean success;
-	private double maxscore=0;
+
+
 			
-	public void select() { // grab hand and start test
+	public void select() { // grab hand and start test. *what does "grab" hand mean?
 		Hand h = new Hand();
 		try {
 			ArrayList<Hand> arrayHands = SerializedTargetHand.getAllHands();
@@ -51,8 +65,7 @@ public class Control extends Controller {
 		if (h.isValid()) staticStart(h); 
 	}
 	
-	private long testTime = 0;
-	private boolean timeTracked = false; 
+
 	public void staticStart(Hand storedHand){
 		System.out.println("test start");
 		testHand = storedHand; 
@@ -72,16 +85,15 @@ public class Control extends Controller {
 		freeMode = true; 
 	}
 
-	private long dataStamp;
-	private long displayStamp;
-	private boolean selecting = false;	
+
 	public void enterTrainingMode(){
 		selecting = true;
-		select();
+		select();					//is this method the selection process?
 		freeMode=false;
 		selecting = false;
 	}		
-	
+
+	//method that executes on each incoming frame received by the controller
 	public void receive(Frame inFrame) {
 		long timestamp = inFrame.timestamp();		
 		if (selecting){}
@@ -155,8 +167,8 @@ class ControlListener extends Listener{
 	}
 
 	@Override
-	public void onFrame(Controller controller) { // action upon receiving frame
-		Frame inFrame = controller.frame();
-		control.receive(inFrame);
+	public void onFrame(Controller controller) { 	// action upon receiving frame
+		Frame inFrame = controller.frame(); 		//incoming frame
+		control.receive(inFrame);					//execute this method on the incoming frame
 	}
 }

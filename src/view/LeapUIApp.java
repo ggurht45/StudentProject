@@ -48,7 +48,7 @@ public class LeapUIApp extends Application {
 	private static Button testButton;   // a button to transition from free mode to training mode
 	private static Text scoreText;      // displays the user's score at the end of a test
 	private static Text timeText;       // displays the time a user took at the end of a test
-	private static Control control;
+	private static Control control; 		//the controller object
 	private static Hand latestHand = null; // For recording target hands, disable in release version
 //	private Controller leapDevice; // XXX testing purposes only
 	
@@ -91,6 +91,7 @@ public class LeapUIApp extends Application {
 		
 		testButton = new Button("Enter Test Mode") {
 			@Override public void fire() {
+				System.out.println("* entering test mode btn clicked");
 				setVisible(false);
 				userHand.setVisible(false);
 				new Thread( () -> control.enterTrainingMode() ).start();

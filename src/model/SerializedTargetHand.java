@@ -38,6 +38,8 @@ public class SerializedTargetHand{
     	printer.println(fileName);
     	printer.close();
 	}
+
+	//this method reads a .hand file. given a path string that tells where to find that .hand file
 	public static Hand readFromFile(String s) throws FileNotFoundException, IOException {
 		Controller controller = new Controller(); //An instance must exist
 		byte[] frameBytes = Files.readAllBytes(Paths.get(s));
