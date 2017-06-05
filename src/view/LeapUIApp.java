@@ -128,7 +128,7 @@ public class LeapUIApp extends Application {
 						//showImage()
 						FingerList fingersInFrame = f.fingers();
 						System.out.println("number of fingers: \n" + fingersInFrame.count());
-						System.out.println("extened fingers: \n" + fingersInFrame.extended().count());
+						System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
 
 
 						SerializedTargetHand.Save(latestHand.frame());
