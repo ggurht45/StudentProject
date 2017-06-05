@@ -32,6 +32,7 @@ import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
 import com.leapmotion.leap.Hand;
+import com.leapmotion.leap.*;
 
 import controller.Control;
 
@@ -121,6 +122,15 @@ public class LeapUIApp extends Application {
 			public void handle(KeyEvent keyEvent) {
 				if (keyEvent.getCode() == KeyCode.ENTER)
 					try {
+						System.out.println("enter was pressed, saving target hand.");
+						Frame f = latestHand.frame();
+						System.out.println("frame: \n" + f.toString());//enter was pressed, saving target hand.");
+						//showImage()
+						FingerList fingersInFrame = f.fingers();
+						System.out.println("number of fingers: \n" + fingersInFrame.count());
+						System.out.println("extened fingers: \n" + fingersInFrame.extended().count());
+
+
 						SerializedTargetHand.Save(latestHand.frame());
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
