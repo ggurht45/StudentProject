@@ -125,7 +125,7 @@ public class LeapUIApp extends Application {
 						System.out.println("enter was pressed, saving target hand.");
 						Frame f = latestHand.frame();
 						System.out.println("frame: \n" + f.toString());//enter was pressed, saving target hand.");
-						//showImage()
+						//showImage();
 						FingerList fingersInFrame = f.fingers();
 						System.out.println("number of fingers: \n" + fingersInFrame.count());
 						System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
