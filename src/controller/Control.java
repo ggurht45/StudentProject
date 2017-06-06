@@ -58,6 +58,7 @@ public class Control extends Controller {
             ArrayList<Hand> arrayHands = SerializedTargetHand.getAllHands();
             h = LeapUIApp.selectHand(arrayHands);
         } catch (Exception e) {
+            System.out.println("** Error happened while trying to select hand.");
             e.printStackTrace();
         }
         if (h.isValid()) staticStart(h);
@@ -95,7 +96,8 @@ public class Control extends Controller {
     public void receive(Frame inFrame) {
         long timestamp = inFrame.timestamp();
         if (selecting) {
-        } //do nothing with frame received
+            //do nothing with frame received, because in the process of selecting hand
+        }
         else if (freeMode) {
             if ((timestamp - displayStamp) > displayLimit) {
                 if (inFrame.hands().count() == 0) LeapUIApp.setUser(null, 0);
