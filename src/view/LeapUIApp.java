@@ -315,6 +315,8 @@ public class LeapUIApp extends Application {
             prevButton.setPrefSize(width / 4, height);
             prevButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
+
+            //things are starting to click. ^^
             confirmButton = new Button("Begin Test") {
                 @Override
                 public void fire() {
@@ -344,17 +346,28 @@ public class LeapUIApp extends Application {
         //this is a synchronized method... nb
         public synchronized Hand select(ArrayList<Hand> arrayList) throws InterruptedException {
             confirmed = false;
-            index = 0;
+            index = 0; //set to zero. does not change in this method.
             targets = arrayList;
             if (targets != null && targets.size() > 0) {
                 //lambda annonymous function defined here. takes no arguments, and does the code int the brackets
                 Platform.runLater(() -> {
-                    targetHand.setLoc(targets.get(index));
+                    targetHand.setLoc(targets.get(index)); //takes the 0th hand and assigns it using setLoc
                     targetHand.setVisible(true);
-                }); // **set local variables**
-                while (!confirmed) wait();
+                });
+                // **set local variables**
+                //waits until user clicks a button to say "begin test" then we can be sure this hand has been selected.
+                //still a little confused about the Platform.runLater but maybe debugging will help
+                while (!confirmed) {
+                    wait();
+                }
+                //the wait is over, selection was confirmed. can return the selected hand
                 return targets.get(index);
-            } else return null;
+
+            }
+            //returning null cuz the arraylist passed in was null or empty
+            else {
+                return null;
+            }
         }
 
         synchronized void confirm() {
@@ -379,7 +392,7 @@ public class LeapUIApp extends Application {
         }
 
 		/* also have keyboard listeners attached to scene to turn KeyCode.LEFT and .RIGHT into prevButton.click and nextButton.click respectively
-		 *     
+         *
 		 *     for Java wait/notify, wait() and notifyAll() must both be in synchronized blocks
 		 *     
 		 *     synchronized(sBar) { doStuff(); sBar.wait(); continueStuff(); }

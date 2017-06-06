@@ -83,8 +83,12 @@ public class UIHand_Simple extends UIHand {
 		
 	}
 
+
+	//this is the method that gets called from LeapUI, cuz the program uses Simple Hand rather than Full hand.
+	//takes a hand object and sets some fingers and other stuff?
 	@Override
 	public void setLoc(Hand hand) {
+		System.out.println("* setLoc called from UIHand_Simple");
 		Vector[] knuckles = new Vector[5];
 		Vector pinkyBase = new Vector();
 		
