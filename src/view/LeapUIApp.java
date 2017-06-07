@@ -35,6 +35,8 @@ import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.*;
 
 import controller.Control;
+import controller.Control2;
+import controller.ControllerInterface;
 
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
@@ -48,8 +50,12 @@ public class LeapUIApp extends Application {
     private static Button testButton;   // a button to transition from free mode to training mode
     private static Text scoreText;      // displays the user's score at the end of a test
     private static Text timeText;       // displays the time a user took at the end of a test
-    private static Control control;        //the controller object
+    private static ControllerInterface control;        //the controller object
     private static Hand latestHand = null; // For recording target hands, disable in release version
+
+    private static boolean DEVELOPER_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
+
+
 //	private Controller leapDevice; // XXX testing purposes only
 
     public static void main(String[] args) {
@@ -118,11 +124,16 @@ public class LeapUIApp extends Application {
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         Scene scene = new Scene(root);
 
+        //create references for the 2 different controls
+        Control ctrl1 = new Control();
+        Control2 ctrl2 = new Control2();
+
+
         // TODO For recording target hands, disable in release version
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER)
+                if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         System.out.println("enter was pressed, saving target hand.");
                         Frame f = latestHand.frame();
@@ -138,7 +149,42 @@ public class LeapUIApp extends Application {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                if (keyEvent.getCode() == KeyCode.M)
+                }
+                if (keyEvent.getCode().isDigitKey()) {
+                    try {
+                        System.out.println("0 KEY was pressed,gonna save into correct folder");
+                        Frame f = latestHand.frame();
+                        System.out.println("frame: \n" + f.toString());
+                        //showImage();
+                        FingerList fingersInFrame = f.fingers();
+                        System.out.println("number of fingers: \n" + fingersInFrame.count());
+                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+
+
+                        SerializedTargetHand.Save2(latestHand.frame(),"0","typeA");
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                if (keyEvent.getCode() == KeyCode.D) {
+                    try {
+                        System.out.println("D was pressed, going into developer mode");
+                        //try setting control dynamically
+                        if(!DEVELOPER_MODE){
+                            System.out.println("setting control to ctrl1 dynamically");
+                            DEVELOPER_MODE = true;
+                            control = ctrl1;
+                        }else{
+                            System.out.println("setting control to ctrl2222 dynamically");
+                            DEVELOPER_MODE = false;
+                            control = ctrl2;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (keyEvent.getCode() == KeyCode.M) {
                     new Thread(() -> {
                         try {
                             selectHand(SerializedTargetHand.getAllHands());
@@ -147,12 +193,21 @@ public class LeapUIApp extends Application {
                             e.printStackTrace();
                         }
                     }).start();
-            }
+                }
+            }//END      public void handle(KeyEvent keyEvent) method
         });
 
         stage.setScene(scene);
         stage.show();
-        control = new Control();
+
+        //set control based on initial value of DEVELOPER_MODE
+        if(DEVELOPER_MODE){
+            System.out.println("setting to control...(inital setting) ");
+            control = ctrl1;
+        }else{
+            System.out.println("setting to control2--- (inital setting)");
+            control = ctrl2;
+        }
     }
 
     @Override

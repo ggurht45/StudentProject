@@ -14,7 +14,7 @@ import model.SerializedTargetHand;
 import view.LeapUIApp;
 
 
-public class Control extends Controller {
+public class Control extends Controller implements ControllerInterface {
     //put fields up here
 
     static int dataLimit = 10000; //0.01s; time limit between data points
@@ -51,6 +51,13 @@ public class Control extends Controller {
         addListener(controlListener);
     }
 
+    public void enterTrainingMode() {
+        System.out.println("enterTrainingMode called inside Control");
+        selecting = true;
+        select();                    //is this method the selection process?
+        freeMode = false;
+        selecting = false;
+    }
 
     public void select() { // grab hand and start test. *what does "grab" hand mean?
         Hand h = new Hand();
@@ -61,7 +68,9 @@ public class Control extends Controller {
             System.out.println("** Error happened while trying to select hand.");
             e.printStackTrace();
         }
-        if (h.isValid()) staticStart(h);
+        if (h.isValid()) {
+            staticStart(h);
+        }
     }
 
 
@@ -85,20 +94,14 @@ public class Control extends Controller {
     }
 
 
-    public void enterTrainingMode() {
-        selecting = true;
-        select();                    //is this method the selection process?
-        freeMode = false;
-        selecting = false;
-    }
+
 
     //method that executes on each incoming frame received by the controller
     public void receive(Frame inFrame) {
         long timestamp = inFrame.timestamp();
         if (selecting) {
             //do nothing with frame received, because in the process of selecting hand
-        }
-        else if (freeMode) {
+        } else if (freeMode) {
             if ((timestamp - displayStamp) > displayLimit) {
                 if (inFrame.hands().count() == 0) LeapUIApp.setUser(null, 0);
                 else for (Hand h : inFrame.hands()) {

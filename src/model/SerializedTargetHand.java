@@ -20,57 +20,69 @@ import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Controller;
 
 
+public class SerializedTargetHand {
+    public static final int MAX_FRAMES = 10;
+    private static final String hands_file = "TargetHands.txt";
 
-public class SerializedTargetHand{
-	public static final int  MAX_FRAMES = 10; 
-	private static final String hands_file = "TargetHands.txt";
-	
-	
-	public static void Save(Frame f) throws IOException
-	{
-	   	Calendar cal = Calendar.getInstance();
-    	cal.getTime();
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-    	String fileName="targets/" + sdf.format(cal.getTime() ) + ".hand";
-    	byte[] serializedFrame = f.serialize();
-    	Files.write(Paths.get(fileName), serializedFrame);
-    	PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
-    	printer.println(fileName);
-    	printer.close();
-	}
 
-	//this method reads a .hand file. given a path string that tells where to find that .hand file
-	public static Hand readFromFile(String s) throws FileNotFoundException, IOException {
-		Controller controller = new Controller(); //An instance must exist
-		byte[] frameBytes = Files.readAllBytes(Paths.get(s));
+    public static void Save(Frame f) throws IOException {
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        String fileName = "targets/" + sdf.format(cal.getTime()) + ".hand";
+        byte[] serializedFrame = f.serialize();
+        Files.write(Paths.get(fileName), serializedFrame);
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
+        printer.println(fileName);
+        printer.close();
+    }
 
-		Frame reconstructedFrame = new Frame();
-		reconstructedFrame.deserialize(frameBytes);
-		
-		return reconstructedFrame.hands().leftmost();
-	}
-	
-	public static ArrayList<Hand> getAllHands() throws Exception {
-		
-		File inFile = new  File(hands_file);
-		if (!inFile.exists()) 
-			throw new Exception("In file not found :"+hands_file); // No input file
-		
-		BufferedReader br = new BufferedReader(new FileReader( inFile));
-		
-		ArrayList<Hand> hands=new ArrayList<Hand>();
+    //use this function to save to a specific folder.
+    public static void Save2(Frame f, String outFolder, String typeOfGesture) throws IOException {
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        //store in dataOutput/<outFolder>/<typeOfGesture>_<DateTime>.hand
+        String fileName = "dataOutput/" + outFolder + "/" + typeOfGesture + "_" + sdf.format(cal.getTime()) + ".hand";
+        byte[] serializedFrame = f.serialize();
+        Files.write(Paths.get(fileName), serializedFrame);
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
+        printer.println(fileName);
+        printer.close();
+    }
 
-		try {
-		     String line = br.readLine();
-		     while (line != null) {
-		    	 	hands.add(readFromFile(line));
-		            line = br.readLine();
-		      }
-		    } finally {
-		        br.close();
-		 }
-		return hands;
-		
-	}
-	
+    //this method reads a .hand file. given a path string that tells where to find that .hand file
+    public static Hand readFromFile(String s) throws FileNotFoundException, IOException {
+        Controller controller = new Controller(); //An instance must exist
+        byte[] frameBytes = Files.readAllBytes(Paths.get(s));
+
+        Frame reconstructedFrame = new Frame();
+        reconstructedFrame.deserialize(frameBytes);
+
+        return reconstructedFrame.hands().leftmost();
+    }
+
+    public static ArrayList<Hand> getAllHands() throws Exception {
+
+        File inFile = new File(hands_file);
+        if (!inFile.exists())
+            throw new Exception("In file not found :" + hands_file); // No input file
+
+        BufferedReader br = new BufferedReader(new FileReader(inFile));
+
+        ArrayList<Hand> hands = new ArrayList<Hand>();
+
+        try {
+            String line = br.readLine();
+            while (line != null) {
+                hands.add(readFromFile(line));
+                line = br.readLine();
+            }
+        } finally {
+            br.close();
+        }
+        return hands;
+
+    }
+
 }

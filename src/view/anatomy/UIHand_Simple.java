@@ -88,7 +88,7 @@ public class UIHand_Simple extends UIHand {
 	//takes a hand object and sets some fingers and other stuff?
 	@Override
 	public void setLoc(Hand hand) {
-		System.out.println("* setLoc called from UIHand_Simple");
+		//System.out.println("* setLoc called from UIHand_Simple");
 		Vector[] knuckles = new Vector[5];
 		Vector pinkyBase = new Vector();
 		
