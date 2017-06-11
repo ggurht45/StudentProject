@@ -144,6 +144,7 @@ public class Control extends Controller implements ControllerInterface {
                 timeTracked = true;
             }
 
+            //the sequence of updating display to show current hand position; changes based on the displayLimit
             if ((timestamp - displayStamp) > displayLimit) {
                 if (inFrame.hands().count() == 0) {
                     LeapUIApp.setUser(null, 0);
