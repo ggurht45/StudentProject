@@ -53,7 +53,7 @@ public class LeapUIApp extends Application {
     private static ControllerInterface control;        //the controller object
     private static Hand latestHand = null; // For recording target hands, disable in release version
 
-    private static boolean DEVELOPER_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
+    private static boolean AUTOMATIC_MODE = true; //developer mode is the one that shows the accuracy bar and the time.
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -101,6 +101,7 @@ public class LeapUIApp extends Application {
                 System.out.println("* entering test mode btn clicked");
                 setVisible(false);
                 userHand.setVisible(false);
+                //makes a new thread, passing it a lambda function and then it calls start on that thread.
                 new Thread(() -> control.enterTrainingMode()).start();
             }
         };
@@ -171,13 +172,13 @@ public class LeapUIApp extends Application {
                     try {
                         System.out.println("D was pressed, going into developer mode");
                         //try setting control dynamically
-                        if(!DEVELOPER_MODE){
+                        if(!AUTOMATIC_MODE){
                             System.out.println("setting control to ctrl1 dynamically");
-                            DEVELOPER_MODE = true;
+                            AUTOMATIC_MODE = true;
                             control = ctrl1;
                         }else{
                             System.out.println("setting control to ctrl2222 dynamically");
-                            DEVELOPER_MODE = false;
+                            AUTOMATIC_MODE = false;
                             control = ctrl2;
                         }
                     } catch (Exception e) {
@@ -201,11 +202,11 @@ public class LeapUIApp extends Application {
         stage.show();
 
         //set control based on initial value of DEVELOPER_MODE
-        if(DEVELOPER_MODE){
-            System.out.println("setting to control...(inital setting) ");
+        if(AUTOMATIC_MODE){
+            System.out.println("Using control for automatic mode");
             control = ctrl1;
         }else{
-            System.out.println("setting to control2--- (inital setting)");
+            System.out.println("using control2 for manual mode");
             control = ctrl2;
         }
     }
