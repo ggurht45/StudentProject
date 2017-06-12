@@ -129,7 +129,7 @@ public class LeapUIApp extends Application {
         Scene scene = new Scene(root);
 
         //create references for the 2 different controls
-//        Control ctrl1 = new Control();
+        Control ctrl1 = new Control();
         Control2 ctrl2 = new Control2();
 
 
@@ -178,7 +178,7 @@ public class LeapUIApp extends Application {
                         if(!AUTOMATIC_MODE){
                             System.out.println("setting control to ctrl1 dynamically");
                             AUTOMATIC_MODE = true;
-//                            control = ctrl1;
+                            control = ctrl1;
                         }else{
                             System.out.println("setting control to ctrl2222 dynamically");
                             AUTOMATIC_MODE = false;
@@ -207,7 +207,7 @@ public class LeapUIApp extends Application {
         //set control based on initial value of DEVELOPER_MODE
         if(AUTOMATIC_MODE){
             System.out.println("Using control for automatic mode");
-//            control = ctrl1;
+            control = ctrl1;
         }else{
             System.out.println("using control2 for manual mode");
             control = ctrl2;
