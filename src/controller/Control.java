@@ -17,6 +17,8 @@ import view.LeapUIApp;
 public class Control extends Controller implements ControllerInterface {
     //put fields up here
 
+    private boolean automaticMode;
+
     //one second seems to have 6 zeros.
     static int dataLimit = 10000; //0.01s; time limit between data points
     static int displayLimit = 10000; //0.01s; framelimit
@@ -50,6 +52,15 @@ public class Control extends Controller implements ControllerInterface {
         super();
         controlListener = new ControlListener(this);
         addListener(controlListener);
+    }
+
+
+    public boolean isAutomaticMode() {
+        return automaticMode;
+    }
+
+    public void setAutomaticMode(boolean automaticMode) {
+        automaticMode = automaticMode;
     }
 
     public void enterTrainingMode() {
@@ -205,6 +216,11 @@ class ControlListener extends Listener {
     @Override
     public void onFrame(Controller controller) {    // action upon receiving frame
         Frame inFrame = controller.frame();        //incoming frame
-        control.receive(inFrame);                    //execute this method on the incoming frame
+        if (control.isAutomaticMode()) {
+            control.receive(inFrame);                    //execute this method on the incoming frame
+        } else {
+            //don't execute the recieve method
+        }
+
     }
 }

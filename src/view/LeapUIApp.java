@@ -52,9 +52,11 @@ public class LeapUIApp extends Application {
     private static Text scoreText;      // displays the user's score at the end of a test
     private static Text timeText;       // displays the time a user took at the end of a test
     private static ControllerInterface control;        //the controller object
+    private static Control ctrl1;
+    private static Control2 ctrl2;
     private static Hand latestHand = null; // For recording target hands, disable in release version
 
-    private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
+    private static boolean AUTOMATIC_MODE; //developer mode is the one that shows the accuracy bar and the time.
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -129,8 +131,8 @@ public class LeapUIApp extends Application {
         Scene scene = new Scene(root);
 
         //create references for the 2 different controls
-        Control ctrl1 = new Control();
-        Control2 ctrl2 = new Control2();
+        ctrl1 = new Control();
+        ctrl2 = new Control2();
 
 
         // TODO For recording target hands, disable in release version
@@ -177,12 +179,14 @@ public class LeapUIApp extends Application {
                         //try setting control dynamically
                         if(!AUTOMATIC_MODE){
                             System.out.println("setting control to ctrl1 dynamically");
-                            AUTOMATIC_MODE = true;
-                            control = ctrl1;
+                            setAutomaticMode(true);
+//                            AUTOMATIC_MODE = true;
+//                            control = ctrl1;
                         }else{
                             System.out.println("setting control to ctrl2222 dynamically");
-                            AUTOMATIC_MODE = false;
-                            control = ctrl2;
+                            setAutomaticMode(false);
+//                            AUTOMATIC_MODE = false;
+//                            control = ctrl2;
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -204,7 +208,8 @@ public class LeapUIApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //set control based on initial value of DEVELOPER_MODE
+        //set control based on initial value of AUTOMATIC_MODE
+        setAutomaticMode(true);
         if(AUTOMATIC_MODE){
             System.out.println("Using control for automatic mode");
             control = ctrl1;
@@ -220,6 +225,19 @@ public class LeapUIApp extends Application {
         System.exit(0);
     }
 
+    private void setAutomaticMode(boolean b){
+        System.out.println("setting automatic mode to : " + b);
+        if(b){
+            AUTOMATIC_MODE = true;
+            ctrl1.setAutomaticMode(true);
+            ctrl2.setAutomaticMode(true);
+        }
+        else{
+            AUTOMATIC_MODE = false;
+            ctrl1.setAutomaticMode(false);
+            ctrl2.setAutomaticMode(false);
+        }
+    }
 
     public static void startStaticTest(Hand h) {
         Platform.runLater(new StaticStartTask(h));

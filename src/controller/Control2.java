@@ -16,6 +16,7 @@ import view.LeapUIApp;
 
 public class Control2 extends Controller implements ControllerInterface {
     //put fields up here
+    private boolean automaticMode;
 
     static int dataLimit = 10000; //0.01s; time limit between data points
     static int displayLimit = 10000; //0.01s; framelimit
@@ -49,6 +50,14 @@ public class Control2 extends Controller implements ControllerInterface {
         super();
         controlListener = new ControlListener2(this);
         addListener(controlListener);
+    }
+
+    public boolean isAutomaticMode() {
+        return automaticMode;
+    }
+
+    public void setAutomaticMode(boolean automaticMode) {
+        automaticMode = automaticMode;
     }
 
     public void enterTrainingMode() {
@@ -175,6 +184,12 @@ class ControlListener2 extends Listener {
     @Override
     public void onFrame(Controller controller) {    // action upon receiving frame
         Frame inFrame = controller.frame();        //incoming frame
-        control.receive(inFrame);                    //execute this method on the incoming frame
+
+        //only execute the recieve method in manual mode
+        if (!control.isAutomaticMode()) {
+            control.receive(inFrame);                    //execute this method on the incoming frame
+        } else {
+            //don't execute the recieve method
+        }
     }
 }
