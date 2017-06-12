@@ -579,12 +579,30 @@ public class LeapUIApp extends Application {
 //        }
 
         synchronized void save() {
-            //save data
-            System.out.println("saving data");
+            try{
+                //save data
+                System.out.println("saving data ************");
+                Frame f = latestHand.frame();
+                System.out.println("frame: \n" + f.toString());
+                //showImage();
+                FingerList fingersInFrame = f.fingers();
+                System.out.println("number of fingers: \n" + fingersInFrame.count());
+                System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+
+
+                SerializedTargetHand.Save2(latestHand.frame(),"General","typeX");
+                System.out.println("saving data END ************");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
 
         synchronized void endTesting() {
             System.out.println("ending test mode");
+            control.staticEnd();
+            this.setVisible(false);
+            System.out.println("ending test mode END");
         }
 
         synchronized void prevHand() {

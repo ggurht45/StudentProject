@@ -19,3 +19,7 @@ targets/2015-05-05 08-19-29.hand
 targets/2017-06-06 06-53-33.hand
 targets/2017-06-06 06-55-07.hand
 dataOutput/0/typeA_2017-06-06 18-13-19.hand
+dataOutput/General/typeX_2017-06-12 08-51-14.hand
+dataOutput/General/typeX_2017-06-12 08-51-17.hand
+dataOutput/General/typeX_2017-06-12 08-51-21.hand
+dataOutput/General/typeX_2017-06-12 08-54-54.hand
