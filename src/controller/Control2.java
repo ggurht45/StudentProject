@@ -110,55 +110,56 @@ public class Control2 extends Controller implements ControllerInterface {
                 displayStamp = timestamp;
             }
         } else { // training mode
-            if (timeTracked) {
-                if ((timestamp - testTime) > testLimit) {
-                    System.out.println("timeout");
-                    finalscore = maxscore;
-                    finaltime = testLimit;
-                    success = false;
-                    staticEnd();
-                }
-            } else {//if timeTracked is set to false, it will always be be set to True. cuz of the else.
-                testTime = timestamp;
-                timeTracked = true;
-            }
-
-            if ((timestamp - displayStamp) > displayLimit) {
-                if (inFrame.hands().count() == 0) LeapUIApp.setUser(null, 0);
-                else for (Hand h : inFrame.hands()) {
-                    double x = comparer.compare(h, testHand);
-                    if (x > 0) {
-                        LeapUIApp.setUser(h, x);
-                    }
-                }
-                displayStamp = timestamp;
-            }
-
-            if ((timestamp - dataStamp) > dataLimit) {
-                double y = 0; // max hand score this frame
-                for (Hand h : inFrame.hands()) {
-                    double x = comparer.compare(h, testHand);
-                    if (x > 0) {
-                        FrameStore.pass(new FrameWithScore(inFrame, x));
-                        dataStamp = timestamp;
-                        maxscore = Math.max(maxscore, x);
-                        y = x;
-                    }
-                }
-                if (y <= testThreshold) {// hands invalid or below threshold; countdown restarts
-                    countdown = false;
-                } else if (!countdown) {
-                    countdown = true;
-                    countdownStart = timestamp;
-                }
-                // user has spent enough time in successful position
-                else if (timestamp - countdownStart > countdownTime) {
-                    success = true;
-                    finalscore = y;
-                    finaltime = timestamp - testTime;
-                    staticEnd();
-                }
-            }
+            System.out.println("entered training mode in control2");
+//            if (timeTracked) {
+//                if ((timestamp - testTime) > testLimit) {
+//                    System.out.println("timeout");
+//                    finalscore = maxscore;
+//                    finaltime = testLimit;
+//                    success = false;
+//                    staticEnd();
+//                }
+//            } else {//if timeTracked is set to false, it will always be be set to True. cuz of the else.
+//                testTime = timestamp;
+//                timeTracked = true;
+//            }
+//
+//            if ((timestamp - displayStamp) > displayLimit) {
+//                if (inFrame.hands().count() == 0) LeapUIApp.setUser(null, 0);
+//                else for (Hand h : inFrame.hands()) {
+//                    double x = comparer.compare(h, testHand);
+//                    if (x > 0) {
+//                        LeapUIApp.setUser(h, x);
+//                    }
+//                }
+//                displayStamp = timestamp;
+//            }
+//
+//            if ((timestamp - dataStamp) > dataLimit) {
+//                double y = 0; // max hand score this frame
+//                for (Hand h : inFrame.hands()) {
+//                    double x = comparer.compare(h, testHand);
+//                    if (x > 0) {
+//                        FrameStore.pass(new FrameWithScore(inFrame, x));
+//                        dataStamp = timestamp;
+//                        maxscore = Math.max(maxscore, x);
+//                        y = x;
+//                    }
+//                }
+//                if (y <= testThreshold) {// hands invalid or below threshold; countdown restarts
+//                    countdown = false;
+//                } else if (!countdown) {
+//                    countdown = true;
+//                    countdownStart = timestamp;
+//                }
+//                // user has spent enough time in successful position
+//                else if (timestamp - countdownStart > countdownTime) {
+//                    success = true;
+//                    finalscore = y;
+//                    finaltime = timestamp - testTime;
+//                    staticEnd();
+//                }
+//            }
         } // end of training code
     }
 }
