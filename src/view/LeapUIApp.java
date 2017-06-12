@@ -5,6 +5,7 @@ package view;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import controller.Comparer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -37,6 +38,7 @@ import com.leapmotion.leap.*;
 import controller.Control;
 import controller.Control2;
 import controller.ControllerInterface;
+import model.SerializedTargetHand;
 
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
@@ -55,6 +57,7 @@ public class LeapUIApp extends Application {
     private static Hand latestHand = null; // For recording target hands, disable in release version
 
     private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
+    private Comparer comparer;
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -296,6 +299,61 @@ public class LeapUIApp extends Application {
             System.out.println("using control2 for manual mode");
             control = ctrl2;
         }
+
+
+        //compare targetHand 0 against another one.
+        String str1 = "targets/2015-05-05 08-17-01.hand";
+        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
+        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
+        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
+        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+        comparer = new Comparer();
+
+        compareTwoHands(str1, str2);
+        compareTwoHands(str1, str3);
+        compareTwoHands(str1, str4);
+        compareTwoHands(str1, str5);
+        compareTwoHands(str1, str6);
+
+
+        //scores:
+        //(str1, str2) -> 0.8699791905046874
+        //(str1, str3) -> 0.8804384491907629
+        //(str1, str4) -> 0.15855860365038324
+        //(str1, str5) -> 0.0
+        //(str1, str6) -> 0.9003894774440483
+
+        /*
+        scores after wrist weight set to zero
+        ************Score**********: 0.9515686165548964
+
+        ************Score**********: 0.9367086427558178
+
+        ************Score**********: 0.17667958692471275
+
+        ************Score**********: 0.0
+
+        ************Score**********: 0.944533897841223
+
+         */
+
+    }
+
+    public double compareTwoHands(String s1, String s2){
+
+        double score = 0.0;
+        try{
+            Hand h1 = SerializedTargetHand.readFromFile(s1);
+            Hand h2 = SerializedTargetHand.readFromFile(s2);
+            //display hands somehow.
+            score = comparer.compare(h1,h2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        System.out.println("************Score**********: " + score + "\n");
+        return score;
     }
 
     @Override
