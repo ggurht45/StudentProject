@@ -23,3 +23,6 @@ dataOutput/General/typeX_2017-06-12 08-51-14.hand
 dataOutput/General/typeX_2017-06-12 08-51-17.hand
 dataOutput/General/typeX_2017-06-12 08-51-21.hand
 dataOutput/General/typeX_2017-06-12 08-54-54.hand
+dataOutput/General/typeX_2017-06-12 09-07-27.hand
+dataOutput/General/typeX_2017-06-12 09-07-27.hand
+dataOutput/General/typeX_2017-06-12 09-07-28.hand
