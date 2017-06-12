@@ -82,12 +82,14 @@ public class Control2 extends Controller implements ControllerInterface {
     }
 
     public void staticEnd() {
-        LeapUIApp.endStaticTest(finalscore, finaltime, success); // returns after 10s
+        System.out.println("static end called from manual control2");
+        LeapUIApp.endStaticTest2();
         try {
             FrameStore.staticEnd();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //these variables are probably unnecessary
         maxscore = 0;
         timeTracked = false;
         freeMode = true;

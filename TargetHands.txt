@@ -31,3 +31,5 @@ dataOutput/General/typeX_2017-06-12 09-28-37.hand
 dataOutput/9/typeA_2017-06-12 09-39-03.hand
 dataOutput/3/typeA_2017-06-12 09-39-11.hand
 dataOutput/5/typeA_2017-06-12 09-39-16.hand
+dataOutput/General/typeX_2017-06-12 09-47-41.hand
+dataOutput/4/typeA_2017-06-12 09-47-44.hand

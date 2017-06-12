@@ -320,6 +320,11 @@ public class LeapUIApp extends Application {
         Platform.runLater(new StaticEndTask());
     }
 
+    public static void endStaticTest2() {
+        System.out.println("endStaticTest2 called");
+        Platform.runLater(new StaticEndTask());
+    }
+
     public static void setUser(Hand hand, double accuracy) {
         Platform.runLater(new SetUserTask(hand, accuracy));
     }
