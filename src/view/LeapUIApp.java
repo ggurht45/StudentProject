@@ -391,7 +391,7 @@ public class LeapUIApp extends Application {
     public static Hand selectHand(ArrayList<Hand> arrayList) throws InterruptedException {
         Platform.runLater(() -> {
             userHand.setVisible(false);
-            aBar.setVisible(false);
+            aBar.setVisible(false);//turn off the accuracy bar.
             sBar.setVisible(true);
         });
         Hand hand = sBar.select(arrayList); // Does not return until the user has selected a target

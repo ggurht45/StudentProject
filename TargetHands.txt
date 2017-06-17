@@ -39,3 +39,5 @@ targets/2017-06-12 12-18-33.hand
 targets/2017-06-12 12-21-01.hand
 targets/2017-06-12 12-23-19.hand
 targets/2017-06-12 12-30-56.hand
+dataOutput/General/typeX_2017-06-12 13-27-16.hand
+dataOutput/6/typeA_2017-06-12 13-27-35.hand

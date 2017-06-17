@@ -14,7 +14,9 @@ public class ViewMath {
 	public static Point3D vectorToPoint(Vector v) {
 		return new Point3D( v.getX(), v.getY(), v.getZ() );
 	}
-	
+
+
+	//changes the node that was passed in. java is pass by value, but what gets passed in is remote control to the objects.
 	public static void setPositionByVector(Node node, Vector position) {
 		node.setTranslateX(position.getX()/positionScaleFactor);
 		node.setTranslateY((150 - position.getY())/positionScaleFactor); // compensate for device Y being 0+, screen Y being -0+
@@ -36,6 +38,8 @@ public class ViewMath {
 		cylinder.setHeight(direction.magnitude()/positionScaleFactor);
 	}
 
+	//even though this method doesnt return the changed node, since it is passed in the references to the real node objects, it does change
+	//those objects through the references that were passed in. very javaish. not functional programming ideals of using pure functions.
 	public static void setCylinder(Cylinder cylinder, Vector mid, Vector direction) {
 		setPositionByVector(cylinder, mid);
 		setRotationByVector(cylinder, direction);

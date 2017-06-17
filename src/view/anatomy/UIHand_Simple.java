@@ -85,7 +85,8 @@ public class UIHand_Simple extends UIHand {
 
 
 	//this is the method that gets called from LeapUI, cuz the program uses Simple Hand rather than Full hand.
-	//takes a hand object and sets some fingers and other stuff?
+	//takes a hand object and sets some fingers and other stuff? yes.
+	//name is very confusing. i guess it can mean set locations of different parts of the hand.
 	@Override
 	public void setLoc(Hand hand) {
 		//System.out.println("* setLoc called from UIHand_Simple");
@@ -96,11 +97,15 @@ public class UIHand_Simple extends UIHand {
 			Finger finger = hand.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
 			for (int j = 0; j<3; ++j) {
 				Bone bone = finger.bone(Bone.Type.swigToEnum(j+1));
+				//this will take the "fingerBones[i][j]" item stored and update it with the data passed in
+				// via the "bone" variable. bone comes from hand which was passed into this function.
 				Cylinder uiBone = fingerBones[i][j];
+				//updates uiBone based on bone passed in
 				ViewMath.setCylinder(uiBone, bone.center(), bone.direction().times(bone.length()));
 				
 				Sphere uiJoint = fingerJoints[i][j+1];
 				Vector joint = bone.nextJoint();
+				//probably updates uiJoint
 				ViewMath.setPositionByVector(uiJoint, joint);
 				
 				if (j==0) {
