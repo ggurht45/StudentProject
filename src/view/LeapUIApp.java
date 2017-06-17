@@ -58,6 +58,7 @@ public class LeapUIApp extends Application {
 
     private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
     private Comparer comparer;
+    private static Button loadButton;   // a button to load hand and show it using user hand
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -116,6 +117,24 @@ public class LeapUIApp extends Application {
         testButton.setPrefHeight(50);
         testButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
+        //load button, inspired from testButton
+        loadButton = new Button("Load Hand") {
+            @Override
+            public void fire() {
+                System.out.println("load hand button clicked");
+                //setVisible(true);
+                Hand h = getHandFromString("targets/2017-06-12 12-13-58.hand");
+                userHand.setLoc(h);
+                userHand.setVisible(true);
+                //makes a new thread, passing it a lambda function and then it calls start on that thread.
+                //new Thread(() -> control.enterTrainingMode()).start();
+            }
+        };
+        loadButton.setTranslateX(ScreenWidth * 1 / 5);
+        loadButton.setTranslateY(ScreenHeight * 4 / 5);
+        loadButton.setPrefHeight(50);
+        loadButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
         scoreText = new Text();
         scoreText.setFont(Font.font(STYLESHEET_MODENA, ScreenHeight / 4));
         scoreText.setY(ScreenHeight / 2);
@@ -126,7 +145,7 @@ public class LeapUIApp extends Application {
         timeText.setVisible(false);
 
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, scoreText, timeText);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         Scene scene = new Scene(root);
@@ -339,6 +358,18 @@ public class LeapUIApp extends Application {
          */
 
     }
+
+    public Hand getHandFromString(String s){
+        Hand h = null;
+        try{
+            h = SerializedTargetHand.readFromFile(s);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return h;
+    }
+
+
 
     public double compareTwoHands(String s1, String s2){
 
