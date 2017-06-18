@@ -29,6 +29,7 @@ import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.SerializedTargetHand;
+import view.analyze.LoadGesturesScene;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
 import view.anatomy.UIHand_Simple;
@@ -60,8 +61,8 @@ public class LeapUIApp extends Application {
     private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
     private Comparer comparer;
     private static Button loadButton;   // a button to load hand and show it using user hand
-    private Stage window;
-    private Scene scene, scene2;
+    public Stage window;
+    public Scene scene, scene2;
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -160,14 +161,15 @@ public class LeapUIApp extends Application {
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
 
-        //Button 2
-        Button button2 = new Button("This sucks, go back to scene 1");
-        button2.setOnAction(e -> window.setScene(scene));
-
-        //Layout 2
-        StackPane layout2 = new StackPane();
-        layout2.getChildren().add(button2);
-        scene2 = new Scene(layout2);
+//        //Button 2
+//        Button button2 = new Button("This sucks, go back to scene 1");
+//        button2.setOnAction(e -> window.setScene(scene));
+//
+//        //Layout 2
+//        StackPane layout2 = new StackPane();
+//        layout2.getChildren().add(button2);
+        Group layout2 = new LoadGesturesScene(this);
+        scene2 = new Scene(layout2, ScreenWidth, ScreenHeight);
 
         //create references for the 2 different controls
         Control ctrl1 = new Control();
