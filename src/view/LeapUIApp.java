@@ -19,6 +19,7 @@ import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -59,6 +60,8 @@ public class LeapUIApp extends Application {
     private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
     private Comparer comparer;
     private static Button loadButton;   // a button to load hand and show it using user hand
+    private Stage window;
+    private Scene scene, scene2;
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -69,6 +72,8 @@ public class LeapUIApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        window = stage;
+
         Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
         ScreenWidth = bounds.getWidth();
         ScreenHeight = bounds.getHeight();
@@ -117,19 +122,24 @@ public class LeapUIApp extends Application {
         testButton.setPrefHeight(50);
         testButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-        //load button, inspired from testButton
-        loadButton = new Button("Load Hand") {
-            @Override
-            public void fire() {
-                System.out.println("load hand button clicked");
-                //setVisible(true);
-                Hand h = getHandFromString("targets/2017-06-12 12-13-58.hand");
-                userHand.setLoc(h);
-                userHand.setVisible(true);
-                //makes a new thread, passing it a lambda function and then it calls start on that thread.
-                //new Thread(() -> control.enterTrainingMode()).start();
-            }
-        };
+//        //load button, inspired from testButton
+//        loadButton = new Button("Load Hand") {
+//            @Override
+//            public void fire() {
+//                System.out.println("load hand button clicked");
+//                Hand h = getHandFromString("targets/2017-06-12 12-13-58.hand");
+//                userHand.setLoc(h);
+//                userHand.setVisible(true);
+//            }
+//        };
+
+        loadButton = new Button("Load Hand");
+        loadButton.setOnAction(e -> {
+            System.out.println("load button clicked. going to scene2");
+            window.setScene(scene2);
+        });
+
+
         loadButton.setTranslateX(ScreenWidth * 1 / 5);
         loadButton.setTranslateY(ScreenHeight * 4 / 5);
         loadButton.setPrefHeight(50);
@@ -148,7 +158,16 @@ public class LeapUIApp extends Application {
         Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
+
+        //Button 2
+        Button button2 = new Button("This sucks, go back to scene 1");
+        button2.setOnAction(e -> window.setScene(scene));
+
+        //Layout 2
+        StackPane layout2 = new StackPane();
+        layout2.getChildren().add(button2);
+        scene2 = new Scene(layout2);
 
         //create references for the 2 different controls
         Control ctrl1 = new Control();
