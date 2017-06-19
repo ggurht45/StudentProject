@@ -45,22 +45,22 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
-    private static double ScreenWidth = 800;
-    private static double ScreenHeight = 800;
-    private static UIHand userHand;
-    private static UIHand targetHand;
-    private static AccuracyBar aBar;    // a bar to show the current accuracy of the user compared to the target
-    private static SelectBar sBar;      // the buttons for selecting a target
-    private static MoveBar mBar;        // the buttons for moving to next/prev a target
-    private static Button testButton;   // a button to transition from free mode to training mode
-    private static Text scoreText;      // displays the user's score at the end of a test
-    private static Text timeText;       // displays the time a user took at the end of a test
-    private static ControllerInterface control;        //the controller object
-    private static Hand latestHand = null; // For recording target hands, disable in release version
+    public static double ScreenWidth = 800;
+    public static double ScreenHeight = 800;
+    public static UIHand userHand;
+    public static UIHand targetHand;
+    public static AccuracyBar aBar;    // a bar to show the current accuracy of the user compared to the target
+    public static SelectBar sBar;      // the buttons for selecting a target
+    public static MoveBar mBar;        // the buttons for moving to next/prev a target
+    public static Button testButton;   // a button to transition from free mode to training mode
+    public static Text scoreText;      // displays the user's score at the end of a test
+    public static Text timeText;       // displays the time a user took at the end of a test
+    public static ControllerInterface control;        //the controller object
+    public static Hand latestHand = null; // For recording target hands, disable in release version
 
-    private static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
-    private Comparer comparer;
-    private static Button loadButton;   // a button to load hand and show it using user hand
+    public static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
+    public Comparer comparer;
+    public static Button loadButton;   // a button to load hand and show it using user hand
     public Stage window;
     public Scene scene, scene2;
 
