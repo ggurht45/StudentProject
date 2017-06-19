@@ -150,43 +150,24 @@ public class LeapUIApp extends Application {
         loadButton.setPrefHeight(50);
         loadButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-        //create a toggle button
-        //earlier had error with this class. the leapmotion Image class was being used. now it seems to have fixed itself
-        //Image image = new Image(this.getClass().getResourceAsStream("icon.png"));
-//        Image image2 = new Image(this.getClass().getResourceAsStream("icon.png"));
-//        ToggleButton tb = new ToggleButton("Press me", new ImageView(image2));
-//        tb.setTranslateX(ScreenWidth * 1 / 5);
-//        tb.setTranslateY(ScreenHeight * 3 / 5);
-//        tb.setPrefHeight(50);
-//        tb.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
-//
-//        //ToggleGroup class just extends object. therefore, its a different kind of "Group" then the heirarchical group we are used to
-//        ToggleGroup tbGroup = new ToggleGroup();
-//        ToggleButton tb1 = new ToggleButton("Left");
-//        tb1.setToggleGroup(tbGroup);
-//        tb1.setSelected(true);
-//        tb1.setTranslateX(ScreenWidth * 1 / 5);
-//        tb1.setTranslateY(ScreenHeight * 3 / 5);
-//        tb1.setPrefHeight(50);
-//        tb1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
-//        ToggleButton tb2 = new ToggleButton("Right");
-//        tb2.setToggleGroup(tbGroup);
-//        tb2.setTranslateX(ScreenWidth * 2 / 5);
-//        tb2.setTranslateY(ScreenHeight * 3 / 5);
-//        tb2.setPrefHeight(50);
-//        tb2.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
-
 
         //going radio button approach
-        ToggleGroup groupGender = new ToggleGroup();
+        ToggleGroup lfGroup = new ToggleGroup();
         RadioButton leftRadio = new RadioButton("Left");
-        leftRadio.setToggleGroup(groupGender);
+        leftRadio.setToggleGroup(lfGroup);
+        leftRadio.setSelected(true);
         leftRadio.setTranslateX(ScreenWidth * 1 / 5);
         leftRadio.setTranslateY(ScreenHeight * 1 / 10);
         RadioButton rightRadio = new RadioButton("Right");
-        rightRadio.setToggleGroup(groupGender);
+        rightRadio.setToggleGroup(lfGroup);
         rightRadio.setTranslateX(ScreenWidth * 3 / 10);
         rightRadio.setTranslateY(ScreenHeight * 1 / 10);
+
+        //set actions
+        boolean leftHandSelected = true; //do this soon. with event listener set up on the group.
+
+        //create label
+//        Text lrLabel = new Text("Left"); //updates based on boolean
 
 
         scoreText = new Text();
