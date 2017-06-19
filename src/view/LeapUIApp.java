@@ -380,15 +380,15 @@ public class LeapUIApp extends Application {
 
     }
 
-    public Hand getHandFromString(String s){
-        Hand h = null;
-        try{
-            h = SerializedTargetHand.readFromFile(s);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return h;
-    }
+//    public Hand getHandFromString(String s){
+//        Hand h = null;
+//        try{
+//            h = SerializedTargetHand.readFromFile(s);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return h;
+//    }
 
 
 
