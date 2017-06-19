@@ -17,6 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -145,6 +148,16 @@ public class LeapUIApp extends Application {
         loadButton.setPrefHeight(50);
         loadButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
+        //create a toggle button
+        //earlier had error with this class. the leapmotion Image class was being used. now it seems to have fixed itself
+        //Image image = new Image(this.getClass().getResourceAsStream("icon.png"));
+        Image image2 = new Image(this.getClass().getResourceAsStream("icon.png"));
+        ToggleButton tb = new ToggleButton("Press me", new ImageView(image2));
+        tb.setTranslateX(ScreenWidth * 1 / 5);
+        tb.setTranslateY(ScreenHeight * 3 / 5);
+        tb.setPrefHeight(50);
+        tb.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
         scoreText = new Text();
         scoreText.setFont(Font.font(STYLESHEET_MODENA, ScreenHeight / 4));
         scoreText.setY(ScreenHeight / 2);
@@ -155,7 +168,7 @@ public class LeapUIApp extends Application {
         timeText.setVisible(false);
 
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, tb);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
