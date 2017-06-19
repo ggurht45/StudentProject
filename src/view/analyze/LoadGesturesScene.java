@@ -1,24 +1,31 @@
 package view.analyze;
 
 import com.leapmotion.leap.Hand;
-import javafx.scene.Group;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
 
-public class LoadGesturesScene extends Group {
+public class LoadGesturesScene{
 
     public static UIHand loadedHandUI;
+    public static Group rootGroup;
+    public static Scene scene;
 
     public LoadGesturesScene(LeapUIApp app) {
-        super();
+
+        //set up the loadedHandUI
+        loadedHandUI = new UIHand_Simple(Color.GREEN.darker(), false);
+        loadedHandUI.setVisible(false);
 
         //button to go back to main scene
         Button button2 = new Button("Go Back");
@@ -27,11 +34,6 @@ public class LoadGesturesScene extends Group {
         button2.setTranslateY(app.ScreenHeight * 4 / 5);
         button2.setPrefHeight(50);
         button2.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
-
-
-        //set up the loadedHandUI
-        loadedHandUI = new UIHand_Simple(Color.GREEN.darker(), false);
-        loadedHandUI.setVisible(false);
 
         //button to load hand into the scene
         Button loadHandButton = new Button("Load Hand");
@@ -48,12 +50,28 @@ public class LoadGesturesScene extends Group {
         loadHandButton.setPrefHeight(50);
         loadHandButton.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-        //Layout 2
-        Group layout2 = new Group();
-        layout2.getChildren().addAll(button2, loadHandButton, loadedHandUI);
 
-        this.getChildren().add(layout2);
+        // The 3D camera
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
+
+        // The 3D display
+        Group group3D = new Group();
+        group3D.getChildren().add(camera);
+        group3D.getChildren().add(loadedHandUI);
+        SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
+        sub3D.setFill(Color.LAVENDER);
+        sub3D.setCamera(camera);
+
+        // The 2D overlay
+        Group group2D = new Group(button2, loadHandButton);
+        SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
+
+
+        //put 2D and 3D subScenes together; and make it into a scene
+        rootGroup = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
+        scene = new Scene(rootGroup);
 
     }
 

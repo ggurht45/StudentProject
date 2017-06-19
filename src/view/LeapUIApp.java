@@ -168,8 +168,8 @@ public class LeapUIApp extends Application {
 //        //Layout 2
 //        StackPane layout2 = new StackPane();
 //        layout2.getChildren().add(button2);
-        Group layout2 = new LoadGesturesScene(this);
-        scene2 = new Scene(layout2, ScreenWidth, ScreenHeight);
+        LoadGesturesScene layout2 = new LoadGesturesScene(this);
+        scene2 = layout2.scene;
 
         //create references for the 2 different controls
         Control ctrl1 = new Control();
