@@ -18,6 +18,7 @@ import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -151,12 +152,30 @@ public class LeapUIApp extends Application {
         //create a toggle button
         //earlier had error with this class. the leapmotion Image class was being used. now it seems to have fixed itself
         //Image image = new Image(this.getClass().getResourceAsStream("icon.png"));
-        Image image2 = new Image(this.getClass().getResourceAsStream("icon.png"));
-        ToggleButton tb = new ToggleButton("Press me", new ImageView(image2));
-        tb.setTranslateX(ScreenWidth * 1 / 5);
-        tb.setTranslateY(ScreenHeight * 3 / 5);
-        tb.setPrefHeight(50);
-        tb.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+//        Image image2 = new Image(this.getClass().getResourceAsStream("icon.png"));
+//        ToggleButton tb = new ToggleButton("Press me", new ImageView(image2));
+//        tb.setTranslateX(ScreenWidth * 1 / 5);
+//        tb.setTranslateY(ScreenHeight * 3 / 5);
+//        tb.setPrefHeight(50);
+//        tb.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
+        //ToggleGroup class just extends object. therefore, its a different kind of "Group" then the heirarchical group we are used to
+        ToggleGroup tbGroup = new ToggleGroup();
+        ToggleButton tb1 = new ToggleButton("Left");
+        tb1.setToggleGroup(tbGroup);
+        tb1.setSelected(true);
+        tb1.setTranslateX(ScreenWidth * 1 / 5);
+        tb1.setTranslateY(ScreenHeight * 3 / 5);
+        tb1.setPrefHeight(50);
+        tb1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+        ToggleButton tb2 = new ToggleButton("Right");
+        tb2.setToggleGroup(tbGroup);
+        tb2.setTranslateX(ScreenWidth * 2 / 5);
+        tb2.setTranslateY(ScreenHeight * 3 / 5);
+        tb2.setPrefHeight(50);
+        tb2.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
+
 
         scoreText = new Text();
         scoreText.setFont(Font.font(STYLESHEET_MODENA, ScreenHeight / 4));
@@ -168,7 +187,7 @@ public class LeapUIApp extends Application {
         timeText.setVisible(false);
 
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, tb);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, tb1, tb2);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
@@ -210,7 +229,7 @@ public class LeapUIApp extends Application {
                 }
                 if (keyEvent.getCode().isDigitKey()) {
                     try {
-                        if(keyEvent.getCode() == KeyCode.DIGIT0){
+                        if (keyEvent.getCode() == KeyCode.DIGIT0) {
                             System.out.println("0 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -218,8 +237,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"0","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT1){
+                            SerializedTargetHand.Save2(latestHand.frame(), "0", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT1) {
                             System.out.println("1 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -227,8 +246,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"1","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT2){
+                            SerializedTargetHand.Save2(latestHand.frame(), "1", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT2) {
                             System.out.println("2 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -236,8 +255,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"2","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT3){
+                            SerializedTargetHand.Save2(latestHand.frame(), "2", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT3) {
                             System.out.println("3 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -245,8 +264,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"3","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT4){
+                            SerializedTargetHand.Save2(latestHand.frame(), "3", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT4) {
                             System.out.println("4 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -254,8 +273,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"4","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT5){
+                            SerializedTargetHand.Save2(latestHand.frame(), "4", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT5) {
                             System.out.println("5 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -263,8 +282,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"5","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT6){
+                            SerializedTargetHand.Save2(latestHand.frame(), "5", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT6) {
                             System.out.println("6 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -272,8 +291,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"6","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT7){
+                            SerializedTargetHand.Save2(latestHand.frame(), "6", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT7) {
                             System.out.println("7 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -281,8 +300,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"7","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT8){
+                            SerializedTargetHand.Save2(latestHand.frame(), "7", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT8) {
                             System.out.println("8 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -290,8 +309,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"8","typeA");
-                        }else if(keyEvent.getCode() == KeyCode.DIGIT9){
+                            SerializedTargetHand.Save2(latestHand.frame(), "8", "typeA");
+                        } else if (keyEvent.getCode() == KeyCode.DIGIT9) {
                             System.out.println("9 KEY was pressed,gonna save into correct folder");
                             Frame f = latestHand.frame();
                             System.out.println("frame: \n" + f.toString());
@@ -299,8 +318,8 @@ public class LeapUIApp extends Application {
                             FingerList fingersInFrame = f.fingers();
                             System.out.println("number of fingers: \n" + fingersInFrame.count());
                             System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(),"9","typeA");
-                        }else{
+                            SerializedTargetHand.Save2(latestHand.frame(), "9", "typeA");
+                        } else {
                             System.out.println("hmm.. not sure which digit key was pressed");
                         }
 
@@ -313,11 +332,11 @@ public class LeapUIApp extends Application {
                     try {
                         System.out.println("D was pressed, going into developer mode");
                         //try setting control dynamically
-                        if(!AUTOMATIC_MODE){
+                        if (!AUTOMATIC_MODE) {
                             System.out.println("setting control to ctrl1 dynamically");
                             AUTOMATIC_MODE = true;
                             control = ctrl1;
-                        }else{
+                        } else {
                             System.out.println("setting control to ctrl2222 dynamically");
                             AUTOMATIC_MODE = false;
                             control = ctrl2;
@@ -343,10 +362,10 @@ public class LeapUIApp extends Application {
         stage.show();
 
         //set control based on initial value of DEVELOPER_MODE
-        if(AUTOMATIC_MODE){
+        if (AUTOMATIC_MODE) {
             System.out.println("Using control for automatic mode");
             control = ctrl1;
-        }else{
+        } else {
             System.out.println("using control2 for manual mode");
             control = ctrl2;
         }
@@ -391,27 +410,26 @@ public class LeapUIApp extends Application {
 
     }
 
-    public Hand getHandFromString(String s){
+    public Hand getHandFromString(String s) {
         Hand h = null;
-        try{
+        try {
             h = SerializedTargetHand.readFromFile(s);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return h;
     }
 
 
-
-    public double compareTwoHands(String s1, String s2){
+    public double compareTwoHands(String s1, String s2) {
 
         double score = 0.0;
-        try{
+        try {
             Hand h1 = SerializedTargetHand.readFromFile(s1);
             Hand h2 = SerializedTargetHand.readFromFile(s2);
             //display hands somehow.
-            score = comparer.compare(h1,h2);
-        }catch(Exception e){
+            score = comparer.compare(h1, h2);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -461,10 +479,10 @@ public class LeapUIApp extends Application {
         mBar.setTargets(arrayList);
         Platform.runLater(() -> {
             sBar.setVisible(false);
-            if(AUTOMATIC_MODE){
+            if (AUTOMATIC_MODE) {
                 aBar.setVisible(true);
                 mBar.setVisible(false);
-            }else{
+            } else {
                 aBar.setVisible(false);
                 mBar.setVisible(true);
             }
@@ -692,9 +710,8 @@ public class LeapUIApp extends Application {
 //	 }
 
 
-
     private class MoveBar extends Group {
-//        private Boolean confirmed;
+        //        private Boolean confirmed;
         private ArrayList<Hand> targets = null;
         private int index;
         private Button prevButton;
@@ -702,7 +719,7 @@ public class LeapUIApp extends Application {
         private Button nextButton;
         private Button endButton; //click on this to end the testing mode
 
-        public MoveBar(double x, double y, double width, double height ) {
+        public MoveBar(double x, double y, double width, double height) {
             super();
 //            confirmed = false;
             index = 0;
@@ -757,7 +774,7 @@ public class LeapUIApp extends Application {
         }
 
 
-        public void setTargets(ArrayList<Hand> targetHands){
+        public void setTargets(ArrayList<Hand> targetHands) {
             targets = targetHands;
         }
 
@@ -789,7 +806,7 @@ public class LeapUIApp extends Application {
 //        }
 
         synchronized void save() {
-            try{
+            try {
                 //save data
                 System.out.println("saving data ************");
                 Frame f = latestHand.frame();
@@ -800,9 +817,9 @@ public class LeapUIApp extends Application {
                 System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
 
 
-                SerializedTargetHand.Save2(latestHand.frame(),"General","typeX");
+                SerializedTargetHand.Save2(latestHand.frame(), "General", "typeX");
                 System.out.println("saving data END ************");
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -840,7 +857,6 @@ public class LeapUIApp extends Application {
 		 *     not sure if you need to do **sBar**.wait/notify(), may work to just do wait/notify. Probably not tho
 		 */
     }
-
 
 
 }
