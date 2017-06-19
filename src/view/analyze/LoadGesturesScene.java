@@ -1,8 +1,11 @@
 package view.analyze;
 
 import com.leapmotion.leap.Hand;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,8 +17,12 @@ import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class LoadGesturesScene{
+
+public class LoadGesturesScene {
 
     public static UIHand loadedHandUI;
     public static Group rootGroup;
@@ -51,7 +58,15 @@ public class LoadGesturesScene{
         loadHandButton.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
 
-        // The 3D camera
+        //make a comboList
+        List al = new ArrayList(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+        ObservableList<String> options = FXCollections.observableArrayList(al);
+        ComboBox comboBox = new ComboBox(options);
+        comboBox.setTranslateX(app.ScreenWidth * 1 / 5);
+        comboBox.setTranslateY(app.ScreenHeight * 2 / 5);
+
+
+        // The 3D camera; necessary for 3D display
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
@@ -65,7 +80,7 @@ public class LoadGesturesScene{
         sub3D.setCamera(camera);
 
         // The 2D overlay
-        Group group2D = new Group(button2, loadHandButton);
+        Group group2D = new Group(comboBox, button2, loadHandButton);
         SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
 
 
