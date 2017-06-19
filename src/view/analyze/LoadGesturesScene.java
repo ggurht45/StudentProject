@@ -24,7 +24,7 @@ public class LoadGesturesScene{
     public LoadGesturesScene(LeapUIApp app) {
 
         //set up the loadedHandUI
-        loadedHandUI = new UIHand_Simple(Color.GREEN.darker(), false);
+        loadedHandUI = new UIHand_Simple(Color.BLUE.darker(), false);
         loadedHandUI.setVisible(false);
 
         //button to go back to main scene
