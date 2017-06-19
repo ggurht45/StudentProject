@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -158,23 +159,34 @@ public class LeapUIApp extends Application {
 //        tb.setTranslateY(ScreenHeight * 3 / 5);
 //        tb.setPrefHeight(50);
 //        tb.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+//
+//        //ToggleGroup class just extends object. therefore, its a different kind of "Group" then the heirarchical group we are used to
+//        ToggleGroup tbGroup = new ToggleGroup();
+//        ToggleButton tb1 = new ToggleButton("Left");
+//        tb1.setToggleGroup(tbGroup);
+//        tb1.setSelected(true);
+//        tb1.setTranslateX(ScreenWidth * 1 / 5);
+//        tb1.setTranslateY(ScreenHeight * 3 / 5);
+//        tb1.setPrefHeight(50);
+//        tb1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+//        ToggleButton tb2 = new ToggleButton("Right");
+//        tb2.setToggleGroup(tbGroup);
+//        tb2.setTranslateX(ScreenWidth * 2 / 5);
+//        tb2.setTranslateY(ScreenHeight * 3 / 5);
+//        tb2.setPrefHeight(50);
+//        tb2.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-        //ToggleGroup class just extends object. therefore, its a different kind of "Group" then the heirarchical group we are used to
-        ToggleGroup tbGroup = new ToggleGroup();
-        ToggleButton tb1 = new ToggleButton("Left");
-        tb1.setToggleGroup(tbGroup);
-        tb1.setSelected(true);
-        tb1.setTranslateX(ScreenWidth * 1 / 5);
-        tb1.setTranslateY(ScreenHeight * 3 / 5);
-        tb1.setPrefHeight(50);
-        tb1.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
-        ToggleButton tb2 = new ToggleButton("Right");
-        tb2.setToggleGroup(tbGroup);
-        tb2.setTranslateX(ScreenWidth * 2 / 5);
-        tb2.setTranslateY(ScreenHeight * 3 / 5);
-        tb2.setPrefHeight(50);
-        tb2.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
+        //going radio button approach
+        ToggleGroup groupGender = new ToggleGroup();
+        RadioButton leftRadio = new RadioButton("Left");
+        leftRadio.setToggleGroup(groupGender);
+        leftRadio.setTranslateX(ScreenWidth * 1 / 5);
+        leftRadio.setTranslateY(ScreenHeight * 1 / 10);
+        RadioButton rightRadio = new RadioButton("Right");
+        rightRadio.setToggleGroup(groupGender);
+        rightRadio.setTranslateX(ScreenWidth * 3 / 10);
+        rightRadio.setTranslateY(ScreenHeight * 1 / 10);
 
 
         scoreText = new Text();
@@ -187,7 +199,7 @@ public class LeapUIApp extends Application {
         timeText.setVisible(false);
 
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, tb1, tb2);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, leftRadio, rightRadio);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
