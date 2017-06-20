@@ -25,6 +25,7 @@ import java.util.List;
 public class LoadGesturesScene {
 
     private LeapUIApp app;
+    private String handToLoadFile;
     public static UIHand loadedHandUI;
     public static Hand lh;
     public static UIHand targetHandUI;
@@ -52,7 +53,7 @@ public class LoadGesturesScene {
         //button to load hand into the scene
         Button loadHandButton = makeGenericButton("Load Hand", 0.4, 0.8);//new Button("Load Hand");
         loadHandButton.setOnAction(e -> {
-            lh = getHandFromString("targets/2017-06-12 12-13-58.hand");
+            lh = getHandFromString(handToLoadFile);
             th = getHandFromString("targets/2015-05-05 08-17-01.hand");
             loadedHandUI.setLoc(lh);
             loadedHandUI.setVisible(true);
@@ -69,12 +70,29 @@ public class LoadGesturesScene {
         });
 
 
+        String str1 = "targets/2015-05-05 08-17-01.hand";
+        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
+        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
+        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
+        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+
         //make a comboList
-        List al = new ArrayList(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
+        List<String> fileList = new ArrayList(Arrays.asList(str2, str3, str4, str5, str6));
+        List<String> al = new ArrayList(Arrays.asList("normal facing up", "facing down", "facing down fingers to right", "right hand palm upright", "facing down 2"));
         ObservableList<String> options = FXCollections.observableArrayList(al);
         ComboBox comboBox = new ComboBox(options);
-        comboBox.setTranslateX(app.ScreenWidth * 1 / 5);
-        comboBox.setTranslateY(app.ScreenHeight * 2 / 5);
+        //initially set up to load 0th item
+        comboBox.setValue("normal facing up");
+        handToLoadFile = fileList.get(0);
+        comboBox.setOnAction(e -> {
+            System.out.println("selected: " + comboBox.getValue());
+            System.out.println("index: " + al.indexOf(comboBox.getValue()));
+            int index = al.indexOf(comboBox.getValue());
+            handToLoadFile = fileList.get(index);
+        });
+        comboBox.setTranslateX(app.ScreenWidth * (2 / 5));
+        comboBox.setTranslateY(app.ScreenHeight * 4 / 5);
 
 
         // The 3D camera; necessary for 3D display
@@ -115,7 +133,6 @@ public class LoadGesturesScene {
 
     private Button makeGenericButton(String name, double xTranslate, double yTranslate) {
         Button b = new Button(name);
-        System.out.println("xT, yT: " + xTranslate + ", " + yTranslate);
         b.setTranslateX(app.ScreenWidth * xTranslate);
         b.setTranslateY(app.ScreenHeight * yTranslate);
         b.setPrefHeight(50);
