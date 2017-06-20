@@ -24,15 +24,22 @@ import java.util.List;
 
 public class LoadGesturesScene {
 
+    private LeapUIApp app;
     public static UIHand loadedHandUI;
+    public static Hand lh;
+    public static UIHand targetHandUI;
+    public static Hand th;
     public static Group rootGroup;
     public static Scene scene;
 
     public LoadGesturesScene(LeapUIApp app) {
-
-        //set up the loadedHandUI
+        this.app = app;
+        //set up the loadedHandUI and target hand
         loadedHandUI = new UIHand_Simple(Color.BLUE.darker(), false);
         loadedHandUI.setVisible(false);
+        targetHandUI = new UIHand_Simple(Color.DARKRED, true);
+        targetHandUI.setVisible(false);
+
 
         //button to go back to main scene
         Button button2 = new Button("Go Back");
@@ -43,19 +50,23 @@ public class LoadGesturesScene {
         button2.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
         //button to load hand into the scene
-        Button loadHandButton = new Button("Load Hand");
+        Button loadHandButton = makeGenericButton("Load Hand", 0.4, 0.8);//new Button("Load Hand");
         loadHandButton.setOnAction(e -> {
-            System.out.println("load hand button clicked");
-            Hand h = getHandFromString("targets/2017-06-12 12-13-58.hand");
-            System.out.println("seemed to have gotten hand, about to turn on visibility");
-            loadedHandUI.setLoc(h);
+            lh = getHandFromString("targets/2017-06-12 12-13-58.hand");
+            th = getHandFromString("targets/2015-05-05 08-17-01.hand");
+            loadedHandUI.setLoc(lh);
             loadedHandUI.setVisible(true);
+            targetHandUI.setLoc(th);
+            targetHandUI.setVisible(true);
+        });
+
+        //make a compare button. that compares it against the appropriate hand... should be stored somehow.
+        Button compareButton = makeGenericButton("Compare Hands", 0.5, 0.8);//new Button("Load Hand");
+        compareButton.setOnAction(e -> {
+            double score = compareTwoHands(lh, th);
+            System.out.println("score after comparing h, th:" + score);
 
         });
-        loadHandButton.setTranslateX(app.ScreenWidth * 2 / 5);
-        loadHandButton.setTranslateY(app.ScreenHeight * 4 / 5);
-        loadHandButton.setPrefHeight(50);
-        loadHandButton.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
 
         //make a comboList
@@ -74,19 +85,21 @@ public class LoadGesturesScene {
         // The 3D display
         Group group3D = new Group();
         group3D.getChildren().add(camera);
+        group3D.getChildren().add(targetHandUI);
         group3D.getChildren().add(loadedHandUI);
         SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
         sub3D.setFill(Color.LAVENDER);
         sub3D.setCamera(camera);
 
         // The 2D overlay
-        Group group2D = new Group(comboBox, button2, loadHandButton);
+        Group group2D = new Group(comboBox, button2, loadHandButton, compareButton);
         SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
 
 
         //put 2D and 3D subScenes together; and make it into a scene
         rootGroup = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(rootGroup);
+
 
     }
 
@@ -99,4 +112,25 @@ public class LoadGesturesScene {
         }
         return h;
     }
+
+    private Button makeGenericButton(String name, double xTranslate, double yTranslate) {
+        Button b = new Button(name);
+        System.out.println("xT, yT: " + xTranslate + ", " + yTranslate);
+        b.setTranslateX(app.ScreenWidth * xTranslate);
+        b.setTranslateY(app.ScreenHeight * yTranslate);
+        b.setPrefHeight(50);
+        b.setFont(Font.font(app.STYLESHEET_MODENA, FontWeight.BOLD, 15));
+        return b;
+    }
+
+    public double compareTwoHands(Hand h1, Hand h2){
+        double score = 0.0;
+        try{
+            score = app.comparer.compare(h1,h2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return score;
+    }
+
 }

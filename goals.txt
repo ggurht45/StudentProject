@@ -25,3 +25,7 @@ create  new scene for loading section
 have updatable algorithms. peace sign gesture -> set angles for last 3 fingers 
 to be acceptable below a certain range. if that range gets overridden by clinician,
 then update the acceptance criteria
+
+--------------------------------------------------
+8:23
+make hand appear on new scene.    

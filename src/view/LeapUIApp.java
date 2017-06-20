@@ -134,7 +134,7 @@ public class LeapUIApp extends Application {
 //            }
 //        };
 
-        loadButton = new Button("Load Hand");
+        loadButton = new Button("Analyze Data");
         loadButton.setOnAction(e -> {
             System.out.println("load button clicked. going to scene2");
             window.setScene(scene2);
