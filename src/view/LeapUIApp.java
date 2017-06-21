@@ -841,6 +841,10 @@ public class LeapUIApp extends Application {
                 System.out.println("number of fingers: \n" + fingersInFrame.count());
                 System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
 
+                //create a new kind of save function that is based on save3 and allows u to save into the folder called joe. u can type and make
+                //folders as u go. as long as they have directories to be saved in. and the saving process should note the gesture type also. so
+                //when it needs to be compared it can be appropriately compared. maybe that can be saved in files, serialized data?
+
 
                 SerializedTargetHand.Save2(latestHand.frame(), "General", "typeX");
                 System.out.println("saving data END ************");
