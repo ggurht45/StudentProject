@@ -33,6 +33,7 @@ import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.SerializedTargetHand;
+import view.analyze.InfoBox;
 import view.analyze.LoadGesturesScene;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
@@ -202,6 +203,27 @@ public class LeapUIApp extends Application {
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.S) {
+                    try {
+                        System.out.println("saving official gesture");
+                        Frame f = latestHand.frame();
+
+                        //for debugging
+                        System.out.println("frame: \n" + f.toString());
+                        FingerList fingersInFrame = f.fingers();
+                        System.out.println("number of fingers: \n" + fingersInFrame.count());
+                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+
+                        //show alert box
+                        InfoBox.display("Gesture Name", "Please name this gesture:");
+                        System.out.println("name: " + InfoBox.name + " leftHand: " + InfoBox.leftHand);
+
+                        SerializedTargetHand.Save3(f,  InfoBox.name,  InfoBox.leftHand);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         System.out.println("enter was pressed, saving target hand.");

@@ -23,6 +23,8 @@ import com.leapmotion.leap.Controller;
 public class SerializedTargetHand {
     public static final int MAX_FRAMES = 10;
     private static final String hands_file = "TargetHands.txt";
+    private static String leftGestures_file = "LeftGestures.txt";
+    private static String rightGestures_file = "RightGestures.txt";
 
 
     public static void Save(Frame f) throws IOException {
@@ -49,6 +51,27 @@ public class SerializedTargetHand {
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
         printer.println(fileName);
         printer.close();
+    }
+
+    //save the 10 specific gestures; id = 1-10; side = l/r
+    public static void Save3(Frame f, String gestureId, boolean leftHand) throws IOException {
+        System.out.println("inside save3");
+        String side;
+        String indexFile;
+        if (leftHand) {
+            side = "Left";
+            indexFile = leftGestures_file;
+        } else {
+            side = "Right";
+            indexFile = rightGestures_file;
+        }
+        String fileName = "targets2/" + gestureId + side + ".hand";
+        byte[] serializedFrame = f.serialize();
+        Files.write(Paths.get(fileName), serializedFrame);
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(indexFile, true)));
+        printer.println(fileName);
+        printer.close();
+        System.out.println("leaving save3");
     }
 
     //this method reads a .hand file. given a path string that tells where to find that .hand file
