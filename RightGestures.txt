@@ -1,1 +1,10 @@
 targets2/gesture1Right.hand
+targets2/gesture2Right.hand
+targets2/gesture3Right.hand
+targets2/gesture4Right.hand
+targets2/gesture5Right.hand
+targets2/gesture6Right.hand
+targets2/gesture7Right.hand
+targets2/gesture8Right.hand
+targets2/gesture9Right.hand
+targets2/gesture10Right.hand
