@@ -108,4 +108,56 @@ public class SerializedTargetHand {
 
     }
 
+    public static ArrayList<Hand> getAllHands2(String fileName) {
+        try {
+            File inFile = new File(fileName);
+            if (!inFile.exists())
+                throw new Exception("In file not found :" + fileName); // No input file
+
+            BufferedReader br = new BufferedReader(new FileReader(inFile));
+
+            ArrayList<Hand> hands = new ArrayList<Hand>();
+
+            try {
+                String line = br.readLine();
+                while (line != null) {
+                    hands.add(readFromFile(line));
+                    line = br.readLine();
+                }
+            } finally {
+                br.close();
+            }
+            return hands;
+        } catch (Exception e) {
+            System.out.println("error happened while trying to getAllHands2");
+        }
+        return null;
+    }
+
+    public static ArrayList<String> getAllHands2Names(String fileName) {
+        try {
+            File inFile = new File(fileName);
+            if (!inFile.exists())
+                throw new Exception("In file not found :" + fileName); // No input file
+
+            BufferedReader br = new BufferedReader(new FileReader(inFile));
+
+            ArrayList<String> handFiles = new ArrayList();
+
+            try {
+                String line = br.readLine();
+                while (line != null) {
+                    handFiles.add(line);
+                    line = br.readLine();
+                }
+            } finally {
+                br.close();
+            }
+            return handFiles;
+        } catch (Exception e) {
+            System.out.println("error happened while trying to getAllHands2Names");
+        }
+        return null;
+    }
+
 }

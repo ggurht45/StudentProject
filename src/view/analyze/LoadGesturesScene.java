@@ -79,20 +79,22 @@ public class LoadGesturesScene {
         String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
         String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
         String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+//        List<String> al = new ArrayList(Arrays.asList("normal facing up", "facing down", "facing down fingers to right", "right hand palm upright", "facing down 2"));
 
         //make a comboList
-        List<String> fileList = new ArrayList(Arrays.asList(str2, str3, str4, str5, str6));
-        List<String> al = new ArrayList(Arrays.asList("normal facing up", "facing down", "facing down fingers to right", "right hand palm upright", "facing down 2"));
-        ObservableList<String> options = FXCollections.observableArrayList(al);
+        String lhGesturesFile = "LeftGestures.txt";
+        String rhGesturesFile = "RightGestures.txt";
+        List<Hand> handList = SerializedTargetHand.getAllHands2(lhGesturesFile);
+        List<String> fileList = SerializedTargetHand.getAllHands2Names(lhGesturesFile);
+
+        ObservableList<String> options = FXCollections.observableArrayList(fileList);
         ComboBox comboBox = new ComboBox(options);
         //initially set up to load 0th item
-        comboBox.setValue("facing down fingers to right");
-        handToLoadFile = fileList.get(2);
+        comboBox.setValue(fileList.get(0));
+        handToLoadFile = fileList.get(0);
         comboBox.setOnAction(e -> {
             System.out.println("selected: " + comboBox.getValue());
-            System.out.println("index: " + al.indexOf(comboBox.getValue()));
-            int index = al.indexOf(comboBox.getValue());
-            handToLoadFile = fileList.get(index);
+            handToLoadFile = (String) comboBox.getValue();
         });
         comboBox.setTranslateX(app.ScreenWidth * (2 / 5));
         comboBox.setTranslateY(app.ScreenHeight * 4 / 5);
