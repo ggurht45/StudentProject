@@ -40,5 +40,10 @@ public class UIHand_Full extends UIHand {
 		for (UIFinger f : fingers) f.setChildrenOpacity(opacity);
 		palm.setChildrenOpacity(opacity);
 	}
-	
+
+	@Override
+	public void setDirectionTo(Hand hand) {
+		System.out.println("inside empty setDirectionTo method call. It seems like UIHand_full is never used.");
+	}
+
 }

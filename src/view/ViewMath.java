@@ -17,6 +17,7 @@ public class ViewMath {
 
 
 	//changes the node that was passed in. java is pass by value, but what gets passed in is remote control to the objects.
+	//position is some point in space, this method sets the node to be at the position also, but scaled back by a factor so as to fit on the screen i guess.
 	public static void setPositionByVector(Node node, Vector position) {
 		node.setTranslateX(position.getX()/positionScaleFactor);
 		node.setTranslateY((150 - position.getY())/positionScaleFactor); // compensate for device Y being 0+, screen Y being -0+
@@ -30,7 +31,9 @@ public class ViewMath {
 		node.setRotate(angle);
 		node.setRotationAxis(axis);
 	}
-	
+
+
+	//this method is used in the UIPalm class.
 	public static void setCylinder(Cylinder cylinder, Vector mid, Vector direction, float radius) {
 		setPositionByVector(cylinder, mid);
 		setRotationByVector(cylinder, direction);

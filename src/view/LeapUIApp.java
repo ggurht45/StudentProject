@@ -155,8 +155,16 @@ public class LeapUIApp extends Application {
         timeText.setY(ScreenHeight * 5 / 8);
         timeText.setVisible(false);
 
+
+        Text text = new Text("This is a test");
+        text.setX(10);
+        text.setY(50);
+        text.setFont(new Font(20));
+
+        text.getTransforms().add(new Rotate(30, 50, 30));
+
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, text);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
