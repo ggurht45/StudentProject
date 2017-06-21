@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import controller.Comparer;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -16,10 +18,7 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -67,6 +66,7 @@ public class LeapUIApp extends Application {
     private static Button loadButton;   // a button to load hand and show it using user hand
     private Stage window;
     private Scene scene, scene2;
+    boolean leftHandSelected = true;
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -153,18 +153,23 @@ public class LeapUIApp extends Application {
 
         //going radio button approach
         ToggleGroup lfGroup = new ToggleGroup();
-        RadioButton leftRadio = new RadioButton("Left");
+        RadioButton leftRadio = new RadioButton("Left Hand");
         leftRadio.setToggleGroup(lfGroup);
         leftRadio.setSelected(true);
         leftRadio.setTranslateX(ScreenWidth * 1 / 5);
         leftRadio.setTranslateY(ScreenHeight * 1 / 10);
-        RadioButton rightRadio = new RadioButton("Right");
+        leftRadio.setOnAction(e -> {
+            leftHandSelected = true;
+//            System.out.println("left selected; leftHandSelected: " + leftHandSelected);
+        });
+        RadioButton rightRadio = new RadioButton("Right Hand");
         rightRadio.setToggleGroup(lfGroup);
-        rightRadio.setTranslateX(ScreenWidth * 3 / 10);
+        rightRadio.setTranslateX(ScreenWidth * 8 / 10);
         rightRadio.setTranslateY(ScreenHeight * 1 / 10);
-
-        //set actions
-        boolean leftHandSelected = true; //do this soon. with event listener set up on the group.
+        rightRadio.setOnAction(e -> {
+            leftHandSelected = false;
+//            System.out.println("right selected; leftHandSelected: " + leftHandSelected);
+        });
 
         //create label
 //        Text lrLabel = new Text("Left"); //updates based on boolean
