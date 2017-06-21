@@ -63,7 +63,12 @@ public class Control extends Controller implements ControllerInterface {
     public void select() { // grab hand and start test. *what does "grab" hand mean?
         Hand h = new Hand();
         try {
-            ArrayList<Hand> arrayHands = SerializedTargetHand.getAllHands();
+            ArrayList<Hand> arrayHands;
+            if(LeapUIApp.leftHandSelected){
+                arrayHands = SerializedTargetHand.getAllHands2("LeftGestures.txt");
+            }else{
+                arrayHands = SerializedTargetHand.getAllHands2("RightGestures.txt");
+            }
             h = LeapUIApp.selectHand(arrayHands);
         } catch (Exception e) {
             System.out.println("** Error happened while trying to select hand.");

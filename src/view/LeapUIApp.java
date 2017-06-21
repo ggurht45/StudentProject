@@ -68,7 +68,7 @@ public class LeapUIApp extends Application {
     public static Button loadButton;   // a button to load hand and show it using user hand
     public Stage window;
     public Scene scene, scene2;
-    public boolean leftHandSelected = true;
+    public static boolean leftHandSelected = true;
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -218,7 +218,12 @@ public class LeapUIApp extends Application {
                         InfoBox.display("Gesture Name", "Please name this gesture:");
                         System.out.println("name: " + InfoBox.name + " leftHand: " + InfoBox.leftHand);
 
-                        SerializedTargetHand.Save3(f,  InfoBox.name,  InfoBox.leftHand);
+                        if(InfoBox.name!= null){
+                            SerializedTargetHand.Save3(f,  InfoBox.name,  InfoBox.leftHand);
+                        }else{
+                            System.out.println("aborting saving of gesture. no name was typed.");
+                        }
+
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -362,7 +367,11 @@ public class LeapUIApp extends Application {
                 if (keyEvent.getCode() == KeyCode.M) {
                     new Thread(() -> {
                         try {
-                            selectHand(SerializedTargetHand.getAllHands());
+                            if(leftHandSelected) {
+                                selectHand(SerializedTargetHand.getAllHands2("LeftGestures.txt"));
+                            }else{
+                                selectHand(SerializedTargetHand.getAllHands2("RightGestures.txt"));
+                            }
                         } catch (Exception e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
