@@ -203,7 +203,7 @@ public class LeapUIApp extends Application {
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.S) {
+                if (keyEvent.getCode() == KeyCode.G) {
                     try {
                         System.out.println("saving official gesture");
                         Frame f = latestHand.frame();
