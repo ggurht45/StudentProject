@@ -66,7 +66,7 @@ public class LoadGesturesScene {
         //make a compare button. that compares it against the appropriate hand... should be stored somehow.
         Button compareButton = makeGenericButton("Compare Hands", 0.5, 0.8);//new Button("Load Hand");
         compareButton.setOnAction(e -> {
-            fixHand();
+//            fixHand();
             double score = compareTwoHands(lh, th);
             System.out.println("score after comparing h, th:" + score);
 

@@ -119,6 +119,7 @@ public class LeapUIApp extends Application {
                 System.out.println("* entering test mode btn clicked");
                 setVisible(false);
                 userHand.setVisible(false);
+                loadButton.setVisible(false);
                 //makes a new thread, passing it a lambda function and then it calls start on that thread.
                 new Thread(() -> control.enterTrainingMode()).start();
             }
@@ -172,10 +173,6 @@ public class LeapUIApp extends Application {
 //            System.out.println("right selected; leftHandSelected: " + leftHandSelected);
         });
 
-        //create label
-//        Text lrLabel = new Text("Left"); //updates based on boolean
-
-
         scoreText = new Text();
         scoreText.setFont(Font.font(STYLESHEET_MODENA, ScreenHeight / 4));
         scoreText.setY(ScreenHeight / 2);
@@ -192,13 +189,7 @@ public class LeapUIApp extends Application {
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
 
-//        //Button 2
-//        Button button2 = new Button("This sucks, go back to scene 1");
-//        button2.setOnAction(e -> window.setScene(scene));
-//
-//        //Layout 2
-//        StackPane layout2 = new StackPane();
-//        layout2.getChildren().add(button2);
+
         LoadGesturesScene layout2 = new LoadGesturesScene(this);
         scene2 = layout2.scene;
 
@@ -583,6 +574,7 @@ public class LeapUIApp extends Application {
             timeText.setVisible(false);
             aBar.setVisible(false);
             testButton.setVisible(true);
+            loadButton.setCancelButton(true);
             return null;
         }
 
