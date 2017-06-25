@@ -19,6 +19,7 @@ import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
+import view.anatomy.UIHand_SuperSimple;
 
 import java.util.List;
 
@@ -35,24 +36,37 @@ public class LoadGesturesScene2 {
     public LoadGesturesScene2(LeapUIApp app) {
         this.app = app;
 
+        //sometimes need to do ctrl save for the import hint to come up
+//        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
+        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), false);
+//        uiHand1.setVisible(true);
+
+        lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
+        uiHand1.setLoc(lh);
+        uiHand1.setVisible(true);
+
+//        uiHand2 = new UIHand_SuperSimple(Color.DARKRED, true);
+//        uiHand2.setVisible(false);
+
+
 //        Text label = new Text("hello world");
         Button label = new Button ("click me!");
 
 
 
         // The 3D camera; necessary for 3D display
-//        PerspectiveCamera camera = new PerspectiveCamera(true);
-//        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
 
         // The 3D display
-//        Group group3D = new Group();
-//        group3D.getChildren().add(camera);
-//        group3D.getChildren().add(uiHand1);
+        Group group3D = new Group();
+        group3D.getChildren().add(camera);
+        group3D.getChildren().add(uiHand1);
 //        group3D.getChildren().add(uiHand2);
-//        SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
-//        sub3D.setFill(Color.LAVENDER);
-//        sub3D.setCamera(camera);
+        SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
+        sub3D.setFill(Color.LAVENDER);
+        sub3D.setCamera(camera);
 
         // The 2D overlay
         Group group2D = new Group(label);
@@ -60,14 +74,24 @@ public class LoadGesturesScene2 {
 
 
         //put 2D and 3D subScenes together; and make it into a scene
-//        rootGroup = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
-        rootGroup = new Group(sub2D); // sub2D is second, as we want it overlaid, not underlaid
+        rootGroup = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
+//        rootGroup = new Group(sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(rootGroup);
 
     }
 
     public Scene getScene(){
         return scene;
+    }
+
+    public Hand getHandFromString(String s) {
+        Hand h = null;
+        try {
+            h = SerializedTargetHand.readFromFile(s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return h;
     }
 
 }
