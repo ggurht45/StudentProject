@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import model.SerializedTargetHand;
 import view.analyze.InfoBox;
 import view.analyze.LoadGesturesScene;
+import view.analyze.LoadGesturesScene2;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
 import view.anatomy.UIHand_Simple;
@@ -65,7 +66,7 @@ public class LeapUIApp extends Application {
 
     public static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
     public Comparer comparer;
-    public static Button loadButton;   // a button to load hand and show it using user hand
+    public static Button scene2Button;   // a button to load hand and show it using user hand
     public Stage window;
     public Scene scene, scene2;
     public static boolean leftHandSelected = true;
@@ -120,7 +121,7 @@ public class LeapUIApp extends Application {
                 System.out.println("* entering test mode btn clicked");
                 setVisible(false);
                 userHand.setVisible(false);
-                loadButton.setVisible(false);
+                scene2Button.setVisible(false);
                 //makes a new thread, passing it a lambda function and then it calls start on that thread.
                 new Thread(() -> control.enterTrainingMode()).start();
             }
@@ -141,17 +142,17 @@ public class LeapUIApp extends Application {
 //            }
 //        };
 
-        loadButton = new Button("Analyze Data");
-        loadButton.setOnAction(e -> {
-            System.out.println("load button clicked. going to scene2");
+        scene2Button = new Button("Analyze Data");
+        scene2Button.setOnAction(e -> {
+            //System.out.println("going to scene2");
             window.setScene(scene2);
         });
 
 
-        loadButton.setTranslateX(ScreenWidth * 1 / 5);
-        loadButton.setTranslateY(ScreenHeight * 4 / 5);
-        loadButton.setPrefHeight(50);
-        loadButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+        scene2Button.setTranslateX(ScreenWidth * 1 / 5);
+        scene2Button.setTranslateY(ScreenHeight * 4 / 5);
+        scene2Button.setPrefHeight(50);
+        scene2Button.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
 
         //going radio button approach
@@ -185,14 +186,19 @@ public class LeapUIApp extends Application {
 
 
         // The 2D overlay
-        Group group2D = new Group(aBar, sBar, mBar, testButton, loadButton, scoreText, timeText, leftRadio, rightRadio);
+        Group group2D = new Group(aBar, sBar, mBar, testButton, scene2Button, scoreText, timeText, leftRadio, rightRadio);
         SubScene sub2D = new SubScene(group2D, ScreenWidth, ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
         Group root = new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
         scene = new Scene(root);
 
 
-        LoadGesturesScene layout2 = new LoadGesturesScene(this);
-        scene2 = layout2.scene;
+//        LoadGesturesScene layout2 = new LoadGesturesScene(this);
+//        scene2 = layout2.getScene();
+
+        LoadGesturesScene2 rotateDemoLayout = new LoadGesturesScene2(this);
+        scene2 = rotateDemoLayout.getScene();
+
+
 
         //create references for the 2 different controls
         Control ctrl1 = new Control();
@@ -605,7 +611,7 @@ public class LeapUIApp extends Application {
             timeText.setVisible(false);
             aBar.setVisible(false);
             testButton.setVisible(true);
-            loadButton.setCancelButton(true);
+            scene2Button.setCancelButton(true);
             return null;
         }
 

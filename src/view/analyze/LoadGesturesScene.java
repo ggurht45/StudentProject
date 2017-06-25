@@ -33,11 +33,11 @@ public class LoadGesturesScene {
     public static UIHand targetHandUI;
     public static Hand th;
     public static Group rootGroup;
-    public static Scene scene;
+    private static Scene scene;
 
     public LoadGesturesScene(LeapUIApp app) {
         this.app = app;
-        //set up the loadedHandUI and target hand
+        //set up the uiHand1 and target hand
         loadedHandUI = new UIHand_Simple(Color.BLUE.darker(), false);
         loadedHandUI.setVisible(false);
         targetHandUI = new UIHand_Simple(Color.DARKRED, true);
@@ -126,6 +126,10 @@ public class LoadGesturesScene {
 
     }
 
+    public Scene getScene(){
+        return scene;
+    }
+
     public Hand getHandFromString(String s) {
         Hand h = null;
         try {
@@ -181,31 +185,31 @@ public class LoadGesturesScene {
         Point3D axisForY = new Point3D(0, 0, 1);
 
 //        double rotationAngleX = thd.getX()*(-90.0);
-//        loadedHandUI.setRotationAxis(new Point3D(0, 1, 0));
-//        loadedHandUI.setRotate(rotationAngleX);
+//        uiHand1.setRotationAxis(new Point3D(0, 1, 0));
+//        uiHand1.setRotate(rotationAngleX);
 //
 //        double rotationAngleZ = thd.getZ()*(-90.0);
-//        loadedHandUI.setRotationAxis(new Point3D(1, 0, 0));
-//        loadedHandUI.setRotate(rotationAngleZ);
+//        uiHand1.setRotationAxis(new Point3D(1, 0, 0));
+//        uiHand1.setRotate(rotationAngleZ);
 //
 //
-//        loadedHandUI.setRotationAxis(new Point3D(0, 0, 1));
+//        uiHand1.setRotationAxis(new Point3D(0, 0, 1));
 //        double rotationAngleY = thd.getY()*(-90.0);
-//        loadedHandUI.setRotate(rotationAngleY);
+//        uiHand1.setRotate(rotationAngleY);
 
 
         //didnt work kinda close though. maybe try to make clones or copys of objects. needs more thought later
         //no doesnt work at all basically. cuz clicking on compare multiple times causes problems.
-//        loadedHandUI.getTransforms().removeAll();
-//        loadedHandUI.getTransforms().add(new Rotate(rotationAngleX, axisForX));
-//        loadedHandUI.getTransforms().add(new Rotate(rotationAngleZ, axisForZ));
-//        loadedHandUI.getTransforms().add(new Rotate(rotationAngleY, axisForY));
+//        uiHand1.getTransforms().removeAll();
+//        uiHand1.getTransforms().add(new Rotate(rotationAngleX, axisForX));
+//        uiHand1.getTransforms().add(new Rotate(rotationAngleZ, axisForZ));
+//        uiHand1.getTransforms().add(new Rotate(rotationAngleY, axisForY));
 
 
         //this stuff may also be useful later.
-//        loadedHandUI.getLayoutX();
-//        loadedHandUI.getLayoutY();
-//        loadedHandUI.getLocalToParentTransform();
+//        uiHand1.getLayoutX();
+//        uiHand1.getLayoutY();
+//        uiHand1.getLocalToParentTransform();
 
 //        System.out.println("rotation angles: " + rotationAngleY + " " + rotationAngleX + " " + rotationAngleZ);
 
