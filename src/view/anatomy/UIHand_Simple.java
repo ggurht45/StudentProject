@@ -55,7 +55,6 @@ public class UIHand_Simple extends UIHand {
                 if (wireframe) fingerJoints[i][j].setDrawMode(DrawMode.LINE);
             }
             getChildren().addAll(fingerJoints[i]);
-            ;
         }
 
         knuckleSpans = new Cylinder[4];
@@ -104,6 +103,8 @@ public class UIHand_Simple extends UIHand {
                 // via the "bone" variable. bone comes from hand which was passed into this function.
                 Cylinder uiBone = fingerBones[i][j];
                 //updates uiBone based on bone passed in. even though this method doesn't seem to return anything, it does change the uiBone
+                //bone.center() = the midpoint of the bone. bone.direction = normalized direction from base to tip of bone. thats why we have to
+                //multiply it by the length of the bone.
                 ViewMath.setCylinder(uiBone, bone.center(), bone.direction().times(bone.length()));
 
                 Sphere uiJoint = fingerJoints[i][j + 1];

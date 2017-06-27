@@ -2,40 +2,47 @@ package view.anatomy;
 
 import javafx.geometry.Point3D;
 import javafx.scene.shape.Box;
-import javafx.scene.transform.Rotate;
-import view.ViewMath;
 
-import com.leapmotion.leap.Bone;
-import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Hand;
-import com.leapmotion.leap.Vector;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.DrawMode;
-import javafx.scene.shape.Sphere;
+import javafx.scene.transform.Rotate;
 
 public class UIHand_SuperSimple extends UIHand {
 
-    private static float defaultWidth = 34f;
-    private static float defaultHeight = 74f;
-    private static float defaultDepth = 14f;
-    private Box handRepresentation;
+    private static float defaultWidth = 5f;
+    private static float defaultHeight = 10f;
+    private static float defaultDepth = 2f;
+    private Box hand;
+    private Cylinder thumb;
 
     public UIHand_SuperSimple(Color color, boolean wireframe) {
         super();
-        handRepresentation = new Box(defaultWidth, defaultHeight, defaultDepth);
+        PhongMaterial dark = new PhongMaterial(color);
+        PhongMaterial thumbColor = new PhongMaterial(Color.BURLYWOOD);
+        hand = new Box(defaultWidth, defaultHeight, defaultDepth);
+        hand.setMaterial(dark);
+        thumb = new Cylinder(2, 8);
+        thumb.setMaterial(thumbColor);
+        thumb.setTranslateX(4);
+
+//        this.getTransforms().add(new Rotate(10, new Point3D(1,0,0)));
+        this.setRotate(20);
 
         //add children to UiHand group
-        this.getChildren().add(handRepresentation);
+        this.getChildren().addAll(hand, thumb);
 
     }
 
+//    private void createHandGroup(){
+//
+//    }
+
     @Override
     public void setLoc(Hand hand) {
-
 
     }
 

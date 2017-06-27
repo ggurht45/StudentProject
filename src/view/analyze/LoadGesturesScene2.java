@@ -37,13 +37,19 @@ public class LoadGesturesScene2 {
         this.app = app;
 
         //sometimes need to do ctrl save for the import hint to come up
-//        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
-        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), false);
-//        uiHand1.setVisible(true);
-
+        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
         lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
-        uiHand1.setLoc(lh);
+        uiHand1.setLoc(th);
         uiHand1.setVisible(true);
+        uiHand1.setTranslateX(-8);
+
+        //uihand2
+        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
+        th = getHandFromString("targets/2017-06-12 12-21-01.hand");
+        uiHand2.setLoc(th);
+        uiHand2.setVisible(true);
+        uiHand2.setTranslateX(8);
+
 
 //        uiHand2 = new UIHand_SuperSimple(Color.DARKRED, true);
 //        uiHand2.setVisible(false);
@@ -62,7 +68,7 @@ public class LoadGesturesScene2 {
         // The 3D display
         Group group3D = new Group();
         group3D.getChildren().add(camera);
-        group3D.getChildren().add(uiHand1);
+        group3D.getChildren().addAll(uiHand1, uiHand2);
 //        group3D.getChildren().add(uiHand2);
         SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
         sub3D.setFill(Color.LAVENDER);
