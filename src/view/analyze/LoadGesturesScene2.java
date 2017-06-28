@@ -28,6 +28,7 @@ public class LoadGesturesScene2 {
     private static UIHand uiHand1;
     private static Hand lh;
     private static UIHand uiHand2;
+    private static UIHand uiHand3;
     private static Hand th;
     private static Group rootGroup;
     private static Scene scene;
@@ -40,7 +41,11 @@ public class LoadGesturesScene2 {
         uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
         lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
         uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
-        th = getHandFromString("targets/2017-06-12 12-21-01.hand");
+
+//        th = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
+//        th = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
+        th = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+        uiHand3 = new UIHand_Simple(Color.GREEN, true);
 
         //uiHand1 setup
         uiHand1.setLoc(th);
@@ -57,28 +62,39 @@ public class LoadGesturesScene2 {
 
         //uihand2 set up
         uiHand2.setLoc(th);
+        //need paranthesis..
+        ((UIHand_Simple)uiHand2).fixOrientation(th);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(8);
 
+        //uihand3 set up
+        uiHand3.setLoc(th);
+        uiHand3.setVisible(true);
+        uiHand3.setTranslateX(16);
 
-//        uiHand2 = new UIHand_SuperSimple(Color.DARKRED, true);
-//        uiHand2.setVisible(false);
 
 
-//        Text label = new Text("hello world");
         Button label = new Button ("click me!");
 
 
 
         // The 3D camera; necessary for 3D display
+        //weird things about camera: y increases downwards, z increases into the screen, x increases to the right
+        //from google result: 'In JavaFX, the camera coordinate system is as follows: • X-axis pointing to the right • Y-axis pointing down • Z-axis pointing away from the viewer or into the screen.'
+        //transforms get added lifo.
         PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
+        //z increases into the screen for javafx. unlike leap motion controller coordinate system
+        //note, the order in which transforms are added matters. a lot. it seems to be the last one added is executed first. lifo. very weird
+        //angles increase counter clockwise when looking down the negative of the axis. -90 x-axis makes sense now.
+//        camera.getTransforms().addAll(new Rotate(-90, Rotate.X_AXIS), new Translate(0, 0, -50));
+        camera.getTransforms().addAll(new Translate(0, -70, 0), new Rotate(-90, Rotate.X_AXIS)); //note how we have to set the y axis now. y seems to increase downwards.
+//        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
 
         // The 3D display
         Group group3D = new Group();
         group3D.getChildren().add(camera);
-        group3D.getChildren().addAll(uiHand1, uiHand2);
+        group3D.getChildren().addAll(uiHand1, uiHand2, uiHand3);
 //        group3D.getChildren().add(uiHand2);
         SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
         sub3D.setFill(Color.LAVENDER);

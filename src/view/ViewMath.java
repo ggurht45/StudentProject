@@ -60,6 +60,15 @@ public class ViewMath {
 		//change into the second hand's direction
 	}
 
+	public static void setRotationByVector2(Node node, Vector direction, Vector orginalAxis) {
+		Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
+
+		double angle = correctedDirection.angleTo(orginalAxis) * 180/Math.PI;	//angle in degrees.
+
+		Point3D axis = vectorToPoint( correctedDirection.cross(orginalAxis) );
+		node.setRotate(angle);
+		node.setRotationAxis(axis);
+	}
 
 	//this method is used in the UIPalm class... only thing is that this sets the radius also.
 	public static void setCylinder(Cylinder cylinder, Vector mid, Vector direction, float radius) {
@@ -90,6 +99,13 @@ public class ViewMath {
 	public static void setGroup(Group group, Vector middlePoint, Vector directionWithMagnitude) {
 		setPositionByVector(group, middlePoint);
 		setRotationByVector(group, directionWithMagnitude);
+		double lengthOfBone = directionWithMagnitude.magnitude();
+		group.setScaleY(lengthOfBone/positionScaleFactor);
+	}
+
+	public static void setGroup2(Group group, Vector middlePoint, Vector directionWithMagnitude, Vector axis) {
+		setPositionByVector(group, middlePoint);
+		setRotationByVector2(group, directionWithMagnitude, axis);
 		double lengthOfBone = directionWithMagnitude.magnitude();
 		group.setScaleY(lengthOfBone/positionScaleFactor);
 	}

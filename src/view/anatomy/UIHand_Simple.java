@@ -147,6 +147,32 @@ public class UIHand_Simple extends UIHand {
 
     }
 
+    public void fixOrientation(Hand h){
+        System.out.println("***EE2");
+        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+        System.out.println("this = simple hand after setLoc");
+        System.out.println("this.getRotate(): " + this.getRotate());
+        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+        System.out.println("h.direction(): " + h.direction());
+        System.out.println("h.direction().opposite: " + h.direction().opposite());
+        System.out.println("***EE2");
+        Vector v = new Vector(0,150,0); //weird work around for setPosition method
+        Vector d = h.direction().opposite();
+        d.setZ(d.getZ()*-1);
+        ViewMath.setGroup2(this, v, d.times(20), Vector.yAxis());
+        System.out.println("***EE3");
+        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+        System.out.println("this = simple hand after setLoc");
+        System.out.println("this.getRotate(): " + this.getRotate());
+        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+        System.out.println("h.direction(): " + h.direction());
+        System.out.println("h.direction().opposite: " + h.direction().opposite());
+        System.out.println("direction at d: " + d);
+        System.out.println("***EE3");
+    }
+
     @Override
     public void setDirectionTo(Hand hand) {
 //        ViewMath.setPositionByVector(this, hand.palmNormal());
