@@ -52,13 +52,13 @@ public class LoadGesturesScene2 {
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 
-        System.out.println("***loadGestSc2");
-        System.out.println("uiHand1");
-        System.out.println("layout: " + uiHand1.getLayoutX() + " " + uiHand1.getLayoutY() );
-        System.out.println("translate: " + uiHand1.getTranslateX() + " " + uiHand1.getTranslateY() + " " + uiHand1.getTranslateZ() );
-        System.out.println("uiHand1.getRotate(): " + uiHand1.getRotate());
-        System.out.println("uiHand1.getRotationAxis(): " + uiHand1.getRotationAxis());
-        System.out.println("***loadGestSc2");
+//        System.out.println("***loadGestSc2");
+//        System.out.println("uiHand1");
+//        System.out.println("layout: " + uiHand1.getLayoutX() + " " + uiHand1.getLayoutY() );
+//        System.out.println("translate: " + uiHand1.getTranslateX() + " " + uiHand1.getTranslateY() + " " + uiHand1.getTranslateZ() );
+//        System.out.println("uiHand1.getRotate(): " + uiHand1.getRotate());
+//        System.out.println("uiHand1.getRotationAxis(): " + uiHand1.getRotationAxis());
+//        System.out.println("***loadGestSc2");
 
         //uihand2 set up
         uiHand2.setLoc(th);
@@ -87,8 +87,8 @@ public class LoadGesturesScene2 {
         //note, the order in which transforms are added matters. a lot. it seems to be the last one added is executed first. lifo. very weird
         //angles increase counter clockwise when looking down the negative of the axis. -90 x-axis makes sense now.
 //        camera.getTransforms().addAll(new Rotate(-90, Rotate.X_AXIS), new Translate(0, 0, -50));
-        camera.getTransforms().addAll(new Translate(0, -70, 0), new Rotate(-90, Rotate.X_AXIS)); //note how we have to set the y axis now. y seems to increase downwards.
-//        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
+//        camera.getTransforms().addAll(new Translate(0, -70, 0), new Rotate(-90, Rotate.X_AXIS)); //note how we have to set the y axis now. y seems to increase downwards.
+        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
 
         // The 3D display

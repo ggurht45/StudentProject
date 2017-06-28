@@ -51,17 +51,17 @@ public class UIHand_SuperSimple extends UIHand {
         //hand.direction is a unit vector
 
         //position of group before setGroup is called
-        System.out.println("***");
-        System.out.println("groupHand position before setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+//        System.out.println("***");
+//        System.out.println("groupHand position before setGroup called in setLoc in superSimple");
+//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
         ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
-        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-        System.out.println("this.getRotate(): " + this.getRotate());
-        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-        System.out.println("***");
+//        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
+//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+//        System.out.println("this.getRotate(): " + this.getRotate());
+//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+//        System.out.println("***");
 
         ViewMath.straightenGroup(this);
 
