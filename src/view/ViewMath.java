@@ -160,12 +160,6 @@ public class ViewMath {
         System.out.println("palmWidth: " + roundFloat(h.palmWidth()));
         System.out.println("wristPosition: " + roundVector(h.wristPosition()));
         System.out.println("-------------------------------------------- END");
-
-
-        //notes about goal
-        //i want no roll. high pitch. no yaw.
-        //so. i need to be able to correct* for having roll. having yaw(fingers pointing to right),
-        //having wrong pitch (fingers facing downwards or something)
     }
 
     public static Vector roundVector(Vector u) {

@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
+import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import view.ViewMath;
 
@@ -20,16 +21,21 @@ public class UIHand_SuperSimple extends UIHand {
     private static float defaultDepth = 2f;
     private Box hand;
     private Cylinder thumb;
+    private Sphere fingers;
 
     public UIHand_SuperSimple(Color color, boolean wireframe) {
         super();
         PhongMaterial dark = new PhongMaterial(color);
         PhongMaterial thumbColor = new PhongMaterial(Color.BURLYWOOD);
+        PhongMaterial fingersColor = new PhongMaterial(Color.CADETBLUE);
         hand = new Box(defaultWidth, defaultHeight, defaultDepth);
         hand.setMaterial(dark);
         thumb = new Cylinder(2, 8);
         thumb.setMaterial(thumbColor);
         thumb.setTranslateX(4);
+        fingers = new Sphere(2);
+        fingers.setMaterial(fingersColor);
+        fingers.setTranslateY(-6); //java coordinate system, y increases downwards. z into the screen, and x to the right.
 
 //        this.setScaleY(.5);
 
@@ -37,7 +43,7 @@ public class UIHand_SuperSimple extends UIHand {
 //        this.setRotate(20);
 
         //add children to UiHand group
-        this.getChildren().addAll(hand, thumb);
+        this.getChildren().addAll(hand, thumb, fingers);
 
     }
 
