@@ -169,16 +169,25 @@ public class UIHand_Simple extends UIHand {
 
         System.out.println("num transforms: " + this.getTransforms().size());
         //try 3 transforms. look cam for inspiration. using pitch yaw roll.
-        float pitch = h.direction().pitch();
-        float yaw = h.direction().yaw();
-        float roll = h.palmNormal().roll();
-        pitch = (float)Math.toDegrees(pitch);//casting to Float different from casting to float. primitive vs object types
-        yaw = (float) Math.toDegrees(yaw);
-        roll = (float) Math.toDegrees(roll);
+//        float pitch = h.direction().pitch();
+//        float yaw = h.direction().yaw();
+//        float roll = h.palmNormal().roll();
+//        pitch = (float)Math.toDegrees(pitch);//casting to Float different from casting to float. primitive vs object types
+//        yaw = (float) Math.toDegrees(yaw);
+//        roll = (float) Math.toDegrees(roll);
+        Vector d = h.direction();
+        Vector pn = h.palmNormal();
+        float pitch = ViewMath.getWeightedPYR(d,"pitch", true, false);
+        float yaw = ViewMath.getWeightedPYR(d,"yaw", true, false);
+        float roll = ViewMath.getWeightedPYR(d,"roll", true, false);
+        float rollPN = ViewMath.getWeightedPYR(pn,"roll", true, false);
         Rotate rPitch =  new Rotate(pitch, Rotate.X_AXIS);
         Rotate rYaw =  new Rotate(yaw, Rotate.Y_AXIS);
         Rotate rRoll =  new Rotate(roll, Rotate.Z_AXIS);
-        this.getTransforms().addAll(rPitch, rYaw, rRoll);
+        Rotate rRollPN =  new Rotate(rollPN, Rotate.Z_AXIS);
+
+        //maybe the problem is happening here. need to test this to make sure its behaving as i expect
+        this.getTransforms().addAll(rPitch, rYaw, rRollPN);
 
         // 1. palm normal should always be -1 in z axis(lmotion). or 1 in javafx . not enough though..
         // cuz 2 axis can still change when palm is facing -z direction(lm) yaw, and roll.

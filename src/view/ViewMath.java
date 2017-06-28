@@ -138,7 +138,9 @@ public class ViewMath {
     //helper static methods:
     public static void printHandInfo(Hand h, String msg) {
         System.out.println("--------------------------------------------" + msg);
-        System.out.println("direction (rounded u.vec): " + roundVector(h.direction()));
+        Vector d = h.direction();
+        System.out.println("direction (rounded u.vec): " + roundVector(d));
+        System.out.println("d normalized: " + roundVector(d.normalized()));
 //        System.out.println("opposite direction: " + roundVector(h.direction().opposite()));
         Matrix basis = h.basis();
         Vector xBasis = roundVector(basis.getXBasis());
@@ -150,21 +152,86 @@ public class ViewMath {
         System.out.println("(y-Basis): " + yBasis);
         System.out.println("(z-Basis): " + zBasis);
         System.out.println("(origin): " + origin);
-        float pitch = h.direction().pitch();
-        float yaw = h.direction().yaw();
-        float roll = h.palmNormal().roll();
+        float pitch = d.pitch();
+        float yaw = d.yaw();
+        Vector pn = h.palmNormal();
+        float roll = pn.roll();
         pitch = roundFloat((float) Math.toDegrees(pitch));//casting to Float different from casting to float. primitive vs object types
         yaw = roundFloat((float) Math.toDegrees(yaw));
         roll = roundFloat((float) Math.toDegrees(roll));
-        System.out.println("palmNormal: " + roundVector(h.palmNormal()));
+        System.out.println("palmNormal: " + roundVector(pn));
         System.out.println("pitch: " + pitch);
         System.out.println("yaw: " + yaw);
         System.out.println("roll: " + roll);
+
+        //weight by magnitude of projections into the respective planes
+        float pitchWeighted = getWeightedPYR(d, "pitch", true, true);
+        float yawWeighted = getWeightedPYR(d, "yaw", true, true);
+        float rollWeighted = getWeightedPYR(d, "roll", true, true);
+        float rollWeightedPN = getWeightedPYR(pn, "roll", true, true);//roll for palm normal
+        System.out.println("pitchWeighted: " + pitchWeighted);
+        System.out.println("yawWeighted: " + yawWeighted);
+        System.out.println("rollWeighted (d): " + rollWeighted);
+        System.out.println("rollWeighted (pn): " + rollWeightedPN);
+
         System.out.println("palmPosition: " + roundVector(h.palmPosition()));
         System.out.println("stabilizedPalmPosition: " + roundVector(h.stabilizedPalmPosition()));
         System.out.println("palmWidth: " + roundFloat(h.palmWidth()));
         System.out.println("wristPosition: " + roundVector(h.wristPosition()));
         System.out.println("-------------------------------------------- END");
+    }
+
+
+    public static float getWeightedPYR(Vector d, String type, boolean useDegrees, boolean round) {
+        d = d.normalized();
+
+        //anglePYR is angle for pitch yaw or roll. depending on type passed in
+        float anglePYR = d.pitch();
+
+        Vector proj = d; //initially set proj to just d passed in
+
+        //really set the projection
+        if (type.equalsIgnoreCase("pitch")) {
+            proj = getProjection(d, "YZ");
+        } else if (type.equalsIgnoreCase("yaw")) {
+            proj = getProjection(d, "XZ");
+        } else if (type.equalsIgnoreCase("roll")) {
+            proj = getProjection(d, "XY");
+        } else {
+            System.out.println("\n \n Wrong angle type passed in !!! \n \n ");
+        }
+
+        //weight the angle
+        float w = proj.magnitude();
+        anglePYR = anglePYR * w;//weight to multiply pitch/yaw/roll by. cuz direction is unit vector
+
+        if (useDegrees) {
+            anglePYR = (float) Math.toDegrees(anglePYR);//return rounded, and converted to degrees
+        }//else doesnt do anything. pitch is already in radians
+
+        if (round) {
+            return roundFloat(anglePYR);
+        } else {
+            return anglePYR;
+        }
+    }
+
+
+
+    //planes for angles pitch -> yz;    yaw -> xz;      roll -> xy
+    public static Vector getProjection(Vector d, String plane) {
+        Vector v = new Vector(d.getX(), d.getY(), d.getZ());
+        if (plane.equalsIgnoreCase("YZ")) {
+            v.setX(0);
+        } else if (plane.equalsIgnoreCase("XZ")) {
+            v.setY(0);
+        } else if (plane.equalsIgnoreCase("XY")) {
+            v.setZ(0);
+        } else {
+            System.out.println("\n \n Error! wrong plane specified \n \n");
+        }
+        System.out.println("getProjection(pitch:yz; yaw:xz; roll:xy): " + plane + " " + v + " mag (weight): " + v.magnitude());
+        return v;
     }
 
     public static Vector roundVector(Vector u) {
@@ -208,15 +275,15 @@ public class ViewMath {
                     System.out.println("dir: " + d + " \t prjYZ: " + projectionOntoYZplane + " \n p(radians): " + p + " \t (deg): " + Math.toDegrees(p));
                     Vector negZAxis = Vector.zAxis().opposite();
                     float angBtw = negZAxis.angleTo(projectionOntoYZplane);
-                    System.out.println("negZAxis: " + negZAxis + " \t angBtw(-z, proj): " + angBtw + " \t angBtw(deg): " +Math.toDegrees(angBtw));
+                    System.out.println("negZAxis: " + negZAxis + " \t angBtw(-z, proj): " + angBtw + " \t angBtw(deg): " + Math.toDegrees(angBtw));
 
                     //multiply by percentage of magnitude.
                     float fullMag = d.magnitude();
                     float projYZmag = projectionOntoYZplane.magnitude();
                     System.out.println("dMagnitude: " + fullMag + " \t projMag" + projYZmag);
-                    float angBtwWeighted = angBtw*projYZmag;
-                    float angBtwDegW = (float)Math.toDegrees(angBtw)*projYZmag;
-                    System.out.println("angW (rad): " + angBtwWeighted + " \t angW (deg): " +Math.toDegrees(angBtwWeighted) + " \t convertDeg 1st: " + angBtwDegW);
+                    float angBtwWeighted = angBtw * projYZmag;
+                    float angBtwDegW = (float) Math.toDegrees(angBtw) * projYZmag;
+                    System.out.println("angW (rad): " + angBtwWeighted + " \t angW (deg): " + Math.toDegrees(angBtwWeighted) + " \t convertDeg 1st: " + angBtwDegW);
                     System.out.println("*** End special *** ");
 
                 }
