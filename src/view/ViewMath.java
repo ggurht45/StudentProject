@@ -208,7 +208,15 @@ public class ViewMath {
                     System.out.println("dir: " + d + " \t prjYZ: " + projectionOntoYZplane + " \n p(radians): " + p + " \t (deg): " + Math.toDegrees(p));
                     Vector negZAxis = Vector.zAxis().opposite();
                     float angBtw = negZAxis.angleTo(projectionOntoYZplane);
-                    System.out.println("negZAxis: " + negZAxis + " \t angBtw(-z, proj): " + angBtw);
+                    System.out.println("negZAxis: " + negZAxis + " \t angBtw(-z, proj): " + angBtw + " \t angBtw(deg): " +Math.toDegrees(angBtw));
+
+                    //multiply by percentage of magnitude.
+                    float fullMag = d.magnitude();
+                    float projYZmag = projectionOntoYZplane.magnitude();
+                    System.out.println("dMagnitude: " + fullMag + " \t projMag" + projYZmag);
+                    float angBtwWeighted = angBtw*projYZmag;
+                    float angBtwDegW = (float)Math.toDegrees(angBtw)*projYZmag;
+                    System.out.println("angW (rad): " + angBtwWeighted + " \t angW (deg): " +Math.toDegrees(angBtwWeighted) + " \t convertDeg 1st: " + angBtwDegW);
                     System.out.println("*** End special *** ");
 
                 }
