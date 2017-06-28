@@ -8,8 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.shape.Cylinder;
 
 import com.leapmotion.leap.Vector;
+import model.SerializedTargetHand;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ViewMath {
     public static final int positionScaleFactor = 20;
@@ -63,11 +67,12 @@ public class ViewMath {
     }
 
     public static void setRotationByVector2(Node node, Vector direction, Vector orginalAxis) {
-        Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
+        Vector correctedDirection = new Vector(direction.getX(), -direction.getY(), -direction.getZ());
 
         double angle = correctedDirection.angleTo(orginalAxis) * 180 / Math.PI;    //angle in degrees.
 
-        Point3D axis = vectorToPoint(correctedDirection.cross(orginalAxis));
+        Point3D axis = vectorToPoint(orginalAxis.cross(correctedDirection));
+//        Point3D axis = vectorToPoint(correctedDirection.cross(orginalAxis));
         node.setRotate(angle);
         node.setRotationAxis(axis);
     }
@@ -148,7 +153,7 @@ public class ViewMath {
         float pitch = h.direction().pitch();
         float yaw = h.direction().yaw();
         float roll = h.palmNormal().roll();
-        pitch = roundFloat((float)Math.toDegrees(pitch));//casting to Float different from casting to float. primitive vs object types
+        pitch = roundFloat((float) Math.toDegrees(pitch));//casting to Float different from casting to float. primitive vs object types
         yaw = roundFloat((float) Math.toDegrees(yaw));
         roll = roundFloat((float) Math.toDegrees(roll));
         System.out.println("palmNormal: " + roundVector(h.palmNormal()));
@@ -179,4 +184,38 @@ public class ViewMath {
         return bd.floatValue();
     }
 
+
+    public static void printInfoManyHands() {
+        String str1 = "targets/2015-05-05 08-17-01.hand"; //normal facing up(1)
+        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand. normal facing up(2)
+        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
+        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
+        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+        List<String> msges = new ArrayList<String>(Arrays.asList("normal facing up(1)", "normal facing up(2)", "facing down", "facing down, fingers to right", "right hand palm upright", "facing down 2"));
+        List<String> files = new ArrayList<String>(Arrays.asList(str1, str2, str3, str4, str5, str6));
+
+        for (int i = 0; i < msges.size(); i++) {
+            Hand h = null;
+            try {
+                h = SerializedTargetHand.readFromFile(files.get(i));
+                printHandInfo(h, msges.get(i));
+                if (i == 3) {
+                    System.out.println("** special pitch calculations **");
+                    Vector d = h.direction();
+                    float p = d.pitch();
+                    Vector projectionOntoYZplane = new Vector(0, d.getY(), d.getZ());
+                    System.out.println("dir: " + d + " \t prjYZ: " + projectionOntoYZplane + " \n p(radians): " + p + " \t (deg): " + Math.toDegrees(p));
+                    Vector negZAxis = Vector.zAxis().opposite();
+                    float angBtw = negZAxis.angleTo(projectionOntoYZplane);
+                    System.out.println("negZAxis: " + negZAxis + " \t angBtw(-z, proj): " + angBtw);
+                    System.out.println("*** End special *** ");
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

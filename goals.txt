@@ -41,7 +41,17 @@ left hands:
 //i want no roll. high pitch. no yaw.
 //so. i need to be able to correct* for having roll. having yaw(fingers pointing to right),
 //having wrong pitch (fingers facing downwards or something)
-//put a sphere on supersimple hand
+
+x - //put a sphere on supersimple hand
+
+//one by one. see at each step. and display each step.
+//printInfo on group
+//double cross product. one cross product is not enough. do one at a time and see results.
+
+
+
+//i see how the pitch can be very large in the fingers pointing to right vector.
+Pitch is the angle between the negative z-axis and the **projection** of the vector onto the y-z plane.
 
 
 
@@ -51,7 +61,105 @@ left hands:
 
 
 
+--------------------------------------------normal facing up(1)
+direction (rounded u.vec): (0.01, 0.72, -0.69)
+basis matrix:
+(x-Basis): (-0.98, -0.13, -0.15)
+(y-Basis): (-0.2, 0.68, 0.7)
+(z-Basis): (-0.01, -0.72, 0.69)
+(origin): (0, 0, 0)
+palmNormal: (0.2, -0.68, -0.7)
+pitch: 46.09
+yaw: 0.56
+roll: 16.44
+palmPosition: (-30.71, 124.11, 173.14)
+stabilizedPalmPosition: (-31.43, 119.19, 176.38)
+palmWidth: 88.46
+wristPosition: (-39.17, 88.15, 211.4)
+-------------------------------------------- END
+--------------------------------------------normal facing up(2)
+direction (rounded u.vec): (0.08, 0.79, -0.61)
+basis matrix:
+(x-Basis): (-0.92, -0.17, -0.34)
+(y-Basis): (-0.38, 0.59, 0.72)
+(z-Basis): (-0.08, -0.79, 0.61)
+(origin): (0, 0, 0)
+palmNormal: (0.38, -0.59, -0.72)
+pitch: 52.52
+yaw: 7.25
+roll: 32.62
+palmPosition: (-37.02, 108.85, 17.37)
+stabilizedPalmPosition: (-31.52, 106.88, 20.56)
+palmWidth: 80.53
+wristPosition: (-48.38, 72.12, 46.8)
+-------------------------------------------- END
+--------------------------------------------facing down
+direction (rounded u.vec): (0.05, -0.28, -0.96)
+basis matrix:
+(x-Basis): (-0.98, -0.19, 0)
+(y-Basis): (-0.18, 0.94, -0.29)
+(z-Basis): (-0.05, 0.28, 0.96)
+(origin): (0, 0, 0)
+palmNormal: (0.18, -0.94, 0.29)
+pitch: -16.57
+yaw: 3.16
+roll: 11.02
+palmPosition: (-19.28, 103.5, -8.01)
+stabilizedPalmPosition: (-23.71, 107.11, -16.55)
+palmWidth: 90.99
+wristPosition: (-30.41, 121.49, 42.44)
+-------------------------------------------- END
+--------------------------------------------facing down, fingers to right
+direction (rounded u.vec): (0.98, 0.21, -0.08)
+basis matrix:
+(x-Basis): (-0.07, -0.05, -1)
+(y-Basis): (-0.21, 0.98, -0.03)
+(z-Basis): (-0.98, -0.21, 0.08)
+(origin): (0, 0, 0)
+palmNormal: (0.21, -0.98, 0.03)
+pitch: 67.9 //big angle makes sense now. maybe can minimize it by taking magnitude into account
+yaw: 85.12
+roll: 12.04
+palmPosition: (-5.33, 112.26, -29.09)
+stabilizedPalmPosition: (-11.49, 112.81, -34.71)
+palmWidth: 90.99
+wristPosition: (-59.46, 105.02, -32.33)
+** special pitch calculations **          Pitch is the angle between the negative z-axis and the **projection** of the vector onto the y-z plane.
+dir: (0.975177, 0.205163, -0.0832915) 	 prjYZ: (0, 0.205163, -0.0832915) //magnitude of projection is very small. so that should be taken into account.
+ p(radians): 1.1851473 	 (deg): 67.9039375583259
+negZAxis: (-0, -0, -1) 	 angBtw(-z, proj): 1.1851473
+*** End special ***
+-------------------------------------------- END
+--------------------------------------------right hand palm upright
+direction (rounded u.vec): (-0.13, 0.68, -0.72)
+basis matrix:
+(x-Basis): (0.95, -0.13, -0.29)
+(y-Basis): (0.29, 0.72, 0.63)
+(z-Basis): (0.13, -0.68, 0.72)
+(origin): (0, 0, 0)
+palmNormal: (-0.29, -0.72, -0.63)
+pitch: 43.55
+yaw: -9.92
+roll: -21.77
+palmPosition: (-5.34, 115.82, 22.1)
+stabilizedPalmPosition: (-12.65, 115.17, 20.35)
+palmWidth: 86.15
+wristPosition: (9.12, 82.9, 59.38)
+-------------------------------------------- END
+--------------------------------------------facing down 2
+direction (rounded u.vec): (0.03, -0.02, -1)
+basis matrix:
+(x-Basis): (-1, -0.08, -0.03)
+(y-Basis): (-0.08, 1, -0.02)
+(z-Basis): (-0.03, 0.02, 1)
+(origin): (0, 0, 0)
+palmNormal: (0.08, -1, 0.02)
+pitch: -1.05
+yaw: 1.62
+roll: 4.65
+palmPosition: (-18.04, 188.96, -46.94)
+stabilizedPalmPosition: (-18.75, 191.5, -46.67)
+palmWidth: 78.63
+wristPosition: (-26.23, 192.99, -0.55)
+-------------------------------------------- END
 
-
-
-- 

@@ -2,6 +2,7 @@ package view.anatomy;
 
 import javafx.geometry.Point3D;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import view.ViewMath;
 
 import com.leapmotion.leap.Bone;
@@ -148,7 +149,8 @@ public class UIHand_Simple extends UIHand {
     }
 
     public void fixOrientation(Hand h){
-        ViewMath.printHandInfo(h, "fixOrientation Method");
+        System.out.println("fixOrientation simple hand");
+//        ViewMath.printHandInfo(h, "fixOrientation Method");
 
 //        System.out.println("***EE2");
 //        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
@@ -161,7 +163,29 @@ public class UIHand_Simple extends UIHand {
 //        System.out.println("***EE2");
 //        Vector v = new Vector(0,150,0); //weird work around for setPosition method
 //        Vector d = h.direction().opposite();
-//        d.setZ(d.getZ()*-1);
+////        d.setZ(d.getZ()*-1);
+////        d.setY(d.getY()*-1);
+
+
+        System.out.println("num transforms: " + this.getTransforms().size());
+        //try 3 transforms. look cam for inspiration. using pitch yaw roll.
+        float pitch = h.direction().pitch();
+        float yaw = h.direction().yaw();
+        float roll = h.palmNormal().roll();
+        pitch = (float)Math.toDegrees(pitch);//casting to Float different from casting to float. primitive vs object types
+        yaw = (float) Math.toDegrees(yaw);
+        roll = (float) Math.toDegrees(roll);
+        Rotate rPitch =  new Rotate(pitch, Rotate.X_AXIS);
+        Rotate rYaw =  new Rotate(yaw, Rotate.Y_AXIS);
+        Rotate rRoll =  new Rotate(roll, Rotate.Z_AXIS);
+        this.getTransforms().addAll(rPitch, rYaw, rRoll);
+
+        // 1. palm normal should always be -1 in z axis(lmotion). or 1 in javafx . not enough though..
+        // cuz 2 axis can still change when palm is facing -z direction(lm) yaw, and roll.
+        //so in addition to 1.
+
+
+        System.out.println(this.getTransforms().toString());
 //        ViewMath.setGroup2(this, v, d.times(20), Vector.yAxis());
 //        System.out.println("***EE3");
 //        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
