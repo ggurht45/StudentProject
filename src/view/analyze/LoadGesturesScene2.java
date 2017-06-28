@@ -47,6 +47,14 @@ public class LoadGesturesScene2 {
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 
+        System.out.println("***loadGestSc2");
+        System.out.println("uiHand1");
+        System.out.println("layout: " + uiHand1.getLayoutX() + " " + uiHand1.getLayoutY() );
+        System.out.println("translate: " + uiHand1.getTranslateX() + " " + uiHand1.getTranslateY() + " " + uiHand1.getTranslateZ() );
+        System.out.println("uiHand1.getRotate(): " + uiHand1.getRotate());
+        System.out.println("uiHand1.getRotationAxis(): " + uiHand1.getRotationAxis());
+        System.out.println("***loadGestSc2");
+
         //uihand2 set up
         uiHand2.setLoc(th);
         uiHand2.setVisible(true);

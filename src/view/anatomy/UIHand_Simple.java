@@ -137,9 +137,13 @@ public class UIHand_Simple extends UIHand {
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
 
 
+        System.out.println("***EE");
+        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
         System.out.println("this = simple hand after setLoc");
         System.out.println("this.getRotate(): " + this.getRotate());
         System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+        System.out.println("***EE");
 
     }
 

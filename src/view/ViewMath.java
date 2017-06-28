@@ -94,6 +94,13 @@ public class ViewMath {
 		group.setScaleY(lengthOfBone/positionScaleFactor);
 	}
 
+	public static void straightenGroup(Group group) {
+//		setPositionByVector(group, middlePoint);
+//		setRotationByVector(group, directionWithMagnitude);
+//		double lengthOfBone = directionWithMagnitude.magnitude();
+//		group.setScaleY(lengthOfBone/positionScaleFactor);
+	}
+
 
 	// also very similar to the above methods. just finds the mid and direction by itself.
 	//i should really refractor this code.

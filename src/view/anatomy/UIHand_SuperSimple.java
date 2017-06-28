@@ -48,21 +48,22 @@ public class UIHand_SuperSimple extends UIHand {
     @Override
     public void setLoc(Hand hand) {
         System.out.println("in setLoc method of superSimple hand");
-//        Group g = this;
-
-
         //hand.direction is a unit vector
-        System.out.println(hand.id());
-//        System.out.println(hand.stabilizedPalmPosition());
-//        System.out.println( hand.direction().times(20));
-//        Cylinder uiBone = thumb;
-//        System.out.println(thumb);
-//        ViewMath.setCylinder2(hand.stabilizedPalmPosition(), hand.direction().times(20));
-        ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
 
+        //position of group before setGroup is called
+        System.out.println("***");
+        System.out.println("groupHand position before setGroup called in setLoc in superSimple");
+        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+        ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
+        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
+        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
         System.out.println("this.getRotate(): " + this.getRotate());
         System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+        System.out.println("***");
 
+        ViewMath.straightenGroup(this);
 
 
 
