@@ -1,6 +1,7 @@
 package view.anatomy;
 
 import javafx.geometry.Point3D;
+import javafx.scene.Group;
 import javafx.scene.shape.Box;
 
 import com.leapmotion.leap.Hand;
@@ -10,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.transform.Rotate;
+import view.ViewMath;
 
 public class UIHand_SuperSimple extends UIHand {
 
@@ -29,8 +31,10 @@ public class UIHand_SuperSimple extends UIHand {
         thumb.setMaterial(thumbColor);
         thumb.setTranslateX(4);
 
-//        this.getTransforms().add(new Rotate(10, new Point3D(1,0,0)));
-        this.setRotate(20);
+//        this.setScaleY(.5);
+
+////        this.getTransforms().add(new Rotate(10, new Point3D(1,0,0)));
+//        this.setRotate(20);
 
         //add children to UiHand group
         this.getChildren().addAll(hand, thumb);
@@ -43,6 +47,25 @@ public class UIHand_SuperSimple extends UIHand {
 
     @Override
     public void setLoc(Hand hand) {
+        System.out.println("in setLoc method of superSimple hand");
+//        Group g = this;
+
+
+        //hand.direction is a unit vector
+        System.out.println(hand.id());
+//        System.out.println(hand.stabilizedPalmPosition());
+//        System.out.println( hand.direction().times(20));
+//        Cylinder uiBone = thumb;
+//        System.out.println(thumb);
+//        ViewMath.setCylinder2(hand.stabilizedPalmPosition(), hand.direction().times(20));
+        ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
+
+        System.out.println("this.getRotate(): " + this.getRotate());
+        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+
+
+
+
 
     }
 

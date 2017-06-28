@@ -1,6 +1,7 @@
 package view;
 
 import javafx.geometry.Point3D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.Cylinder;
 
@@ -54,12 +55,13 @@ public class ViewMath {
 		node.setRotationAxis(axis);
 
 
+
 		//get a second "hand" set its direction approximately. also set h1. set both hands.
 		//change into the second hand's direction
 	}
 
 
-	//this method is used in the UIPalm class.
+	//this method is used in the UIPalm class... only thing is that this sets the radius also.
 	public static void setCylinder(Cylinder cylinder, Vector mid, Vector direction, float radius) {
 		setPositionByVector(cylinder, mid);
 		setRotationByVector(cylinder, direction);
@@ -75,7 +77,26 @@ public class ViewMath {
 		double lengthOfBone = directionWithMagnitude.magnitude();
 		cylinder.setHeight(lengthOfBone/positionScaleFactor);
 	}
-	
+
+
+
+	//even though this method doesnt return the changed node, since it is passed in the references to the real node objects, it does change
+	//those objects through the references that were passed in. very javaish. not functional programming ideals of using pure functions.
+	public static void setCylinder2(Vector middlePoint, Vector directionWithMagnitude) {
+		System.out.println("hello from c2");
+	}
+
+	//work with whole group object rather than just one cylinder
+	public static void setGroup(Group group, Vector middlePoint, Vector directionWithMagnitude) {
+		setPositionByVector(group, middlePoint);
+		setRotationByVector(group, directionWithMagnitude);
+		double lengthOfBone = directionWithMagnitude.magnitude();
+		group.setScaleY(lengthOfBone/positionScaleFactor);
+	}
+
+
+	// also very similar to the above methods. just finds the mid and direction by itself.
+	//i should really refractor this code.
 	public static void setCylinderByEndpoints(Cylinder cylinder, Vector start, Vector end) {
 		Vector mid = start.plus(end).divide(2);
 		Vector direction = start.minus(end);

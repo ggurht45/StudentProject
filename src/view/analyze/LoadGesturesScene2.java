@@ -39,13 +39,15 @@ public class LoadGesturesScene2 {
         //sometimes need to do ctrl save for the import hint to come up
         uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
         lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
+        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
+        th = getHandFromString("targets/2017-06-12 12-21-01.hand");
+
+        //uiHand1 setup
         uiHand1.setLoc(th);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 
-        //uihand2
-        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
-        th = getHandFromString("targets/2017-06-12 12-21-01.hand");
+        //uihand2 set up
         uiHand2.setLoc(th);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(8);

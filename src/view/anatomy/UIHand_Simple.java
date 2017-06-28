@@ -95,8 +95,10 @@ public class UIHand_Simple extends UIHand {
         Vector[] knuckles = new Vector[5];
         Vector pinkyBase = new Vector();
 
+        //go through five fingers
         for (int i = 0; i < 5; ++i) {
             Finger finger = hand.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            //and each bone on the fingers
             for (int j = 0; j < 3; ++j) {
                 Bone bone = finger.bone(Bone.Type.swigToEnum(j + 1));
                 //this will take the "fingerBones[i][j]" item stored and update it with the data passed in
@@ -127,9 +129,17 @@ public class UIHand_Simple extends UIHand {
             }
         }
 
-        for (int i = 0; i < 4; ++i) ViewMath.setCylinderByEndpoints(knuckleSpans[i], knuckles[i], knuckles[i + 1]);
+        //do something for the 4 knuckles ? why not five?
+        for (int i = 0; i < 4; ++i){
+            ViewMath.setCylinderByEndpoints(knuckleSpans[i], knuckles[i], knuckles[i + 1]);
+        }
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
+
+
+        System.out.println("this = simple hand after setLoc");
+        System.out.println("this.getRotate(): " + this.getRotate());
+        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
 
     }
 
