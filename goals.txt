@@ -63,7 +63,7 @@ getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.975177, 0, -0.0832915) mag (weig
 getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.975177, 0.205163, 0) mag (weight): 0.9965252
 //note interesting.. even though right hand only seems to do yaw. what we need to do to "UNDO" that is:
 //key is how do i figure out these instructions from given info. that i can gather from the hand.
-//2nd key is. if i do have 1,2, below, can I transform the hand gui as i wish.
+//2nd key is. if i do have 1,2, below, can I transform the hand gui as i wish. --> yes this test passes.
 1. swing cc 90 in xy plane. (looking down -z axis(lm))--note -z is opposite in javafx
 2. swing cc 90 in xz plane. (looking down -y axis(lm)) --note -y is opposite in javafx
 

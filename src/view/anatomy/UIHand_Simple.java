@@ -185,9 +185,12 @@ public class UIHand_Simple extends UIHand {
         Rotate rYaw =  new Rotate(yaw, Rotate.Y_AXIS);
         Rotate rRoll =  new Rotate(roll, Rotate.Z_AXIS);
         Rotate rRollPN =  new Rotate(rollPN, Rotate.Z_AXIS);
-
         //maybe the problem is happening here. need to test this to make sure its behaving as i expect
-        this.getTransforms().addAll(rPitch, rYaw, rRollPN);
+//        this.getTransforms().addAll(rPitch, rYaw, rRollPN);
+
+        Rotate swingToLeft =  new Rotate(-90, Rotate.Z_AXIS); //by lm: should be 90. by javfx -90? ok need to use javafx
+        Rotate swivelAround =  new Rotate(-90, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
+        this.getTransforms().addAll(swivelAround, swingToLeft);
 
         // 1. palm normal should always be -1 in z axis(lmotion). or 1 in javafx . not enough though..
         // cuz 2 axis can still change when palm is facing -z direction(lm) yaw, and roll.
