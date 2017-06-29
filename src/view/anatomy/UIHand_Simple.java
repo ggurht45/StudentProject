@@ -228,9 +228,9 @@ public class UIHand_Simple extends UIHand {
         //        yawWeighted: 66.46   --> use this for pitch, flip sign
         //        rollWeighted (d): 67.67
         //        rollWeighted (pn): -91.92 -->use this for roll, flip sign
-//        double r = 91;  //around z
-//        double p = -66; //rotation around x axis --> seems to be around y...
-//        double y = 15;  //around y --> seems to be around x.
+        double r = 90;  //around z
+        double p = -90; //rotation around x axis --> seems to be around y... yup. and requires -neg
+        double y = 90;  //around y --> seems to be around x.
 
 
 
@@ -280,9 +280,9 @@ public class UIHand_Simple extends UIHand {
         //        yawWeighted: -15.88   --> use this for pitch, flip sign
         //        rollWeighted (d): -4.8
         //        rollWeighted (pn): -102.54 -->use this for roll, flip sign
-        double r = 30;  //around z
-        double p = -90; //rotation around x axis --> seems to be around y...
-        double y = 70;  //around y --> seems to be around x.
+//        double r = 90;  //around z
+//        double p = -40; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+//        double y = 0;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
 
 
 

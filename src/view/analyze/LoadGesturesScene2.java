@@ -46,9 +46,9 @@ public class LoadGesturesScene2 {
         lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
         uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
 
-//        th = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
+        th = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
 //        th = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-        th = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+//        th = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
         uiHand3 = new UIHand_Simple(Color.GREEN, true);
 
         //uiHand1 setup
