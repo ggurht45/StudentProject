@@ -17,6 +17,8 @@ import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.Sphere;
 
+import javax.swing.text.View;
+
 public class UIHand_Simple extends UIHand {
 
     private static float fingerRadius = 14f;
@@ -192,9 +194,119 @@ public class UIHand_Simple extends UIHand {
         Rotate swivelAround =  new Rotate(-66, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
         Rotate turnUp = new Rotate(15, Rotate.X_AXIS); // looking down neg of X-axis, 15 sounds good.
 
-        this.getTransforms().addAll(swivelAround, swingToLeft); //order does matter. seems swivel happens first? no. the last transform added happens first
 
 
+        /*
+        right hand info
+        pitch, yaw, roll in radians
+        pitch: 1.1851473
+        yaw: 1.4855914
+        roll(d): 1.7781574
+        roll(pn): 0.210175
+        pitch, yaw, roll in degrees
+        pitch: 67.9
+        yaw: 85.12
+        roll(d): 101.88
+        roll(pn): 12.04
+        getProjection(pitch:yz; yaw:xz; roll:xy): YZ (0, 0.205163, -0.0832915) mag (weight): 0.22142547
+        getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.975177, 0, -0.0832915) mag (weight): 0.9787279
+        getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.975177, 0.205163, 0) mag (weight): 0.9965252
+        getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.208513, -0.977441, 0) mag (weight): 0.9994338
+        pitchWeighted: 15.04
+        yawWeighted: 66.46
+        rollWeighted (d): 67.67
+        rollWeighted (pn): -91.92
+
+         */
+
+//        double r = 90;  //around z
+//        double p = -90; //rotation around x axis --> seems to be around y...
+//        double y = 0;  //around y --> seems to be around x.
+
+        //gonna try values.
+        //        pitchWeighted: 15.04 --> use this for yaw
+        //        yawWeighted: 66.46   --> use this for pitch, flip sign
+        //        rollWeighted (d): 67.67
+        //        rollWeighted (pn): -91.92 -->use this for roll, flip sign
+//        double r = 91;  //around z
+//        double p = -66; //rotation around x axis --> seems to be around y...
+//        double y = 15;  //around y --> seems to be around x.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        facing down hand info
+            palmNormal: (0.18, -0.94, 0.29)
+            pitch, yaw, roll in radians
+            pitch: -0.28922155
+            yaw: 0.05520654
+            roll(d): 0.18362421
+            roll(pn): 0.19239147
+            pitch, yaw, roll in degrees
+            pitch: -16.57
+            yaw: 3.16
+            roll(d): 10.52
+            roll(pn): 11.02
+            getProjection(pitch:yz; yaw:xz; roll:xy): YZ (0, -0.284807, -0.957124) mag (weight): 0.9986002
+            getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.0528933, 0, -0.957124) mag (weight): 0.9585849
+            getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.0528933, -0.284807, 0) mag (weight): 0.2896769
+            getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.183009, -0.939468, 0) mag (weight): 0.9571276
+            pitchWeighted: -16.55
+            yawWeighted: -15.88
+            rollWeighted (d): -4.8
+            rollWeighted (pn): -102.54
+
+         */
+
+//        double r = 90;  //around z
+//        double p = -90; //rotation around x axis --> seems to be around y...
+//        double y = 0;  //around y --> seems to be around x.
+
+        //gonna try values.
+        //        pitchWeighted: -16.55 --> use this for yaw
+        //        yawWeighted: -15.88   --> use this for pitch, flip sign
+        //        rollWeighted (d): -4.8
+        //        rollWeighted (pn): -102.54 -->use this for roll, flip sign
+        double r = 30;  //around z
+        double p = -90; //rotation around x axis --> seems to be around y...
+        double y = 70;  //around y --> seems to be around x.
+
+
+
+
+
+
+
+
+
+
+        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+        //angles need to be given in radians.
+
+        ViewMath.matrixRotateNode(this, Math.toRadians(r), Math.toRadians(p), Math.toRadians(y));
+
+
+        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+//        Point3D axis  = ViewMath.getRotationAxis(r, p, y);
+//        double angle  = ViewMath.getRotationAngle(r, p, y);
+//        Rotate rotateTransform = new Rotate(angle, axis);
+//        System.out.println("number of transforms: " + this.getTransforms().size());
+//        this.getTransforms().addAll(rotateTransform);
+
+//        this.getTransforms().addAll(swivelAround, swingToLeft); //order does matter. seems swivel happens first? no. the last transform added happens first
 //        this.getTransforms().addAll(swingToLeft);
 ////        this.getTransforms().addAll(swivelAround); //order does matter. (roll after swivel)
 //        this.getTransforms().removeAll();

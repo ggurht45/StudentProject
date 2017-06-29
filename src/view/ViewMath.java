@@ -154,15 +154,25 @@ public class ViewMath {
         System.out.println("(origin): " + origin);
         float pitch = d.pitch();
         float yaw = d.yaw();
+        float roll1 = d.roll();
         Vector pn = h.palmNormal();
-        float roll = pn.roll();
-        pitch = roundFloat((float) Math.toDegrees(pitch));//casting to Float different from casting to float. primitive vs object types
-        yaw = roundFloat((float) Math.toDegrees(yaw));
-        roll = roundFloat((float) Math.toDegrees(roll));
+        float roll2 = pn.roll();
         System.out.println("palmNormal: " + roundVector(pn));
+        System.out.println("pitch, yaw, roll in radians");
         System.out.println("pitch: " + pitch);
         System.out.println("yaw: " + yaw);
-        System.out.println("roll: " + roll);
+        System.out.println("roll(d): " + roll1);
+        System.out.println("roll(pn): " + roll2);
+
+        pitch = roundFloat((float) Math.toDegrees(pitch));//casting to Float different from casting to float. primitive vs object types
+        yaw = roundFloat((float) Math.toDegrees(yaw));
+        roll1 = roundFloat((float) Math.toDegrees(roll1));
+        roll2 = roundFloat((float) Math.toDegrees(roll2));
+        System.out.println("pitch, yaw, roll in degrees");
+        System.out.println("pitch: " + pitch);
+        System.out.println("yaw: " + yaw);
+        System.out.println("roll(d): " + roll1);
+        System.out.println("roll(pn): " + roll2);
 
         //weight by magnitude of projections into the respective planes
         float pitchWeighted = getWeightedPYR(d, "pitch", true, true);
@@ -217,7 +227,6 @@ public class ViewMath {
             return anglePYR;
         }
     }
-
 
 
     //planes for angles pitch -> yz;    yaw -> xz;      roll -> xy
@@ -294,5 +303,64 @@ public class ViewMath {
             }
         }
 
+    }
+
+    public static Point3D getRotationAxis(double alf, double bet, double gam) {
+        double A11 = Math.cos(alf) * Math.cos(gam);
+        double A12 = Math.cos(bet) * Math.sin(alf) + Math.cos(alf) * Math.sin(bet) * Math.sin(gam);
+        double A13 = Math.sin(alf) * Math.sin(bet) - Math.cos(alf) * Math.cos(bet) * Math.sin(gam);
+        double A21 = -Math.cos(gam) * Math.sin(alf);
+        double A22 = Math.cos(alf) * Math.cos(bet) - Math.sin(alf) * Math.sin(bet) * Math.sin(gam);
+        double A23 = Math.cos(alf) * Math.sin(bet) + Math.cos(bet) * Math.sin(alf) * Math.sin(gam);
+        double A31 = Math.sin(gam);
+        double A32 = -Math.cos(gam) * Math.sin(bet);
+        double A33 = Math.cos(bet) * Math.cos(gam);
+
+        double d = Math.acos((A11 + A22 + A33 - 1d) / 2d);
+        if (d != 0d) {
+            double den = 2d * Math.sin(d);
+            Point3D p = new Point3D((A32 - A23) / den, (A13 - A31) / den, (A21 - A12) / den);
+            return p;
+        } else {
+            System.out.println("\n \n Error!! angle is zero?? \n \n");
+            return new Point3D(0, 0, 0);
+        }
+    }
+
+    public static double getRotationAngle(double alf, double bet, double gam) {
+        double A11 = Math.cos(alf) * Math.cos(gam);
+        double A12 = Math.cos(bet) * Math.sin(alf) + Math.cos(alf) * Math.sin(bet) * Math.sin(gam);
+        double A13 = Math.sin(alf) * Math.sin(bet) - Math.cos(alf) * Math.cos(bet) * Math.sin(gam);
+        double A21 = -Math.cos(gam) * Math.sin(alf);
+        double A22 = Math.cos(alf) * Math.cos(bet) - Math.sin(alf) * Math.sin(bet) * Math.sin(gam);
+        double A23 = Math.cos(alf) * Math.sin(bet) + Math.cos(bet) * Math.sin(alf) * Math.sin(gam);
+        double A31 = Math.sin(gam);
+        double A32 = -Math.cos(gam) * Math.sin(bet);
+        double A33 = Math.cos(bet) * Math.cos(gam);
+
+        double d = Math.acos((A11 + A22 + A33 - 1d) / 2d);
+        return Math.toDegrees(d);
+    }
+
+
+    //note!! expects angle in radians!!
+    public static void matrixRotateNode(Node n, double alf, double bet, double gam){
+        double A11=Math.cos(alf)*Math.cos(gam);
+        double A12=Math.cos(bet)*Math.sin(alf)+Math.cos(alf)*Math.sin(bet)*Math.sin(gam);
+        double A13=Math.sin(alf)*Math.sin(bet)-Math.cos(alf)*Math.cos(bet)*Math.sin(gam);
+        double A21=-Math.cos(gam)*Math.sin(alf);
+        double A22=Math.cos(alf)*Math.cos(bet)-Math.sin(alf)*Math.sin(bet)*Math.sin(gam);
+        double A23=Math.cos(alf)*Math.sin(bet)+Math.cos(bet)*Math.sin(alf)*Math.sin(gam);
+        double A31=Math.sin(gam);
+        double A32=-Math.cos(gam)*Math.sin(bet);
+        double A33=Math.cos(bet)*Math.cos(gam);
+
+        double d = Math.acos((A11+A22+A33-1d)/2d);
+        if(d!=0d){
+            double den=2d*Math.sin(d);
+            Point3D p= new Point3D((A32-A23)/den,(A13-A31)/den,(A21-A12)/den);
+            n.setRotationAxis(p);
+            n.setRotate(Math.toDegrees(d));
+        }
     }
 }
