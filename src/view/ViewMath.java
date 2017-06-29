@@ -178,6 +178,8 @@ public class ViewMath {
         System.out.println("stabilizedPalmPosition: " + roundVector(h.stabilizedPalmPosition()));
         System.out.println("palmWidth: " + roundFloat(h.palmWidth()));
         System.out.println("wristPosition: " + roundVector(h.wristPosition()));
+        Vector negZaxis = Vector.zAxis().opposite(); //seems to give -0s shouldnt be a problem. but its kinda weird.
+        System.out.println("learning about pitch, roll yaw: vector =" + negZaxis + " \t pitch: " + negZaxis.pitch() + " \t roll: " + negZaxis.roll() + " \t yaw: " + negZaxis.yaw());
         System.out.println("-------------------------------------------- END");
     }
 

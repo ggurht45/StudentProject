@@ -62,12 +62,29 @@ getProjection(pitch:yz; yaw:xz; roll:xy): YZ (0, 0.205163, -0.0832915) mag (weig
 getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.975177, 0, -0.0832915) mag (weight): 0.9787279
 getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.975177, 0.205163, 0) mag (weight): 0.9965252
 //note interesting.. even though right hand only seems to do yaw. what we need to do to "UNDO" that is:
-//key is how do i figure out these instructions from given info. that i can gather from the hand.
+//key is how do i figure out these instructions (given below) from given info. that i can gather from the hand. *** look below
 //2nd key is. if i do have 1,2, below, can I transform the hand gui as i wish. --> yes this test passes.
 1. swing cc 90 in xy plane. (looking down -z axis(lm))--note -z is opposite in javafx
 2. swing cc 90 in xz plane. (looking down -y axis(lm)) --note -y is opposite in javafx
 
+*** could also multiply the weight by 90. and then would have to take care of the direction. cuz that number will always be +
 
+hmm.. another thing   (note positive and neg are in terms of lm coord sys). Very important angles and projections notes below:
+also see. "leap motion Vector java"
+                        -- the angle is between (-zAxis) and projOnto_YZ (for pitch)  [jf csystem: +zAxis and projection]
+                            -- +(0-pi) if angle is pointed up. -(0-pi) if pointed down
+                        -- the angle is between (+yAxis) and projOnto_XY (for roll)   [jf csystem: -yAxis and projection]
+                            -- +(0-pi) if angle is pointed to left of Y axis. -(0-pi) if pointed to right of Y axis
+                        -- the angle is between -zAxis) and projOnto_XZ (for yaw)    [jf csystem: +zAxis and projection]
+                            -- +(0-pi) if angle is pointed to right of Z axis. -(0-pi) if pointed to left of Z axis
+
+                            (right hand. weighted)
+                            pitchWeighted: 15.04 mks
+                            yawWeighted: 66.46 mks
+                            rollWeighted (d): 67.67
+                            rollWeighted (pn): -91.92
+                            palmPosition: (-5.33, 112.26, -29.09)
+                            stabilizedPalmPosition: (-11.49, 112.81, -34.71)
 
 
 --------------------------------------------normal facing up(1)

@@ -188,9 +188,25 @@ public class UIHand_Simple extends UIHand {
         //maybe the problem is happening here. need to test this to make sure its behaving as i expect
 //        this.getTransforms().addAll(rPitch, rYaw, rRollPN);
 
-        Rotate swingToLeft =  new Rotate(-90, Rotate.Z_AXIS); //by lm: should be 90. by javfx -90? ok need to use javafx
-        Rotate swivelAround =  new Rotate(-90, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
-        this.getTransforms().addAll(swivelAround, swingToLeft);
+        Rotate swingToLeft =  new Rotate(-68, Rotate.Z_AXIS); //by lm: should be 90. by javfx -90? ok need to use javafx. because Rotate.Z_Axis is pointing into the screen
+        Rotate swivelAround =  new Rotate(-66, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
+        Rotate turnUp = new Rotate(15, Rotate.X_AXIS); // looking down neg of X-axis, 15 sounds good.
+
+        this.getTransforms().addAll(swivelAround, swingToLeft); //order does matter. seems swivel happens first? no. the last transform added happens first
+
+
+//        this.getTransforms().addAll(swingToLeft);
+////        this.getTransforms().addAll(swivelAround); //order does matter. (roll after swivel)
+//        this.getTransforms().removeAll();
+//        this.getTransforms().addAll(swivelAround); //order does matter. (roll after swivel)
+////        this.getTransforms().addAll(swingToLeft);
+
+//        this.getTransforms().addAll(swingToLeft, swivelAround); //order does matter. (roll after swivel)
+//        this.getTransforms().removeAll();
+//        this.getTransforms().addAll(swingToLeft);
+
+
+//        this.getTransforms().addAll(swingToLeft, swivelAround, turnUp); //order does matter.
 
         // 1. palm normal should always be -1 in z axis(lmotion). or 1 in javafx . not enough though..
         // cuz 2 axis can still change when palm is facing -z direction(lm) yaw, and roll.

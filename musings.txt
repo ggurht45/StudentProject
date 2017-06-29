@@ -1,0 +1,10 @@
+matrices can represent rotations. wow. mind blown.
+[   cos(ang)  -sin(ang)
+    sin(ang)    cos(ang ]
+this matrix represents a rotation around the origin in 2D. given any point/vector or line.
+or even shape probably. you can rotate it around the origin by any angle (Matrix)(point) = new point . note order of multip. matters.
+see jmtPatrick: Rotation Matrices
+
+wow. khan academy was very useful also. linear transformation. category theory popping up again. how is linearity defined by scaler multip and L(a+b) = La + Lb.
+ it seem a weird way to define "linear" trans. could look into more later.
+ other than that, the video was awesome "Rotations in R2 Khan academy"
