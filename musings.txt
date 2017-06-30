@@ -51,3 +51,171 @@ quote from their site:
 
 i also found a pic online of right hand cs vs left hand. thumb index middle fingers on both hands are mapped to x, y, z. RESPECTIVELY.
 I will put the pic in this project for later reference
+--------------
+
+
+
+
+javafx camera cs, vs lhcs, vs lmcs (supposedly rhcs)
+need to clarify the coordinate systems. causes unnecessary headaches
+
+
+
+
+[ ---------------------------------- Notes about Pitch
+
+*need to rethink my ideas about pitch. take hand pointing to the right for example. what is the pitch. its 0. for hand point into -z. pitch is also 0.
+thats fine. one of things i should do when i get the pitch from the direction is subtract it from 90 to get the angle to "pitch up to". so in both of these
+cases it would be (90-0) = 90. -> this is the angle to "pitch up to". so to recap. get pitch from direction, no need to weigh it i think, the original is fine
+and in fact the orginal is perferred. if we weight it, it may introduce error. come back and think about this again later(@1). after getting pitch from direction,
+subtract it from 90. so if we got a pitch of 60. then our "pitch up" angle is 90-60 = 30. if we got -60, -> 90- (-60) = 150.
+
+ok, the above note seems to make sense. need to try it.
+
+
+
+@1. so did come back and think about it again. i think the weights are in fact needed. think fingers to the right hand. most of the direction vector is in the
+xaxis. the tiny portions that project onto the yz plane calculate a big pitch. this pitch needs to be tempered by how much of the direction vector causes it.
+if we have a direction in 45 x(-z) plane. then a small y will give bigger pitch? try this and come back and update my thinking.
+
+
+*anther point. need to account for +z coordinate in the direction. pitch seems to hit the fan when it detects a +z coordinate. need to take this into account
+and make sure i calculate pitch appropriately.
+
+
+*another point. fingers pointing to the right hand(fpr from now on). roll 90 up. yaw 90 to the right. pitch back or forward by a little amount.
+multiply mags by 90:
+p-> 20
+y -> 88
+r -> 90
+--test passes for right hand.
+double r = 88;  //around z
+double p_moreLikeYaw = -90; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+double y_moreLikePitch = 20;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
+
+this ^above point doesnt seem to take pitch into consideration. hmm. so how did it come into my calculation earlier. will have to think more.
+hm.. just thinking for fpr. we only have a 90 deg yaw. we undo that 90* yaw. then we have "pitch up to" angle of 90*.
+
+
+
+
+(the original pitch needs to be multiplied by the % on the z axis.)
+pitch angle is too heck low. --remember Luke. trying to hit 90 for pitch, we are
+p -> .96 * (90- (-16.57))                --direction weight from -zAxis(lm) * (total angle to move upwards)
+
+----------------------------    End notes about Pitch ----------------------------------]
+
+
+[ ---------------------------------- Notes about Roll
+
+think about roll soon. its tricky. imagine left hand handshake position. maybe it needs no weight. hmm. need to think more.
+i think we need to use the normal to the palm. in handshake postion normal would extend to the right. projection to the xy plane
+will be on the x axis almost. now angle from (yaxis lhcs) to xaxis is 90. also from (yaxis rhcs) to xaxis is 90.
+so roll in lefthand in handshake pos is 90*. check later to confirm.
+
+* another insight. getting roll from direction doesnt tell us much. since it will be a projection onto the xy plane, if the hand is pointed in space
+it may be concluded that there is a roll, when in fact there wouldnt really be. think 45 in x, y, -z [rhcs]. if this is the direction, then a 45 degree
+angle on the xy plane from the projection would be counted as a ROLL?? no that shouldnt be taken as a roll i think. can confirm later.
+
+* so we should only get roll from the normal to the palm. and then also dont need to do any weighting and stuff. but just for learning purposes, i should
+continue to show the roll from teh direction vector also. i can label it as "FAKE Roll" not fake news. this will help to illustrate and sink in why its useless
+even with the "weighing" procedure.
+
+
+*palm mormal may not always be useful when getting the roll. think left hand in handshake position point to the right (x-axis)
+in this position the palm normal be parallel to the z-axis, thus the roll caculated woudl be 0. when it is obviously not zero.
+
+hmm.. so ^^, things make more sense. i think i know how to get pitch and roll now.
+r -> 0.05 * (                            --direction weight from xAxis(lm) * (total angle to move upwards)
+
+----------------------------    End notes about Roll ----------------------------------]
+
+!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!
+
+main thing i am noticing. getting the correct pitch, roll angles is not as easy as lm would have you believe. its good im thinking about it critcally. can
+hopefully solve the problem and write about it in my paper.
+
+
+@2 -lets call this the plane position
+
+i think i can explain to my Professor this tricky problem. start with palm facing -z. we understand that to be 0 pitch, roll, yaw.(@2) sadly that is not the case
+in lm. roll is 180. then we think oh have to use palm normal for roll. cool. but then we realize that palm normal for hand in handshake position pointing to
+right (direction of positive x-axis) is parallel with z-axis and therefore 0 in the xy plane. so i need to think of a different way for getting the roll in
+this situation.
+
+it would be really nice if i made a class that got all the correct pitch roll and yaw angles for a hand in a given orientation. how would i know they are
+correct? i would need to verify the logic and results some how. I CAN NOT TRUST LM!!! <- MAIN MORAL OF THE STORY. (i think lm mostly expects user's palm to
+face foward. this expectation goes out the window for us.)
+
+!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!
+
+y -> 0.28 *                              --direction weight from -zAxis(lm) * (total angle to move upwards)
+
+
+
+
+Loaded hand = left handshake. my musings seem correct. direction roll = fake roll. weights dont matter in roll (im pretty sure).
+--------------------------------------------sanity check. loaded hand info
+direction (rounded u.vec): (0.09, -0.05, -0.99)
+palmNormal: (0.81, -0.58, 0.1)
+pitch, yaw, roll in radians
+pitch: -0.05185028
+yaw: 0.089063555
+roll(d): 1.0443506
+roll(pn): 0.9533764
+pitch, yaw, roll in degrees
+pitch: -2.97
+yaw: 5.1
+roll(d): 59.84  FAKE ROLL!!!!!
+roll(pn): 54.62
+pitchWeighted: -2.96
+yawWeighted: -2.97
+rollWeighted (d): -0.31
+rollWeighted (pn): -99.55
+-------------------------------------------- END
+------------- direction of the loaded hand Orientation Info -------------
+direction of the loaded hand vector: 	 (0.0888273, -0.0516222, -0.994708)
+pitch: 	-2.97 	-0.05 radians
+roll: 	59.84 	1.04 FAKE ROLL!!!!!
+yaw: 	5.1 	0.09
+------------- End -------------
+------------- palm Normal of the loaded hand Orientation Info -------------
+palm Normal of the loaded hand vector: 	 (0.811096, -0.575895, 0.102318)
+pitch: 	-100.07 	-1.75 radians
+roll: 	54.62 	0.95
+yaw: 	97.19 	1.7
+------------- End -------------
+
+
+--------------------------------------------facing down 2
+direction (rounded u.vec): (0.03, -0.02, -1)
+palmNormal: (0.08, -1, 0.02)
+pitch, yaw, roll in radians
+pitch: -0.018305246
+yaw: 0.028189935
+roll(d): 0.9949454
+roll(pn): 0.08116785
+pitch, yaw, roll in degrees
+pitch: -1.05
+yaw: 1.62
+roll(d): 57.01 FAKE ROLL!!!!!
+roll(pn): 4.65
+
+--------------------------------------------facing down
+direction (rounded u.vec): (0.05, -0.28, -0.96)
+palmNormal: (0.18, -0.94, 0.29)
+pitch, yaw, roll in radians
+pitch: -0.28922155
+yaw: 0.05520654
+roll(d): 0.18362421
+roll(pn): 0.19239147
+pitch, yaw, roll in degrees
+pitch: -16.57
+yaw: 3.16
+roll(d): 10.52  FAKE ROLL!!!!!
+roll(pn): 11.02

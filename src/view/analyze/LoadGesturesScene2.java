@@ -58,16 +58,24 @@ public class LoadGesturesScene2 {
         // y-axis
         ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
 
+
+
+
+
+
         // x-axis -- -0.0f?!!
-        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with positive 0. (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, 0.0f), "Positive X Axis with POSITIVE 0 for zAxis (lm cs)");
         //what the fudge! there is such thing as a negative zero.
-        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with negative 0! (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with NEGATIVE -0! for zAxis (lm cs (supposedly))");
+
         Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
-
         almostXAxis = almostXAxis.normalized();
-        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis, with slight z, y coordinates. (lmotion)");
+        System.out.println("note the high pitch. this is what makes me think i need to multiply it by the weight of the projection? in addition, note the NEGATIVE z direction \n");
 
-        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lm_cs)");
+        Vector xz45deg = new Vector(0.5f, 0.03f, -0.5f).normalized();
+        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis with slight y direction. Note the pitch. (lm_cs)");
 
 
 
@@ -85,9 +93,11 @@ public class LoadGesturesScene2 {
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
 //        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
-//        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //--facing downwards, to the right (roll left), pointing -z direction
-        ViewMath.printHandInfo(loadedHand, "sanity check. downward facing hand info");
+//        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
+        ViewMath.printHandInfo(loadedHand, "sanity check. loaded hand info");
+        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "direction of the loaded hand");
+        ViewMath.printVectorOrientationAngles(loadedHand.palmNormal(), "palm Normal of the loaded hand");
 
 
         //print direction vectors orientation angles for sanity check
