@@ -42,7 +42,14 @@ public class LoadGesturesScene2 {
         System.out.println("Why is the roll 135?!! ");
         Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
         float angle =Vector.yAxis().angleTo(projectionXY);
-        System.out.println("y axis in lm: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
+        System.out.println("y axis in lm??!!: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
+        System.out.println("so, the Roll angle seems to be between the javafx y-axis (which points down) and projection onto the xy plane. because 135+45 = 180 \n");
+        Vector test2 = new Vector(0.01f, 0.09f, -0.9f);
+        test2 = test2.normalized();
+        ViewMath.printVectorOrientationAngles(test2, "Aaaalmost Negative Z Axis, a more skewed projection (lmotion)");
+        Vector ptest2 = ViewMath.getProjection(test2, "XY");
+        float ang2 =Vector.yAxis().angleTo(ptest2);
+        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest2 + " angle(radians): " + ang2  + " angle(deg): " + Math.toDegrees(ang2));
         System.out.println("\n");
 
 

@@ -38,3 +38,16 @@ found bugs!?? in leap motion axises. -0.0f ??! 180* pitch. (1, 0, 0) vs (1, 0, -
 still working on understanding the roll angle derivation from leap motion.
 
 may have to fix this "leap motion" code by my self by writing wrapper methods. need more time.
+
+
+            --comment about yaxis being wrong
+leap motions Vector.yAxis gives (0,1,0). this is NOT the y-axis in the lm cs. its the y-axis. in the javafx cs. found this out through the bug in their roll
+angle. also their webpage documentation is wrong.
+
+quote from their site:
+    The origin is centered at the center of the Leap Motion Controller. The x- and z-axes lie in the horizontal plane,
+     with the x-axis running parallel to the long edge of the device. The y-axis is vertical, with positive values
+     increasing upwards (in contrast to the downward orientation of most computer graphics coordinate systems).
+
+i also found a pic online of right hand cs vs left hand. thumb index middle fingers on both hands are mapped to x, y, z. RESPECTIVELY.
+I will put the pic in this project for later reference
