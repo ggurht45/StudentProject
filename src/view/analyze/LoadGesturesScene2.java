@@ -35,15 +35,17 @@ public class LoadGesturesScene2 {
         //      ------------------------- understanding lm p r y
         ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
         System.out.println("Why is the roll 180?!! \n \n");
-
+        // z-axis angles (especially roll is weird
         Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
         almostNegZAxis = almostNegZAxis.normalized();
         ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
         System.out.println("Why is the roll 135?!! ");
+
         Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
         float angle =Vector.yAxis().angleTo(projectionXY);
         System.out.println("y axis in lm??!!: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
         System.out.println("so, the Roll angle seems to be between the javafx y-axis (which points down) and projection onto the xy plane. because 135+45 = 180 \n");
+
         Vector test2 = new Vector(0.01f, 0.09f, -0.9f);
         test2 = test2.normalized();
         ViewMath.printVectorOrientationAngles(test2, "Aaaalmost Negative Z Axis, a more skewed projection (lmotion)");
@@ -53,7 +55,10 @@ public class LoadGesturesScene2 {
         System.out.println("\n");
 
 
+        // y-axis
         ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
+
+        // x-axis -- -0.0f?!!
         ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with positive 0. (lmotion)");
         //what the fudge! there is such thing as a negative zero.
         ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with negative 0! (lmotion)");
@@ -63,6 +68,14 @@ public class LoadGesturesScene2 {
         ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis (lmotion)");
 
         ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lmotion)");
+
+
+
+
+
+
+
+
 
 
         uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
