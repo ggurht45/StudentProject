@@ -31,14 +31,19 @@ public class LoadGesturesScene2 {
         this.app = app;
 
         ViewMath.printInfoManyHands();
-        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
 
+        //      ------------------------- understanding lm p r y
+        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
+        System.out.println("Why is the roll 180?!! \n \n");
 
         Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
         almostNegZAxis = almostNegZAxis.normalized();
-        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
         ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
-        System.out.println("y axis in lm: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle: " + Vector.yAxis().angleTo(projectionXY));
+        System.out.println("Why is the roll 135?!! ");
+        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
+        float angle =Vector.yAxis().angleTo(projectionXY);
+        System.out.println("y axis in lm: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
+        System.out.println("\n");
 
 
         ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
@@ -60,8 +65,8 @@ public class LoadGesturesScene2 {
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
 //        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-//        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
-        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //--facing downwards, to the right (roll left), pointing -z direction
+        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+//        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //--facing downwards, to the right (roll left), pointing -z direction
         ViewMath.printHandInfo(loadedHand, "sanity check. downward facing hand info");
 
 
