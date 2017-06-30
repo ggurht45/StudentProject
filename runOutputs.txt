@@ -203,3 +203,33 @@ palmWidth: 78.63
 wristPosition: (-26.23, 192.99, -0.55)
 learning about pitch, roll yaw: vector =(-0, -0, -1) 	 pitch: -0.0 	 roll: -0.0 	 yaw: -0.0
 -------------------------------------------- END
+
+
+
+
+
+
+
+
+------------- Positive Y Axis (lmotion) Orientation Info -------------
+Positive Y Axis (lmotion) vector: 	 (0, 1, 0)
+pitch: 	90.0 	1.57radians
+roll: 	180.0 	3.14
+yaw: 	180.0 	3.14
+------------- End -------------
+------------- Target Hand Direction Orientation Info -------------
+Target Hand Direction vector: 	 (0.0772117, 0.791229, -0.606625)
+//Special note: dont erase!
+pitch is calculated via projection onto the y-z plane. (0.791229, -0.606625) (y,z). slope of this vector = 1.3 .big slope .arctan Opp/adj -> .91 radians.
+pitch: 	52.52 	0.92radians
+roll: 	174.43 	3.04
+yaw: 	7.25 	0.13
+------------- End -------------
+------------- Loaded Hand Direction Orientation Info -------------
+Loaded Hand Direction vector: 	 (0.975177, 0.205163, -0.0832915)
+//Special note: dont erase!
+pitch is calculated via projection onto the y-z plane. (0.205163, -0.0832915) (y,z). slope of this vector = 2.46 .big slope -> arctan -> 1.19 radians checks out
+pitch: 	67.9 	1.19radians -> mks.
+roll: 	101.88 	1.78
+yaw: 	85.12 	1.49
+------------- End -------------
