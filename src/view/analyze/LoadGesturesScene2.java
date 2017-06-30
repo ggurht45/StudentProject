@@ -31,13 +31,27 @@ public class LoadGesturesScene2 {
         this.app = app;
 
         ViewMath.printInfoManyHands();
-        ViewMath.printVectorOrientationAngles(new Vector(0, 1, 0), "Positive Y Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
+
+
+        Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
+        almostNegZAxis = almostNegZAxis.normalized();
+        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
+        ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
+        System.out.println("y axis in lm: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle: " + Vector.yAxis().angleTo(projectionXY));
+
+
+        ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with positive 0. (lmotion)");
         //what the fudge! there is such thing as a negative zero.
-        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with negative 0! (lmotion)");
         Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
+
         almostXAxis = almostXAxis.normalized();
         ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis (lmotion)");
+
         ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lmotion)");
+
 
         uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
         uiHand2 = new UIHand_Simple(Color.GREEN, false);
@@ -46,14 +60,14 @@ public class LoadGesturesScene2 {
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
 //        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+//        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //--facing downwards, to the right (roll left), pointing -z direction
         ViewMath.printHandInfo(loadedHand, "sanity check. downward facing hand info");
 
 
         //print direction vectors orientation angles for sanity check
         ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
         ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
-
 
 
         //uiHand1 setup
@@ -72,11 +86,11 @@ public class LoadGesturesScene2 {
         uiHand3.setTranslateX(16);
 
         //button to fix orientation
-        Button fixOrientationButton = new Button ("Fix Orientation");
+        Button fixOrientationButton = new Button("Fix Orientation");
         fixOrientationButton.setOnAction(e -> {
             System.out.println("gonna fix orientation");
             //need parenthesis..
-            ((UIHand_Simple)uiHand2).fixOrientation(loadedHand);
+            ((UIHand_Simple) uiHand2).fixOrientation(loadedHand);
 
         });
 
@@ -115,7 +129,7 @@ public class LoadGesturesScene2 {
 
     }
 
-    public Scene getScene(){
+    public Scene getScene() {
         return scene;
     }
 

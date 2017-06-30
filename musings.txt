@@ -19,3 +19,22 @@ wow. khan academy was very useful also. linear transformation. category theory p
  //need to get projections onto some plane and then take their mag. also take mag of original vector. -> 1. projection mag /1 = proj mag.
 
  //what the heck! -0.0f... sheesh! pitch makes sense.
+
+
+
+***********
+tried working with cross product and setting rotations one after the other. didnt work. need to do all the rotations at once around an axis.
+
+leap motion cs is NOT equal to javafx cs. --> cause for concern. but now largerly mitigated by using Jose Pereda's function.
+
+learning linear algebra. understanding matrix transformations. rotational matrixces. deriving the 3d rot matrix. javafx sucks. doesnt support pitch roll yaw.
+their docs page on rotate not very good.
+found jose Pereda's blog post and stackoverflow answer. radians. passing in arguments order. understanding matrix derivation. -still didnt work exactly as i wanted
+
+but i found that i can work with pitch yaw and roll. at least with the hand pointing right. but now the problem is getting the correct pitch, roll and yaw angles?
+
+
+found bugs!?? in leap motion axises. -0.0f ??! 180* pitch. (1, 0, 0) vs (1, 0, -0.0f) crazy stuff.
+still working on understanding the roll angle derivation from leap motion.
+
+may have to fix this "leap motion" code by my self by writing wrapper methods. need more time.

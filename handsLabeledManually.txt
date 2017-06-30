@@ -1,0 +1,5 @@
+dataOutput/1/typeA_2017-06-30 08-07-36.hand         --facing downwards, pointing -z direction
+dataOutput/1/typeA_2017-06-30 08-08-24.hand         --facing downwards, and to the left. (roll right), pointing -z direction
+dataOutput/1/typeA_2017-06-30 08-08-37.hand         --facing downwards, to the right (roll left), pointing -z direction
+dataOutput/1/typeA_2017-06-30 08-08-46.hand         --facing upwards, (180 roll), pointing -z direction
+dataOutput/1/typeA_2017-06-30 08-09-16.hand         --facing downwards, yaw 45* to the right.  pointing -z direction
