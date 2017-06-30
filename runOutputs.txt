@@ -233,3 +233,73 @@ pitch: 	67.9 	1.19radians -> mks.
 roll: 	101.88 	1.78
 yaw: 	85.12 	1.49
 ------------- End -------------
+
+
+//right hand real data
+getProjection(pitch:yz; yaw:xz; roll:xy): YZ (0, 0.205163, -0.0832915) mag (weight): 0.22142547 --> Pitch
+getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.975177, 0, -0.0832915) mag (weight): 0.9787279 --> yaw
+getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.975177, 0.205163, 0) mag (weight): 0.9965252
+getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.208513, -0.977441, 0) mag (weight): 0.9994338 --> roll
+
+multiply mags by 90:
+p-> 20
+y -> 88
+r -> 90
+--test passes for right hand.
+double r = 88;  //around z
+double p_moreLikeYaw = -90; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+double y_moreLikePitch = 20;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
+
+
+
+
+
+
+
+
+
+
+
+
+//hand facing down real data
+getProjection(pitch:yz; yaw:xz; roll:xy): YZ (0, -0.284807, -0.957124) mag (weight): 0.9986002 --> Pitch
+getProjection(pitch:yz; yaw:xz; roll:xy): XZ (0.0528933, 0, -0.957124) mag (weight): 0.9585849 --> yaw
+getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.0528933, -0.284807, 0) mag (weight): 0.2896769
+getProjection(pitch:yz; yaw:xz; roll:xy): XY (0.183009, -0.939468, 0) mag (weight): 0.9571276   --> roll
+more info
+direction (rounded u.vec): (0.05, -0.28, -0.96)
+palmNormal: (0.18, -0.94, 0.29)
+pitch, yaw, roll in radians
+pitch: -0.28922155
+yaw: 0.05520654
+roll(d): 0.18362421
+roll(pn): 0.19239147
+pitch, yaw, roll in degrees
+pitch: -16.57
+yaw: 3.16
+roll(d): 10.52
+roll(pn): 11.02
+
+multiply mags by 90:
+p-> 90
+y -> 86
+r -> 86
+
+double r = 86;  //around z
+double p_moreLikeYaw = -86; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+double y_moreLikePitch = 90;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
+
+--hm test didnt pass as i thought.
+to many 90s.
+what i need to do is just have pitch up. how can i learn that from the data
+pitch mag weight is high and yaw is too D high party
+
+(the original pitch needs to be multiplied by the % on the z axis.)
+pitch angle is too heck low. --remember Luke. trying to hit 90 for pitch, we are
+p -> .96 * (90- (-16.57))                --direction weight from -zAxis(lm) * (total angle to move upwards)
+
+think about roll soon. its tricky. imagine left hand handshake position. maybe it needs no weight. hmm. need to think more.
+r -> 0.05 * (                            --direction weight from xAxis(lm) * (total angle to move upwards)
+
+
+y -> 0.28 *                              --direction weight from -zAxis(lm) * (total angle to move upwards)

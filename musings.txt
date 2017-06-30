@@ -14,3 +14,8 @@ wow. khan academy was very useful also. linear transformation. category theory p
  //sometimes need to do ctrl save for the import hint to come up
 
  pitch and yaw angles seem to default to 180, when given 0,1,0. weird
+
+
+ //need to get projections onto some plane and then take their mag. also take mag of original vector. -> 1. projection mag /1 = proj mag.
+
+ //what the heck! -0.0f... sheesh! pitch makes sense.

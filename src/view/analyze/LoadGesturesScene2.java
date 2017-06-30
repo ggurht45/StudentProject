@@ -14,6 +14,8 @@ import view.ViewMath;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
+import javax.swing.text.View;
+
 public class LoadGesturesScene2 {
     private LeapUIApp app;
     private static UIHand uiHand1;
@@ -30,6 +32,12 @@ public class LoadGesturesScene2 {
 
         ViewMath.printInfoManyHands();
         ViewMath.printVectorOrientationAngles(new Vector(0, 1, 0), "Positive Y Axis (lmotion)");
+        //what the fudge! there is such thing as a negative zero.
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis (lmotion)");
+        Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
+        almostXAxis = almostXAxis.normalized();
+        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis (lmotion)");
+        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lmotion)");
 
         uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
         uiHand2 = new UIHand_Simple(Color.GREEN, false);
@@ -37,8 +45,9 @@ public class LoadGesturesScene2 {
 
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
-        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-//        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+//        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
+        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+        ViewMath.printHandInfo(loadedHand, "sanity check. downward facing hand info");
 
 
         //print direction vectors orientation angles for sanity check
