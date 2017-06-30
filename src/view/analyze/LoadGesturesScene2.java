@@ -74,8 +74,18 @@ public class LoadGesturesScene2 {
         System.out.println("note the high pitch. this is what makes me think i need to multiply it by the weight of the projection? in addition, note the NEGATIVE z direction \n");
 
         ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lm_cs)", true);
+
         Vector xz45deg = new Vector(0.5f, 0.03f, -0.5f).normalized();
         ViewMath.printVectorOrientationAngles(xz45deg, "X(-Z) plane 45 degree Axis with slight y direction. Note the pitch. (lm_cs)", true);
+
+        Vector xyz45deg = new Vector(0.5f, 0.5f, -0.5f).normalized();
+        ViewMath.printVectorOrientationAngles(xyz45deg, "XY(-Z) plane 45 degrees all. Note the pitch. (lm_cs)", true);
+
+        Vector xy45deg = new Vector(0.5f, 0.5f, -0.0f).normalized();
+        ViewMath.printVectorOrientationAngles(xy45deg, "xy 45 degrees (lm cs)", true);
+
+        Vector xy_smallz45deg = new Vector(0.5f, 0.5f, -0.1f).normalized();
+        ViewMath.printVectorOrientationAngles(xy_smallz45deg, "xy smallZ 45 degrees (lm cs)", true);
 
 
 
