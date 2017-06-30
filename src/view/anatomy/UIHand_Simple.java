@@ -145,10 +145,9 @@ public class UIHand_Simple extends UIHand {
     public void fixOrientation(Hand h){
         System.out.println("entered fixOrientation UIHand_Simple");
 
-        double r = 86;  //around z
-        double p_moreLikeYaw = -86; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
-        double y_moreLikePitch = 90;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
-
+        double r = 88;  //around z
+        double p_moreLikeYaw = -90; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+        double y_moreLikePitch = 20;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
 
         //stackoverflow: alf is roll, bet is pitch and gam is yaw.
         //angles need to be given in radians.
