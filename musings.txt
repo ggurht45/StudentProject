@@ -12,3 +12,5 @@ wow. khan academy was very useful also. linear transformation. category theory p
 
 
  //sometimes need to do ctrl save for the import hint to come up
+
+ pitch and yaw angles seem to default to 180, when given 0,1,0. weird

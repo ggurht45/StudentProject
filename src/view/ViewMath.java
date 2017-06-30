@@ -371,10 +371,10 @@ public class ViewMath {
 
     public static void printVectorOrientationAngles(Vector v, String vectorName) {
         System.out.println("------------- " + vectorName + " Orientation Info -------------");
-        System.out.println("target orientation vector: \t " + v);
-        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()));
-        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()));
-        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()));
+        System.out.println(vectorName + " vector: \t " + v);
+        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()) + " \t"  + roundFloat(v.pitch()) + " radians");
+        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()) + " \t"  + roundFloat(v.roll()));
+        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()) + " \t"  + roundFloat(v.yaw()));
         System.out.println("------------- End -------------");
     }
 

@@ -29,7 +29,7 @@ public class LoadGesturesScene2 {
         this.app = app;
 
         ViewMath.printInfoManyHands();
-        ViewMath.printVectorOrientationAngles(new Vector(0, 1, 0), "Target Vector");
+        ViewMath.printVectorOrientationAngles(new Vector(0, 1, 0), "Positive Y Axis (lmotion)");
 
         uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
         uiHand2 = new UIHand_Simple(Color.GREEN, false);
@@ -37,9 +37,14 @@ public class LoadGesturesScene2 {
 
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
-//        loadedHand = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
         loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
+
+
+        //print direction vectors orientation angles for sanity check
+        ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
+        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
+
 
 
         //uiHand1 setup
