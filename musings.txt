@@ -76,7 +76,8 @@ ok, the above note seems to make sense. need to try it.
 
 @1. so did come back and think about it again. i think the weights are in fact needed. think fingers to the right hand. most of the direction vector is in the
 xaxis. the tiny portions that project onto the yz plane calculate a big pitch. this pitch needs to be tempered by how much of the direction vector causes it.
-if we have a direction in 45 x(-z) plane. then a small y will give bigger pitch? try this and come back and update my thinking.
+if we have a direction in 45 x(-z) plane. then a small y will give bigger pitch? try this and come back and update my thinking. also i know how to minimize
+pitch for fpr hand, but what about the hand 45 x(-z) with slight y. how do i minimize this hand's pitch. i think the answer lies in having to use the normal.
 
 
 *anther point. need to account for +z coordinate in the direction. pitch seems to hit the fan when it detects a +z coordinate. need to take this into account

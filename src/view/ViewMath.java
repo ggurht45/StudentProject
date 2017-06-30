@@ -198,16 +198,20 @@ public class ViewMath {
         d = d.normalized();
 
         //anglePYR is angle for pitch yaw or roll. depending on type passed in
-        float anglePYR = d.pitch();
+//        float anglePYR = d.pitch(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WRONG!
+        float anglePYR =0.0f; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WRONG!
 
         Vector proj = d; //initially set proj to just d passed in
 
         //really set the projection
         if (type.equalsIgnoreCase("pitch")) {
+            anglePYR = d.pitch();
             proj = getProjection(d, "YZ");
         } else if (type.equalsIgnoreCase("yaw")) {
+            anglePYR = d.yaw();
             proj = getProjection(d, "XZ");
         } else if (type.equalsIgnoreCase("roll")) {
+            anglePYR = d.roll();
             proj = getProjection(d, "XY");
         } else {
             System.out.println("\n \n Wrong angle type passed in !!! \n \n ");
@@ -375,6 +379,24 @@ public class ViewMath {
         System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()) + " \t"  + roundFloat(v.pitch()) + " radians");
         System.out.println("roll: \t" + roundedAngleDegrees(v.roll()) + " \t"  + roundFloat(v.roll()));
         System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()) + " \t"  + roundFloat(v.yaw()));
+        System.out.println("------------- End -------------");
+    }
+
+    public static void printVectorOrientationAngles(Vector v, String vectorName, boolean weighProjections) {
+        System.out.println("------------- " + vectorName + " Orientation Info -------------");
+        System.out.println(vectorName + " vector: \t " + v);
+        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()) + " \t"  + roundFloat(v.pitch()) + " radians");
+        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()) + " \t"  + roundFloat(v.roll()));
+        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()) + " \t"  + roundFloat(v.yaw()));
+
+        if(weighProjections){
+            float p = getWeightedPYR(v, "pitch", true, true);
+            float r = getWeightedPYR(v, "roll", true, true);
+            float y = getWeightedPYR(v, "yaw", true, true);
+            System.out.println("pitch(weighted): \t" + p);
+            System.out.println("roll(weighted): \t" + r);
+            System.out.println("yaw(weighted): \t" + y);
+        }
         System.out.println("------------- End -------------");
     }
 
