@@ -8,3 +8,7 @@ see jmtPatrick: Rotation Matrices
 wow. khan academy was very useful also. linear transformation. category theory popping up again. how is linearity defined by scaler multip and L(a+b) = La + Lb.
  it seem a weird way to define "linear" trans. could look into more later.
  other than that, the video was awesome "Rotations in R2 Khan academy"
+
+
+
+ //sometimes need to do ctrl save for the import hint to come up

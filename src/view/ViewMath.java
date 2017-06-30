@@ -218,7 +218,7 @@ public class ViewMath {
         anglePYR = anglePYR * w;//weight to multiply pitch/yaw/roll by. cuz direction is unit vector
 
         if (useDegrees) {
-            anglePYR = (float) Math.toDegrees(anglePYR);//return rounded, and converted to degrees
+            anglePYR = (float) Math.toDegrees(anglePYR);// converted to degrees
         }//else doesnt do anything. pitch is already in radians
 
         if (round) {
@@ -252,8 +252,13 @@ public class ViewMath {
         return new Vector(x, y, z);
     }
 
+    //default rounding precision
     public static float roundFloat(float d) {
         return roundFloat(d, 2);
+    }
+
+    public static float roundedAngleDegrees(float a) {
+        return roundFloat((float)Math.toDegrees(a));
     }
 
     public static float roundFloat(float d, int decimalPlace) {
@@ -363,4 +368,14 @@ public class ViewMath {
             n.setRotate(Math.toDegrees(d));
         }
     }
+
+    public static void printVectorOrientationAngles(Vector v, String vectorName) {
+        System.out.println("------------- " + vectorName + " Orientation Info -------------");
+        System.out.println("target orientation vector: \t " + v);
+        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()));
+        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()));
+        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()));
+        System.out.println("------------- End -------------");
+    }
+
 }

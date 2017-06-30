@@ -3,16 +3,9 @@ package view.analyze;
 
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Vector;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import model.SerializedTargetHand;
@@ -20,17 +13,14 @@ import view.LeapUIApp;
 import view.ViewMath;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
-import view.anatomy.UIHand_SuperSimple;
-
-import java.util.List;
 
 public class LoadGesturesScene2 {
     private LeapUIApp app;
     private static UIHand uiHand1;
-    private static Hand lh;
+    private static Hand realTarget;
     private static UIHand uiHand2;
     private static UIHand uiHand3;
-    private static Hand th;
+    private static Hand loadedHand;
     private static Group rootGroup;
     private static Scene scene;
 
@@ -39,47 +29,42 @@ public class LoadGesturesScene2 {
         this.app = app;
 
         ViewMath.printInfoManyHands();
+        ViewMath.printVectorOrientationAngles(new Vector(0, 1, 0), "Target Vector");
+
+        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
+        uiHand2 = new UIHand_Simple(Color.GREEN, false);
+        uiHand3 = new UIHand_Simple(Color.RED, true);
 
 
-        //sometimes need to do ctrl save for the import hint to come up
-        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), false);
-        lh = getHandFromString("targets/2015-05-05 08-17-01.hand");
-        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), false);
+        realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
+//        loadedHand = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
+        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
+//        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
 
-        th = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal
-//        th = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
-//        th = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
-        uiHand3 = new UIHand_Simple(Color.GREEN, true);
 
         //uiHand1 setup
-        uiHand1.setLoc(th);
+        uiHand1.setLoc(realTarget);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 
-//        System.out.println("***loadGestSc2");
-//        System.out.println("uiHand1");
-//        System.out.println("layout: " + uiHand1.getLayoutX() + " " + uiHand1.getLayoutY() );
-//        System.out.println("translate: " + uiHand1.getTranslateX() + " " + uiHand1.getTranslateY() + " " + uiHand1.getTranslateZ() );
-//        System.out.println("uiHand1.getRotate(): " + uiHand1.getRotate());
-//        System.out.println("uiHand1.getRotationAxis(): " + uiHand1.getRotationAxis());
-//        System.out.println("***loadGestSc2");
-
         //uihand2 set up
-        uiHand2.setLoc(th);
-        //need paranthesis..
-        ((UIHand_Simple)uiHand2).fixOrientation(th);
+        uiHand2.setLoc(loadedHand);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(8);
 
         //uihand3 set up
-        uiHand3.setLoc(th);
+        uiHand3.setLoc(loadedHand);
         uiHand3.setVisible(true);
         uiHand3.setTranslateX(16);
 
+        //button to fix orientation
+        Button fixOrientationButton = new Button ("Fix Orientation");
+        fixOrientationButton.setOnAction(e -> {
+            System.out.println("gonna fix orientation");
+            //need parenthesis..
+            ((UIHand_Simple)uiHand2).fixOrientation(loadedHand);
 
-
-        Button label = new Button ("click me!");
-
+        });
 
 
         // The 3D camera; necessary for 3D display
@@ -105,7 +90,7 @@ public class LoadGesturesScene2 {
         sub3D.setCamera(camera);
 
         // The 2D overlay
-        Group group2D = new Group(label);
+        Group group2D = new Group(fixOrientationButton);
         SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
 
 

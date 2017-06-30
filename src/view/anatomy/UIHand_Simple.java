@@ -138,19 +138,29 @@ public class UIHand_Simple extends UIHand {
         }
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
-
-
-//        System.out.println("***EE");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-//        System.out.println("this = simple hand after setLoc");
-//        System.out.println("this.getRotate(): " + this.getRotate());
-//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-//        System.out.println("***EE");
-
     }
 
+
+
     public void fixOrientation(Hand h){
+        System.out.println("entered fixOrientation UIHand_Simple");
+        double r = 90;  //around z
+        double p = -40; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+        double y = 0;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
+
+        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+        //angles need to be given in radians.
+        ViewMath.matrixRotateNode(this, Math.toRadians(r), Math.toRadians(p), Math.toRadians(y));
+        System.out.println("leaving fixOrientation UIHand_Simple");
+    }
+
+
+
+
+
+
+
+    public void fixOrientationOld(Hand h){
         System.out.println("fixOrientation simple hand");
 //        ViewMath.printHandInfo(h, "fixOrientation Method");
 
@@ -228,9 +238,9 @@ public class UIHand_Simple extends UIHand {
         //        yawWeighted: 66.46   --> use this for pitch, flip sign
         //        rollWeighted (d): 67.67
         //        rollWeighted (pn): -91.92 -->use this for roll, flip sign
-        double r = 90;  //around z
-        double p = -90; //rotation around x axis --> seems to be around y... yup. and requires -neg
-        double y = 90;  //around y --> seems to be around x.
+//        double r = 90;  //around z
+//        double p = -90; //rotation around x axis --> seems to be around y... yup. and requires -neg
+//        double y = 90;  //around y --> seems to be around x.
 
 
 
@@ -280,14 +290,9 @@ public class UIHand_Simple extends UIHand {
         //        yawWeighted: -15.88   --> use this for pitch, flip sign
         //        rollWeighted (d): -4.8
         //        rollWeighted (pn): -102.54 -->use this for roll, flip sign
-//        double r = 90;  //around z
-//        double p = -40; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
-//        double y = 0;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
-
-
-
-
-
+        double r = 90;  //around z
+        double p = -40; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+        double y = 0;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
 
 
 
