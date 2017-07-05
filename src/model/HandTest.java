@@ -1,15 +1,16 @@
 package model;
 
+import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
 
-public class HandTest extends Hand{
+public class HandTest extends Hand {
 
     private Hand hand;
     private int id;
     private int secretVariable;
 
-    public HandTest(Hand h){
+    public HandTest(Hand h) {
         hand = h;
         //go through and set variables.. so when this "extended" (manually in this case), hand is passed around, the methods work as expected.
         //and to be honest, it wont be that difficult. i just use the super.method() in the overridden methods.
@@ -38,6 +39,21 @@ public class HandTest extends Hand{
 
     public void setHand(Hand hand) {
         this.hand = hand;
+    }
+
+
+    public void runTests() {
+        System.out.println("------------- testing extended hand class -------------");
+        //try to give ht all the methods that lm hand has.
+        for (int i = 0; i < 5; ++i) {
+            Finger fingerA = this.hand.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            Finger fingerB = this.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            System.out.println("hand finger " + i + ": " + fingerA);
+            System.out.println("ht finger " + i + ": " + fingerB);
+            System.out.println("fingerA = fingerB?  \t" + fingerA.equals(fingerB));
+        }
+        System.out.println("------------- END testing extended hand class -------------");
+
     }
 
 }
