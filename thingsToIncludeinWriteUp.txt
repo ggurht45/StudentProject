@@ -1,0 +1,3 @@
+-should definately talk about -0.0f and how i figured out that the axis -> roll, pitch, were behaving very weirdly.
+
+--there is definately a problem with the roll method. it returns 135 when it should return 45. need to subtract answer from pi. to get the correct answer.

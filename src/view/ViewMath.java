@@ -400,4 +400,76 @@ public class ViewMath {
         System.out.println("------------- End -------------");
     }
 
+//    public static void
+
+    public static void runVectorTests(){
+
+        //      ------------------------- understanding lm p r y
+        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
+        System.out.println("Why is the roll 180?!! \n \n");
+        // z-axis angles (especially roll is weird
+        Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
+        almostNegZAxis = almostNegZAxis.normalized();
+        ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
+        System.out.println("Why is the roll 135?!! ");
+
+        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
+        float angle =Vector.yAxis().angleTo(projectionXY);
+        System.out.println("y axis in lm??!!: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
+        System.out.println("so, the Roll angle seems to be between the javafx y-axis (which points down) and projection onto the xy plane. because 135+45 = 180 \n");
+
+        Vector test2 = new Vector(0.01f, 0.09f, -0.9f);
+        test2 = test2.normalized();
+        ViewMath.printVectorOrientationAngles(test2, "Aaaalmost Negative Z Axis, a more skewed projection (lmotion)");
+        Vector ptest2 = ViewMath.getProjection(test2, "XY");
+        float ang2 =Vector.yAxis().angleTo(ptest2);
+        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest2 + " angle(radians): " + ang2  + " angle(deg): " + Math.toDegrees(ang2));
+
+        Vector test3 = new Vector(0.01f, -0.09f, -0.9f);
+        test3 = test3.normalized();
+        ViewMath.printVectorOrientationAngles(test3, "Aaaalmost Negative Z Axis, -y direction");
+        Vector ptest3 = ViewMath.getProjection(test3, "XY");
+        float ang3 =Vector.yAxis().angleTo(ptest3);
+        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest3 + " angle(radians): " + ang3  + " angle(deg): " + Math.toDegrees(ang3));
+        System.out.println("\n");
+
+        System.out.println("\n");
+
+
+        // y-axis
+        ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
+
+
+
+
+
+
+        // x-axis -- -0.0f?!!
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, 0.0f), "Positive X Axis with POSITIVE 0 for zAxis (lm cs)", true);
+        //what the fudge! there is such thing as a negative zero.
+        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with NEGATIVE -0! for zAxis (lm cs (supposedly))", true);
+
+        Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
+        almostXAxis = almostXAxis.normalized();
+        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis, with slight z, y coordinates. (lmotion)", true);
+        System.out.println("note the high pitch. this is what makes me think i need to multiply it by the weight of the projection? in addition, note the NEGATIVE z direction \n");
+
+        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lm_cs)", true);
+
+        Vector xz45deg = new Vector(0.5f, 0.03f, -0.5f).normalized();
+        ViewMath.printVectorOrientationAngles(xz45deg, "X(-Z) plane 45 degree Axis with slight y direction. Note the pitch. (lm_cs)", true);
+
+        Vector xyz45deg = new Vector(0.5f, 0.5f, -0.5f).normalized();
+        ViewMath.printVectorOrientationAngles(xyz45deg, "XY(-Z) plane 45 degrees all. Note the pitch. (lm_cs)", true);
+
+        Vector xy45deg = new Vector(0.5f, 0.5f, -0.0f).normalized();
+        ViewMath.printVectorOrientationAngles(xy45deg, "xy 45 degrees (lm cs)", true);
+
+        Vector xy_smallz45deg = new Vector(0.5f, 0.5f, -0.1f).normalized();
+        ViewMath.printVectorOrientationAngles(xy_smallz45deg, "xy smallZ 45 degrees (lm cs)", true);
+
+
+    }
+
+
 }
