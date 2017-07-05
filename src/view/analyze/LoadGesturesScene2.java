@@ -1,6 +1,7 @@
 package view.analyze;
 
 
+import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Vector;
 import javafx.scene.*;
@@ -118,9 +119,17 @@ public class LoadGesturesScene2 {
 
 
         //testing my hand class that i made
+        System.out.println("------------- testing extended hand class -------------");
         HandTest ht = new HandTest(realTarget);
-        System.out.println("secret var: " + ht.getSecretVariable());
-
+        //try to give ht all the methods that lm hand has.
+        for (int i = 0; i < 5; ++i) {
+            Finger fingerA = realTarget.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            Finger fingerB = ht.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            System.out.println("hand finger " + i + ": " + fingerA);
+            System.out.println("ht finger " + i + ": " + fingerB);
+            System.out.println("fingerA = fingerB?  \t" + fingerA.equals(fingerB));
+        }
+        System.out.println("------------- END testing extended hand class -------------");
 
         //uiHand1 setup
         uiHand1.setLoc(realTarget);

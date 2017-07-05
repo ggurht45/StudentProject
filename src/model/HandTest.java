@@ -1,5 +1,6 @@
 package model;
 
+import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
 
 public class HandTest extends Hand{
@@ -18,6 +19,10 @@ public class HandTest extends Hand{
         secretVariable = 1394;
     }
 
+    @Override
+    public FingerList fingers() {
+        return hand.fingers();
+    }
 
     public int getSecretVariable() {
         return secretVariable;
