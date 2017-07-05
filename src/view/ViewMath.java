@@ -194,12 +194,14 @@ public class ViewMath {
     }
 
 
+    //given a vector and a possible choice of "pitch", "roll", "yaw" this returns the weighted such angle
+    //in degrees and rounded if specified
     public static float getWeightedPYR(Vector d, String type, boolean useDegrees, boolean round) {
         d = d.normalized();
 
         //anglePYR is angle for pitch yaw or roll. depending on type passed in
 //        float anglePYR = d.pitch(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WRONG!
-        float anglePYR =0.0f; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WRONG!
+        float anglePYR = 0.0f;
 
         Vector proj = d; //initially set proj to just d passed in
 
@@ -232,7 +234,7 @@ public class ViewMath {
         }
     }
 
-
+    //this method returns the projection vector onto a specified plane.
     //planes for angles pitch -> yz;    yaw -> xz;      roll -> xy
     public static Vector getProjection(Vector d, String plane) {
         Vector v = new Vector(d.getX(), d.getY(), d.getZ());
@@ -245,10 +247,11 @@ public class ViewMath {
         } else {
             System.out.println("\n \n Error! wrong plane specified \n \n");
         }
-        System.out.println("getProjection(pitch:yz; yaw:xz; roll:xy): " + plane + " " + v + " mag (weight): " + v.magnitude());
+        //System.out.println("getProjection(pitch:yz; yaw:xz; roll:xy): " + plane + " " + v + " mag (weight): " + v.magnitude());
         return v;
     }
 
+    //returns a vector rounded to 2 decimal points
     public static Vector roundVector(Vector u) {
         float x = roundFloat(u.getX());
         float y = roundFloat(u.getY());
@@ -262,9 +265,10 @@ public class ViewMath {
     }
 
     public static float roundedAngleDegrees(float a) {
-        return roundFloat((float)Math.toDegrees(a));
+        return roundFloat((float) Math.toDegrees(a));
     }
 
+    //more generic float rounding method
     public static float roundFloat(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
@@ -353,120 +357,140 @@ public class ViewMath {
 
 
     //note!! expects angle in radians!!
-    public static void matrixRotateNode(Node n, double alf, double bet, double gam){
-        double A11=Math.cos(alf)*Math.cos(gam);
-        double A12=Math.cos(bet)*Math.sin(alf)+Math.cos(alf)*Math.sin(bet)*Math.sin(gam);
-        double A13=Math.sin(alf)*Math.sin(bet)-Math.cos(alf)*Math.cos(bet)*Math.sin(gam);
-        double A21=-Math.cos(gam)*Math.sin(alf);
-        double A22=Math.cos(alf)*Math.cos(bet)-Math.sin(alf)*Math.sin(bet)*Math.sin(gam);
-        double A23=Math.cos(alf)*Math.sin(bet)+Math.cos(bet)*Math.sin(alf)*Math.sin(gam);
-        double A31=Math.sin(gam);
-        double A32=-Math.cos(gam)*Math.sin(bet);
-        double A33=Math.cos(bet)*Math.cos(gam);
+    public static void matrixRotateNode(Node n, double alf, double bet, double gam) {
+        double A11 = Math.cos(alf) * Math.cos(gam);
+        double A12 = Math.cos(bet) * Math.sin(alf) + Math.cos(alf) * Math.sin(bet) * Math.sin(gam);
+        double A13 = Math.sin(alf) * Math.sin(bet) - Math.cos(alf) * Math.cos(bet) * Math.sin(gam);
+        double A21 = -Math.cos(gam) * Math.sin(alf);
+        double A22 = Math.cos(alf) * Math.cos(bet) - Math.sin(alf) * Math.sin(bet) * Math.sin(gam);
+        double A23 = Math.cos(alf) * Math.sin(bet) + Math.cos(bet) * Math.sin(alf) * Math.sin(gam);
+        double A31 = Math.sin(gam);
+        double A32 = -Math.cos(gam) * Math.sin(bet);
+        double A33 = Math.cos(bet) * Math.cos(gam);
 
-        double d = Math.acos((A11+A22+A33-1d)/2d);
-        if(d!=0d){
-            double den=2d*Math.sin(d);
-            Point3D p= new Point3D((A32-A23)/den,(A13-A31)/den,(A21-A12)/den);
+        double d = Math.acos((A11 + A22 + A33 - 1d) / 2d);
+        if (d != 0d) {
+            double den = 2d * Math.sin(d);
+            Point3D p = new Point3D((A32 - A23) / den, (A13 - A31) / den, (A21 - A12) / den);
             n.setRotationAxis(p);
             n.setRotate(Math.toDegrees(d));
         }
     }
 
     public static void printVectorOrientationAngles(Vector v, String vectorName) {
-        System.out.println("------------- " + vectorName + " Orientation Info -------------");
-        System.out.println(vectorName + " vector: \t " + v);
-        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()) + " \t"  + roundFloat(v.pitch()) + " radians");
-        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()) + " \t"  + roundFloat(v.roll()));
-        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()) + " \t"  + roundFloat(v.yaw()));
-        System.out.println("------------- End -------------");
+        printVectorOrientationAngles(v, vectorName, true);
+    }
+
+
+    //expects roll being passed in to be in Radians
+    public static float correctRollRadians(float rollToCorrect){
+        return (float)(Math.PI)-rollToCorrect;
+    }
+
+    //expects roll being passed in to be in Radians
+    public static float correctRollDegrees(float rollToCorrect){
+        return 180.0f-rollToCorrect;
     }
 
     public static void printVectorOrientationAngles(Vector v, String vectorName, boolean weighProjections) {
         System.out.println("------------- " + vectorName + " Orientation Info -------------");
-        System.out.println(vectorName + " vector: \t " + v);
-        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()) + " \t"  + roundFloat(v.pitch()) + " radians");
-        System.out.println("roll: \t" + roundedAngleDegrees(v.roll()) + " \t"  + roundFloat(v.roll()));
-        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()) + " \t"  + roundFloat(v.yaw()));
+        System.out.println("\t\t\tVector: " + v);
+        //pitch info
+        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()));
+        Vector axis = new Vector(0, 0, -1);
+        Vector prj = roundVector(getProjection(v, "YZ"));
+        System.out.println("\tAngle btw neg-ZAxis( " + axis + ") and projection onto YZ-plane( " + prj + "):\n\t" + axis.angleTo(prj));
 
-        if(weighProjections){
+        //roll info
+        System.out.println("roll (original): \t" + roundedAngleDegrees(v.roll()));
+        System.out.println("roll (corrected): \t" + roundedAngleDegrees(ViewMath.correctRollRadians(v.roll())));
+        axis = new Vector(0, 1, 0);
+        prj = roundVector(getProjection(v, "XY"));
+        System.out.println("\tAngle btw YAxis( " + axis + ") and projection onto XY-plane( " + prj + "):\n\t" + axis.angleTo(prj));
+
+        //yaw info
+        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()));
+        axis = new Vector(0, 0, -1);
+        prj = roundVector(getProjection(v, "XZ"));
+        System.out.println("\tAngle btw neg-ZAxis( " + axis + ") and projection onto XZ-plane( " + prj + "):\n\t" + axis.angleTo(prj));
+
+
+        if (weighProjections) {
+            System.out.println("Pitch, roll, yaw WEIGHTED by the projection size");
             float p = getWeightedPYR(v, "pitch", true, true);
             float r = getWeightedPYR(v, "roll", true, true);
             float y = getWeightedPYR(v, "yaw", true, true);
-            System.out.println("pitch(weighted): \t" + p);
-            System.out.println("roll(weighted): \t" + r);
-            System.out.println("yaw(weighted): \t" + y);
+            System.out.println("pitch: \t" + p);
+            System.out.println("roll: \t" + r);
+            System.out.println("yaw: \t" + y);
         }
         System.out.println("------------- End -------------");
     }
 
-//    public static void
 
-    public static void runVectorTests(){
-
-        //      ------------------------- understanding lm p r y
-        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmotion)");
-        System.out.println("Why is the roll 180?!! \n \n");
-        // z-axis angles (especially roll is weird
-        Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
-        almostNegZAxis = almostNegZAxis.normalized();
-        ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
-        System.out.println("Why is the roll 135?!! ");
-
-        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
-        float angle =Vector.yAxis().angleTo(projectionXY);
-        System.out.println("y axis in lm??!!: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle  + " angle(deg): " + Math.toDegrees(angle));
-        System.out.println("so, the Roll angle seems to be between the javafx y-axis (which points down) and projection onto the xy plane. because 135+45 = 180 \n");
-
-        Vector test2 = new Vector(0.01f, 0.09f, -0.9f);
-        test2 = test2.normalized();
-        ViewMath.printVectorOrientationAngles(test2, "Aaaalmost Negative Z Axis, a more skewed projection (lmotion)");
-        Vector ptest2 = ViewMath.getProjection(test2, "XY");
-        float ang2 =Vector.yAxis().angleTo(ptest2);
-        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest2 + " angle(radians): " + ang2  + " angle(deg): " + Math.toDegrees(ang2));
-
-        Vector test3 = new Vector(0.01f, -0.09f, -0.9f);
-        test3 = test3.normalized();
-        ViewMath.printVectorOrientationAngles(test3, "Aaaalmost Negative Z Axis, -y direction");
-        Vector ptest3 = ViewMath.getProjection(test3, "XY");
-        float ang3 =Vector.yAxis().angleTo(ptest3);
-        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest3 + " angle(radians): " + ang3  + " angle(deg): " + Math.toDegrees(ang3));
-        System.out.println("\n");
-
-        System.out.println("\n");
+    //this method prints info about different vectors and their respective pitch, roll, and yaw angles to learn more about
+    //how lm calculates these angles.
+    public static void runVectorTests() {
+        ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmcs)");
 
 
-        // y-axis
-        ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
-
-
-
-
-
-
-        // x-axis -- -0.0f?!!
-        ViewMath.printVectorOrientationAngles(new Vector(1, 0, 0.0f), "Positive X Axis with POSITIVE 0 for zAxis (lm cs)", true);
-        //what the fudge! there is such thing as a negative zero.
-        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with NEGATIVE -0! for zAxis (lm cs (supposedly))", true);
-
-        Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
-        almostXAxis = almostXAxis.normalized();
-        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis, with slight z, y coordinates. (lmotion)", true);
-        System.out.println("note the high pitch. this is what makes me think i need to multiply it by the weight of the projection? in addition, note the NEGATIVE z direction \n");
-
-        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lm_cs)", true);
-
-        Vector xz45deg = new Vector(0.5f, 0.03f, -0.5f).normalized();
-        ViewMath.printVectorOrientationAngles(xz45deg, "X(-Z) plane 45 degree Axis with slight y direction. Note the pitch. (lm_cs)", true);
-
-        Vector xyz45deg = new Vector(0.5f, 0.5f, -0.5f).normalized();
-        ViewMath.printVectorOrientationAngles(xyz45deg, "XY(-Z) plane 45 degrees all. Note the pitch. (lm_cs)", true);
-
-        Vector xy45deg = new Vector(0.5f, 0.5f, -0.0f).normalized();
-        ViewMath.printVectorOrientationAngles(xy45deg, "xy 45 degrees (lm cs)", true);
-
-        Vector xy_smallz45deg = new Vector(0.5f, 0.5f, -0.1f).normalized();
-        ViewMath.printVectorOrientationAngles(xy_smallz45deg, "xy smallZ 45 degrees (lm cs)", true);
+//        System.out.println("Why is the roll 180?!! \n \n");
+//        // z-axis angles (especially roll is weird
+//        Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
+//        almostNegZAxis = almostNegZAxis.normalized();
+//        ViewMath.printVectorOrientationAngles(almostNegZAxis, "Aaaalmost Negative Z Axis (lmotion)");
+//        System.out.println("Why is the roll 135?!! ");
+//
+//        Vector projectionXY = ViewMath.getProjection(almostNegZAxis, "XY");
+//        float angle = Vector.yAxis().angleTo(projectionXY);
+//        System.out.println("y axis in lm??!!: " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + projectionXY + " angle(radians): " + angle + " angle(deg): " + Math.toDegrees(angle));
+//        System.out.println("so, the Roll angle seems to be between the javafx y-axis (which points down) and projection onto the xy plane. because 135+45 = 180 \n");
+//
+//        Vector test2 = new Vector(0.01f, 0.09f, -0.9f);
+//        test2 = test2.normalized();
+//        ViewMath.printVectorOrientationAngles(test2, "Aaaalmost Negative Z Axis, a more skewed projection (lmotion)");
+//        Vector ptest2 = ViewMath.getProjection(test2, "XY");
+//        float ang2 = Vector.yAxis().angleTo(ptest2);
+//        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest2 + " angle(radians): " + ang2 + " angle(deg): " + Math.toDegrees(ang2));
+//
+//        Vector test3 = new Vector(0.01f, -0.09f, -0.9f);
+//        test3 = test3.normalized();
+//        ViewMath.printVectorOrientationAngles(test3, "Aaaalmost Negative Z Axis, -y direction");
+//        Vector ptest3 = ViewMath.getProjection(test3, "XY");
+//        float ang3 = Vector.yAxis().angleTo(ptest3);
+//        System.out.println("y axis in lm(more like javafx): " + Vector.yAxis() + " \n" + "angle btw yaxis and projection: " + ptest3 + " angle(radians): " + ang3 + " angle(deg): " + Math.toDegrees(ang3));
+//        System.out.println("\n");
+//
+//        System.out.println("\n");
+//
+//
+//        // y-axis
+//        ViewMath.printVectorOrientationAngles(new Vector(0, 1, -0.0f), "Positive Y Axis (lmotion)");
+//
+//
+//        // x-axis -- -0.0f?!!
+//        ViewMath.printVectorOrientationAngles(new Vector(1, 0, 0.0f), "Positive X Axis with POSITIVE 0 for zAxis (lm cs)", true);
+//        //what the fudge! there is such thing as a negative zero.
+//        ViewMath.printVectorOrientationAngles(new Vector(1, 0, -0.0f), "Positive X Axis with NEGATIVE -0! for zAxis (lm cs (supposedly))", true);
+//
+//        Vector almostXAxis = new Vector(0.9f, 0.05f, -0.05f); //note the direction change in the z axis.
+//        almostXAxis = almostXAxis.normalized();
+//        ViewMath.printVectorOrientationAngles(almostXAxis, "Aaaalmost Positive X Axis, with slight z, y coordinates. (lmotion)", true);
+//        System.out.println("note the high pitch. this is what makes me think i need to multiply it by the weight of the projection? in addition, note the NEGATIVE z direction \n");
+//
+//        ViewMath.printVectorOrientationAngles(new Vector(0.5f, 0, -0.5f), "X(-Z) plane 45 degree Axis (lm_cs)", true);
+//
+//        Vector xz45deg = new Vector(0.5f, 0.03f, -0.5f).normalized();
+//        ViewMath.printVectorOrientationAngles(xz45deg, "X(-Z) plane 45 degree Axis with slight y direction. Note the pitch. (lm_cs)", true);
+//
+//        Vector xyz45deg = new Vector(0.5f, 0.5f, -0.5f).normalized();
+//        ViewMath.printVectorOrientationAngles(xyz45deg, "XY(-Z) plane 45 degrees all. Note the pitch. (lm_cs)", true);
+//
+//        Vector xy45deg = new Vector(0.5f, 0.5f, -0.0f).normalized();
+//        ViewMath.printVectorOrientationAngles(xy45deg, "xy 45 degrees (lm cs)", true);
+//
+//        Vector xy_smallz45deg = new Vector(0.5f, 0.5f, -0.1f).normalized();
+//        ViewMath.printVectorOrientationAngles(xy_smallz45deg, "xy smallZ 45 degrees (lm cs)", true);
 
 
     }

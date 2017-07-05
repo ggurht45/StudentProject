@@ -30,7 +30,7 @@ public class LoadGesturesScene2 {
     public LoadGesturesScene2(LeapUIApp app) {
         this.app = app;
 
-        ViewMath.printInfoManyHands();
+//        ViewMath.printInfoManyHands();
 
         ViewMath.runVectorTests();
 
@@ -44,14 +44,14 @@ public class LoadGesturesScene2 {
         loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
-        ViewMath.printHandInfo(loadedHand, "sanity check. loaded hand info");
-        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "direction of the loaded hand");
-        ViewMath.printVectorOrientationAngles(loadedHand.palmNormal(), "palm Normal of the loaded hand");
+//        ViewMath.printHandInfo(loadedHand, "sanity check. loaded hand info");
+//        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "direction of the loaded hand");
+//        ViewMath.printVectorOrientationAngles(loadedHand.palmNormal(), "palm Normal of the loaded hand");
 
 
         //print direction vectors orientation angles for sanity check
-        ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
-        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
+//        ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
+//        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
 
 
         //uiHand1 setup

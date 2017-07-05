@@ -463,7 +463,7 @@ public class LeapUIApp extends Application {
             e.printStackTrace();
         }
 
-        System.out.println("************Score**********: " + score + "\n");
+//        System.out.println("************Score**********: " + score + "\n");
         return score;
     }
 
