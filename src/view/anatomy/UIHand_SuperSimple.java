@@ -119,7 +119,10 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("this.getRotationAxis(): " + this.entireGroup.getRotationAxis());
         System.out.println("***2");
 
-//        this.entireGroup.getTransforms().add(new Translate(-15, 0, 0));
+
+        this.getTransforms().add(new Translate(-5, 0, 0));
+
+
 
     }
 
