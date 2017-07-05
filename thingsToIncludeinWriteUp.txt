@@ -20,3 +20,9 @@
 
       so many things about rotations i had to learn by myself. if someone were there to explain them, it would have been so hard. it feels like i have been
       struggling in the dark for a long time.
+
+
+
+-- things to remember. -weird coordinate systems. -0s in floating numbers and their effect on axises. -- wrong roll calculations in leapmotions. --flipping
+angles of pitch and yaw to use method. --last transform that is added gets executed first in line.  --- rotations follow the order of Pitch first, then yaw,
+then roll. if you miss this order or cant fit in something, then you need to execute it before by adding another transform.
