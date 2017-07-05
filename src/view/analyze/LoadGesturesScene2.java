@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import model.HandTest;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.ViewMath;
@@ -113,6 +114,12 @@ public class LoadGesturesScene2 {
         //print direction vectors orientation angles for sanity check
         ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
         ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
+
+
+
+        //testing my hand class that i made
+        HandTest ht = new HandTest(realTarget);
+        System.out.println("secret var: " + ht.getSecretVariable());
 
 
         //uiHand1 setup
