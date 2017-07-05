@@ -11,3 +11,12 @@
 
 
 -- vector cross product. a x b = fingers in direction of A, curl towards B, cross prod = thumb
+
+--matrix multiplication A = A3*A2*A1=Az*Ay*Ax = Aroll*Ayaw*Apitch Jose Pereda's blog leap motion
+
+--    //epiphany. to get to 45, 45 x,-z handshake position.
+      //i must add a rotation transform at the end. that basically does a rotation around the y-axis. a 90 yaw. -> flipping -90 yaw.
+      //why? because order is always pitch then yaw, then roll. so if you want to do yaw before pitch, it must come seperately.^^
+
+      so many things about rotations i had to learn by myself. if someone were there to explain them, it would have been so hard. it feels like i have been
+      struggling in the dark for a long time.

@@ -43,14 +43,14 @@ public class ViewMath {
     public static void setRotationByVector(Node node, Vector direction) {
         //the "corrected" direction switches the zaxis to negative. because fingers point into the screen but z axis extends outward from the screen
         Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
-        System.out.println("correctedDirection: " + correctedDirection);
+//        System.out.println("correctedDirection: " + correctedDirection);
 
         //angle is the angle to the of the 'corrected' direction to the y-axis
         //not sure why its then multiplying it by 57ish.. oh! it converting from radians to degrees.
         //the angleTo method returns angle in radians. to convert it radians we must multiply that by 180 and then take
         //the result and divide it by Pi. mks
         double angle = correctedDirection.angleTo(Vector.yAxis()) * 180 / Math.PI;    //angle in degrees.
-        System.out.println("angle in setRotationByVector: " + angle);
+//        System.out.println("angle in setRotationByVector: " + angle);
 
         //just takes a vector and converts it to point3d. the vector it converts is the cross the cross product to the y-axis
         //so this code.. kinda already does what i want. or does it? then how come i was able to show hand pointed to the right?
@@ -61,7 +61,7 @@ public class ViewMath {
         //it chooses the y-axis cuz that is the original "direction" of the cylinder. top/down. we are going from that axis to another axis
         //the "corrected" direction axis. getting the cross product. a cross b is NOT the same as  (b x a). its the opposite direction.
         Point3D axis = vectorToPoint(correctedDirection.cross(Vector.yAxis()));
-        System.out.println("rotation axis: " + axis);
+//        System.out.println("rotation axis: " + axis);
         node.setRotate(angle);
         node.setRotationAxis(axis);
 
@@ -365,6 +365,7 @@ public class ViewMath {
 
 
     //note!! expects angle in radians!!
+    //stackoverflow: alf is roll, bet is pitch and gam is yaw.
     public static void matrixRotateNode(Node n, double alf, double bet, double gam) {
         double A11 = Math.cos(alf) * Math.cos(gam);
         double A12 = Math.cos(bet) * Math.sin(alf) + Math.cos(alf) * Math.sin(bet) * Math.sin(gam);

@@ -59,9 +59,53 @@ public class UIHand_SuperSimple extends UIHand {
 //
 //    }
 
+    //epiphany. to get to 45, 45 x,-z handshake position.
+    //i must add a rotation transform at the end. that basically does a rotation around the y-axis. a 90 yaw. -> flipping -90 yaw.
+    //why? because order is always pitch then yaw, then roll. so if you want to do yaw before pitch, it must come seperately.^^
+
+    private void tryAgain(Hand hand){
+        //determine correct p,y,r from direction:
+        Vector direction = new Vector(1,0,-1);
+        //new approach
+        ViewMath.setGenericNode(this.hand, hand.stabilizedPalmPosition(), Vector.yAxis().times(20));
+        ViewMath.setGenericNode(this.thumb, hand.stabilizedPalmPosition(), Vector.yAxis().times(20));
+        ViewMath.setGenericNode(this.fingers, hand.stabilizedPalmPosition(), Vector.yAxis().times(20));
+        float roll = (float)Math.toRadians(0);
+        //flip sign for pitch and yaw before passing them as arguments.
+        //remember pitch downwards is -90 or whatever angle. and yaw to the right is +30. or whatever angle.
+        //now after you have thought of the angles as above. remember to flip them, as told below.
+        //so if you imagined the pitch and yaw angles to be -90, 30, respectively, then you should pass them as 90, -30;
+        //i think this may be b/c of jcs vs lcs. leap coordinate sys vs javafx cs.
+        float pitch = (float)Math.toRadians(45.0);
+        float yaw = (float)Math.toRadians(-45);
+        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+        ViewMath.matrixRotateNode(this, roll, pitch, yaw);
+        //fix translate
+        fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
+        thumb.getTransforms().add(new Translate(4, 0, 0));
+
+        //add rotation around y-axis. yaw of 90 -> flip -> -90;
+        this.getTransforms().add(new Rotate(90, new Point3D(0,1,0)));
+
+
+
+    }
+
+
     @Override
     public void setLoc(Hand hand) {
         System.out.println("in setLoc method of superSimple hand");
+        tryAgain(hand);
+
+
+
+
+
+
+
+
+
+        /*
         //hand.direction is a unit vector
 //        Vector direction = new Vector(0, 1, 0);
 //        Vector direction = new Vector(1,0,0);
@@ -84,10 +128,6 @@ public class UIHand_SuperSimple extends UIHand {
         ViewMath.setGenericNode(this.fingers, hand.stabilizedPalmPosition(), direction.times(20));
 
 
-        //fix rotate
-//        this.hand.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
-//        fingers.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
-//        thumb.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
 
         //fix translate
         fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
@@ -107,7 +147,7 @@ public class UIHand_SuperSimple extends UIHand {
 
 //        ViewMath.straightenGroup(this);
 
-
+*/
     }
 
     @Override
