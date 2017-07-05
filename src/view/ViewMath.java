@@ -214,6 +214,8 @@ public class ViewMath {
             proj = getProjection(d, "XZ");
         } else if (type.equalsIgnoreCase("roll")) {
             anglePYR = d.roll();
+            //correct roll angle
+            anglePYR = correctRoll_Radians(anglePYR);
             proj = getProjection(d, "XY");
         } else {
             System.out.println("\n \n Wrong angle type passed in !!! \n \n ");
@@ -383,46 +385,52 @@ public class ViewMath {
 
 
     //expects roll being passed in to be in Radians
-    public static float correctRollRadians(float rollToCorrect){
-        return (float)(Math.PI)-rollToCorrect;
+    public static float correctRoll_Radians(float rollToCorrect) {
+        return (float) (Math.PI) - rollToCorrect;
     }
 
     //expects roll being passed in to be in Radians
-    public static float correctRollDegrees(float rollToCorrect){
-        return 180.0f-rollToCorrect;
+    public static float correctRoll_Degrees(float rollToCorrect) {
+        return 180.0f - rollToCorrect;
     }
 
     public static void printVectorOrientationAngles(Vector v, String vectorName, boolean weighProjections) {
         System.out.println("------------- " + vectorName + " Orientation Info -------------");
-        System.out.println("\t\t\tVector: " + v);
+        Vector vn = v.normalized();
+        System.out.println("\t\t\tVector: " + v + "\n\t\t\tVector Normalized: " + vn);
+
         //pitch info
-        System.out.println("pitch: \t" + roundedAngleDegrees(v.pitch()));
+        float p = roundedAngleDegrees(v.pitch());
+        System.out.println("pitch: \t" + p);
         Vector axis = new Vector(0, 0, -1);
         Vector prj = roundVector(getProjection(v, "YZ"));
-        System.out.println("\tAngle btw neg-ZAxis( " + axis + ") and projection onto YZ-plane( " + prj + "):\n\t" + axis.angleTo(prj));
+        float angleBtw = roundedAngleDegrees(axis.angleTo(prj));
+        System.out.println("Angle btw neg-ZAxis" + axis + " and projection onto YZ-plane" + prj + ":\n\t" + angleBtw);
 
         //roll info
-        System.out.println("roll (original): \t" + roundedAngleDegrees(v.roll()));
-        System.out.println("roll (corrected): \t" + roundedAngleDegrees(ViewMath.correctRollRadians(v.roll())));
+        float cr = roundedAngleDegrees(ViewMath.correctRoll_Radians(v.roll()));
+        System.out.println("roll (corrected): \t" + cr); //only show corrected roll from now on
         axis = new Vector(0, 1, 0);
         prj = roundVector(getProjection(v, "XY"));
-        System.out.println("\tAngle btw YAxis( " + axis + ") and projection onto XY-plane( " + prj + "):\n\t" + axis.angleTo(prj));
+        angleBtw = roundedAngleDegrees(axis.angleTo(prj));
+        System.out.println("Angle btw YAxis" + axis + " and projection onto XY-plane" + prj + ":\n\t" + angleBtw);
 
         //yaw info
-        System.out.println("yaw: \t" + roundedAngleDegrees(v.yaw()));
+        float y = roundedAngleDegrees(v.yaw());
+        System.out.println("yaw: \t" + y);
         axis = new Vector(0, 0, -1);
         prj = roundVector(getProjection(v, "XZ"));
-        System.out.println("\tAngle btw neg-ZAxis( " + axis + ") and projection onto XZ-plane( " + prj + "):\n\t" + axis.angleTo(prj));
-
+        angleBtw = roundedAngleDegrees(axis.angleTo(prj));
+        System.out.println("Angle btw neg-ZAxis" + axis + " and projection onto XZ-plane" + prj + ":\n\t" + angleBtw);
 
         if (weighProjections) {
-            System.out.println("Pitch, roll, yaw WEIGHTED by the projection size");
-            float p = getWeightedPYR(v, "pitch", true, true);
-            float r = getWeightedPYR(v, "roll", true, true);
-            float y = getWeightedPYR(v, "yaw", true, true);
-            System.out.println("pitch: \t" + p);
-            System.out.println("roll: \t" + r);
-            System.out.println("yaw: \t" + y);
+            float wp = getWeightedPYR(v, "pitch", true, true);
+            float wcr = getWeightedPYR(v, "roll", true, true); //only have correct roll method.
+            float wy = getWeightedPYR(v, "yaw", true, true);
+            System.out.println("\nNon-weighted angles and WEIGHTED by the projection size, after vector has been normalized");
+            System.out.println("pitch: \t\t" + p + "\t\tpitch(weighted): \t" + wp);
+            System.out.println("roll(cr): \t" + cr + "\t\troll(cr,weighted): \t" + wcr);
+            System.out.println("yaw: \t\t" + y + "\t\tyaw(weighted): \t\t" + wy);
         }
         System.out.println("------------- End -------------");
     }
@@ -431,9 +439,15 @@ public class ViewMath {
     //this method prints info about different vectors and their respective pitch, roll, and yaw angles to learn more about
     //how lm calculates these angles.
     public static void runVectorTests() {
+
+        // tests on z-axis
         ViewMath.printVectorOrientationAngles(new Vector(0, 0, -1.0f), "Negative Z Axis (lmcs)");
+        ViewMath.printVectorOrientationAngles(new Vector(0.05f, 0.05f, -0.9f), "Aaaalmost Negative Z Axis (lmcs)");
+        ViewMath.printVectorOrientationAngles(new Vector(0.01f, 0.09f, -0.9f), "Aaaalmost Negative Z Axis (more skewed) (lmcs)");
+        ViewMath.printVectorOrientationAngles(new Vector(0.01f, -0.09f, -0.9f), "Aaaalmost Negative Z Axis, more skewed, -y  (lmcs)");
 
 
+//
 //        System.out.println("Why is the roll 180?!! \n \n");
 //        // z-axis angles (especially roll is weird
 //        Vector almostNegZAxis = new Vector(0.05f, 0.05f, -0.9f);
