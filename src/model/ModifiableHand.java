@@ -4,13 +4,13 @@ import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
 
-public class HandTest extends Hand {
+public class ModifiableHand extends Hand {
 
     private Hand hand;
     private int id;
     private int secretVariable;
 
-    public HandTest(Hand h) {
+    public ModifiableHand(Hand h) {
         hand = h;
         //go through and set variables.. so when this "extended" (manually in this case), hand is passed around, the methods work as expected.
         //and to be honest, it wont be that difficult. i just use the super.method() in the overridden methods.

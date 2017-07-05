@@ -1,7 +1,6 @@
 package view.analyze;
 
 
-import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Vector;
 import javafx.scene.*;
@@ -9,14 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
-import model.HandTest;
+import model.ModifiableHand;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.ViewMath;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
-
-import javax.swing.text.View;
 
 public class LoadGesturesScene2 {
     private LeapUIApp app;
@@ -119,7 +116,7 @@ public class LoadGesturesScene2 {
 
 
         //testing my hand class that i made
-        HandTest ht = new HandTest(realTarget);
+        ModifiableHand ht = new ModifiableHand(realTarget);
         ht.runTests();
 
         //uiHand1 setup
