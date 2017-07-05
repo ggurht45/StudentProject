@@ -64,9 +64,9 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("in setLoc method of superSimple hand");
         //hand.direction is a unit vector
 //        Vector direction = new Vector(0, 1, 0);
-        Vector direction = new Vector(1,0,0);
+//        Vector direction = new Vector(1,0,0);
 //        Vector direction = new Vector(0,0,-1);
-//        Vector direction = new Vector(1,0,-1);
+        Vector direction = new Vector(1,0,-1);
         direction = direction.normalized();
 
         //old approach

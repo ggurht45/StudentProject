@@ -43,6 +43,7 @@ public class ViewMath {
     public static void setRotationByVector(Node node, Vector direction) {
         //the "corrected" direction switches the zaxis to negative. because fingers point into the screen but z axis extends outward from the screen
         Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
+        System.out.println("correctedDirection: " + correctedDirection);
 
         //angle is the angle to the of the 'corrected' direction to the y-axis
         //not sure why its then multiplying it by 57ish.. oh! it converting from radians to degrees.
@@ -118,7 +119,7 @@ public class ViewMath {
         setRotationByVector(node, directionWithMagnitude);
         double lengthOfBone = directionWithMagnitude.magnitude();
         node.setScaleY(lengthOfBone / positionScaleFactor);
-        node.getTransforms().add(new Rotate(90, new Point3D(0,1,0))); //not really sure i understand this. but so happy it looks good now.
+//        node.getTransforms().add(new Rotate(90, new Point3D(0,1,0))); //not really sure i understand this. but so happy it looks good now.
     }
 
     public static void straightenGroup(Group group) {

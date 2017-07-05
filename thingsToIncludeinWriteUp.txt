@@ -8,3 +8,6 @@
         fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
         //this below does not work. its hard setting the translate property.
 //        fingers.setTranslateY(transY-6); //java coordinate system, y increases downwards. z into the screen, and x to the right.
+
+
+-- vector cross product. a x b = fingers in direction of A, curl towards B, cross prod = thumb
