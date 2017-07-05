@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.shape.Cylinder;
 
 import com.leapmotion.leap.Vector;
+import javafx.scene.transform.Rotate;
 import model.SerializedTargetHand;
 
 import java.math.BigDecimal;
@@ -48,6 +49,7 @@ public class ViewMath {
         //the angleTo method returns angle in radians. to convert it radians we must multiply that by 180 and then take
         //the result and divide it by Pi. mks
         double angle = correctedDirection.angleTo(Vector.yAxis()) * 180 / Math.PI;    //angle in degrees.
+        System.out.println("angle in setRotationByVector: " + angle);
 
         //just takes a vector and converts it to point3d. the vector it converts is the cross the cross product to the y-axis
         //so this code.. kinda already does what i want. or does it? then how come i was able to show hand pointed to the right?
@@ -58,6 +60,7 @@ public class ViewMath {
         //it chooses the y-axis cuz that is the original "direction" of the cylinder. top/down. we are going from that axis to another axis
         //the "corrected" direction axis. getting the cross product. a cross b is NOT the same as  (b x a). its the opposite direction.
         Point3D axis = vectorToPoint(correctedDirection.cross(Vector.yAxis()));
+        System.out.println("rotation axis: " + axis);
         node.setRotate(angle);
         node.setRotationAxis(axis);
 
@@ -115,6 +118,7 @@ public class ViewMath {
         setRotationByVector(node, directionWithMagnitude);
         double lengthOfBone = directionWithMagnitude.magnitude();
         node.setScaleY(lengthOfBone / positionScaleFactor);
+        node.getTransforms().add(new Rotate(90, new Point3D(0,1,0))); //not really sure i understand this. but so happy it looks good now.
     }
 
     public static void straightenGroup(Group group) {

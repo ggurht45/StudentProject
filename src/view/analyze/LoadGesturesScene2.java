@@ -56,7 +56,7 @@ public class LoadGesturesScene2 {
 
 
         //uiHand1 setup
-        uiHand1.setLoc(loadedHand);
+        uiHand1.setLoc(realTarget);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 

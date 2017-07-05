@@ -1,5 +1,6 @@
 package view.anatomy;
 
+import com.leapmotion.leap.Vector;
 import javafx.geometry.Point3D;
 import javafx.scene.Group;
 import javafx.scene.shape.Box;
@@ -62,6 +63,11 @@ public class UIHand_SuperSimple extends UIHand {
     public void setLoc(Hand hand) {
         System.out.println("in setLoc method of superSimple hand");
         //hand.direction is a unit vector
+//        Vector direction = new Vector(0, 1, 0);
+        Vector direction = new Vector(1,0,0);
+//        Vector direction = new Vector(0,0,-1);
+//        Vector direction = new Vector(1,0,-1);
+        direction = direction.normalized();
 
         //old approach
         //        ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
@@ -73,31 +79,33 @@ public class UIHand_SuperSimple extends UIHand {
 //        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
 
         //new approach
-        ViewMath.setGenericNode(this.hand, hand.stabilizedPalmPosition(), hand.direction().times(20));
-        ViewMath.setGenericNode(this.thumb, hand.stabilizedPalmPosition(), hand.direction().times(20));
-        ViewMath.setGenericNode(this.fingers, hand.stabilizedPalmPosition(), hand.direction().times(20));
+        ViewMath.setGenericNode(this.hand, hand.stabilizedPalmPosition(), direction.times(20));
+        ViewMath.setGenericNode(this.thumb, hand.stabilizedPalmPosition(), direction.times(20));
+        ViewMath.setGenericNode(this.fingers, hand.stabilizedPalmPosition(), direction.times(20));
+
+
+        //fix rotate
+//        this.hand.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
+//        fingers.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
+//        thumb.getTransforms().add(new Rotate(90, new Point3D(1,0,0)));
 
         //fix translate
         fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
-        thumb.getTransforms().add(new Translate(4,0,0));
+        thumb.getTransforms().add(new Translate(4, 0, 0));
         //this below does not work. its hard setting the translate property.
 //        fingers.setTranslateY(transY-6); //java coordinate system, y increases downwards. z into the screen, and x to the right.
 
 
-
-
         //these below were helpful. i should make a debug method for them
 
-        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-        System.out.println("this.getRotate(): " + this.getRotate());
-        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-        System.out.println("***");
+//        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
+//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
+//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
+//        System.out.println("this.getRotate(): " + this.getRotate());
+//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+//        System.out.println("***");
 
 //        ViewMath.straightenGroup(this);
-
-
 
 
     }
