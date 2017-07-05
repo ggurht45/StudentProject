@@ -13,6 +13,7 @@ import view.LeapUIApp;
 import view.ViewMath;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
+import view.anatomy.UIHand_SuperSimple;
 
 import javax.swing.text.View;
 
@@ -32,10 +33,10 @@ public class LoadGesturesScene2 {
 
 //        ViewMath.printInfoManyHands();
 
-        ViewMath.runVectorTests();
+//        ViewMath.runVectorTests();
 
 
-        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), true);
+        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), true);
         uiHand2 = new UIHand_Simple(Color.GREEN, false);
         uiHand3 = new UIHand_Simple(Color.RED, true);
 
@@ -55,7 +56,7 @@ public class LoadGesturesScene2 {
 
 
         //uiHand1 setup
-        uiHand1.setLoc(realTarget);
+        uiHand1.setLoc(loadedHand);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 

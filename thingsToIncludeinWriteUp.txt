@@ -1,3 +1,10 @@
 -should definately talk about -0.0f and how i figured out that the axis -> roll, pitch, were behaving very weirdly.
 
 --there is definately a problem with the roll method. it returns 135 when it should return 45. need to subtract answer from pi. to get the correct answer.
+
+--learning about transforms and how they get performed last to first. last transform added is the first to be performed
+        //fix translate in superSimpleHandUI
+        double transY = fingers.getTranslateY();
+        fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
+        //this below does not work. its hard setting the translate property.
+//        fingers.setTranslateY(transY-6); //java coordinate system, y increases downwards. z into the screen, and x to the right.

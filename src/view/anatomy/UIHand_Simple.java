@@ -133,16 +133,27 @@ public class UIHand_Simple extends UIHand {
         }
 
         //do something for the 4 knuckles ? why not five?
-        for (int i = 0; i < 4; ++i){
+        for (int i = 0; i < 4; ++i) {
             ViewMath.setCylinderByEndpoints(knuckleSpans[i], knuckles[i], knuckles[i + 1]);
         }
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
+
+
+
+        //these below were helpful. i should make a debug method for them.
+
+//        System.out.println("***EE");
+//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
+//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ());
+//        System.out.println("this = simple hand after setLoc");
+//        System.out.println("this.getRotate(): " + this.getRotate());
+//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
+//        System.out.println("***EE");
     }
 
 
-
-    public void fixOrientation(Hand h){
+    public void fixOrientation(Hand h) {
         System.out.println("entered fixOrientation UIHand_Simple");
 
         double r = 88;  //around z
@@ -156,12 +167,7 @@ public class UIHand_Simple extends UIHand {
     }
 
 
-
-
-
-
-
-    public void fixOrientationOld(Hand h){
+    public void fixOrientationOld(Hand h) {
         System.out.println("fixOrientation simple hand");
 //        ViewMath.printHandInfo(h, "fixOrientation Method");
 
@@ -190,19 +196,19 @@ public class UIHand_Simple extends UIHand {
 //        roll = (float) Math.toDegrees(roll);
         Vector d = h.direction();
         Vector pn = h.palmNormal();
-        float pitch = ViewMath.getWeightedPYR(d,"pitch", true, false);
-        float yaw = ViewMath.getWeightedPYR(d,"yaw", true, false);
-        float roll = ViewMath.getWeightedPYR(d,"roll", true, false);
-        float rollPN = ViewMath.getWeightedPYR(pn,"roll", true, false);
-        Rotate rPitch =  new Rotate(pitch, Rotate.X_AXIS);
-        Rotate rYaw =  new Rotate(yaw, Rotate.Y_AXIS);
-        Rotate rRoll =  new Rotate(roll, Rotate.Z_AXIS);
-        Rotate rRollPN =  new Rotate(rollPN, Rotate.Z_AXIS);
+        float pitch = ViewMath.getWeightedPYR(d, "pitch", true, false);
+        float yaw = ViewMath.getWeightedPYR(d, "yaw", true, false);
+        float roll = ViewMath.getWeightedPYR(d, "roll", true, false);
+        float rollPN = ViewMath.getWeightedPYR(pn, "roll", true, false);
+        Rotate rPitch = new Rotate(pitch, Rotate.X_AXIS);
+        Rotate rYaw = new Rotate(yaw, Rotate.Y_AXIS);
+        Rotate rRoll = new Rotate(roll, Rotate.Z_AXIS);
+        Rotate rRollPN = new Rotate(rollPN, Rotate.Z_AXIS);
         //maybe the problem is happening here. need to test this to make sure its behaving as i expect
 //        this.getTransforms().addAll(rPitch, rYaw, rRollPN);
 
-        Rotate swingToLeft =  new Rotate(-68, Rotate.Z_AXIS); //by lm: should be 90. by javfx -90? ok need to use javafx. because Rotate.Z_Axis is pointing into the screen
-        Rotate swivelAround =  new Rotate(-66, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
+        Rotate swingToLeft = new Rotate(-68, Rotate.Z_AXIS); //by lm: should be 90. by javfx -90? ok need to use javafx. because Rotate.Z_Axis is pointing into the screen
+        Rotate swivelAround = new Rotate(-66, Rotate.Y_AXIS); //by lm: should be 90. by javfx -90? sheesh. ok . need to use javafx again
         Rotate turnUp = new Rotate(15, Rotate.X_AXIS); // looking down neg of X-axis, 15 sounds good.
 
 
@@ -294,9 +300,6 @@ public class UIHand_Simple extends UIHand {
         double r = 90;  //around z
         double p = -40; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
         double y = 0;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
-
-
-
 
 
         //stackoverflow: alf is roll, bet is pitch and gam is yaw.

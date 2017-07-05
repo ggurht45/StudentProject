@@ -109,11 +109,12 @@ public class ViewMath {
         group.setScaleY(lengthOfBone / positionScaleFactor);
     }
 
-    public static void setGroup2(Group group, Vector middlePoint, Vector directionWithMagnitude, Vector axis) {
-        setPositionByVector(group, middlePoint);
-        setRotationByVector2(group, directionWithMagnitude, axis);
+    //for setting any generic node, be it cylinder or box.
+    public static void setGenericNode(Node node, Vector middlePoint, Vector directionWithMagnitude) {
+        setPositionByVector(node, middlePoint);
+        setRotationByVector(node, directionWithMagnitude);
         double lengthOfBone = directionWithMagnitude.magnitude();
-        group.setScaleY(lengthOfBone / positionScaleFactor);
+        node.setScaleY(lengthOfBone / positionScaleFactor);
     }
 
     public static void straightenGroup(Group group) {
