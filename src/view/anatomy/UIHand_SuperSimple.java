@@ -120,9 +120,28 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("***2");
 
 
-        this.getTransforms().add(new Translate(-5, 0, 0));
+        undoTransforms();
 
 
+    }
+
+    private void undoTransforms(){
+//        this.getTransforms().add(new Translate(-5, 0, 0));
+
+////        //yaw, then pitch, then yaw.
+//        float roll = (float) Math.toRadians(0);
+//        float pitch = (float) Math.toRadians(0);
+//        float yaw = (float) Math.toRadians(45);
+//        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+//        ViewMath.matrixRotateNode(this, roll, pitch, yaw);
+
+
+
+        this.getTransforms().add(new Rotate(-90, new Point3D(0,1,0)));
+
+        this.getTransforms().add(new Rotate(45, new Point3D(1,0,0)));
+
+        this.getTransforms().add(new Rotate(-45, new Point3D(0,1,0)));
 
     }
 
