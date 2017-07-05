@@ -117,10 +117,11 @@ public class LoadGesturesScene2 {
 
         //testing my hand class that i made
         ModifiableHand ht = new ModifiableHand(realTarget);
-        ht.runTests();
+//        ht.runTests();
+
 
         //uiHand1 setup
-        uiHand1.setLoc(realTarget);
+        uiHand1.setLoc(ht);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(-8);
 
