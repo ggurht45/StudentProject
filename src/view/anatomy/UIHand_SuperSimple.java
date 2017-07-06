@@ -67,6 +67,17 @@ public class UIHand_SuperSimple extends UIHand {
     //why? because order is always pitch then yaw, then roll. so if you want to do yaw before pitch, it must come seperately.^^
 
     private void tryAgain(Hand hand) {
+        //passed in parameters, AS SEEN FROM LM CS!
+        float y1_original = -90;//-> this is the most tricky to think about. it sometimes reminds me of roll. but its a yaw i perform before the other two pitch and yaw. Note: by "before" i mean i will write it in code "after" the other two.
+        float p_original = 10;
+        float y2_original = -45;
+
+
+        //fix incoming angles to correct coordinate system and assumpstions
+        float y1 = y1_original * (-1.0f);
+        float y2 = y2_original * (-1.0f);
+        float p = 90.0f - p_original;
+
         System.out.println("***");
         System.out.println("groupHand position before setGroup called in setLoc in superSimple");
         System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
@@ -91,8 +102,8 @@ public class UIHand_SuperSimple extends UIHand {
         //now after you have thought of the angles as above. remember to flip them, as told below.
         //so if you imagined the pitch and yaw angles to be -90, 30, respectively, then you should pass them as 90, -30;
         //i think this may be b/c of jcs vs lcs. leap coordinate sys vs javafx cs.
-        float pitch = (float) Math.toRadians(30.0);
-        float yaw = (float) Math.toRadians(-45);
+        float pitch = (float) Math.toRadians(p);
+        float yaw = (float) Math.toRadians(y2);
         //stackoverflow: alf is roll, bet is pitch and gam is yaw.
         ViewMath.matrixRotateNode(this.entireGroup, roll, pitch, yaw);
 
@@ -101,7 +112,11 @@ public class UIHand_SuperSimple extends UIHand {
         thumb.getTransforms().add(new Translate(4, 0, 0));
 
         //add rotation around y-axis. yaw of 90 -> flip -> -90;
-        this.entireGroup.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
+        //this works. looking down the opposite of the axis and +theta means to revolve counterclockwise around axis when looking down opposite end of axis
+        this.entireGroup.getTransforms().add(new Rotate(y1, new Point3D(0, -1, 0))); //this is correct way in my current situation. to be inline with other code above.such as matrixRotateNode
+        //this also works. note the axis being used is in javafx cs.
+//        this.entireGroup.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
+
 
         System.out.println("groupHand position After setGroup called in setLoc in superSimple");
         System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
@@ -120,28 +135,23 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("***2");
 
 
-        undoTransforms();
+        //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
+        //only need to switch signs
+        undoTransforms(y1_original, p_original, y2_original);
 
 
     }
 
-    private void undoTransforms(){
-//        this.getTransforms().add(new Translate(-5, 0, 0));
+    private void undoTransforms(float firstYaw, float pitch, float lastYaw) {
+        //Note the negative -1 in the y-axis. this is important. remember "looking down the opposite direction of the axis" so if -1, is given, we would be looking in the positive y direction (javafxcs) or in other words upwards direction
 
-////        //yaw, then pitch, then yaw.
-//        float roll = (float) Math.toRadians(0);
-//        float pitch = (float) Math.toRadians(0);
-//        float yaw = (float) Math.toRadians(45);
-//        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
-//        ViewMath.matrixRotateNode(this, roll, pitch, yaw);
-
-
-
-        this.getTransforms().add(new Rotate(-90, new Point3D(0,1,0)));
-
-        this.getTransforms().add(new Rotate(30, new Point3D(1,0,0)));
-
-        this.getTransforms().add(new Rotate(-45, new Point3D(0,1,0)));
+        pitch = 90.0f - pitch;
+        //undo the first yaw that was performed. first meaning when the hand originally in the vertical position and before any pitch or yaws took place.
+        this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, -1, 0))); //happens third in relation to these transforms.
+        //undo the pitch
+        this.getTransforms().add(new Rotate(pitch, new Point3D(1, 0, 0))); //happens second
+        //undo the last yaw that was performed
+        this.getTransforms().add(new Rotate(lastYaw, new Point3D(0, -1, 0)));//happens first
 
     }
 
