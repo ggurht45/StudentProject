@@ -91,7 +91,7 @@ public class UIHand_SuperSimple extends UIHand {
         //now after you have thought of the angles as above. remember to flip them, as told below.
         //so if you imagined the pitch and yaw angles to be -90, 30, respectively, then you should pass them as 90, -30;
         //i think this may be b/c of jcs vs lcs. leap coordinate sys vs javafx cs.
-        float pitch = (float) Math.toRadians(45.0);
+        float pitch = (float) Math.toRadians(30.0);
         float yaw = (float) Math.toRadians(-45);
         //stackoverflow: alf is roll, bet is pitch and gam is yaw.
         ViewMath.matrixRotateNode(this.entireGroup, roll, pitch, yaw);
@@ -139,7 +139,7 @@ public class UIHand_SuperSimple extends UIHand {
 
         this.getTransforms().add(new Rotate(-90, new Point3D(0,1,0)));
 
-        this.getTransforms().add(new Rotate(45, new Point3D(1,0,0)));
+        this.getTransforms().add(new Rotate(30, new Point3D(1,0,0)));
 
         this.getTransforms().add(new Rotate(-45, new Point3D(0,1,0)));
 
