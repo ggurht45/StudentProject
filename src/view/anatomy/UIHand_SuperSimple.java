@@ -79,12 +79,6 @@ public class UIHand_SuperSimple extends UIHand {
         float y2 = y2_original * (-1.0f);
         float p = 90.0f - p_original;
 
-        System.out.println("***");
-        System.out.println("groupHand position before setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
-        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ());
-        System.out.println("this.getRotate(): " + this.getRotate());
-        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
 
 
         //new approach, first hard set the the direction of the nodes in this hand.
@@ -119,15 +113,8 @@ public class UIHand_SuperSimple extends UIHand {
 //        this.entireGroup.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
 
 
-        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
-        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ());
-        System.out.println("this.getRotate(): " + this.getRotate());
-        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-        System.out.println("***");
-
-
-        DebugHelper.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
+//        DebugHelper.printNodeInfo(this.entireGroup, "'this' inside the superSimplehand class");
+//        DebugHelper.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
 
         //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
         //only need to switch signs

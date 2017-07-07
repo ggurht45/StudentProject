@@ -3,6 +3,7 @@ package view.anatomy;
 import javafx.geometry.Point3D;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import view.DebugHelper;
 import view.ViewMath;
 
 import com.leapmotion.leap.Bone;
@@ -196,10 +197,10 @@ public class UIHand_Simple extends UIHand {
 //        roll = (float) Math.toDegrees(roll);
         Vector d = h.direction();
         Vector pn = h.palmNormal();
-        float pitch = ViewMath.getWeightedPYR(d, "pitch", true, false);
-        float yaw = ViewMath.getWeightedPYR(d, "yaw", true, false);
-        float roll = ViewMath.getWeightedPYR(d, "roll", true, false);
-        float rollPN = ViewMath.getWeightedPYR(pn, "roll", true, false);
+        float pitch = DebugHelper.getWeightedPYR(d, "pitch", true, false);
+        float yaw = DebugHelper.getWeightedPYR(d, "yaw", true, false);
+        float roll = DebugHelper.getWeightedPYR(d, "roll", true, false);
+        float rollPN = DebugHelper.getWeightedPYR(pn, "roll", true, false);
         Rotate rPitch = new Rotate(pitch, Rotate.X_AXIS);
         Rotate rYaw = new Rotate(yaw, Rotate.Y_AXIS);
         Rotate rRoll = new Rotate(roll, Rotate.Z_AXIS);

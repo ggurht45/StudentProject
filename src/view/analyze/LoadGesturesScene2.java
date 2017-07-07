@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import model.SerializedTargetHand;
+import view.DebugHelper;
 import view.LeapUIApp;
 import view.ViewMath;
 import view.anatomy.UIHand;
@@ -31,9 +32,9 @@ public class LoadGesturesScene2 {
     public LoadGesturesScene2(LeapUIApp app) {
         this.app = app;
 
-//        ViewMath.printInfoManyHands();
+        DebugHelper.printInfoManyHands();
 
-//        ViewMath.runVectorTests();
+//        DebugHelper.runVectorDebugTests();
 
 
         uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), true);
@@ -45,14 +46,14 @@ public class LoadGesturesScene2 {
         loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
-//        ViewMath.printHandInfo(loadedHand, "sanity check. loaded hand info");
-//        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "direction of the loaded hand");
-//        ViewMath.printVectorOrientationAngles(loadedHand.palmNormal(), "palm Normal of the loaded hand");
+//        DebugHelper.printHandInfo(loadedHand, "sanity check. loaded hand info");
+//        DebugHelper.printVectorOrientationAngles(loadedHand.direction(), "direction of the loaded hand");
+//        DebugHelper.printVectorOrientationAngles(loadedHand.palmNormal(), "palm Normal of the loaded hand");
 
 
         //print direction vectors orientation angles for sanity check
-//        ViewMath.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
-//        ViewMath.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
+//        DebugHelper.printVectorOrientationAngles(realTarget.direction(), "Target Hand Direction");
+//        DebugHelper.printVectorOrientationAngles(loadedHand.direction(), "Loaded Hand Direction");
 
 
         //uiHand1 setup
