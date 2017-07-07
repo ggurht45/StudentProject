@@ -88,3 +88,37 @@ also see. "leap motion Vector java"
 
 
 
+---
+done -cap one boa
+done -allyauto
+
+small method in view math to view node info.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

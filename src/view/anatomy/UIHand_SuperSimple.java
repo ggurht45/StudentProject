@@ -126,14 +126,7 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("***");
 
 
-        System.out.println("***2");
-        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
-        System.out.println("layout: " + this.entireGroup.getLayoutX() + " " + this.entireGroup.getLayoutY());
-        System.out.println("translate: " + this.entireGroup.getTranslateX() + " " + this.entireGroup.getTranslateY() + " " + this.entireGroup.getTranslateZ());
-        System.out.println("this.getRotate(): " + this.entireGroup.getRotate());
-        System.out.println("this.getRotationAxis(): " + this.entireGroup.getRotationAxis());
-        System.out.println("***2");
-
+        ViewMath.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
 
         //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
         //only need to switch signs
