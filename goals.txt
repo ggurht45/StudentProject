@@ -93,8 +93,20 @@ done -cap one boa
 done -allyauto
 
 small method in view math to view node info.
-
 debug helper
+moving functions from viewmath to debughelper
+
+
+-try to get the real hands to behave like the supersimple hands.
+    -wrap the hand in an entire group. and then can transform the hand, not the entire group ^^
+
+-set up 3 buttons to set the positions easily. 6 buttons. 3 labels. labels read value of the angles.
+    -need to parameterize the positioning method in the supersimple hand
+
+
+tyrant woken juvenile whale turnip abort laptop wife comb upgrade seeded adrenalin orbit gnaw hitched mowing large gutter yellow enforce pelican present lagoon tolerant lofty ritual industrial dwelt afield
+
+
 
 
 

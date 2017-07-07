@@ -32,8 +32,7 @@ public class LoadGesturesScene2 {
     public LoadGesturesScene2(LeapUIApp app) {
         this.app = app;
 
-        DebugHelper.printInfoManyHands();
-
+//        DebugHelper.printInfoManyHands();
 //        DebugHelper.runVectorDebugTests();
 
 

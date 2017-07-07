@@ -59,9 +59,7 @@ public class UIHand_SuperSimple extends UIHand {
 
     }
 
-//    private void createHandGroup(){
-//
-//    }
+
 
     //epiphany. to get to 45, 45 x,-z handshake position.
     //i must add a rotation transform at the end. that basically does a rotation around the y-axis. a 90 yaw. -> flipping -90 yaw.
@@ -69,16 +67,15 @@ public class UIHand_SuperSimple extends UIHand {
 
     private void tryAgain(Hand hand) {
         //passed in parameters, AS SEEN FROM LM CS!
-        float y1_original = -90;//-> this is the most tricky to think about. it sometimes reminds me of roll. but its a yaw i perform before the other two pitch and yaw. Note: by "before" i mean i will write it in code "after" the other two.
-        float p_original = 10;
-        float y2_original = -45;
+        float y1_original = 90;//-> this is the most tricky to think about. it sometimes reminds me of roll. but its a yaw i perform before the other two pitch and yaw. Note: by "before" i mean i will write it in code "after" the other two.
+        float p_original = 30;
+        float y2_original = 45;
 
 
         //fix incoming angles to correct coordinate system and assumpstions
         float y1 = y1_original * (-1.0f);
         float y2 = y2_original * (-1.0f);
         float p = 90.0f - p_original;
-
 
 
         //new approach, first hard set the the direction of the nodes in this hand.
@@ -118,7 +115,7 @@ public class UIHand_SuperSimple extends UIHand {
 
         //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
         //only need to switch signs
-        undoTransforms(y1_original, p_original, y2_original);
+//        undoTransforms(y1_original, p_original, y2_original);
 
 
     }
@@ -141,58 +138,6 @@ public class UIHand_SuperSimple extends UIHand {
     public void setLoc(Hand hand) {
         System.out.println("in setLoc method of superSimple hand");
         tryAgain(hand);
-
-
-
-
-
-
-
-
-
-        /*
-        //hand.direction is a unit vector
-//        Vector direction = new Vector(0, 1, 0);
-//        Vector direction = new Vector(1,0,0);
-//        Vector direction = new Vector(0,0,-1);
-        Vector direction = new Vector(1,0,-1);
-        direction = direction.normalized();
-
-        //old approach
-        //        ViewMath.setGroup(this, hand.stabilizedPalmPosition(), hand.direction().times(20));
-
-        //position of group before setGroup is called
-//        System.out.println("***");
-//        System.out.println("groupHand position before setGroup called in setLoc in superSimple");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-
-        //new approach
-        ViewMath.setGenericNode(this.hand, hand.stabilizedPalmPosition(), direction.times(20));
-        ViewMath.setGenericNode(this.thumb, hand.stabilizedPalmPosition(), direction.times(20));
-        ViewMath.setGenericNode(this.fingers, hand.stabilizedPalmPosition(), direction.times(20));
-
-
-
-        //fix translate
-        fingers.getTransforms().add(new Translate(0, -6, 0)); // this transform happens first. transforms that get added last, are performed first
-        thumb.getTransforms().add(new Translate(4, 0, 0));
-        //this below does not work. its hard setting the translate property.
-//        fingers.setTranslateY(transY-6); //java coordinate system, y increases downwards. z into the screen, and x to the right.
-
-
-        //these below were helpful. i should make a debug method for them
-
-//        System.out.println("groupHand position After setGroup called in setLoc in superSimple");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-//        System.out.println("this.getRotate(): " + this.getRotate());
-//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-//        System.out.println("***");
-
-//        ViewMath.straightenGroup(this);
-
-*/
     }
 
     @Override
