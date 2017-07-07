@@ -94,6 +94,7 @@ done -allyauto
 
 small method in view math to view node info.
 
+debug helper
 
 
 

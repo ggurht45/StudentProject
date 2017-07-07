@@ -15,6 +15,7 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
+import view.DebugHelper;
 import view.ViewMath;
 
 import javax.swing.text.View;
@@ -126,7 +127,7 @@ public class UIHand_SuperSimple extends UIHand {
         System.out.println("***");
 
 
-        ViewMath.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
+        DebugHelper.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
 
         //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
         //only need to switch signs
