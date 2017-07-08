@@ -151,17 +151,20 @@ public class UIHand_Simple extends UIHand {
         float p_original = 90; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
         float y_original = 0; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
         float r_original = 0; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
+        float firstYaw_original = -45; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
 
-
-        //fix incoming angles to correct coordinate system and assumptions. the cs the matrixRotateNode method seems to be using is Javafxc
+        //fix incoming angles (that were deteremined using the lmcs) to correct coordinate system and assumptions.
+        // the cs the matrixRotateNode method seems to be using is Javafxc
         float p = p_original * (-1.0f);
         float y = y_original * (-1.0f);
         float r = r_original * (-1.0f);
+        float fy = firstYaw_original;// dont need to multiply by -1 because the method that will use this is already using java_cs.
 
         //to be passed into the method
         float pitch = (float) Math.toRadians(p);
-        float roll = (float) Math.toRadians(r);
         float yaw = (float) Math.toRadians(y);
+        float roll = (float) Math.toRadians(r);
+        float firstYaw = fy; // dont need to convert to radians for Rotate transform java class.
 
         //pitch happens before roll and yaw.
         //yaw happens before roll.
@@ -169,10 +172,8 @@ public class UIHand_Simple extends UIHand {
         ViewMath.matrixRotateNode(this, roll, pitch, yaw);
 
 
-//        this.getTransforms().add(0, new Rotate(90, new Point3D(101, 0, 0)));
-        this.getTransforms().add(new Rotate(-90, new Point3D(0, 1, 0)));
-
-
+        //add a yaw to perform before the matrixRotateNode sets the axis and angle.
+        this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, 1, 0)));
 
     }
 
