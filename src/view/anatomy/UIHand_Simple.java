@@ -150,13 +150,20 @@ public class UIHand_Simple extends UIHand {
         // also note the spinning around counter-clockwise axis is in lmcs is not following convention
         float p_original = 90; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
         float y_original = 0; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
-        float r_original = -90; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
+        float r_original = 0; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
 
         //very interesting thing to note about rotations and the order of operations p,y,r
         // for the the hand pointing to the right and palm facing down, the rotations to transform it into a vertical position with palm facing -z direction
         // can be 1) -90 yaw, followed by 90 pitch. (this doesn't respect the order of operations so it is impossible to do with the matrixRotate method.)
         // or 2)90 pitch, -90 roll. this works fine and gets the job done also.
         // or 3)-90 roll, followed by -90 yaw. (this doesn't respect the order of operations so it is impossible to do with the matrixRotate method.)
+        // or 4) First add a new transform that performs a -90 degree yaw around the JavafxCS y-axis. This transform will be written after the other
+        // transforms in code, but it will be performed first in terms of the rotational transforms.  (means spin 90 degrees *clockwise* cuz note the
+        // negative sign, when looking into the -yaxis direction (java_cs)). and then add a 90 degree pitch using the matrixRotateNode function.
+        // or 5) add a transform of pitch around x-axis by 90, and then write a transform of -90 yaw around the yaxis. this works, but for some reason
+        // seems to translate the whole hand up by a bit and its not even possible to see the translating transform.
+
+
 
         //fix incoming angles to correct coordinate system and assumptions. the cs the matrixRotateNode method seems to be using is Javafxc
         float p = p_original * (-1.0f);
@@ -172,6 +179,12 @@ public class UIHand_Simple extends UIHand {
         //yaw happens before roll.
         //order of operations: pitch, yaw, roll.
         ViewMath.matrixRotateNode(this, roll, pitch, yaw);
+
+
+//        this.getTransforms().add(0, new Rotate(90, new Point3D(101, 0, 0)));
+        this.getTransforms().add(new Rotate(-90, new Point3D(0, 1, 0)));
+
+
 
     }
 
