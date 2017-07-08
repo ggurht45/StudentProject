@@ -42,6 +42,7 @@ public class LoadGesturesScene2 {
 
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
+//        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-09-16.hand"); //--facing downwards, yaw 45* to the right.  pointing -z direction
         loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
@@ -89,8 +90,9 @@ public class LoadGesturesScene2 {
         //note, the order in which transforms are added matters. a lot. it seems to be the last one added is executed first. lifo. very weird
         //angles increase counter clockwise when looking down the negative of the axis. -90 x-axis makes sense now.
 //        camera.getTransforms().addAll(new Rotate(-90, Rotate.X_AXIS), new Translate(0, 0, -50));
-//        camera.getTransforms().addAll(new Translate(0, -70, 0), new Rotate(-90, Rotate.X_AXIS)); //note how we have to set the y axis now. y seems to increase downwards.
-        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
+//        camera.getTransforms().addAll(new Translate(0, -70, -10), new Rotate(-85, Rotate.X_AXIS)); //note how we have to set the y axis now. y seems to increase downwards.
+        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS)); //---------NORMAL, original.
+//        camera.getTransforms().addAll(new Translate(0, -25, -50), new Rotate(-20, Rotate.X_AXIS));
 
 
         // The 3D display

@@ -110,8 +110,8 @@ public class UIHand_SuperSimple extends UIHand {
 //        this.entireGroup.getTransforms().add(new Rotate(90, new Point3D(0, 1, 0)));
 
 
-//        DebugHelper.printNodeInfo(this.entireGroup, "'this' inside the superSimplehand class");
-//        DebugHelper.printNodeInfo(this.entireGroup, "group object the superSimple hand wraps");
+//        DebugHelper.printNodeInfo(this, "'this' inside the superSimplehand class");
+//        DebugHelper.printNodeInfo(this.entireGroup, "group object (entiregroup) the superSimple hand wraps");
 
         //seems like the modifications that were performed on y1, y1, p are almost suited for undoing them.
         //only need to switch signs

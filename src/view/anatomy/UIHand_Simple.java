@@ -139,31 +139,59 @@ public class UIHand_Simple extends UIHand {
         }
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
-
-
-
-        //these below were helpful. i should make a debug method for them.
-
-//        System.out.println("***EE");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY());
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ());
-//        System.out.println("this = simple hand after setLoc");
-//        System.out.println("this.getRotate(): " + this.getRotate());
-//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-//        System.out.println("***EE");
     }
 
+
+    private void tryAgain(Hand h){
+        System.out.println("inside tryAgain");
+        DebugHelper.printNodeInfo(this, "UIHand_simple before fixing orientation");
+
+        //passed in parameters, AS SEEN FROM LM CS, based on the pictures. not the words!
+        // also note the spinning around counter-clockwise axis is in lmcs is not following convention
+        float p_original = 90; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
+        float y_original = 0; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
+        float r_original = -90; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
+
+        //very interesting thing to note about rotations and the order of operations p,y,r
+        // for the the hand pointing to the right and palm facing down, the rotations to transform it into a vertical position with palm facing -z direction
+        // can be 1) -90 yaw, followed by 90 pitch. (this doesn't respect the order of operations so it is impossible to do with the matrixRotate method.)
+        // or 2)90 pitch, -90 roll. this works fine and gets the job done also.
+        // or 3)-90 roll, followed by -90 yaw. (this doesn't respect the order of operations so it is impossible to do with the matrixRotate method.)
+
+        //fix incoming angles to correct coordinate system and assumptions. the cs the matrixRotateNode method seems to be using is Javafxc
+        float p = p_original * (-1.0f);
+        float y = y_original * (-1.0f);
+        float r = r_original * (-1.0f);
+
+        //to be passed into the method
+        float pitch = (float) Math.toRadians(p);
+        float roll = (float) Math.toRadians(r);
+        float yaw = (float) Math.toRadians(y);
+
+        //pitch happens before roll and yaw.
+        //yaw happens before roll.
+        //order of operations: pitch, yaw, roll.
+        ViewMath.matrixRotateNode(this, roll, pitch, yaw);
+
+    }
 
     public void fixOrientation(Hand h) {
         System.out.println("entered fixOrientation UIHand_Simple");
 
-        double r = 88;  //around z
-        double p_moreLikeYaw = -90; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
-        double y_moreLikePitch = 20;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
 
-        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
-        //angles need to be given in radians.
-        ViewMath.matrixRotateNode(this, Math.toRadians(r), Math.toRadians(p_moreLikeYaw), Math.toRadians(y_moreLikePitch));
+        tryAgain(h);
+
+//        DebugHelper.printNodeInfo(this, "UIHand_simple before fixing orientation");
+//
+//        double r = 88;  //around z
+//        double p_moreLikeYaw = -90; //rotation around x axis --> seems to be around y... --> nope here, it seems to be around x axix? check again to make sure... nono i was wrong. it does seem to be around y. looking like  a good sign ^^.
+//        double y_moreLikePitch = 20;  //around y --> seems to be around x... --> here it seems to be around y. check again to make sure.
+//
+//        //stackoverflow: alf is roll, bet is pitch and gam is yaw.
+//        //angles need to be given in radians.
+//        ViewMath.matrixRotateNode(this, Math.toRadians(r), Math.toRadians(p_moreLikeYaw), Math.toRadians(y_moreLikePitch));
+//
+//        DebugHelper.printNodeInfo(this, "UIHand_simple After fixing orientation");
         System.out.println("leaving fixOrientation UIHand_Simple");
     }
 
