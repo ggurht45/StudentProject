@@ -94,14 +94,14 @@ public class UIHand_Simple extends UIHand {
     //takes a hand object and sets some fingers and other stuff? yes.
     //name is very confusing. i guess it can mean set locations of different parts of the hand.
     @Override
-    public void setLoc(Hand hand) {
+    public void setLoc(Hand h) {
         //System.out.println("* setLoc called from UIHand_Simple");
         Vector[] knuckles = new Vector[5];
         Vector pinkyBase = new Vector();
 
         //go through five fingers
         for (int i = 0; i < 5; ++i) {
-            Finger finger = hand.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
+            Finger finger = h.fingers().fingerType(Finger.Type.swigToEnum(i)).frontmost();
             //and each bone on the fingers
             for (int j = 0; j < 3; ++j) {
                 Bone bone = finger.bone(Bone.Type.swigToEnum(j + 1));
@@ -142,16 +142,126 @@ public class UIHand_Simple extends UIHand {
     }
 
 
-    private void tryAgain(Hand h){
+    private void tryToCalculateAngles(Hand h) {
+        DebugHelper.printHandInfo(h, "gonna try to find pyr or ypy angles for this hand");
+        //angle to yaxix and zaxis
+        Vector d = h.direction();
+
+        //angles to the 3 axis is not the same as how much percentage wise the direction vector is closer to the axis.
+        System.out.println("angle from hand-direction to xAxis: " + Math.toDegrees(d.angleTo(Vector.xAxis())));
+        System.out.println("angle .. yAxis: " + Math.toDegrees(d.angleTo(Vector.yAxis())));
+        System.out.println("angle .. zAxis: " + Math.toDegrees(d.angleTo(Vector.zAxis())));
+
+
+    }
+
+    //the yaw that happens on the plane of xz.
+    private float getfirstYaw(Hand h) {
+        System.out.println("getfirstYaw: " + Math.toDegrees(h.direction().angleTo(Vector.zAxis())));
+        return (float) Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+    }
+
+    private float getPitch(Hand h) {
+        System.out.println("getPitch: " + Math.toDegrees(h.direction().angleTo(Vector.yAxis())));
+        return (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+    }
+
+
+    //can in some regards, be thought of as the roll component also.
+    private float getfinalYaw(Hand h) {
+        //uses palm normal
+        System.out.println("getfinalYaw: ... to be calculated");
+
+        //even though im getting roll, this will be treated as finalYaw.
+        //if fingers pointing to the -z direction, then roll will be determined by the amount of projection of the pn onto XY plane
+        //if -- pointing to x direcion, roll -- onto YZ plane
+        //if fingers pointing somewhere in the middle, then need to weight both projections appropriately and add them together.
+        //regardless, i need to weigh the projections against the full pn and only "roll" by the appropriate amount. (*)
+        //
+
+        Vector d = h.direction();
+        Vector pn = h.palmNormal();
+        System.out.println("direction of hand: " + d);
+        System.out.println("palm normal of hand: " + pn);
+
+        //also, could use cos to determine the closeness of the vector to the axises. or dot product, but hopefully this should be fine.
+        float percentToX = d.getX() / d.magnitude();
+        float percentToY = d.getY() / d.magnitude();
+        float percentToZ = d.getZ() / d.magnitude();
+        System.out.println("i think this isn not important in finalyaw calculation --------------");
+        System.out.println("PERCENT of direction pointing to x: " + percentToX);
+        System.out.println("percent of direction pointing to y: " + percentToY);
+        System.out.println("percent of direction pointing to z: " + percentToZ);
+        System.out.println("End ----------i think this isn not important in finalyaw calculation --------------");
+
+        //get projection of pn to yz plane
+        Vector projToYZ = DebugHelper.getProjection(pn, "YZ");
+        Vector projToXY = DebugHelper.getProjection(pn, "XY");
+        System.out.println("projToYZ of pn: " + projToYZ);
+        System.out.println("projToXY of pn: " + projToXY);
+
+        //check how much of the pn are these projections
+        float percentProjYZ = projToYZ.magnitude() / pn.magnitude();
+        float percentProjXY = projToXY.magnitude() / pn.magnitude();
+        System.out.println("wrong path i think--------");
+        System.out.println("percentProjYZ: " + percentProjYZ + " \t projToYZ.magnitude(): " + projToYZ.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
+        System.out.println("percentProjXY: " + percentProjXY + " \t projToXY.magnitude(): " + projToXY.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
+        System.out.println("END ------wrong path i think--------");
+
+        float percentOfPN_onZ = pn.getZ();
+        float percentOfPN_onX = pn.getX();
+        System.out.println("percent Of pn on z-axis: " + percentOfPN_onZ);
+        System.out.println("percent Of pn on x-axis: " + percentOfPN_onX);
+
+
+        //need to review this later
+        float angleBtwProjYZ_yAxis = 180.0f - (float) Math.toDegrees(projToYZ.angleTo(Vector.yAxis()));
+        float angleBtwProjXY_yAxis = 180.0f - (float) Math.toDegrees(projToXY.angleTo(Vector.yAxis()));
+        float combinedAngles = angleBtwProjXY_yAxis + angleBtwProjYZ_yAxis;
+        System.out.println("unweighted angles to yaxis, i dont think this is the way to go-------- ");
+        System.out.println("projToYZ's angleTo yaxis: " + angleBtwProjYZ_yAxis);
+        System.out.println("projToXY's angleTo yaxis: " + angleBtwProjXY_yAxis);
+        System.out.println("combined angle yaxis: " + combinedAngles);
+        System.out.println("End --------unweighted angles to yaxis, i dont think this is the way to go-------- ");
+
+        //note, i think the absolute values need to be added so the opposite directions dont cancel each other out
+        //think -z, x or -x, z 45 deg
+        float angleYZ_yaxis_weighted = angleBtwProjYZ_yAxis*percentOfPN_onZ;
+        float angleXY_yaxis_weighted = angleBtwProjXY_yAxis*percentOfPN_onX;
+        float combinedAngles_weighted = angleYZ_yaxis_weighted + angleXY_yaxis_weighted;
+        System.out.println("projToYZ's angleTo yaxis (weighted by the percentage of pn on the z axis): " + angleYZ_yaxis_weighted);
+        System.out.println("projToXY's angleTo yaxis (weighted .. x axis): " + angleXY_yaxis_weighted);
+        System.out.println("combined angle (weighted) yaxis: " + combinedAngles_weighted);
+
+
+
+
+
+        return combinedAngles_weighted;
+        //return (float)Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+    }
+
+    private void tryAgain(Hand h) {
         System.out.println("inside tryAgain");
         DebugHelper.printNodeInfo(this, "UIHand_simple before fixing orientation");
 
+        //try to get ypy angles from just looking at the hand info
+        tryToCalculateAngles(h);
+        float y1_angle = getfirstYaw(h);
+        float p_angle = getPitch(h);
+        float y2_angle = getfinalYaw(h);
+        System.out.println("----- final results after trying to get ypy STILL NEED TO FIX NEG! Direction!!!--------");
+        System.out.println("y1, p, y2: " + y1_angle + " " + p_angle + " " + y2_angle);
+        System.out.println("----- END final results after trying to get ypy --------");
+
+
         //passed in parameters, AS SEEN FROM LM CS, based on the pictures. not the words!
         // also note the spinning around counter-clockwise axis is in lmcs is not following convention
-        float p_original = 90; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
-        float y_original = 0; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
+        float p_original = p_angle; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
+        float y_original = y2_angle; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
         float r_original = 0; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
-        float firstYaw_original = -45; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
+        //the yaw that happens on the plane of xz.
+        float firstYaw_original = -y1_angle; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
 
         //fix incoming angles (that were deteremined using the lmcs) to correct coordinate system and assumptions.
         // the cs the matrixRotateNode method seems to be using is Javafxc
@@ -200,17 +310,6 @@ public class UIHand_Simple extends UIHand {
 
     public void fixOrientationOld(Hand h) {
         System.out.println("fixOrientation simple hand");
-//        ViewMath.printHandInfo(h, "fixOrientation Method");
-
-//        System.out.println("***EE2");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-//        System.out.println("this = simple hand after setLoc");
-//        System.out.println("this.getRotate(): " + this.getRotate());
-//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-//        System.out.println("h.direction(): " + h.direction());
-//        System.out.println("h.direction().opposite: " + h.direction().opposite());
-//        System.out.println("***EE2");
 //        Vector v = new Vector(0,150,0); //weird work around for setPosition method
 //        Vector d = h.direction().opposite();
 ////        d.setZ(d.getZ()*-1);
@@ -364,19 +463,6 @@ public class UIHand_Simple extends UIHand {
         // cuz 2 axis can still change when palm is facing -z direction(lm) yaw, and roll.
         //so in addition to 1.
 
-
-        System.out.println(this.getTransforms().toString());
-//        ViewMath.setGroup2(this, v, d.times(20), Vector.yAxis());
-//        System.out.println("***EE3");
-//        System.out.println("layout: " + this.getLayoutX() + " " + this.getLayoutY() );
-//        System.out.println("translate: " + this.getTranslateX() + " " + this.getTranslateY() + " " + this.getTranslateZ() );
-//        System.out.println("this = simple hand after setLoc");
-//        System.out.println("this.getRotate(): " + this.getRotate());
-//        System.out.println("this.getRotationAxis(): " + this.getRotationAxis());
-//        System.out.println("h.direction(): " + h.direction());
-//        System.out.println("h.direction().opposite: " + h.direction().opposite());
-//        System.out.println("direction at d: " + d);
-//        System.out.println("***EE3");
     }
 
     @Override
