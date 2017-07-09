@@ -254,11 +254,13 @@ public class UIHand_Simple extends UIHand {
         //find the direction of roll/yaw2 by using the cross product.
         Vector d_cross_pn = d.cross(pn);
         System.out.println("cross product (d X pn): " + d_cross_pn);
-        if (d_cross_pn.getY() > 0.0f) {
-            return -1.0f * combinedAngles_weighted; //need to return negative yaw to "undo" the positive rolling action (palm opens up to the right) observed in the hand
-        } else {
-            return combinedAngles_weighted;
-        }
+        Vector pn_cross_d = pn.cross(d);
+        System.out.println("cross product (pn X d): " + pn_cross_d);
+//        if (d_cross_pn.getY() > 0.0f) {
+//            return combinedAngles_weighted; //need to return negative yaw to "undo" the positive rolling action (palm opens up to the right) observed in the hand
+//        } else {
+            return -1.0f * combinedAngles_weighted;
+//        }
     }
 
     private void tryAgain(Hand h) {
