@@ -2,7 +2,6 @@ package view.anatomy;
 
 import javafx.geometry.Point3D;
 import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Translate;
 import view.DebugHelper;
 import view.ViewMath;
 
@@ -17,8 +16,6 @@ import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.Sphere;
-
-import javax.swing.text.View;
 
 public class UIHand_Simple extends UIHand {
 
@@ -157,11 +154,11 @@ public class UIHand_Simple extends UIHand {
 
     //the yaw that happens on the plane of xz.
     private float getfirstYaw(Hand h) {
-        float angleAmount = (float)Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
-        if(h.direction().getX() > 0.0f){
-            System.out.println("getfirstYaw(-neg angle): " + (-1.0f*angleAmount));
-            return (-1.0f*angleAmount); //returning a -negative angle to "undo" the positive yaw noticed in hand
-        }else{
+        float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+        if (h.direction().getX() > 0.0f) {
+            System.out.println("getfirstYaw(-neg angle): " + (-1.0f * angleAmount));
+            return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive yaw noticed in hand
+        } else {
             System.out.println("getfirstYaw(pos angle): " + angleAmount);
             return angleAmount; //return a positive angle to "undo" a negative yaw noticed in the hand
         }
@@ -171,11 +168,11 @@ public class UIHand_Simple extends UIHand {
 //        System.out.println("getPitch: " + Math.toDegrees(h.direction().angleTo(Vector.yAxis())));
 //        return (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
 
-        float angleAmount = (float)Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
-        if(h.direction().getZ() > 0.0f){
-            System.out.println("getPitch (-neg angle): " + (-1.0f*angleAmount));
-            return (-1.0f*angleAmount); //returning a -negative angle to "undo" the positive pitch noticed in hand
-        }else{
+        float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+        if (h.direction().getZ() > 0.0f) {
+            System.out.println("getPitch (-neg angle): " + (-1.0f * angleAmount));
+            return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive pitch noticed in hand
+        } else {
             //99 % of the time, pitch will be a positive angle, so this case will run most of the time.
             System.out.println("99 % of the time, pitch will be a positive angle");
             System.out.println("getPitch (pos angle): " + angleAmount);
@@ -187,9 +184,9 @@ public class UIHand_Simple extends UIHand {
 
 
     //can in some regards, be thought of as the roll component also.
-    private float getfinalYaw(Hand h) {
+    private float getfinalYaw_relatedToRoll(Hand h) {
         //uses palm normal
-        System.out.println("getfinalYaw: ... to be calculated");
+        System.out.println("getfinalYaw_relatedToRoll: ... to be calculated");
 
         //even though im getting roll, this will be treated as finalYaw.
         //if fingers pointing to the -z direction, then roll will be determined by the amount of projection of the pn onto XY plane
@@ -245,19 +242,22 @@ public class UIHand_Simple extends UIHand {
 
         //note, i think the absolute values need to be added so the opposite directions dont cancel each other out
         //think -z, x or -x, z 45 deg
-        float angleYZ_yaxis_weighted = angleBtwProjYZ_yAxis*percentOfPN_onZ;
-        float angleXY_yaxis_weighted = angleBtwProjXY_yAxis*percentOfPN_onX;
+        float angleYZ_yaxis_weighted = angleBtwProjYZ_yAxis * percentOfPN_onZ;
+        float angleXY_yaxis_weighted = angleBtwProjXY_yAxis * percentOfPN_onX;
         float combinedAngles_weighted = angleYZ_yaxis_weighted + angleXY_yaxis_weighted;
         System.out.println("projToYZ's angleTo yaxis (weighted by the percentage of pn on the z axis): " + angleYZ_yaxis_weighted);
         System.out.println("projToXY's angleTo yaxis (weighted .. x axis): " + angleXY_yaxis_weighted);
         System.out.println("combined angle (weighted) yaxis: " + combinedAngles_weighted);
 
 
-
-
-
-        return combinedAngles_weighted;
-        //return (float)Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+        //find the direction of roll/yaw2 by using the cross product.
+        Vector d_cross_pn = d.cross(pn);
+        System.out.println("cross product (d X pn): " + d_cross_pn);
+        if (d_cross_pn.getY() > 0.0f) {
+            return -1.0f * combinedAngles_weighted; //need to return negative yaw to "undo" the positive rolling action (palm opens up to the right) observed in the hand
+        } else {
+            return combinedAngles_weighted;
+        }
     }
 
     private void tryAgain(Hand h) {
@@ -266,21 +266,22 @@ public class UIHand_Simple extends UIHand {
 
         //try to get ypy angles from just looking at the hand info
         tryToCalculateAngles(h);
-        float y1_angle = getfirstYaw(h);
+        float y1_angle_yawOnXZPlane = getfirstYaw(h);
         float p_angle = getPitch(h);
-        float y2_angle = getfinalYaw(h);
+        float y2_angle_rollCousin = getfinalYaw_relatedToRoll(h);
         System.out.println("----- final results after trying to get ypy STILL NEED TO FIX NEG! Direction!!!--------");
-        System.out.println("y1, p, y2: " + y1_angle + " " + p_angle + " " + y2_angle);
+        System.out.println("y1, p, y2: " + y1_angle_yawOnXZPlane + " " + p_angle + " " + y2_angle_rollCousin);
         System.out.println("----- END final results after trying to get ypy --------");
 
 
+        //the yaw that happens on the plane of xz.
+        float firstYaw_original = y1_angle_yawOnXZPlane; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
         //passed in parameters, AS SEEN FROM LM CS, based on the pictures. not the words!
         // also note the spinning around counter-clockwise axis is in lmcs is not following convention
         float p_original = p_angle; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
-        float y_original = y2_angle; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
+        float y_original = y2_angle_rollCousin; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
         float r_original = 0; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
-        //the yaw that happens on the plane of xz.
-        float firstYaw_original = y1_angle; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
+
 
         //fix incoming angles (that were deteremined using the lmcs) to correct coordinate system and assumptions.
         // the cs the matrixRotateNode method seems to be using is Javafxc
