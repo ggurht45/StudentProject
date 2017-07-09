@@ -42,9 +42,9 @@ public class LoadGesturesScene2 {
 
 
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
-//        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-24.hand"); //--facing downwards, and to the left. (roll right), pointing -z direction
+        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-24.hand"); //--facing downwards, and to the left. (roll right), pointing -z direction
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-09-16.hand"); //--facing downwards, yaw 45* to the right.  pointing -z direction
-        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
+//        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
 
 

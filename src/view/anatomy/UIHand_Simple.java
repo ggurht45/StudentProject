@@ -154,7 +154,8 @@ public class UIHand_Simple extends UIHand {
 
     //the yaw that happens on the plane of xz.
     private float getfirstYaw(Hand h) {
-        float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+        System.out.println("forward vector: " + Vector.forward());
+        float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.forward()));
         if (h.direction().getX() > 0.0f) {
             System.out.println("getfirstYaw(-neg angle): " + (-1.0f * angleAmount));
             return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive yaw noticed in hand
@@ -275,7 +276,7 @@ public class UIHand_Simple extends UIHand {
 
 
         //the yaw that happens on the plane of xz.
-        float firstYaw_original = y1_angle_yawOnXZPlane; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
+        float firstYaw_original = y1_angle_yawOnXZPlane; //-45 means *clockwise* when looking down the negative y-axis in java_cs.(remember negative y-axis in javacs points upwards)
         //passed in parameters, AS SEEN FROM LM CS, based on the pictures. not the words!
         // also note the spinning around counter-clockwise axis is in lmcs is not following convention
         float p_original = p_angle; //-90 means rotate **clockwise** by 90 degrees around x-axis when looking down -xaxis. inside lmcs! picture lmdocs = correct
