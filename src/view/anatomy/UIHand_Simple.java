@@ -157,13 +157,32 @@ public class UIHand_Simple extends UIHand {
 
     //the yaw that happens on the plane of xz.
     private float getfirstYaw(Hand h) {
-        System.out.println("getfirstYaw: " + Math.toDegrees(h.direction().angleTo(Vector.zAxis())));
-        return (float) Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+        float angleAmount = (float)Math.toDegrees(h.direction().angleTo(Vector.zAxis()));
+        if(h.direction().getX() > 0.0f){
+            System.out.println("getfirstYaw(-neg angle): " + (-1.0f*angleAmount));
+            return (-1.0f*angleAmount); //returning a -negative angle to "undo" the positive yaw noticed in hand
+        }else{
+            System.out.println("getfirstYaw(pos angle): " + angleAmount);
+            return angleAmount; //return a positive angle to "undo" a negative yaw noticed in the hand
+        }
     }
 
     private float getPitch(Hand h) {
-        System.out.println("getPitch: " + Math.toDegrees(h.direction().angleTo(Vector.yAxis())));
-        return (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+//        System.out.println("getPitch: " + Math.toDegrees(h.direction().angleTo(Vector.yAxis())));
+//        return (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+
+        float angleAmount = (float)Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
+        if(h.direction().getZ() > 0.0f){
+            System.out.println("getPitch (-neg angle): " + (-1.0f*angleAmount));
+            return (-1.0f*angleAmount); //returning a -negative angle to "undo" the positive pitch noticed in hand
+        }else{
+            //99 % of the time, pitch will be a positive angle, so this case will run most of the time.
+            System.out.println("99 % of the time, pitch will be a positive angle");
+            System.out.println("getPitch (pos angle): " + angleAmount);
+            return angleAmount; //return a positive angle to "undo" a negative pitch noticed in the hand
+        }
+
+
     }
 
 
@@ -261,7 +280,7 @@ public class UIHand_Simple extends UIHand {
         float y_original = y2_angle; //-90 means rotate counter-clockwise by 90 degrees around y-axis when looking down -yaxis. inside lmcs! picture lmdocs = correct
         float r_original = 0; //-90 means rotate counter-clockwise by 90 degrees around the z-axis when looking down -zaxis. inside lmcs! picture lmdocs = correct
         //the yaw that happens on the plane of xz.
-        float firstYaw_original = -y1_angle; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
+        float firstYaw_original = y1_angle; //-45 means *clockwise* when looking down the negative y-axis in java_cs.
 
         //fix incoming angles (that were deteremined using the lmcs) to correct coordinate system and assumptions.
         // the cs the matrixRotateNode method seems to be using is Javafxc
