@@ -55,40 +55,41 @@ public class SerializedTargetHand {
     }
 
     //use this function to save to a specific folder that may need to be created.
-    public static void Save4(Frame f, String fileName, String comments, boolean passFail) throws IOException {
-//        System.out.println("inside save3");
-//        String pf;
-//        String indexFile;
-//        if (passFail) {
-//            pf = "pass";
-////            indexFile = leftGestures_file;
-//        } else {
-//            pf = "fail";
-////            indexFile = rightGestures_file;
-//        }
+    public static void Save4(Frame f, String outputFolder, String comments, boolean passFail) throws IOException {
+        System.out.println("inside save4");
+        String result = (passFail ? "Passed" : "Failed");
+
+        Calendar cal = Calendar.getInstance();
+        cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
 
-        fileName = "gesture1";
+        String fileNameWithPath = outputFolder + sdf.format(cal.getTime());
 
-        File fileDirectory = new File("dataOutput/alice3/" + fileName + ".hand");
+        File fileDirectory = new File(fileNameWithPath + ".hand");
         fileDirectory.getParentFile().mkdirs();
-        System.out.println(fileDirectory);
-        System.out.println("full path: " + fileDirectory.getAbsolutePath());
-        System.out.println("getPath: " + fileDirectory.getPath());
+//        System.out.println(fileDirectory);
+//        System.out.println("full path: " + fileDirectory.getAbsolutePath());
+//        System.out.println("getPath: " + fileDirectory.getPath());
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileDirectory.getPath()), serializedFrame);
+        //printer for comments
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_comments.txt", true)));
+        printer.println(comments);
+        printer.close();
 
+        //printer for pass/fail
+        PrintWriter printer2 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_result.txt", true)));
+        printer2.println(result);
+        printer2.close();
 
-//        fileDirectory.getAbsolutePath();
-//
-//        String fileName = "dataOutput/" + outFolder + "/" + typeOfGesture + "_" + sdf.format(cal.getTime()) + ".hand";
-//        byte[] serializedFrame = f.serialize();
-//        Files.write(Paths.get(fileName), serializedFrame);
-
-
-//        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
-//        printer.println(fileName);
-//        printer.close();
+        //ideal printer
+        PrintWriter printer3 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_Info.txt", true)));
+        printer3.println(fileNameWithPath + ".hand information");
+        printer3.println("\tComments: " + comments);
+        printer3.println("\tResult: " + result);
+        printer3.println();
+        printer3.close();
     }
 
 

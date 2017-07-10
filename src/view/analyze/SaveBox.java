@@ -11,16 +11,26 @@ public class SaveBox {
     //Create variable
     public static String comments;
     public static boolean passFail;
+    public static String directory;
 
-    public static String display(String title, String message) {
+    public static String display(String title, String message, String initialDirectory) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
         window.setMinWidth(350);
+
+
         Label label = new Label();
         label.setText(message);
 
         TextField textField = new TextField();
+
+        //save to directory
+        Label directorylabel = new Label();
+        directorylabel.setText("Output Folder");
+        TextField directoryTextField = new TextField();
+        directoryTextField.setText(initialDirectory);
+
 
         //Create two buttons
         Button saveButton = new Button("Save");
@@ -28,6 +38,7 @@ public class SaveBox {
         //Clicking will set answer and close window
         saveButton.setOnAction(e -> {
             comments = textField.getText();
+            directory = directoryTextField.getText();
             window.close();
         });
 
@@ -45,7 +56,7 @@ public class SaveBox {
         VBox layout = new VBox(10);
 
         //Add buttons
-        layout.getChildren().addAll(label, textField, leftRadio, rightRadio, saveButton);
+        layout.getChildren().addAll(label, textField, directorylabel, directoryTextField, leftRadio, rightRadio, saveButton);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);
