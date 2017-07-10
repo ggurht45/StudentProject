@@ -184,6 +184,26 @@ public class SerializedTargetHand {
         }
     }
 
+    private static ArrayList<HandInfo> deserialize(String fn){
+        ArrayList<HandInfo> arraylist= new ArrayList<>();
+        try
+        {
+            FileInputStream fis = new FileInputStream(fn);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            arraylist = (ArrayList) ois.readObject();
+            ois.close();
+            fis.close();
+        }catch(IOException ioe){
+            ioe.printStackTrace();
+            return null;
+        }catch(ClassNotFoundException c){
+            System.out.println("Class not found");
+            c.printStackTrace();
+            return null;
+        }
+        return arraylist;
+    }
+
     public static void printAllHandOnDeckArrayList(String outputFolder){
         ArrayList<HandInfo> arraylist= new ArrayList<>();
         try

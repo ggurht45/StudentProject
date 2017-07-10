@@ -61,6 +61,8 @@ public class LoadGesturesScene {
             loadedHandUI.setVisible(true);
             targetHandUI.setLoc(th);
             targetHandUI.setVisible(true);
+            targetHandUI.setTranslateX(-4);
+            targetHandUI.setTranslateX(8);
         });
 
         //make a compare button. that compares it against the appropriate hand... should be stored somehow.
