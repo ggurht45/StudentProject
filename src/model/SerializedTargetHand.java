@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,6 +53,44 @@ public class SerializedTargetHand {
         printer.println(fileName);
         printer.close();
     }
+
+    //use this function to save to a specific folder that may need to be created.
+    public static void Save4(Frame f, String fileName, String comments, boolean passFail) throws IOException {
+//        System.out.println("inside save3");
+//        String pf;
+//        String indexFile;
+//        if (passFail) {
+//            pf = "pass";
+////            indexFile = leftGestures_file;
+//        } else {
+//            pf = "fail";
+////            indexFile = rightGestures_file;
+//        }
+
+
+        fileName = "gesture1";
+
+        File fileDirectory = new File("dataOutput/alice3/" + fileName + ".hand");
+        fileDirectory.getParentFile().mkdirs();
+        System.out.println(fileDirectory);
+        System.out.println("full path: " + fileDirectory.getAbsolutePath());
+        System.out.println("getPath: " + fileDirectory.getPath());
+        byte[] serializedFrame = f.serialize();
+        Files.write(Paths.get(fileDirectory.getPath()), serializedFrame);
+
+
+//        fileDirectory.getAbsolutePath();
+//
+//        String fileName = "dataOutput/" + outFolder + "/" + typeOfGesture + "_" + sdf.format(cal.getTime()) + ".hand";
+//        byte[] serializedFrame = f.serialize();
+//        Files.write(Paths.get(fileName), serializedFrame);
+
+
+//        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
+//        printer.println(fileName);
+//        printer.close();
+    }
+
 
     //save the 10 specific gestures; id = 1-10; side = l/r
     public static void Save3(Frame f, String gestureId, boolean leftHand) throws IOException {

@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import model.SerializedTargetHand;
 import view.analyze.InfoBox;
 import view.analyze.LoadGesturesScene;
+import view.analyze.SaveBox;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
 import view.anatomy.UIHand_Simple;
@@ -231,16 +232,21 @@ public class LeapUIApp extends Application {
                 }
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
-                        System.out.println("enter was pressed, saving target hand.");
-                        Frame f = latestHand.frame();
-                        System.out.println("frame: \n" + f.toString());
-                        //showImage();
-                        FingerList fingersInFrame = f.fingers();
-                        System.out.println("number of fingers: \n" + fingersInFrame.count());
-                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+                        System.out.println("enter was pressed, saving hand.");
+                        Hand tmpHand = LoadGesturesScene.getHandFromString("targets/2015-05-05 08-17-01.hand");
+                        String userSpecifiedDirectory = "Alice";
+
+                        //show alert box
+                        SaveBox.display("Result and Comments", "Any comments:");
+                        System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
+
+                        if(SaveBox.comments!= null){
+                            SerializedTargetHand.Save4(tmpHand.frame(), userSpecifiedDirectory,  SaveBox.comments, SaveBox.passFail);
+                        }else{
+                            System.out.println("aborting saving of gesture. no name was typed.");
+                        }
 
 
-                        SerializedTargetHand.Save(latestHand.frame());
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
