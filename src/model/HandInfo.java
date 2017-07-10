@@ -11,4 +11,10 @@ public class HandInfo implements java.io.Serializable {
         comments = cm;
         result = res;
     }
+
+    @Override
+    public String toString(){
+        String s = "Filename: " + handFile + "\n\tComments: " + comments + "\n\tResult: " + result;
+        return s;
+    }
 }

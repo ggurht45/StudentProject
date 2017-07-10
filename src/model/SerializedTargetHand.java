@@ -84,40 +84,131 @@ public class SerializedTargetHand {
         printer3.println();
         printer3.close();
 
+
         //create handInfo object and serialize.
         HandInfo handInfo = new HandInfo(fileNameWithPath + ".hand", comments, result);
-        try {
-            FileOutputStream fileOut = new FileOutputStream(fileNameWithPath + ".ser");
+//        try {
+//            FileOutputStream fileOut = new FileOutputStream(fileNameWithPath + ".ser");
+//
+//            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//            out.writeObject(handInfo);
+//            out.close();
+//            fileOut.close();
+//            System.out.printf("Serialized handInfo");
+//        } catch (IOException i) {
+//            i.printStackTrace();
+//        }
 
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(handInfo);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized handInfo");
-        } catch (IOException i) {
-            i.printStackTrace();
+        //check if a total list exists
+        if (new File(outputFolder + "_allHandsOnDeck.ser").isFile()) {
+            System.out.println("arraylist of hands info file already exists! ");
+
+            //try to get the all hands file and extract the arraylist and add onto it.
+            ArrayList<HandInfo> arraylist;
+            try
+            {
+                FileInputStream fis = new FileInputStream(outputFolder + "_allHandsOnDeck.ser");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                arraylist = (ArrayList) ois.readObject();
+                System.out.println("got arraylist from serialized file, size: "+ arraylist.size());
+                ois.close();
+                fis.close();
+                //add the new HandInfo object to it.
+                arraylist.add(handInfo);
+
+                //then serialize it back and save it to the file again.
+                serialize(arraylist, outputFolder + "_allHandsOnDeck.ser");
+
+            }catch(IOException ioe){
+                ioe.printStackTrace();
+                return;
+            }catch(ClassNotFoundException c){
+                System.out.println("Class not found");
+                c.printStackTrace();
+                return;
+            }
+
+
+        } else {
+            System.out.println("arraylist handsInfo file doesnt exist yet. lets create it");
+            //create arraylist, add hand info objct to it, serialize arraylist
+            ArrayList<HandInfo> al = new ArrayList<>();
+            al.add(handInfo);
+
+            try {
+                FileOutputStream fos = new FileOutputStream(outputFolder + "_allHandsOnDeck.ser");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(al);
+                oos.close();
+                fos.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
         }
+
+        //print if arraylist size is three
+//            if(arraylist.size()>2){
+        printAllHandOnDeckArrayList(outputFolder);
+//            }
+
 
 
         //deserialize
-        HandInfo checkHandInfo = null;
+//        HandInfo checkHandInfo = null;
+//        try {
+//            FileInputStream fileIn = new FileInputStream(fileNameWithPath + ".ser");
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            checkHandInfo = (HandInfo) in.readObject();
+//            in.close();
+//            fileIn.close();
+//        } catch (IOException i) {
+//            i.printStackTrace();
+//            return;
+//        } catch (ClassNotFoundException c) {
+//            System.out.println("HandInfo not found");
+//            c.printStackTrace();
+//            return;
+//        }
+
+    }
+
+    private static void serialize(ArrayList<HandInfo> ar, String fn){
         try {
-            FileInputStream fileIn = new FileInputStream(fileNameWithPath + ".ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            checkHandInfo = (HandInfo) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
+            FileOutputStream fos = new FileOutputStream(fn);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(ar);
+            oos.close();
+            fos.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    public static void printAllHandOnDeckArrayList(String outputFolder){
+        ArrayList<HandInfo> arraylist= new ArrayList<>();
+        try
+        {
+            FileInputStream fis = new FileInputStream(outputFolder + "_allHandsOnDeck.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            arraylist = (ArrayList) ois.readObject();
+            ois.close();
+            fis.close();
+        }catch(IOException ioe){
+            ioe.printStackTrace();
             return;
-        } catch (ClassNotFoundException c) {
-            System.out.println("HandInfo not found");
+        }catch(ClassNotFoundException c){
+            System.out.println("Class not found");
             c.printStackTrace();
             return;
         }
 
+        //print arraylist
+        System.out.println("------------AllHandsOnDeck arraylist---------");
+        for(int i = 0; i<arraylist.size(); i++){
+            System.out.println(arraylist.get(i).toString());
+        }
+        System.out.println("END------------AllHandsOnDeck arraylist---------");
     }
-
 
     //save the 10 specific gestures; id = 1-10; side = l/r
     public static void Save3(Frame f, String gestureId, boolean leftHand) throws IOException {
