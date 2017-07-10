@@ -1,14 +1,7 @@
 package model;
 
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -90,6 +83,39 @@ public class SerializedTargetHand {
         printer3.println("\tResult: " + result);
         printer3.println();
         printer3.close();
+
+        //create handInfo object and serialize.
+        HandInfo handInfo = new HandInfo(fileNameWithPath + ".hand", comments, result);
+        try {
+            FileOutputStream fileOut = new FileOutputStream(fileNameWithPath + ".ser");
+
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(handInfo);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized handInfo");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+
+
+        //deserialize
+        HandInfo checkHandInfo = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(fileNameWithPath + ".ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            checkHandInfo = (HandInfo) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("HandInfo not found");
+            c.printStackTrace();
+            return;
+        }
+
     }
 
 
