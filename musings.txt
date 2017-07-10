@@ -159,64 +159,10 @@ y -> 0.28 *                              --direction weight from -zAxis(lm) * (t
 
 
 
-
-Loaded hand = left handshake. my musings seem correct. direction roll = fake roll. weights dont matter in roll (im pretty sure).
---------------------------------------------sanity check. loaded hand info
-direction (rounded u.vec): (0.09, -0.05, -0.99)
-palmNormal: (0.81, -0.58, 0.1)
-pitch, yaw, roll in radians
-pitch: -0.05185028
-yaw: 0.089063555
-roll(d): 1.0443506
-roll(pn): 0.9533764
-pitch, yaw, roll in degrees
-pitch: -2.97
-yaw: 5.1
-roll(d): 59.84  FAKE ROLL!!!!!
-roll(pn): 54.62
-pitchWeighted: -2.96
-yawWeighted: -2.97
-rollWeighted (d): -0.31
-rollWeighted (pn): -99.55
--------------------------------------------- END
-------------- direction of the loaded hand Orientation Info -------------
-direction of the loaded hand vector: 	 (0.0888273, -0.0516222, -0.994708)
-pitch: 	-2.97 	-0.05 radians
-roll: 	59.84 	1.04 FAKE ROLL!!!!!
-yaw: 	5.1 	0.09
-------------- End -------------
-------------- palm Normal of the loaded hand Orientation Info -------------
-palm Normal of the loaded hand vector: 	 (0.811096, -0.575895, 0.102318)
-pitch: 	-100.07 	-1.75 radians
-roll: 	54.62 	0.95
-yaw: 	97.19 	1.7
-------------- End -------------
+------------------------
+i can show that i made a simple hand to try to figure it out. i couldn't use the normal hands because setting their direction was a hassle. palm normal
+hand direction dont update. so it was more convienient to try to figure out rotations for a simple easily updateable object.
 
 
---------------------------------------------facing down 2
-direction (rounded u.vec): (0.03, -0.02, -1)
-palmNormal: (0.08, -1, 0.02)
-pitch, yaw, roll in radians
-pitch: -0.018305246
-yaw: 0.028189935
-roll(d): 0.9949454
-roll(pn): 0.08116785
-pitch, yaw, roll in degrees
-pitch: -1.05
-yaw: 1.62
-roll(d): 57.01 FAKE ROLL!!!!!
-roll(pn): 4.65
 
---------------------------------------------facing down
-direction (rounded u.vec): (0.05, -0.28, -0.96)
-palmNormal: (0.18, -0.94, 0.29)
-pitch, yaw, roll in radians
-pitch: -0.28922155
-yaw: 0.05520654
-roll(d): 0.18362421
-roll(pn): 0.19239147
-pitch, yaw, roll in degrees
-pitch: -16.57
-yaw: 3.16
-roll(d): 10.52  FAKE ROLL!!!!!
-roll(pn): 11.02
+------------------------END

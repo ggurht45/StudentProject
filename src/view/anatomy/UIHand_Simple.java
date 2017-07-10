@@ -136,31 +136,32 @@ public class UIHand_Simple extends UIHand {
         }
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
+
+        tryAgain(h);
     }
 
-
     private void tryToCalculateAngles(Hand h) {
-        DebugHelper.printHandInfo(h, "gonna try to find pyr or ypy angles for this hand");
+//        DebugHelper.printHandInfo(h, "gonna try to find pyr or ypy angles for this hand");
         //angle to yaxix and zaxis
         Vector d = h.direction();
 
         //angles to the 3 axis is not the same as how much percentage wise the direction vector is closer to the axis.
-        System.out.println("angle from hand-direction to xAxis: " + Math.toDegrees(d.angleTo(Vector.xAxis())));
-        System.out.println("angle .. yAxis: " + Math.toDegrees(d.angleTo(Vector.yAxis())));
-        System.out.println("angle .. zAxis: " + Math.toDegrees(d.angleTo(Vector.zAxis())));
+//        System.out.println("angle from hand-direction to xAxis: " + Math.toDegrees(d.angleTo(Vector.xAxis())));
+//        System.out.println("angle .. yAxis: " + Math.toDegrees(d.angleTo(Vector.yAxis())));
+//        System.out.println("angle .. zAxis: " + Math.toDegrees(d.angleTo(Vector.zAxis())));
 
 
     }
 
     //the yaw that happens on the plane of xz.
     private float getfirstYaw(Hand h) {
-        System.out.println("forward vector: " + Vector.forward());
+//        System.out.println("forward vector: " + Vector.forward());
         float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.forward()));
         if (h.direction().getX() > 0.0f) {
-            System.out.println("getfirstYaw(-neg angle): " + (-1.0f * angleAmount));
+//            System.out.println("getfirstYaw(-neg angle): " + (-1.0f * angleAmount));
             return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive yaw noticed in hand
         } else {
-            System.out.println("getfirstYaw(pos angle): " + angleAmount);
+//            System.out.println("getfirstYaw(pos angle): " + angleAmount);
             return angleAmount; //return a positive angle to "undo" a negative yaw noticed in the hand
         }
     }
@@ -171,12 +172,12 @@ public class UIHand_Simple extends UIHand {
 
         float angleAmount = (float) Math.toDegrees(h.direction().angleTo(Vector.yAxis()));
         if (h.direction().getZ() > 0.0f) {
-            System.out.println("getPitch (-neg angle): " + (-1.0f * angleAmount));
+//            System.out.println("getPitch (-neg angle): " + (-1.0f * angleAmount));
             return (-1.0f * angleAmount); //returning a -negative angle to "undo" the positive pitch noticed in hand
         } else {
             //99 % of the time, pitch will be a positive angle, so this case will run most of the time.
-            System.out.println("99 % of the time, pitch will be a positive angle");
-            System.out.println("getPitch (pos angle): " + angleAmount);
+//            System.out.println("99 % of the time, pitch will be a positive angle");
+//            System.out.println("getPitch (pos angle): " + angleAmount);
             return angleAmount; //return a positive angle to "undo" a negative pitch noticed in the hand
         }
 
@@ -187,7 +188,7 @@ public class UIHand_Simple extends UIHand {
     //can in some regards, be thought of as the roll component also.
     private float getfinalYaw_relatedToRoll(Hand h) {
         //uses palm normal
-        System.out.println("getfinalYaw_relatedToRoll: ... to be calculated");
+//        System.out.println("getfinalYaw_relatedToRoll: ... to be calculated");
 
         //even though im getting roll, this will be treated as finalYaw.
         //if fingers pointing to the -z direction, then roll will be determined by the amount of projection of the pn onto XY plane
@@ -198,83 +199,83 @@ public class UIHand_Simple extends UIHand {
 
         Vector d = h.direction();
         Vector pn = h.palmNormal();
-        System.out.println("direction of hand: " + d);
-        System.out.println("palm normal of hand: " + pn);
+//        System.out.println("direction of hand: " + d);
+//        System.out.println("palm normal of hand: " + pn);
 
         //also, could use cos to determine the closeness of the vector to the axises. or dot product, but hopefully this should be fine.
         float percentToX = d.getX() / d.magnitude();
         float percentToY = d.getY() / d.magnitude();
         float percentToZ = d.getZ() / d.magnitude();
-        System.out.println("i think this isn not important in finalyaw calculation --------------");
-        System.out.println("PERCENT of direction pointing to x: " + percentToX);
-        System.out.println("percent of direction pointing to y: " + percentToY);
-        System.out.println("percent of direction pointing to z: " + percentToZ);
-        System.out.println("End ----------i think this isn not important in finalyaw calculation --------------");
+//        System.out.println("i think this isn not important in finalyaw calculation --------------");
+//        System.out.println("PERCENT of direction pointing to x: " + percentToX);
+//        System.out.println("percent of direction pointing to y: " + percentToY);
+//        System.out.println("percent of direction pointing to z: " + percentToZ);
+//        System.out.println("End ----------i think this isn not important in finalyaw calculation --------------");
 
         //get projection of pn to yz plane
         Vector projToYZ = DebugHelper.getProjection(pn, "YZ");
         Vector projToXY = DebugHelper.getProjection(pn, "XY");
-        System.out.println("projToYZ of pn: " + projToYZ);
-        System.out.println("projToXY of pn: " + projToXY);
+//        System.out.println("projToYZ of pn: " + projToYZ);
+//        System.out.println("projToXY of pn: " + projToXY);
 
         //check how much of the pn are these projections
         float percentProjYZ = projToYZ.magnitude() / pn.magnitude();
         float percentProjXY = projToXY.magnitude() / pn.magnitude();
-        System.out.println("wrong path i think--------");
-        System.out.println("percentProjYZ: " + percentProjYZ + " \t projToYZ.magnitude(): " + projToYZ.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
-        System.out.println("percentProjXY: " + percentProjXY + " \t projToXY.magnitude(): " + projToXY.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
-        System.out.println("END ------wrong path i think--------");
+//        System.out.println("wrong path i think--------");
+//        System.out.println("percentProjYZ: " + percentProjYZ + " \t projToYZ.magnitude(): " + projToYZ.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
+//        System.out.println("percentProjXY: " + percentProjXY + " \t projToXY.magnitude(): " + projToXY.magnitude() + " \t pn.magnitude(): " + pn.magnitude());
+//        System.out.println("END ------wrong path i think--------");
 
         float percentOfPN_onZ = pn.getZ();
         float percentOfPN_onX = pn.getX();
-        System.out.println("percent Of pn on z-axis: " + percentOfPN_onZ);
-        System.out.println("percent Of pn on x-axis: " + percentOfPN_onX);
+//        System.out.println("percent Of pn on z-axis: " + percentOfPN_onZ);
+//        System.out.println("percent Of pn on x-axis: " + percentOfPN_onX);
 
 
         //need to review this later
         float angleBtwProjYZ_yAxis = 180.0f - (float) Math.toDegrees(projToYZ.angleTo(Vector.yAxis()));
         float angleBtwProjXY_yAxis = 180.0f - (float) Math.toDegrees(projToXY.angleTo(Vector.yAxis()));
         float combinedAngles = angleBtwProjXY_yAxis + angleBtwProjYZ_yAxis;
-        System.out.println("unweighted angles to yaxis, i dont think this is the way to go-------- ");
-        System.out.println("projToYZ's angleTo yaxis: " + angleBtwProjYZ_yAxis);
-        System.out.println("projToXY's angleTo yaxis: " + angleBtwProjXY_yAxis);
-        System.out.println("combined angle yaxis: " + combinedAngles);
-        System.out.println("End --------unweighted angles to yaxis, i dont think this is the way to go-------- ");
+//        System.out.println("unweighted angles to yaxis, i dont think this is the way to go-------- ");
+//        System.out.println("projToYZ's angleTo yaxis: " + angleBtwProjYZ_yAxis);
+//        System.out.println("projToXY's angleTo yaxis: " + angleBtwProjXY_yAxis);
+//        System.out.println("combined angle yaxis: " + combinedAngles);
+//        System.out.println("End --------unweighted angles to yaxis, i dont think this is the way to go-------- ");
 
         //note, i think the absolute values need to be added so the opposite directions dont cancel each other out
         //think -z, x or -x, z 45 deg
         float angleYZ_yaxis_weighted = angleBtwProjYZ_yAxis * percentOfPN_onZ;
         float angleXY_yaxis_weighted = angleBtwProjXY_yAxis * percentOfPN_onX;
         float combinedAngles_weighted = angleYZ_yaxis_weighted + angleXY_yaxis_weighted;
-        System.out.println("projToYZ's angleTo yaxis (weighted by the percentage of pn on the z axis): " + angleYZ_yaxis_weighted);
-        System.out.println("projToXY's angleTo yaxis (weighted .. x axis): " + angleXY_yaxis_weighted);
-        System.out.println("combined angle (weighted) yaxis: " + combinedAngles_weighted);
+//        System.out.println("projToYZ's angleTo yaxis (weighted by the percentage of pn on the z axis): " + angleYZ_yaxis_weighted);
+//        System.out.println("projToXY's angleTo yaxis (weighted .. x axis): " + angleXY_yaxis_weighted);
+//        System.out.println("combined angle (weighted) yaxis: " + combinedAngles_weighted);
 
 
         //find the direction of roll/yaw2 by using the cross product.
         Vector d_cross_pn = d.cross(pn);
-        System.out.println("cross product (d X pn): " + d_cross_pn);
+//        System.out.println("cross product (d X pn): " + d_cross_pn);
         Vector pn_cross_d = pn.cross(d);
-        System.out.println("cross product (pn X d): " + pn_cross_d);
+//        System.out.println("cross product (pn X d): " + pn_cross_d);
 //        if (d_cross_pn.getY() > 0.0f) {
 //            return combinedAngles_weighted; //need to return negative yaw to "undo" the positive rolling action (palm opens up to the right) observed in the hand
 //        } else {
-            return -1.0f * combinedAngles_weighted;
+        return -1.0f * combinedAngles_weighted;
 //        }
     }
 
     private void tryAgain(Hand h) {
-        System.out.println("inside tryAgain");
-        DebugHelper.printNodeInfo(this, "UIHand_simple before fixing orientation");
+//        System.out.println("inside tryAgain");
+//        DebugHelper.printNodeInfo(this, "UIHand_simple before fixing orientation");
 
         //try to get ypy angles from just looking at the hand info
         tryToCalculateAngles(h);
         float y1_angle_yawOnXZPlane = getfirstYaw(h);
         float p_angle = getPitch(h);
         float y2_angle_rollCousin = getfinalYaw_relatedToRoll(h);
-        System.out.println("----- final results after trying to get ypy STILL NEED TO FIX NEG! Direction!!!--------");
-        System.out.println("y1, p, y2: " + y1_angle_yawOnXZPlane + " " + p_angle + " " + y2_angle_rollCousin);
-        System.out.println("----- END final results after trying to get ypy --------");
+//        System.out.println("----- final results after trying to get ypy STILL NEED TO FIX NEG! Direction!!!--------");
+//        System.out.println("y1, p, y2: " + y1_angle_yawOnXZPlane + " " + p_angle + " " + y2_angle_rollCousin);
+//        System.out.println("----- END final results after trying to get ypy --------");
 
 
         //the yaw that happens on the plane of xz.
@@ -306,12 +307,23 @@ public class UIHand_Simple extends UIHand {
 
 
         //add a yaw to perform before the matrixRotateNode sets the axis and angle.
-        this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, 1, 0)));
+//        int numTransforms = this.getTransforms().size();
+//        System.out.println("number of transforms before if: " + numTransforms);
+        if (this.getTransforms().size() == 0) {
+            this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, 1, 0)));
+        } else {
+            this.getTransforms().set(0, new Rotate(firstYaw, new Point3D(0, 1, 0)));
+        }
+//        System.out.println("number of transforms after if: " + numTransforms);
+////        this.getTransforms().remove(0);
+////        this.getTransforms().add(new Rotate(firstYaw, new Point3D(0, 1, 0)));
+//        numTransforms = this.getTransforms().size();
+//        System.out.println("number of transforms after rotation transform gets added: " + numTransforms);
 
     }
 
     public void fixOrientation(Hand h) {
-        System.out.println("entered fixOrientation UIHand_Simple");
+//        System.out.println("entered fixOrientation UIHand_Simple");
 
 
         tryAgain(h);
@@ -327,19 +339,19 @@ public class UIHand_Simple extends UIHand {
 //        ViewMath.matrixRotateNode(this, Math.toRadians(r), Math.toRadians(p_moreLikeYaw), Math.toRadians(y_moreLikePitch));
 //
 //        DebugHelper.printNodeInfo(this, "UIHand_simple After fixing orientation");
-        System.out.println("leaving fixOrientation UIHand_Simple");
+//        System.out.println("leaving fixOrientation UIHand_Simple");
     }
 
 
     public void fixOrientationOld(Hand h) {
-        System.out.println("fixOrientation simple hand");
+//        System.out.println("fixOrientation simple hand");
 //        Vector v = new Vector(0,150,0); //weird work around for setPosition method
 //        Vector d = h.direction().opposite();
 ////        d.setZ(d.getZ()*-1);
 ////        d.setY(d.getY()*-1);
 
 
-        System.out.println("num transforms: " + this.getTransforms().size());
+//        System.out.println("num transforms: " + this.getTransforms().size());
         //try 3 transforms. look cam for inspiration. using pitch yaw roll.
 //        float pitch = h.direction().pitch();
 //        float yaw = h.direction().yaw();

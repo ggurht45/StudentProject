@@ -44,9 +44,9 @@ public class LoadGesturesScene2 {
         realTarget = getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-24.hand"); //--facing downwards, and to the left. (roll right), pointing -z direction
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-09-16.hand"); //--facing downwards, yaw 45* to the right.  pointing -z direction
-//        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
+        loadedHand = getHandFromString("targets/2017-06-12 12-21-01.hand"); //--to the right
 //        loadedHand = getHandFromString("dataOutput/1/typeA_2017-06-30 08-08-37.hand"); //-- (handshake position) facing downwards, palm to the right (roll left), pointing -z direction
-        loadedHand = getHandFromString("targets2/gesture5Left.hand"); //gesture 5
+//        loadedHand = getHandFromString("targets2/gesture5Left.hand"); //gesture 5
 
 //        loadedHand = getHandFromString("targets/2017-06-12 12-18-33.hand"); //--downwards
 //        DebugHelper.printHandInfo(loadedHand, "sanity check. loaded hand info");
@@ -77,7 +77,7 @@ public class LoadGesturesScene2 {
         //button to fix orientation
         Button fixOrientationButton = new Button("Fix Orientation");
         fixOrientationButton.setOnAction(e -> {
-            System.out.println("gonna fix orientation");
+//            System.out.println("gonna fix orientation");
             //need parenthesis..
             ((UIHand_Simple) uiHand2).fixOrientation(loadedHand);
 
