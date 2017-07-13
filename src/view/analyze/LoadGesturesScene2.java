@@ -3,6 +3,7 @@ package view.analyze;
 
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Vector;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
@@ -87,12 +88,20 @@ public class LoadGesturesScene2 {
         Button goToStylePage = new Button("TestPage");
         goToStylePage.setTranslateX(100);
         goToStylePage.setOnAction(e -> {
-            System.out.println("going to test page");
             app.window.setScene(scene3);
         });
 
-        TestScene3 sceneUI = new TestScene3(app);
-        scene3 = sceneUI.getScene();
+//        TestScene3 sceneUI = new TestScene3(app);
+//        scene3 = sceneUI.getScene();
+
+        try {
+            System.out.println("inside the try catch for fxmlLoader");
+//            Parent root = FXMLLoader.load(getClass().getResource("/view/analyze/sample.fxml")); --Note the way to find resources manually.
+            Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            scene3 = new Scene(root, 300, 275);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         // The 3D camera; necessary for 3D display
