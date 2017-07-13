@@ -26,7 +26,7 @@ public class LoadGesturesScene2 {
     private static UIHand uiHand3;
     private static Hand loadedHand;
     private static Group rootGroup;
-    private static Scene scene;
+    private static Scene scene, scene3;
 
 
     public LoadGesturesScene2(LeapUIApp app) {
@@ -83,6 +83,17 @@ public class LoadGesturesScene2 {
 
         });
 
+        //button to go to new page that will be styled
+        Button goToStylePage = new Button("TestPage");
+        goToStylePage.setTranslateX(100);
+        goToStylePage.setOnAction(e -> {
+            System.out.println("going to test page");
+            app.window.setScene(scene3);
+        });
+
+        TestScene3 sceneUI = new TestScene3(app);
+        scene3 = sceneUI.getScene();
+
 
         // The 3D camera; necessary for 3D display
         //weird things about camera: y increases downwards, z increases into the screen, x increases to the right
@@ -109,7 +120,7 @@ public class LoadGesturesScene2 {
         sub3D.setCamera(camera);
 
         // The 2D overlay
-        Group group2D = new Group(fixOrientationButton);
+        Group group2D = new Group(fixOrientationButton, goToStylePage);
         SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
 
 

@@ -104,11 +104,13 @@ moving functions from viewmath to debughelper
     -need to parameterize the positioning method in the supersimple hand
 
 
-tyrant woken juvenile whale turnip abort laptop wife comb upgrade seeded adrenalin orbit gnaw hitched mowing large gutter yellow enforce pelican present lagoon tolerant lofty ritual industrial dwelt afield
 
+--i really dont want to do ui. but i have to. so ^^ I will.
 
-
-
+first small and easy goal to accomplish:
+    --make a new file. add a button to it.
+    -- style the button to look like material design.
+    * can listen to good song while doing that.
 
 
 
