@@ -113,6 +113,11 @@ first small and easy goal to accomplish:
     -- style the button to look like material design.
     * can listen to good song while doing that.
 
+    -- make button clickable using script function.
+    -- add material design to button
+    -- import controlsfx.
+
+
 
 
 

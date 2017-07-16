@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="view.analyze.ControllerForSample">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-    <Label text="hello world! fxml scene" fx:id = "theSpecialLabel"/>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForSample">
 
-    <Button text="say hello" fx:id="mySpecialButtonYea" onAction="#sayaHelloa" />
+    <Label fx:id="theSpecialLabel" text="hello world! fxml scene" />
+   <Pane prefHeight="200.0" prefWidth="200.0">
+      <children>
+      
+          <Button fx:id="mySpecialButtonYea" layoutX="239.0" layoutY="60.0" onAction="#sayaHelloa" prefHeight="80.0" prefWidth="122.0" text="say hello" />
+      </children>
+   </Pane>
 
 </VBox>

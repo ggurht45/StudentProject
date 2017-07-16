@@ -136,7 +136,6 @@ public class UIHand_SuperSimple extends UIHand {
 
     @Override
     public void setLoc(Hand hand) {
-        System.out.println("in setLoc method of superSimple hand");
         tryAgain(hand);
     }
 

@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import model.SerializedTargetHand;
+import sample.Controller;
 import view.DebugHelper;
 import view.LeapUIApp;
 import view.ViewMath;
@@ -95,10 +96,18 @@ public class LoadGesturesScene2 {
 //        scene3 = sceneUI.getScene();
 
         try {
-            System.out.println("inside the try catch for fxmlLoader");
 //            Parent root = FXMLLoader.load(getClass().getResource("/view/analyze/sample.fxml")); --Note the way to find resources manually.
-            Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-            scene3 = new Scene(root, 300, 275);
+
+            //create an instance of the fxmlloader, this instance will be used to get controller objects for the fxml templates
+            //note, this is a special kind of loader that has a Specific kind fxml file attached to it
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+            Parent root = fxmlLoader.load();
+            scene3 = new Scene(root, app.ScreenWidth, app.ScreenHeight);
+
+            //get the controller file for the fxml file attached to the loader
+            ControllerForSample scene3Controller = (ControllerForSample) fxmlLoader.getController();
+            scene3Controller.setMainApp(app);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
