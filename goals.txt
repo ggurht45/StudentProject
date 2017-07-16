@@ -109,6 +109,7 @@ moving functions from viewmath to debughelper
 
 first small and easy goal to accomplish:
     --make a new file. add a button to it.
+    --make the button clickable.
     -- style the button to look like material design.
     * can listen to good song while doing that.
 

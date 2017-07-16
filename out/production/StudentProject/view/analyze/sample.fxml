@@ -5,7 +5,8 @@
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
       fx:controller="view.analyze.ControllerForSample">
 
-    <Label text="hello world! fxml scene"/>
-    <Button text="Not linked yet"/>
+    <Label text="hello world! fxml scene" fx:id = "theSpecialLabel"/>
+    
+    <Button text="say hello" fx:id="mySpecialButtonYea" onAction="#sayaHelloa" />
 
 </VBox>
