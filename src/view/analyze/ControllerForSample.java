@@ -1,5 +1,6 @@
 package view.analyze;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,6 +25,17 @@ public class ControllerForSample{
 
     public void setMainApp(LeapUIApp app){
         this.app = app;
+    }
+
+
+    //material button
+    @FXML
+    private JFXButton materialButton;
+
+    @FXML
+    void sayHelloMaterial(ActionEvent event) {
+        System.out.println("hello from material button");
+
     }
 
 
