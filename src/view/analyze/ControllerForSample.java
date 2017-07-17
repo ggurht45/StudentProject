@@ -5,12 +5,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.SerializedTargetHand;
 import view.LeapUIApp;
+
+import java.util.ArrayList;
 
 
 public class ControllerForSample{
 
     private LeapUIApp app;
+    private ArrayList<String> tableList;
 
     @FXML
     private Label theSpecialLabel;
@@ -35,6 +39,11 @@ public class ControllerForSample{
     @FXML
     void sayHelloMaterial(ActionEvent event) {
         System.out.println("hello from material button");
+        tableList = SerializedTargetHand.getAllHands2Names("LeftGestures.txt");
+        System.out.println("tableList: \n" + tableList);
+
+
+
 
     }
 
