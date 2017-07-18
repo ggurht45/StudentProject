@@ -99,13 +99,6 @@ public class ControllerForSample{
         root.getChildren().setAll(item0, item1, item2, item3, item4);
 
 
-        ttCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<String, String> param) {
-                return new SimpleStringProperty(param.getValue().getValue());
-            }
-
-        });
 
         //do some weird stuff to col, but necessary
 //        ttCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
@@ -117,7 +110,7 @@ public class ControllerForSample{
 
 
         //doing weird stuff with lambdas
-//        ttCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> new SimpleStringProperty(param.getValue().getValue()));
+        ttCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> new SimpleStringProperty(param.getValue().getValue()));
 
 
 
