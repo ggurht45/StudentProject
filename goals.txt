@@ -116,8 +116,14 @@ first small and easy goal to accomplish:
     -- make button clickable using script function.
     -- add material design to button
         -- make table on the left side, put button on the bottom, let the button execute on the text field.
+
         -- add a vbox in the tab view and add a button to it from the code.
+            -done
+
     -- import controlsfx.
+
+
+    -- should try to use trello or a command line tool that can talk to it
 
 
 
