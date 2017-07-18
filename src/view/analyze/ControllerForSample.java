@@ -41,12 +41,15 @@ public class ControllerForSample{
         System.out.println("hello from material button");
         tableList = SerializedTargetHand.getAllHands2Names("LeftGestures.txt");
         System.out.println("tableList: \n" + tableList);
-
-
-
-
     }
 
+    @FXML
+    private JFXButton clickyButton;
 
+    @FXML
+    void clickyButtonAction(ActionEvent event) {
+        System.out.println("clicky button clicked");
+
+    }
 
 }
