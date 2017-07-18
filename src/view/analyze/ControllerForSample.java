@@ -59,6 +59,15 @@ public class ControllerForSample{
     @FXML
     private VBox theVBox;
 
+    @FXML
+    public void initialize() {
+
+        //add a button to the vbox, after everything has been done in fxml.
+        //do any java coding that you want to do
+        theVBox.getChildren().add(new JFXButton("mango"));
+
+    }
+
 
 
 
