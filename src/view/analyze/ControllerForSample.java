@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 
@@ -40,7 +41,10 @@ public class ControllerForSample{
     void sayHelloMaterial(ActionEvent event) {
         System.out.println("hello from material button");
         tableList = SerializedTargetHand.getAllHands2Names("LeftGestures.txt");
-        System.out.println("tableList: \n" + tableList);
+
+        //add a button to the vbox
+        System.out.println("children of vbox" + theVBox.getChildren());
+        theVBox.getChildren().add(new JFXButton("yo"));
     }
 
     @FXML
@@ -51,5 +55,11 @@ public class ControllerForSample{
         System.out.println("clicky button clicked");
 
     }
+
+    @FXML
+    private VBox theVBox;
+
+
+
 
 }
