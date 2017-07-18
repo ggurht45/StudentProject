@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForSample">
+<VBox prefHeight="615.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForSample">
    <BorderPane prefHeight="358.0" prefWidth="600.0">
       <padding>
          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -63,7 +63,9 @@
                         <children>
                            <TreeTableView fx:id="treeTableView" prefHeight="263.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                              <columns>
-                               <TreeTableColumn fx:id="ttCol" prefWidth="319.0" text="Names" />
+                               <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="105.44442749023438" text="Name" />
+                                 <TreeTableColumn fx:id="col2" maxWidth="100.0" prefWidth="100.0" text="Email" />
+                                 <TreeTableColumn fx:id="col3" prefWidth="100.0" text="Age" />
                              </columns>
                            </TreeTableView>
                         </children>

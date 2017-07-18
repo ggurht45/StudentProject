@@ -1,6 +1,7 @@
 package view.analyze;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import view.LeapUIApp;
 import java.util.ArrayList;
 
 
-public class ControllerForSample{
+public class ControllerForSample {
 
     private LeapUIApp app;
     private ArrayList<String> tableList;
@@ -32,7 +33,7 @@ public class ControllerForSample{
         System.out.println("button was clicked. btw, did some design in scenebuilder bro");
     }
 
-    public void setMainApp(LeapUIApp app){
+    public void setMainApp(LeapUIApp app) {
         this.app = app;
     }
 
@@ -64,21 +65,28 @@ public class ControllerForSample{
     private VBox theVBox;
 
     @FXML
-    private TreeTableView<String> treeTableView;
+    private TreeTableView<Person> treeTableView;
 
     @FXML
-    private TreeTableColumn<String, String> ttCol;
+    private TreeTableColumn<Person, String> col1;
 
+    @FXML
+    private TreeTableColumn<Person, String> col2;
+
+    @FXML
+    private TreeTableColumn<Person, Number> col3;
 
 
     //fake data for tt in tab2
-    TreeItem<String> item0 = new TreeItem<>("Daniel");
-    TreeItem<String> item1 = new TreeItem<>("Joe");
-    TreeItem<String> item2 = new TreeItem<>("Alice");
-    TreeItem<String> item3 = new TreeItem<>("Bob");
-    TreeItem<String> item4 = new TreeItem<>("Braxton");
+    TreeItem<Person> item0 = new TreeItem<>(new Person("Daniel", "danemail", 30));
+    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", "joeemail", 31));
+    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", "bobemail", 32));
+    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", "aliceemail", 33));
+    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", "matemail", 34));
 
-    TreeItem<String> root = new TreeItem<>("root");
+
+
+    TreeItem<Person> root = new TreeItem<>(new Person("root", "remail", 0));
 
 
     @FXML
@@ -94,10 +102,8 @@ public class ControllerForSample{
         theVBox.getChildren().add(button2);
 
 
-
         //add some data to the treetableView shown in tab2
         root.getChildren().setAll(item0, item1, item2, item3, item4);
-
 
 
         //do some weird stuff to col, but necessary
@@ -108,16 +114,29 @@ public class ControllerForSample{
 //            }
 //        });
 
-
         //doing weird stuff with lambdas
-        ttCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> new SimpleStringProperty(param.getValue().getValue()));
-
+        col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, String> param) -> param.getValue().getValue().nameProperty);
+        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, String> param) -> param.getValue().getValue().emailProperty);
+        col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Number> param) -> param.getValue().getValue().ageProperty);
 
 
         treeTableView.setRoot(root);
+        treeTableView.setShowRoot(false);
     }
 
 
+    class Person {
+        SimpleStringProperty nameProperty;
+        SimpleStringProperty emailProperty;
+        SimpleIntegerProperty ageProperty;
+
+        Person(String name, String email, int age) {
+            this.nameProperty = new SimpleStringProperty(name);
+            this.emailProperty = new SimpleStringProperty(email);
+            this.ageProperty = new SimpleIntegerProperty(age);
+        }
+
+    }
 
 
 }
