@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+
+
+<JFXButton buttonType="RAISED" prefHeight="50.0" prefWidth="113.0" style="-fx-background-color: #0b5cf1;" text="Pomogranate" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" />

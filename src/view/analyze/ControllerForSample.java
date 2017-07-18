@@ -3,6 +3,8 @@ package view.analyze;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -60,11 +62,16 @@ public class ControllerForSample{
     private VBox theVBox;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
 
         //add a button to the vbox, after everything has been done in fxml.
         //do any java coding that you want to do
         theVBox.getChildren().add(new JFXButton("mango"));
+
+        //lets add some thing we prepared in another fxml file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
+        Parent root = fxmlLoader.load();
+        theVBox.getChildren().add(root);
 
     }
 
