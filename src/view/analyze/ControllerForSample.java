@@ -5,10 +5,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.SerializedTargetHand;
@@ -120,6 +122,27 @@ public class ControllerForSample {
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Number> param) -> param.getValue().getValue().ageProperty);
 
 
+        //gonna try to set up editable table cells
+        col1.setCellFactory(new Callback<TreeTableColumn<Person, String>, TreeTableCell<Person, String>>() {
+            @Override
+            public TreeTableCell<Person, String> call(TreeTableColumn<Person, String> param) {
+                return new TextFieldTreeTableCell<>();
+            }
+        });
+
+        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
+        //commit the edit event
+        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Person, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<Person, String> event) {
+                TreeItem<Person> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                currentEditingPerson.getValue().setNameProperty(event.getNewValue());
+            }
+        });
+
+
+        treeTableView.setEditable(true);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
     }
@@ -136,6 +159,17 @@ public class ControllerForSample {
             this.ageProperty = new SimpleIntegerProperty(age);
         }
 
+        public void setNameProperty(String nameProperty) {
+            this.nameProperty.set(nameProperty);
+        }
+
+        public void setEmailProperty(String emailProperty) {
+            this.emailProperty.set(emailProperty);
+        }
+
+        public void setAgeProperty(int ageProperty) {
+            this.ageProperty.set(ageProperty);
+        }
     }
 
 
