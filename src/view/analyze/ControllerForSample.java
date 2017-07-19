@@ -122,14 +122,15 @@ public class ControllerForSample {
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Number> param) -> param.getValue().getValue().ageProperty);
 
 
-        //gonna try to set up editable table cells
-        col1.setCellFactory(new Callback<TreeTableColumn<Person, String>, TreeTableCell<Person, String>>() {
-            @Override
-            public TreeTableCell<Person, String> call(TreeTableColumn<Person, String> param) {
-                return new TextFieldTreeTableCell<>();
-            }
-        });
+        //gonna try to set up editable table cells.. hm. this seems unnecessary?
+//        col1.setCellFactory(new Callback<TreeTableColumn<Person, String>, TreeTableCell<Person, String>>() {
+//            @Override
+//            public TreeTableCell<Person, String> call(TreeTableColumn<Person, String> param) {
+//                return new TextFieldTreeTableCell<>();
+//            }
+//        });
 
+        //specify that a textfield should show up, this is definitely needed
         col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
         //commit the edit event
@@ -140,6 +141,10 @@ public class ControllerForSample {
                 currentEditingPerson.getValue().setNameProperty(event.getNewValue());
             }
         });
+
+
+        //set up editing for col2, col3
+
 
 
         treeTableView.setEditable(true);
