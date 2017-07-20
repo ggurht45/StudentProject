@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -14,18 +15,19 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="615.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForAnalyzeHands">
-   <BorderPane prefHeight="358.0" prefWidth="600.0">
+   <BorderPane prefHeight="533.0" prefWidth="804.0">
       <padding>
          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
       </padding>
       <left>
          <VBox fx:id="theVBox" prefHeight="307.0" prefWidth="220.0" BorderPane.alignment="CENTER">
             <children>
-               <JFXTreeTableView prefHeight="277.0" prefWidth="261.0">
+               <JFXTreeTableView prefHeight="424.0" prefWidth="220.0">
                   <columns>
                      <TreeTableColumn prefWidth="159.00003051757812" text="Column X" />
                   </columns></JFXTreeTableView>
-               <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="65.0" prefWidth="99.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Material" textAlignment="CENTER">
+               <JFXTextField fx:id="folderInputTextField" prefHeight="47.0" prefWidth="220.0" />
+               <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="28.0" prefWidth="99.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Material" textAlignment="CENTER">
                   <font>
                      <Font name="System Bold" size="16.0" />
                   </font>

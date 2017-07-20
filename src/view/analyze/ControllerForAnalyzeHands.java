@@ -1,6 +1,7 @@
 package view.analyze;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -62,6 +63,9 @@ public class ControllerForAnalyzeHands {
         String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
         System.out.println("path: " + path);
         System.out.println("arraylist: \n" + SerializedTargetHand.getAllHandsInfoInFolder(path));
+
+        //get the input from the text field on the press of the button
+        System.out.println("textfield: " + folderInputTextField.getText());
 
 
     }
@@ -200,6 +204,10 @@ public class ControllerForAnalyzeHands {
             this.ageProperty.set(ageProperty);
         }
     }
+
+
+    @FXML
+    private JFXTextField folderInputTextField;
 
 
 }
