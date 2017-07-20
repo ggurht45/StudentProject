@@ -2,6 +2,7 @@ package model;
 
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -204,8 +205,15 @@ public class SerializedTargetHand {
         return arraylist;
     }
 
+    public static String getFolderPathHelperMethod(String shortNameForFolder){
+        return "dataOutput/" + shortNameForFolder +"/";
+    }
+
+    public static ArrayList<HandInfo> getAllHandsInfoInFolder(String folderName){
+        return deserializeArrayList(folderName + "_allHandsOnDeck.ser");
+    }
     public static void printAllHandOnDeckArrayList(String outputFolder){
-        ArrayList<HandInfo> arraylist= deserializeArrayList(outputFolder + "_allHandsOnDeck.ser");
+        ArrayList<HandInfo> arraylist= getAllHandsInfoInFolder(outputFolder);
         //print arraylist
         System.out.println("------------AllHandsOnDeck arraylist---------");
         for(int i = 0; i<arraylist.size(); i++){

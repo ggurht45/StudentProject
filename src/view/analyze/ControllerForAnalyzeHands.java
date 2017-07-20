@@ -57,6 +57,13 @@ public class ControllerForAnalyzeHands {
         //add a button to the vbox
         System.out.println("children of vbox" + theVBox.getChildren());
         theVBox.getChildren().add(new JFXButton("yo"));//note interesting effect when you do setAll vs add
+
+        //print arraylist of handInfo objects
+        String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
+        System.out.println("path: " + path);
+        System.out.println("arraylist: \n" + SerializedTargetHand.getAllHandsInfoInFolder(path));
+
+
     }
 
     @FXML
