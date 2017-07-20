@@ -123,6 +123,7 @@ first small and easy goal to accomplish:
 
 
     --cleanup, run everything to see everthing is working.
+            -- deleted local branches after pushing them up
     --set up the handlers for all buttons
     --store gesture info on hand
     --set up the table to show loaded hands.
