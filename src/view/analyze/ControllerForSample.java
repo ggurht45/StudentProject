@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ChoiceBoxTreeTableCell;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
@@ -147,11 +148,11 @@ public class ControllerForSample {
         });
 
 
-        //specify that a textfield should show up, this is definitely needed
+        //setting up col2 to display choice of true/false
         ObservableList<Boolean> list = FXCollections.observableArrayList();
         list.add(true);
         list.add(false);
-        col2.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(list));
+        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
 
         //commit the edit event
         col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Person, Boolean>>() {
@@ -161,8 +162,6 @@ public class ControllerForSample {
                 currentEditingPerson.getValue().setEmailProperty(event.getNewValue());
             }
         });
-
-
 
 
         treeTableView.setEditable(true);
