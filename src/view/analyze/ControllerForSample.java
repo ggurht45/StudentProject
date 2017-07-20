@@ -1,15 +1,19 @@
 package view.analyze;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -73,22 +77,22 @@ public class ControllerForSample {
     private TreeTableColumn<Person, String> col1;
 
     @FXML
-    private TreeTableColumn<Person, String> col2;
+    private TreeTableColumn<Person, Boolean> col2;
 
     @FXML
     private TreeTableColumn<Person, Number> col3;
 
 
     //fake data for tt in tab2
-    TreeItem<Person> item0 = new TreeItem<>(new Person("Daniel", "danemail", 30));
-    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", "joeemail", 31));
-    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", "bobemail", 32));
-    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", "aliceemail", 33));
-    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", "matemail", 34));
+    TreeItem<Person> item0 = new TreeItem<>(new Person("Daniel", true, 30));
+    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", true, 31));
+    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", true, 32));
+    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", false, 33));
+    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", false, 34));
 
 
 
-    TreeItem<Person> root = new TreeItem<>(new Person("root", "remail", 0));
+    TreeItem<Person> root = new TreeItem<>(new Person("root", true, 0));
 
 
     @FXML
@@ -118,7 +122,7 @@ public class ControllerForSample {
 
         //doing weird stuff with lambdas
         col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, String> param) -> param.getValue().getValue().nameProperty);
-        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, String> param) -> param.getValue().getValue().emailProperty);
+        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Boolean> param) -> param.getValue().getValue().emailProperty);
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Number> param) -> param.getValue().getValue().ageProperty);
 
 
@@ -143,7 +147,21 @@ public class ControllerForSample {
         });
 
 
-        //set up editing for col2, col3
+        //specify that a textfield should show up, this is definitely needed
+        ObservableList<Boolean> list = FXCollections.observableArrayList();
+        list.add(true);
+        list.add(false);
+        col2.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(list));
+
+        //commit the edit event
+        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Person, Boolean>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<Person, Boolean> event) {
+                TreeItem<Person> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                currentEditingPerson.getValue().setEmailProperty(event.getNewValue());
+            }
+        });
+
 
 
 
@@ -155,12 +173,12 @@ public class ControllerForSample {
 
     class Person {
         SimpleStringProperty nameProperty;
-        SimpleStringProperty emailProperty;
+        SimpleBooleanProperty emailProperty;
         SimpleIntegerProperty ageProperty;
 
-        Person(String name, String email, int age) {
+        Person(String name, boolean email, int age) {
             this.nameProperty = new SimpleStringProperty(name);
-            this.emailProperty = new SimpleStringProperty(email);
+            this.emailProperty = new SimpleBooleanProperty(email);
             this.ageProperty = new SimpleIntegerProperty(age);
         }
 
@@ -168,7 +186,7 @@ public class ControllerForSample {
             this.nameProperty.set(nameProperty);
         }
 
-        public void setEmailProperty(String emailProperty) {
+        public void setEmailProperty(boolean emailProperty) {
             this.emailProperty.set(emailProperty);
         }
 
