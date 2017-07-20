@@ -153,7 +153,7 @@ public class SerializedTargetHand {
 
 
 
-        //deserialize
+        //deserializeArrayList
 //        HandInfo checkHandInfo = null;
 //        try {
 //            FileInputStream fileIn = new FileInputStream(fileNameWithPath + ".ser");
@@ -184,7 +184,7 @@ public class SerializedTargetHand {
         }
     }
 
-    private static ArrayList<HandInfo> deserialize(String fn){
+    private static ArrayList<HandInfo> deserializeArrayList(String fn){
         ArrayList<HandInfo> arraylist= new ArrayList<>();
         try
         {
@@ -205,23 +205,7 @@ public class SerializedTargetHand {
     }
 
     public static void printAllHandOnDeckArrayList(String outputFolder){
-        ArrayList<HandInfo> arraylist= new ArrayList<>();
-        try
-        {
-            FileInputStream fis = new FileInputStream(outputFolder + "_allHandsOnDeck.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            arraylist = (ArrayList) ois.readObject();
-            ois.close();
-            fis.close();
-        }catch(IOException ioe){
-            ioe.printStackTrace();
-            return;
-        }catch(ClassNotFoundException c){
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return;
-        }
-
+        ArrayList<HandInfo> arraylist= deserializeArrayList(outputFolder + "_allHandsOnDeck.ser");
         //print arraylist
         System.out.println("------------AllHandsOnDeck arraylist---------");
         for(int i = 0; i<arraylist.size(); i++){
