@@ -61,6 +61,8 @@ public class LoadGesturesScene {
             loadedHandUI.setVisible(true);
             targetHandUI.setLoc(th);
             targetHandUI.setVisible(true);
+            targetHandUI.setTranslateX(-4);
+            targetHandUI.setTranslateX(8);
         });
 
         //make a compare button. that compares it against the appropriate hand... should be stored somehow.
@@ -73,12 +75,12 @@ public class LoadGesturesScene {
         });
 
 
-        String str1 = "targets/2015-05-05 08-17-01.hand";
-        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
-        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
-        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
-        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
-        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+//        String str1 = "targets/2015-05-05 08-17-01.hand";
+//        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
+//        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
+//        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+//        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
+//        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
 //        List<String> al = new ArrayList(Arrays.asList("normal facing up", "facing down", "facing down fingers to right", "right hand palm upright", "facing down 2"));
 
         //make a comboList
@@ -130,7 +132,7 @@ public class LoadGesturesScene {
         return scene;
     }
 
-    public Hand getHandFromString(String s) {
+    public static Hand getHandFromString(String s) {
         Hand h = null;
         try {
             h = SerializedTargetHand.readFromFile(s);

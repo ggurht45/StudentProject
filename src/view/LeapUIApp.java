@@ -36,6 +36,7 @@ import model.SerializedTargetHand;
 import view.analyze.InfoBox;
 import view.analyze.LoadGesturesScene;
 import view.analyze.LoadGesturesScene2;
+import view.analyze.SaveBox;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
 import view.anatomy.UIHand_Simple;
@@ -70,6 +71,8 @@ public class LeapUIApp extends Application {
     public Stage window;
     public Scene scene, scene2;
     public static boolean leftHandSelected = true;
+
+    public String userSpecifiedDirectory = "General"; //default directory to save data to
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -224,9 +227,9 @@ public class LeapUIApp extends Application {
                         InfoBox.display("Gesture Name", "Please name this gesture:");
                         System.out.println("name: " + InfoBox.name + " leftHand: " + InfoBox.leftHand);
 
-                        if(InfoBox.name!= null){
-                            SerializedTargetHand.Save3(f,  InfoBox.name,  InfoBox.leftHand);
-                        }else{
+                        if (InfoBox.name != null) {
+                            SerializedTargetHand.Save3(f, InfoBox.name, InfoBox.leftHand);
+                        } else {
                             System.out.println("aborting saving of gesture. no name was typed.");
                         }
 
@@ -237,16 +240,23 @@ public class LeapUIApp extends Application {
                 }
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
-                        System.out.println("enter was pressed, saving target hand.");
-                        Frame f = latestHand.frame();
-                        System.out.println("frame: \n" + f.toString());
-                        //showImage();
-                        FingerList fingersInFrame = f.fingers();
-                        System.out.println("number of fingers: \n" + fingersInFrame.count());
-                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+                        System.out.println("enter was pressed, saving hand.");
+                        Frame f = (LoadGesturesScene.getHandFromString("targets/2015-05-05 08-17-01.hand")).frame(); //latestHand.frame();
+
+                        //show alert box
+                        SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
+                        System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
+
+                        userSpecifiedDirectory = SaveBox.directory;
+                        String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
+
+                        if (SaveBox.comments != null) {
+                            SerializedTargetHand.Save4(f, dataOutputPath, SaveBox.comments, SaveBox.passFail);
+                        } else {
+                            SerializedTargetHand.Save4(f, dataOutputPath, "no comments", SaveBox.passFail);
+                        }
 
 
-                        SerializedTargetHand.Save(latestHand.frame());
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -373,9 +383,9 @@ public class LeapUIApp extends Application {
                 if (keyEvent.getCode() == KeyCode.M) {
                     new Thread(() -> {
                         try {
-                            if(leftHandSelected) {
+                            if (leftHandSelected) {
                                 selectHand(SerializedTargetHand.getAllHands2("LeftGestures.txt"));
-                            }else{
+                            } else {
                                 selectHand(SerializedTargetHand.getAllHands2("RightGestures.txt"));
                             }
                         } catch (Exception e) {
@@ -448,7 +458,6 @@ public class LeapUIApp extends Application {
 //        }
 //        return h;
 //    }
-
 
 
     public double compareTwoHands(String s1, String s2) {
