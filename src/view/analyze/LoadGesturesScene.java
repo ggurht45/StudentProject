@@ -1,14 +1,11 @@
 package view.analyze;
 
 import com.leapmotion.leap.Hand;
-import com.leapmotion.leap.Vector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -18,14 +15,10 @@ import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class LoadGesturesScene {
-
     private LeapUIApp app;
     private String handToLoadFile;
     public static UIHand loadedHandUI;
@@ -36,6 +29,7 @@ public class LoadGesturesScene {
     private static Scene scene;
 
     public LoadGesturesScene(LeapUIApp app) {
+        
         this.app = app;
         //set up the uiHand1 and target hand
         loadedHandUI = new UIHand_Simple(Color.BLUE.darker(), false);
@@ -159,64 +153,6 @@ public class LoadGesturesScene {
             e.printStackTrace();
         }
         return score;
-    }
-
-    private void fixHand() {
-        System.out.println("gonna fix angles before comparing");
-        //compare lh th directions.
-        Vector lhd = lh.direction();
-        Vector thd = th.direction();
-        System.out.println("lhdirection: " + lhd + " \t " + "thdirection: " + thd);
-
-        Double d1 = loadedHandUI.getRotate();
-        Point3D p1 = loadedHandUI.getRotationAxis();
-        Double d2 = targetHandUI.getRotate();
-        Point3D p2 = targetHandUI.getRotationAxis();
-        System.out.println(d1 + " " + d2 + " \t" + p1 + " " + p2);
-
-
-        //so these work, but the cumulative effect doesnt take hold.
-
-        double rotationAngleX = thd.getX() * (-90.0);
-        Point3D axisForX = new Point3D(0, 1, 0);
-
-        double rotationAngleZ = thd.getZ() * (-90.0);
-        Point3D axisForZ = new Point3D(1, 0, 0);
-
-        double rotationAngleY = thd.getY() * (-90.0);
-        Point3D axisForY = new Point3D(0, 0, 1);
-
-//        double rotationAngleX = thd.getX()*(-90.0);
-//        uiHand1.setRotationAxis(new Point3D(0, 1, 0));
-//        uiHand1.setRotate(rotationAngleX);
-//
-//        double rotationAngleZ = thd.getZ()*(-90.0);
-//        uiHand1.setRotationAxis(new Point3D(1, 0, 0));
-//        uiHand1.setRotate(rotationAngleZ);
-//
-//
-//        uiHand1.setRotationAxis(new Point3D(0, 0, 1));
-//        double rotationAngleY = thd.getY()*(-90.0);
-//        uiHand1.setRotate(rotationAngleY);
-
-
-        //didnt work kinda close though. maybe try to make clones or copys of objects. needs more thought later
-        //no doesnt work at all basically. cuz clicking on compare multiple times causes problems.
-//        uiHand1.getTransforms().removeAll();
-//        uiHand1.getTransforms().add(new Rotate(rotationAngleX, axisForX));
-//        uiHand1.getTransforms().add(new Rotate(rotationAngleZ, axisForZ));
-//        uiHand1.getTransforms().add(new Rotate(rotationAngleY, axisForY));
-
-
-        //this stuff may also be useful later.
-//        uiHand1.getLayoutX();
-//        uiHand1.getLayoutY();
-//        uiHand1.getLocalToParentTransform();
-
-//        System.out.println("rotation angles: " + rotationAngleY + " " + rotationAngleX + " " + rotationAngleZ);
-
-
-        loadedHandUI.setDirectionTo(th);
     }
 
 }
