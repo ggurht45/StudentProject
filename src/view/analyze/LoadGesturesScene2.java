@@ -2,7 +2,6 @@ package view.analyze;
 
 
 import com.leapmotion.leap.Hand;
-import com.leapmotion.leap.Vector;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -10,15 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import model.SerializedTargetHand;
-import sample.Controller;
-import view.DebugHelper;
 import view.LeapUIApp;
-import view.ViewMath;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 import view.anatomy.UIHand_SuperSimple;
-
-import javax.swing.text.View;
 
 public class LoadGesturesScene2 {
     private LeapUIApp app;
@@ -98,17 +92,17 @@ public class LoadGesturesScene2 {
         try {
             //this uses the static load method. which is not what we want if we ever once in our life time want to access the
             //controller associated with this fxml template file.
-//            Parent root = FXMLLoader.load(getClass().getResource("/view/analyze/sample.fxml")); //Note the way to find resources manually.
+//            Parent root = FXMLLoader.load(getClass().getResource("/view/analyze/analyzeHandsScene.fxml")); //Note the way to find resources manually.
 
             //create an instance of the fxmlloader, this instance will be used to get controller objects for the fxml templates
             //note, this is a special kind of loader that has a Specific kind fxml file attached to it
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("analyzeHandsScene.fxml"));
             //note, this loader uses the "instance" load method, rather than the static load method.
             Parent root = fxmlLoader.load();
             scene3 = new Scene(root, app.ScreenWidth, app.ScreenHeight);
 
             //get the controller file for the fxml file attached to the loader
-            ControllerForSample scene3Controller = (ControllerForSample) fxmlLoader.getController();
+            ControllerForAnalyzeHands scene3Controller = (ControllerForAnalyzeHands) fxmlLoader.getController();
             scene3Controller.setMainApp(app);
 
         } catch (Exception e) {

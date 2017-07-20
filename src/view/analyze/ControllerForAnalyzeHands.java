@@ -24,7 +24,7 @@ import view.LeapUIApp;
 import java.util.ArrayList;
 
 
-public class ControllerForSample {
+public class ControllerForAnalyzeHands {
 
     private LeapUIApp app;
     private ArrayList<String> tableList;
