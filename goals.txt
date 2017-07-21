@@ -130,6 +130,9 @@ first small and easy goal to accomplish:
     --fix the things mentioned in the email
 
 
+    --cleanup branch, merge code onto it. perform cleanup. and merge back onto the setupTable branch
+
+
 
 
 
