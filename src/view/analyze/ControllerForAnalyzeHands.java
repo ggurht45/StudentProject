@@ -19,6 +19,7 @@ import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import model.HandInfo;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 
@@ -29,6 +30,7 @@ public class ControllerForAnalyzeHands {
 
     private LeapUIApp app;
     private ArrayList<String> tableList;
+    private ArrayList<HandInfo> handInfos;
 
     @FXML
     private Label theSpecialLabel;
@@ -59,11 +61,6 @@ public class ControllerForAnalyzeHands {
         System.out.println("children of vbox" + theVBox.getChildren());
         theVBox.getChildren().add(new JFXButton("yo"));//note interesting effect when you do setAll vs add
 
-        //print arraylist of handInfo objects
-        String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
-        System.out.println("path: " + path);
-        System.out.println("arraylist: \n" + SerializedTargetHand.getAllHandsInfoInFolder(path));
-
         //get the input from the text field on the press of the button
         System.out.println("textfield: " + folderInputTextField.getText());
 
@@ -83,45 +80,85 @@ public class ControllerForAnalyzeHands {
     private VBox theVBox;
 
     @FXML
-    private TreeTableView<Person> treeTableView;
+    private TreeTableView<HandInfo> treeTableView;
 
+    //handfile string
     @FXML
-    private TreeTableColumn<Person, String> col1;
+    private TreeTableColumn<HandInfo, String> col1;
 
+    //comments
     @FXML
-    private TreeTableColumn<Person, Boolean> col2;
+    private TreeTableColumn<HandInfo, String> col2;
 
+    //result
     @FXML
-    private TreeTableColumn<Person, Number> col3;
+    private TreeTableColumn<HandInfo, String> col3;
+
+//    //Gesture Type
+//    @FXML
+//    private TreeTableColumn<HandInfo, Number> col4;
 
 
     //fake data for tt in tab2
-    TreeItem<Person> item0 = new TreeItem<>(new Person("Daniel", true, 30));
-    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", true, 31));
-    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", true, 32));
-    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", false, 33));
-    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", false, 34));
+//    TreeItem<HandInfo> item0 = new TreeItem<>(new Person("Daniel", true, 30));
+//    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", true, 31));
+//    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", true, 32));
+//    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", false, 33));
+//    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", false, 34));
 
 
+    private static ArrayList<TreeItem<HandInfo>> getTreeItems(String folder) {
+        String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
+        //ArrayList<HandInfo> handInfoArray = SerializedTargetHand.getAllHandsInfoInFolder(path);
 
-    TreeItem<Person> root = new TreeItem<>(new Person("root", true, 0));
+        ArrayList<HandInfo> handInfoArray = new ArrayList<>();
+        HandInfo hi1 = new HandInfo("handfile1", "comments1", "result1");
+        HandInfo hi2 = new HandInfo("handfile2", "comments2", "result2");
+        HandInfo hi3 = new HandInfo("handfile3", "comments3", "result3");
+        handInfoArray.add(hi1);
+        handInfoArray.add(hi2);
+        handInfoArray.add(hi3);
+        System.out.println("handinfoarray: " + handInfoArray);
+        return getTreeItemsFromHandInfos(handInfoArray);
+    }
 
+    private static ArrayList<TreeItem<HandInfo>> getTreeItemsFromHandInfos(ArrayList<HandInfo> arr) {
+        ArrayList<TreeItem<HandInfo>> treeItems = new ArrayList<>();
+        for (int i = 0; i < arr.size(); i++) {
+            HandInfo hi = arr.get(i);
+            TreeItem<HandInfo> item = new TreeItem<HandInfo>(hi);
+            if (i == 0) {
+                System.out.println("handInfo: " + hi);
+                System.out.println("item: " + item);
+            }
+            treeItems.add(item);
+        }
+        return treeItems;
+    }
 
     @FXML
     public void initialize() throws Exception {
-
-        //add a button to the vbox, after everything has been done in fxml.
-        //do any java coding that you want to do
-        theVBox.getChildren().add(new JFXButton("mango"));
-
-        //lets add some thing we prepared in another fxml file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
-        Parent button2 = fxmlLoader.load();
-        theVBox.getChildren().add(button2);
+        //get hand info and store it in the array.default = alex for now
+//        String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
+//        System.out.println("path: " + path);
+//        handInfos = SerializedTargetHand.getAllHandsInfoInFolder(path);
+//        System.out.println("arraylist of handsInfos : \n" + handInfos);
 
 
-        //add some data to the treetableView shown in tab2
-        root.getChildren().setAll(item0, item1, item2, item3, item4);
+        //create root, and add items to it
+        TreeItem<HandInfo> root = new TreeItem<>(new HandInfo("rootFilename", "rootComments", "rootResult"));
+        ArrayList<TreeItem<HandInfo>> treeItems = getTreeItems("Alex");
+        root.getChildren().setAll(treeItems);
+
+
+//        //add a button to the vbox, after everything has been done in fxml.
+//        //do any java coding that you want to do
+//        theVBox.getChildren().add(new JFXButton("mango"));
+//
+//        //lets add some thing we prepared in another fxml file
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
+//        Parent button2 = fxmlLoader.load();
+//        theVBox.getChildren().add(button2);
 
 
         //do some weird stuff to col, but necessary
@@ -132,10 +169,10 @@ public class ControllerForAnalyzeHands {
 //            }
 //        });
 
-        //doing weird stuff with lambdas
-        col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, String> param) -> param.getValue().getValue().nameProperty);
-        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Boolean> param) -> param.getValue().getValue().emailProperty);
-        col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<Person, Number> param) -> param.getValue().getValue().ageProperty);
+        //doing weird stuff with lambdas; much shorter
+        col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().handFile2Property());
+        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().comments2Property());
+        col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().result2Property());
 
 
         //gonna try to set up editable table cells.. hm. this seems unnecessary?
@@ -146,64 +183,64 @@ public class ControllerForAnalyzeHands {
 //            }
 //        });
 
-        //specify that a textfield should show up, this is definitely needed
-        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+//        //specify that a textfield should show up, this is definitely needed
+//        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+//
+//        //commit the edit event
+//        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo, String>>() {
+//            @Override
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo, String> event) {
+//                TreeItem<HandInfo> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//                currentEditingPerson.getValue().setHandFile2(event.getNewValue());
+//            }
+//        });
+//
+//
+//        //setting up col2 to display choice of true/false
+//        ObservableList<String> list = FXCollections.observableArrayList();
+//        list.add("Passed");
+//        list.add("Failed");
+//        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
+//
+//        //commit the edit event
+//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo, String>>() {
+//            @Override
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo, String> event) {
+//                TreeItem<HandInfo> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//                currentEditingPerson.getValue().setComments(event.getNewValue());
+//            }
+//        });
 
-        //commit the edit event
-        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Person, String>>() {
-            @Override
-            public void handle(TreeTableColumn.CellEditEvent<Person, String> event) {
-                TreeItem<Person> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-                currentEditingPerson.getValue().setNameProperty(event.getNewValue());
-            }
-        });
 
-
-        //setting up col2 to display choice of true/false
-        ObservableList<Boolean> list = FXCollections.observableArrayList();
-        list.add(true);
-        list.add(false);
-        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
-
-        //commit the edit event
-        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<Person, Boolean>>() {
-            @Override
-            public void handle(TreeTableColumn.CellEditEvent<Person, Boolean> event) {
-                TreeItem<Person> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-                currentEditingPerson.getValue().setEmailProperty(event.getNewValue());
-            }
-        });
-
-
-        treeTableView.setEditable(true);
+//        treeTableView.setEditable(true);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
     }
 
 
-    class Person {
-        SimpleStringProperty nameProperty;
-        SimpleBooleanProperty emailProperty;
-        SimpleIntegerProperty ageProperty;
-
-        Person(String name, boolean email, int age) {
-            this.nameProperty = new SimpleStringProperty(name);
-            this.emailProperty = new SimpleBooleanProperty(email);
-            this.ageProperty = new SimpleIntegerProperty(age);
-        }
-
-        public void setNameProperty(String nameProperty) {
-            this.nameProperty.set(nameProperty);
-        }
-
-        public void setEmailProperty(boolean emailProperty) {
-            this.emailProperty.set(emailProperty);
-        }
-
-        public void setAgeProperty(int ageProperty) {
-            this.ageProperty.set(ageProperty);
-        }
-    }
+//    class Person {
+//        SimpleStringProperty nameProperty;
+//        SimpleBooleanProperty emailProperty;
+//        SimpleIntegerProperty ageProperty;
+//
+//        Person(String name, boolean email, int age) {
+//            this.nameProperty = new SimpleStringProperty(name);
+//            this.emailProperty = new SimpleBooleanProperty(email);
+//            this.ageProperty = new SimpleIntegerProperty(age);
+//        }
+//
+//        public void setNameProperty(String nameProperty) {
+//            this.nameProperty.set(nameProperty);
+//        }
+//
+//        public void setEmailProperty(boolean emailProperty) {
+//            this.emailProperty.set(emailProperty);
+//        }
+//
+//        public void setAgeProperty(int ageProperty) {
+//            this.ageProperty.set(ageProperty);
+//        }
+//    }
 
 
     @FXML
