@@ -113,21 +113,22 @@ public class ControllerForAnalyzeHands {
         ArrayList<HandInfo> handInfoArray_old = SerializedTargetHand.getAllHandsInfoInFolder(path);
         System.out.println("old handInfoArray: " + handInfoArray_old);
 
-        ArrayList<HandInfo2> handInfoArray = new ArrayList<>();
-        HandInfo2 hi1 = new HandInfo2("handfile1", "comments1", "result1");
-        HandInfo2 hi2 = new HandInfo2("handfile2", "comments2", "result2");
-        HandInfo2 hi3 = new HandInfo2("handfile3", "comments3", "result3");
-        handInfoArray.add(hi1);
-        handInfoArray.add(hi2);
-        handInfoArray.add(hi3);
-        System.out.println("handinfoarray: " + handInfoArray);
-        return getTreeItemsFromHandInfos(handInfoArray);
+//        ArrayList<HandInfo2> handInfoArray = new ArrayList<>();
+//        HandInfo2 hi1 = new HandInfo2("handfile1", "comments1", "result1");
+//        HandInfo2 hi2 = new HandInfo2("handfile2", "comments2", "result2");
+//        HandInfo2 hi3 = new HandInfo2("handfile3", "comments3", "result3");
+//        handInfoArray.add(hi1);
+//        handInfoArray.add(hi2);
+//        handInfoArray.add(hi3);
+//        System.out.println("handinfoarray: " + handInfoArray);
+        return getTreeItemsFromHandInfos(handInfoArray_old);
     }
 
-    private static ArrayList<TreeItem<HandInfo2>> getTreeItemsFromHandInfos(ArrayList<HandInfo2> arr) {
+    //converts the derserialized class into something that can have simplestring properties etc.
+    private static ArrayList<TreeItem<HandInfo2>> getTreeItemsFromHandInfos(ArrayList<HandInfo> arr) {
         ArrayList<TreeItem<HandInfo2>> treeItems = new ArrayList<>();
         for (int i = 0; i < arr.size(); i++) {
-            HandInfo2 hi = arr.get(i);
+            HandInfo2 hi = new HandInfo2(arr.get(i));
             TreeItem<HandInfo2> item = new TreeItem<HandInfo2>(hi);
             if (i == 0) {
                 System.out.println("handInfo: " + hi);
