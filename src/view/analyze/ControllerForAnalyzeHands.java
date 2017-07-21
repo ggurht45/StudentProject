@@ -1,11 +1,10 @@
 package view.analyze;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import model.HandInfo;
 import model.HandInfo2;
 import model.SerializedTargetHand;
@@ -28,17 +27,6 @@ public class ControllerForAnalyzeHands {
         System.out.println("textfield: " + folderInputTextField.getText());
     }
 
-    @FXML
-    private JFXButton clickyButton;
-
-    @FXML
-    void clickyButtonAction(ActionEvent event) {
-        System.out.println("clicky button clicked");
-
-    }
-
-    @FXML
-    private VBox theVBox;
 
     @FXML
     private TreeTableView<HandInfo2> treeTableView;
@@ -72,10 +60,6 @@ public class ControllerForAnalyzeHands {
         for (int i = 0; i < arr.size(); i++) {
             HandInfo2 hi = new HandInfo2(arr.get(i));
             TreeItem<HandInfo2> item = new TreeItem<HandInfo2>(hi);
-            if (i == 0) {
-                System.out.println("handInfo: " + hi);
-                System.out.println("item: " + item);
-            }
             treeItems.add(item);
         }
         return treeItems;
@@ -88,11 +72,10 @@ public class ControllerForAnalyzeHands {
         ArrayList<TreeItem<HandInfo2>> treeItems = getTreeItems("Alex");
         root.getChildren().setAll(treeItems);
 
-//        //look at
+//        -//look at
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
 //        Parent button2 = fxmlLoader.load();
 //        theVBox.getChildren().add(button2);
-
 
         //do some weird stuff to col, but necessary; a shorter version is below
 //        ttCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
@@ -145,4 +128,6 @@ public class ControllerForAnalyzeHands {
     @FXML
     private JFXTextField folderInputTextField;
 
+    @FXML
+    private AnchorPane centerPane;
 }
