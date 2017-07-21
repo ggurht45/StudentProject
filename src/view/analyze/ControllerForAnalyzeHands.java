@@ -20,6 +20,7 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import model.HandInfo;
+import model.HandInfo2;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 
@@ -30,7 +31,7 @@ public class ControllerForAnalyzeHands {
 
     private LeapUIApp app;
     private ArrayList<String> tableList;
-    private ArrayList<HandInfo> handInfos;
+    private ArrayList<HandInfo2> handInfos2;
 
     @FXML
     private Label theSpecialLabel;
@@ -80,41 +81,42 @@ public class ControllerForAnalyzeHands {
     private VBox theVBox;
 
     @FXML
-    private TreeTableView<HandInfo> treeTableView;
+    private TreeTableView<HandInfo2> treeTableView;
 
     //handfile string
     @FXML
-    private TreeTableColumn<HandInfo, String> col1;
+    private TreeTableColumn<HandInfo2, String> col1;
 
     //comments
     @FXML
-    private TreeTableColumn<HandInfo, String> col2;
+    private TreeTableColumn<HandInfo2, String> col2;
 
     //result
     @FXML
-    private TreeTableColumn<HandInfo, String> col3;
+    private TreeTableColumn<HandInfo2, String> col3;
 
 //    //Gesture Type
 //    @FXML
-//    private TreeTableColumn<HandInfo, Number> col4;
+//    private TreeTableColumn<HandInfo2, Number> col4;
 
 
     //fake data for tt in tab2
-//    TreeItem<HandInfo> item0 = new TreeItem<>(new Person("Daniel", true, 30));
+//    TreeItem<Person> item0 = new TreeItem<>(new Person("Daniel", true, 30));
 //    TreeItem<Person> item1 = new TreeItem<>(new Person("Joe", true, 31));
 //    TreeItem<Person> item2 = new TreeItem<>(new Person("Bob", true, 32));
 //    TreeItem<Person> item3 = new TreeItem<>(new Person("Alice", false, 33));
 //    TreeItem<Person> item4 = new TreeItem<>(new Person("Mat", false, 34));
 
 
-    private static ArrayList<TreeItem<HandInfo>> getTreeItems(String folder) {
+    private static ArrayList<TreeItem<HandInfo2>> getTreeItems(String folder) {
         String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
-        //ArrayList<HandInfo> handInfoArray = SerializedTargetHand.getAllHandsInfoInFolder(path);
+        ArrayList<HandInfo> handInfoArray_old = SerializedTargetHand.getAllHandsInfoInFolder(path);
+        System.out.println("old handInfoArray: " + handInfoArray_old);
 
-        ArrayList<HandInfo> handInfoArray = new ArrayList<>();
-        HandInfo hi1 = new HandInfo("handfile1", "comments1", "result1");
-        HandInfo hi2 = new HandInfo("handfile2", "comments2", "result2");
-        HandInfo hi3 = new HandInfo("handfile3", "comments3", "result3");
+        ArrayList<HandInfo2> handInfoArray = new ArrayList<>();
+        HandInfo2 hi1 = new HandInfo2("handfile1", "comments1", "result1");
+        HandInfo2 hi2 = new HandInfo2("handfile2", "comments2", "result2");
+        HandInfo2 hi3 = new HandInfo2("handfile3", "comments3", "result3");
         handInfoArray.add(hi1);
         handInfoArray.add(hi2);
         handInfoArray.add(hi3);
@@ -122,11 +124,11 @@ public class ControllerForAnalyzeHands {
         return getTreeItemsFromHandInfos(handInfoArray);
     }
 
-    private static ArrayList<TreeItem<HandInfo>> getTreeItemsFromHandInfos(ArrayList<HandInfo> arr) {
-        ArrayList<TreeItem<HandInfo>> treeItems = new ArrayList<>();
+    private static ArrayList<TreeItem<HandInfo2>> getTreeItemsFromHandInfos(ArrayList<HandInfo2> arr) {
+        ArrayList<TreeItem<HandInfo2>> treeItems = new ArrayList<>();
         for (int i = 0; i < arr.size(); i++) {
-            HandInfo hi = arr.get(i);
-            TreeItem<HandInfo> item = new TreeItem<HandInfo>(hi);
+            HandInfo2 hi = arr.get(i);
+            TreeItem<HandInfo2> item = new TreeItem<HandInfo2>(hi);
             if (i == 0) {
                 System.out.println("handInfo: " + hi);
                 System.out.println("item: " + item);
@@ -146,8 +148,8 @@ public class ControllerForAnalyzeHands {
 
 
         //create root, and add items to it
-        TreeItem<HandInfo> root = new TreeItem<>(new HandInfo("rootFilename", "rootComments", "rootResult"));
-        ArrayList<TreeItem<HandInfo>> treeItems = getTreeItems("Alex");
+        TreeItem<HandInfo2> root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
+        ArrayList<TreeItem<HandInfo2>> treeItems = getTreeItems("Alex");
         root.getChildren().setAll(treeItems);
 
 
@@ -170,9 +172,9 @@ public class ControllerForAnalyzeHands {
 //        });
 
         //doing weird stuff with lambdas; much shorter
-        col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().handFile2Property());
-        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().comments2Property());
-        col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo, String> param) -> param.getValue().getValue().result2Property());
+        col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().handFile2Property());
+        col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().comments2Property());
+        col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().result2Property());
 
 
         //gonna try to set up editable table cells.. hm. this seems unnecessary?
@@ -187,10 +189,10 @@ public class ControllerForAnalyzeHands {
 //        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 //
 //        //commit the edit event
-//        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo, String>>() {
+//        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
 //            @Override
-//            public void handle(TreeTableColumn.CellEditEvent<HandInfo, String> event) {
-//                TreeItem<HandInfo> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
 //                currentEditingPerson.getValue().setHandFile2(event.getNewValue());
 //            }
 //        });
@@ -203,10 +205,10 @@ public class ControllerForAnalyzeHands {
 //        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
 //
 //        //commit the edit event
-//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo, String>>() {
+//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
 //            @Override
-//            public void handle(TreeTableColumn.CellEditEvent<HandInfo, String> event) {
-//                TreeItem<HandInfo> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
 //                currentEditingPerson.getValue().setComments(event.getNewValue());
 //            }
 //        });

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="615.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForAnalyzeHands">
+   <BorderPane prefHeight="533.0" prefWidth="804.0">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+      <left>
+         <VBox fx:id="theVBox" prefHeight="307.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+            <children>
+               <JFXTreeTableView prefHeight="424.0" prefWidth="220.0">
+                  <columns>
+                     <TreeTableColumn prefWidth="159.00003051757812" text="Column X" />
+                  </columns></JFXTreeTableView>
+               <JFXTextField fx:id="folderInputTextField" prefHeight="47.0" prefWidth="220.0" />
+               <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="28.0" prefWidth="99.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Material" textAlignment="CENTER">
+                  <font>
+                     <Font name="System Bold" size="16.0" />
+                  </font>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </JFXButton>
+            </children>
+         </VBox>
+      </left>
+      <center>
+         <JFXTabPane BorderPane.alignment="CENTER">
+            <tabs>
+               <Tab text="tab one">
+                 <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                           <Label layoutX="14.0" layoutY="14.0" prefHeight="94.0" prefWidth="298.0" text="its been so long" textFill="#577eff">
+                              <font>
+                                 <Font size="19.0" />
+                              </font>
+                           </Label>
+                           <JFXButton fx:id="clickyButton" buttonType="RAISED" layoutX="163.0" layoutY="53.0" onAction="#clickyButtonAction" prefHeight="62.0" prefWidth="94.0" ripplerFill="#66d405" style="-fx-background-color: #ff4c00; -fx-background-radius: 20;" text="click" textFill="#671b4c">
+                              <font>
+                                 <Font size="26.0" />
+                              </font>
+                           </JFXButton>
+                        </children>
+                     </AnchorPane>
+                 </content>
+               </Tab>
+               <Tab text="world2">
+                 <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                           <TreeTableView fx:id="treeTableView" prefHeight="263.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                             <columns>
+                               <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="105.44442749023438" text="Name" />
+                                 <TreeTableColumn fx:id="col2" maxWidth="100.0" prefWidth="100.0" text="Email" />
+                                 <TreeTableColumn fx:id="col3" prefWidth="100.0" text="Age" />
+                             </columns>
+                           </TreeTableView>
+                        </children>
+                     </AnchorPane>
+                 </content>
+               </Tab>
+            </tabs>
+            <padding>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+         </JFXTabPane>
+      </center>
+   </BorderPane>
+
+</VBox>
