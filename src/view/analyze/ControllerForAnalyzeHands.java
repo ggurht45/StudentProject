@@ -12,6 +12,8 @@ import javafx.scene.PerspectiveCamera;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ChoiceBoxTreeTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -122,36 +124,46 @@ public class ControllerForAnalyzeHands {
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().result2Property());
 
 
-//        //specify that a textfield should show up, this is definitely needed
-//        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-//
-//        //commit the edit event
-//        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
-//            @Override
-//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
-//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-//                currentEditingPerson.getValue().setHandFile2(event.getNewValue());
-//            }
-//        });
-//
-//
-//        //setting up col2 to display choice of true/false
-//        ObservableList<String> list = FXCollections.observableArrayList();
-//        list.add("Passed");
-//        list.add("Failed");
-//        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
-//
-        //commit the edit event
-//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
-//            @Override
-//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
-//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-//                currentEditingPerson.getValue().setComments(event.getNewValue());
-//            }
-//        });
+        //filepath column
+        //specify that a textfield should show up, this is definitely needed
+        col1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        col1.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                h.getValue().setHandFile2(event.getNewValue());
+            }
+        });
 
 
-//        treeTableView.setEditable(true);
+        //   comments section
+        col2.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                h.getValue().setComments2(event.getNewValue());
+            }
+        });
+
+
+        //setting up col2 to display choice of true/false
+        ObservableList<String> list = FXCollections.observableArrayList();
+        list.add("Passed");
+        list.add("Failed");
+        col3.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
+
+//        commit the edit event
+        col3.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                h.getValue().setResult(event.getNewValue());
+            }
+        });
+
+
+        treeTableView.setEditable(true);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
 
