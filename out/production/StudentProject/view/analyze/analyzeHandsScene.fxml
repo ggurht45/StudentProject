@@ -6,18 +6,14 @@
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane prefHeight="533.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForAnalyzeHands">
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
-   <left>
-      <VBox fx:id="theVBox" maxHeight="-Infinity" prefHeight="703.0" prefWidth="336.0" BorderPane.alignment="CENTER">
+<HBox fx:id="container" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForAnalyzeHands">
+   <children>
+      <VBox fx:id="theVBox" maxHeight="-Infinity" prefHeight="603.0" prefWidth="336.0">
          <children>
             <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" prefHeight="542.0" prefWidth="221.0">
               <columns>
@@ -47,12 +43,7 @@
                </children>
             </HBox>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
       </VBox>
-   </left>
-   <center>
-      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</HBox>

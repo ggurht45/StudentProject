@@ -1,14 +1,26 @@
 package view.analyze;
 
 import com.jfoenix.controls.JFXTextField;
+import com.leapmotion.leap.Hand;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.SceneAntialiasing;
+import javafx.scene.SubScene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import model.HandInfo;
 import model.HandInfo2;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
+import view.anatomy.UIHand;
+import view.anatomy.UIHand_SuperSimple;
 
 import java.util.ArrayList;
 
@@ -16,6 +28,8 @@ import java.util.ArrayList;
 public class ControllerForAnalyzeHands {
     private LeapUIApp app;
     private ArrayList<HandInfo2> handInfos2;
+    private static UIHand uiHand1;
+    private static Hand lmHand1;
 
     public void setMainApp(LeapUIApp app) {
         this.app = app;
@@ -27,6 +41,12 @@ public class ControllerForAnalyzeHands {
         System.out.println("textfield: " + folderInputTextField.getText());
     }
 
+
+    @FXML
+    private VBox theVBox;
+
+    @FXML
+    private HBox container;
 
     @FXML
     private TreeTableView<HandInfo2> treeTableView;
@@ -67,23 +87,22 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     public void initialize() throws Exception {
+
+        //set pref height and width of container?
+
+        //try to load hands and set up camera
+        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), true);
+        lmHand1 = SerializedTargetHand.getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
+
+        //uiHand1 setup
+        uiHand1.setLoc(lmHand1);
+        uiHand1.setVisible(true);
+        uiHand1.setTranslateX(8);
+
         //create root, and add items to it
         TreeItem<HandInfo2> root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
         ArrayList<TreeItem<HandInfo2>> treeItems = getTreeItems("Alex");
         root.getChildren().setAll(treeItems);
-
-//        -//look at
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
-//        Parent button2 = fxmlLoader.load();
-//        theVBox.getChildren().add(button2);
-
-        //do some weird stuff to col, but necessary; a shorter version is below
-//        ttCol.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<String, String>, ObservableValue<String>>() {
-//            @Override
-//            public ObservableValue<String> call(TreeTableColumn.CellDataFeatures<String, String> param) {
-//                return new SimpleStringProperty(param.getValue().getValue());
-//            }
-//        });
 
         //doing weird stuff with lambdas; much shorter
         col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().handFile2Property());
@@ -123,6 +142,26 @@ public class ControllerForAnalyzeHands {
 //        treeTableView.setEditable(true);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
+
+        //camera and stuff
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.getTransforms().addAll(new Translate(0, -15, -50), new Rotate(-20, Rotate.X_AXIS));
+
+        // The 3D display
+        Group group3D = new Group();
+        group3D.getChildren().add(camera);
+        group3D.getChildren().addAll(uiHand1);
+        SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
+        sub3D.setFill(Color.LAVENDER);
+        sub3D.setCamera(camera);
+
+        // The 2D overlay
+        Group group2D = new Group(theVBox);
+        SubScene sub2D = new SubScene(group2D, app.ScreenWidth, app.ScreenHeight, false, SceneAntialiasing.BALANCED); // "false" because no depth in 2D
+
+
+        //put 2D and 3D subScenes together; and make it into a scene
+        container.getChildren().setAll(new Group(sub3D,sub2D));//new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
     }
 
     @FXML
@@ -131,3 +170,22 @@ public class ControllerForAnalyzeHands {
     @FXML
     private AnchorPane centerPane;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------------------------------------------------------------------------
+//        -//look at later if need to
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("pomo.fxml"));
+//        Parent button2 = fxmlLoader.load();
+//        theVBox.getChildren().add(button2);
