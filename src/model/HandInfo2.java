@@ -32,6 +32,12 @@ public class HandInfo2 implements java.io.Serializable {
         gestureType2 = new SimpleIntegerProperty(-1);
     }
 
+    //convert handinfo2 into handinfo
+    public HandInfo convertToHandInfo(){
+        //convert the properties to strings and construct handinfo object
+        return new HandInfo(this.getHandFile2(), this.getComments2(), this.getResult2());
+    }
+
 
 
     public String getHandFile() {

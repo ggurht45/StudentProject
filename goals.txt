@@ -135,8 +135,10 @@ first small and easy goal to accomplish:
 
 
     --set up text box to type and load folder name. --done
-    --use observable list
-    -- set up editable fields
+    --use observable list --done
+    -- set up editable fields --done
+    -- save data from table back to arraylist when save button pressed
+        --upon close or reloading of other folder
 
 
 

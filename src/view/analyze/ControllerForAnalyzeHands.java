@@ -36,6 +36,7 @@ public class ControllerForAnalyzeHands {
     private LeapUIApp app;
     private static ObservableList<TreeItem<HandInfo2>> treeItems;
     private static TreeItem<HandInfo2> root;
+    private static String currentFolder;
     private static UIHand uiHand1;
     private static Hand lmHand1;
     private static UIHand uiHand2;
@@ -49,13 +50,37 @@ public class ControllerForAnalyzeHands {
     void sayHelloMaterial(ActionEvent event) {
         //get the input from the text field on the press of the button
         String txt = folderInputTextField.getText();
-        System.out.println("textfield: " + folderInputTextField.getText());
 
-        //update table to show new folder contents.
+
+        //save data since it might have been changed; do this before updating name of folder
+        savetableData(treeItems, currentFolder);
+
+        //validate that the input is a valid folder and update the currentfolder
+        currentFolder = txt;
+
+        //update table to show new folder contents
         treeItems = getTreeItems(txt);
-        System.out.println("new Treeitems: " + treeItems);
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
+    }
+
+
+    private static ArrayList<HandInfo> getHandInfoArrayList(ObservableList<TreeItem<HandInfo2>> items) {
+        ArrayList<HandInfo> arr = new ArrayList<>();
+        for (int i = 0; i < items.size(); i++) {
+            HandInfo h = items.get(i).getValue().convertToHandInfo();
+            arr.add(h);
+        }
+        return arr;
+    }
+
+
+    private static void savetableData(ObservableList<TreeItem<HandInfo2>> items, String folder) {
+        //get handInfo Arraylist
+        ArrayList<HandInfo> arr = getHandInfoArrayList(items);
+        //save data to file
+        String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
+        SerializedTargetHand.serialize(arr, path);
     }
 
 
@@ -115,7 +140,8 @@ public class ControllerForAnalyzeHands {
 
         //create root, and add items to it
         root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
-        treeItems = getTreeItems("Alex");
+        currentFolder = "Alex";
+        treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
 
         //doing weird stuff with lambdas; much shorter
@@ -213,15 +239,11 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     void mouseClickedEvent(MouseEvent event) {
-//        System.out.println("mouse wa/s clicked in the table: " + event);
-
         TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
         HandInfo2 h = treeItem.getValue();
-//        System.out.println(h); //prints the object associated with this row in the table
 
         //update hand1
         String file = h.getHandFile();
-//        System.out.println("new file location:" + file);
         lmHand1 = SerializedTargetHand.getHandFromString(file);
         uiHand1.setLoc(lmHand1);
     }

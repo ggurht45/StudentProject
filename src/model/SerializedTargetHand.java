@@ -106,12 +106,11 @@ public class SerializedTargetHand {
 
             //try to get the all hands file and extract the arraylist and add onto it.
             ArrayList<HandInfo> arraylist;
-            try
-            {
+            try {
                 FileInputStream fis = new FileInputStream(outputFolder + "_allHandsOnDeck.ser");
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 arraylist = (ArrayList) ois.readObject();
-                System.out.println("got arraylist from serialized file, size: "+ arraylist.size());
+                System.out.println("got arraylist from serialized file, size: " + arraylist.size());
                 ois.close();
                 fis.close();
                 //add the new HandInfo object to it.
@@ -120,10 +119,10 @@ public class SerializedTargetHand {
                 //then serialize it back and save it to the file again.
                 serialize(arraylist, outputFolder + "_allHandsOnDeck.ser");
 
-            }catch(IOException ioe){
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
                 return;
-            }catch(ClassNotFoundException c){
+            } catch (ClassNotFoundException c) {
                 System.out.println("Class not found");
                 c.printStackTrace();
                 return;
@@ -153,7 +152,6 @@ public class SerializedTargetHand {
 //            }
 
 
-
         //deserializeArrayList
 //        HandInfo checkHandInfo = null;
 //        try {
@@ -173,31 +171,35 @@ public class SerializedTargetHand {
 
     }
 
-    private static void serialize(ArrayList<HandInfo> ar, String fn){
+    public static void serialize(ArrayList<HandInfo> ar, String fn) {
+        //check if fn isDirectory;
+        if ((new File(fn)).isDirectory()) {
+            fn = getAllHandsFileName(fn);
+        }
         try {
             FileOutputStream fos = new FileOutputStream(fn);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ar);
             oos.close();
             fos.close();
+            System.out.println("success..!");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
-    private static ArrayList<HandInfo> deserializeArrayList(String fn){
-        ArrayList<HandInfo> arraylist= new ArrayList<>();
-        try
-        {
+    public static ArrayList<HandInfo> deserializeArrayList(String fn) {
+        ArrayList<HandInfo> arraylist = new ArrayList<>();
+        try {
             FileInputStream fis = new FileInputStream(fn);
             ObjectInputStream ois = new ObjectInputStream(fis);
             arraylist = (ArrayList) ois.readObject();
             ois.close();
             fis.close();
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
             return null;
-        }catch(ClassNotFoundException c){
+        } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
             return null;
@@ -205,18 +207,24 @@ public class SerializedTargetHand {
         return arraylist;
     }
 
-    public static String getFolderPathHelperMethod(String shortNameForFolder){
-        return "dataOutput/" + shortNameForFolder +"/";
+    public static String getFolderPathHelperMethod(String shortNameForFolder) {
+        return "dataOutput/" + shortNameForFolder + "/";
     }
 
-    public static ArrayList<HandInfo> getAllHandsInfoInFolder(String folderName){
+    public static String getAllHandsFileName(String folderName) {
+        return folderName + "_allHandsOnDeck.ser";
+    }
+
+    //clean up this method later
+    public static ArrayList<HandInfo> getAllHandsInfoInFolder(String folderName) {
         return deserializeArrayList(folderName + "_allHandsOnDeck.ser");
     }
-    public static void printAllHandOnDeckArrayList(String outputFolder){
-        ArrayList<HandInfo> arraylist= getAllHandsInfoInFolder(outputFolder);
+
+    public static void printAllHandOnDeckArrayList(String outputFolder) {
+        ArrayList<HandInfo> arraylist = getAllHandsInfoInFolder(outputFolder);
         //print arraylist
         System.out.println("------------AllHandsOnDeck arraylist---------");
-        for(int i = 0; i<arraylist.size(); i++){
+        for (int i = 0; i < arraylist.size(); i++) {
             System.out.println(arraylist.get(i).toString());
         }
         System.out.println("END------------AllHandsOnDeck arraylist---------");
