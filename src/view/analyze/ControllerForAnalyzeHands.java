@@ -3,12 +3,14 @@ package view.analyze;
 import com.jfoenix.controls.JFXTextField;
 import com.leapmotion.leap.Hand;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,6 +22,7 @@ import model.HandInfo2;
 import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
+import view.anatomy.UIHand_Simple;
 import view.anatomy.UIHand_SuperSimple;
 
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class ControllerForAnalyzeHands {
     private ArrayList<HandInfo2> handInfos2;
     private static UIHand uiHand1;
     private static Hand lmHand1;
+    private static UIHand uiHand2;
+    private static Hand lmHand2;
 
     public void setMainApp(LeapUIApp app) {
         this.app = app;
@@ -90,14 +95,19 @@ public class ControllerForAnalyzeHands {
 
         //set pref height and width of container?
 
-        //try to load hands and set up camera
-        uiHand1 = new UIHand_SuperSimple(Color.BLUE.darker(), true);
-        lmHand1 = SerializedTargetHand.getHandFromString("targets/2017-06-12 12-13-58.hand"); //--normal. facing up.
-
         //uiHand1 setup
+        uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
+        lmHand1 = SerializedTargetHand.getHandFromString("targets2/gesture2Left.hand");
         uiHand1.setLoc(lmHand1);
         uiHand1.setVisible(true);
-        uiHand1.setTranslateX(8);
+        uiHand1.setTranslateX(4);
+
+        //uiHand2 setup
+        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
+        lmHand2 = SerializedTargetHand.getHandFromString("dataOutput/Alex/2017-07-10 12-26-16.hand");
+        uiHand2.setLoc(lmHand2);
+        uiHand2.setVisible(true);
+        uiHand2.setTranslateX(12);
 
         //create root, and add items to it
         TreeItem<HandInfo2> root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
@@ -129,14 +139,14 @@ public class ControllerForAnalyzeHands {
 //        list.add("Failed");
 //        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
 //
-//        //commit the edit event
-//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
-//            @Override
-//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
-//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-//                currentEditingPerson.getValue().setComments(event.getNewValue());
-//            }
-//        });
+        //commit the edit event
+        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                currentEditingPerson.getValue().setComments(event.getNewValue());
+            }
+        });
 
 
 //        treeTableView.setEditable(true);
@@ -150,7 +160,7 @@ public class ControllerForAnalyzeHands {
         // The 3D display
         Group group3D = new Group();
         group3D.getChildren().add(camera);
-        group3D.getChildren().addAll(uiHand1);
+        group3D.getChildren().addAll(uiHand1, uiHand2);
         SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
         sub3D.setFill(Color.LAVENDER);
         sub3D.setCamera(camera);
@@ -161,7 +171,7 @@ public class ControllerForAnalyzeHands {
 
 
         //put 2D and 3D subScenes together; and make it into a scene
-        container.getChildren().setAll(new Group(sub3D,sub2D));//new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
+        container.getChildren().setAll(new Group(sub3D, sub2D));//new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
     }
 
     @FXML
@@ -169,19 +179,22 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     private AnchorPane centerPane;
+
+    @FXML
+    void mouseClickedEvent(MouseEvent event) {
+//        System.out.println("mouse wa/s clicked in the table: " + event);
+
+        TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
+        HandInfo2 h = treeItem.getValue();
+//        System.out.println(h); //prints the object associated with this row in the table
+
+        //update hand1
+        String file =  h.getHandFile();
+//        System.out.println("new file location:" + file);
+        lmHand1 = SerializedTargetHand.getHandFromString(file);
+        uiHand1.setLoc(lmHand1);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //-----------------------------------------------------------------------------------------------------------

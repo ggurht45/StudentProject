@@ -10,12 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox fx:id="container" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.analyze.ControllerForAnalyzeHands">
    <children>
       <VBox fx:id="theVBox" maxHeight="-Infinity" prefHeight="603.0" prefWidth="336.0">
          <children>
-            <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" prefHeight="542.0" prefWidth="221.0">
+            <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" onMouseClicked="#mouseClickedEvent" prefHeight="542.0" prefWidth="221.0">
               <columns>
                 <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="82.66668701171875" text="Name" />
                   <TreeTableColumn fx:id="col2" maxWidth="104.33331298828125" prefWidth="104.33331298828125" text="Email" />
