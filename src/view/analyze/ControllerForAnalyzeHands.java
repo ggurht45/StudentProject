@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class ControllerForAnalyzeHands {
     private LeapUIApp app;
-    private ArrayList<HandInfo2> handInfos2;
+    private static ArrayList<TreeItem<HandInfo2>>  treeItems;
     private static UIHand uiHand1;
     private static Hand lmHand1;
     private static UIHand uiHand2;
@@ -90,28 +90,20 @@ public class ControllerForAnalyzeHands {
         return treeItems;
     }
 
+
+    private static String getFileStringPath(int rowIndex){
+        HandInfo2 h = treeItems.get(rowIndex).getValue();
+        return h.getHandFile();
+    }
+
     @FXML
     public void initialize() throws Exception {
 
         //set pref height and width of container?
 
-        //uiHand1 setup
-        uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
-        lmHand1 = SerializedTargetHand.getHandFromString("targets2/gesture2Left.hand");
-        uiHand1.setLoc(lmHand1);
-        uiHand1.setVisible(true);
-        uiHand1.setTranslateX(4);
-
-        //uiHand2 setup
-        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
-        lmHand2 = SerializedTargetHand.getHandFromString("dataOutput/Alex/2017-07-10 12-26-16.hand");
-        uiHand2.setLoc(lmHand2);
-        uiHand2.setVisible(true);
-        uiHand2.setTranslateX(12);
-
         //create root, and add items to it
         TreeItem<HandInfo2> root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
-        ArrayList<TreeItem<HandInfo2>> treeItems = getTreeItems("Alex");
+        treeItems = getTreeItems("Alex");
         root.getChildren().setAll(treeItems);
 
         //doing weird stuff with lambdas; much shorter
@@ -140,18 +132,37 @@ public class ControllerForAnalyzeHands {
 //        col2.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
 //
         //commit the edit event
-        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
-            @Override
-            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
-                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-                currentEditingPerson.getValue().setComments(event.getNewValue());
-            }
-        });
+//        col2.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+//            @Override
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+//                TreeItem<HandInfo2> currentEditingPerson = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//                currentEditingPerson.getValue().setComments(event.getNewValue());
+//            }
+//        });
 
 
 //        treeTableView.setEditable(true);
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
+
+
+
+        //uiHand1 setup
+        uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
+        //set the inital hand to first row's hand file
+        lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(1));
+        uiHand1.setLoc(lmHand1);
+        uiHand1.setVisible(true);
+        uiHand1.setTranslateX(4);
+
+        //uiHand2 setup
+        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
+        lmHand2 = SerializedTargetHand.getHandFromString("targets2/gesture2Left.hand");
+        uiHand2.setLoc(lmHand2);
+        uiHand2.setVisible(true);
+        uiHand2.setTranslateX(12);
+
+
 
         //camera and stuff
         PerspectiveCamera camera = new PerspectiveCamera(true);

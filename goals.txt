@@ -134,6 +134,9 @@ first small and easy goal to accomplish:
 
 
 
+    --set up text box to type and load folder name.
+
+
 
 
 
