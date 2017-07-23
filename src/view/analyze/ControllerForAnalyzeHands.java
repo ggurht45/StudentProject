@@ -44,6 +44,13 @@ public class ControllerForAnalyzeHands {
 
     public void setMainApp(LeapUIApp app) {
         this.app = app;
+        //make sure to save the data if the app is closed
+        app.primaryStage.setOnCloseRequest(event -> {
+            System.out.println("close event is : " + event);
+            //save the data if need to
+            savetableData(treeItems, currentFolder);
+        });
+
     }
 
     @FXML
@@ -62,6 +69,9 @@ public class ControllerForAnalyzeHands {
         treeItems = getTreeItems(txt);
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
+
+        //set text input to empty again
+        folderInputTextField.setText("");
     }
 
 
@@ -135,7 +145,6 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     public void initialize() throws Exception {
-
         //set pref height and width of container?
 
         //create root, and add items to it

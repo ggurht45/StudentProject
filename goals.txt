@@ -137,8 +137,13 @@ first small and easy goal to accomplish:
     --set up text box to type and load folder name. --done
     --use observable list --done
     -- set up editable fields --done
-    -- save data from table back to arraylist when save button pressed
-        --upon close or reloading of other folder
+    -- save data from table upon close or reloading of other folder -- done
+
+    -- attach "enter" event to save button
+    -- fix bug about analyze button not showing up
+    -- test with new file path saved.
+    -- save gesture also
+    -- write if statement for folder not found.
 
 
 

@@ -40,7 +40,7 @@ public class LoadGesturesScene {
 
         //button to go back to main scene
         Button button2 = new Button("Go Back");
-        button2.setOnAction(e -> app.window.setScene(app.scene));
+        button2.setOnAction(e -> app.primaryStage.setScene(app.scene));
         button2.setTranslateX(app.ScreenWidth * 1 / 5);
         button2.setTranslateY(app.ScreenHeight * 4 / 5);
         button2.setPrefHeight(50);

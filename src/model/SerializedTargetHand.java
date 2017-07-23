@@ -182,7 +182,6 @@ public class SerializedTargetHand {
             oos.writeObject(ar);
             oos.close();
             fos.close();
-            System.out.println("success..!");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }

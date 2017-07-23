@@ -68,7 +68,7 @@ public class LeapUIApp extends Application {
     public static boolean AUTOMATIC_MODE = false; //developer mode is the one that shows the accuracy bar and the time.
     public Comparer comparer;
     public static Button scene2Button;   // a button to load hand and show it using user hand
-    public Stage window;
+    public Stage primaryStage;
     public Scene scene, scene2;
     public static boolean leftHandSelected = true;
 
@@ -83,7 +83,7 @@ public class LeapUIApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        window = stage;
+        primaryStage = stage;
 
         Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
         ScreenWidth = bounds.getWidth();
@@ -148,7 +148,7 @@ public class LeapUIApp extends Application {
         scene2Button = new Button("Analyze Data");
         scene2Button.setOnAction(e -> {
             //System.out.println("going to scene2");
-            window.setScene(scene2);
+            primaryStage.setScene(scene2);
         });
 
 

@@ -83,7 +83,7 @@ public class LoadGesturesScene2 {
         Button goToStylePage = new Button("TestPage");
         goToStylePage.setTranslateX(100);
         goToStylePage.setOnAction(e -> {
-            app.window.setScene(scene3);
+            app.primaryStage.setScene(scene3);
         });
 
 //        TestScene3 sceneUI = new TestScene3(app);
