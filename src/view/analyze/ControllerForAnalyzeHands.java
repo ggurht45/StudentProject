@@ -30,7 +30,8 @@ import java.util.ArrayList;
 
 public class ControllerForAnalyzeHands {
     private LeapUIApp app;
-    private static ArrayList<TreeItem<HandInfo2>>  treeItems;
+    private static ArrayList<TreeItem<HandInfo2>> treeItems;
+    private static TreeItem<HandInfo2> root;
     private static UIHand uiHand1;
     private static Hand lmHand1;
     private static UIHand uiHand2;
@@ -43,7 +44,14 @@ public class ControllerForAnalyzeHands {
     @FXML
     void sayHelloMaterial(ActionEvent event) {
         //get the input from the text field on the press of the button
+        String txt = folderInputTextField.getText();
         System.out.println("textfield: " + folderInputTextField.getText());
+
+        //update table to show new folder contents.
+        treeItems = getTreeItems(txt);
+        System.out.println("new Treeitems: " + treeItems);
+        root.getChildren().setAll(treeItems);
+        treeTableView.setRoot(root);
     }
 
 
@@ -74,7 +82,7 @@ public class ControllerForAnalyzeHands {
 
 
     private static ArrayList<TreeItem<HandInfo2>> getTreeItems(String folder) {
-        String path = SerializedTargetHand.getFolderPathHelperMethod("Alex");
+        String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
         ArrayList<HandInfo> handInfoArray_old = SerializedTargetHand.getAllHandsInfoInFolder(path);
         return getTreeItemsFromHandInfos(handInfoArray_old);
     }
@@ -91,7 +99,7 @@ public class ControllerForAnalyzeHands {
     }
 
 
-    private static String getFileStringPath(int rowIndex){
+    private static String getFileStringPath(int rowIndex) {
         HandInfo2 h = treeItems.get(rowIndex).getValue();
         return h.getHandFile();
     }
@@ -102,7 +110,7 @@ public class ControllerForAnalyzeHands {
         //set pref height and width of container?
 
         //create root, and add items to it
-        TreeItem<HandInfo2> root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
+        root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
         treeItems = getTreeItems("Alex");
         root.getChildren().setAll(treeItems);
 
@@ -146,7 +154,6 @@ public class ControllerForAnalyzeHands {
         treeTableView.setShowRoot(false);
 
 
-
         //uiHand1 setup
         uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
         //set the inital hand to first row's hand file
@@ -161,7 +168,6 @@ public class ControllerForAnalyzeHands {
         uiHand2.setLoc(lmHand2);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(12);
-
 
 
         //camera and stuff
@@ -200,7 +206,7 @@ public class ControllerForAnalyzeHands {
 //        System.out.println(h); //prints the object associated with this row in the table
 
         //update hand1
-        String file =  h.getHandFile();
+        String file = h.getHandFile();
 //        System.out.println("new file location:" + file);
         lmHand1 = SerializedTargetHand.getHandFromString(file);
         uiHand1.setLoc(lmHand1);
