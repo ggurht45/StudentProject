@@ -2,6 +2,8 @@ package view.analyze;
 
 import com.jfoenix.controls.JFXTextField;
 import com.leapmotion.leap.Hand;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 
 public class ControllerForAnalyzeHands {
     private LeapUIApp app;
-    private static ArrayList<TreeItem<HandInfo2>> treeItems;
+    private static ObservableList<TreeItem<HandInfo2>> treeItems;
     private static TreeItem<HandInfo2> root;
     private static UIHand uiHand1;
     private static Hand lmHand1;
@@ -81,15 +83,15 @@ public class ControllerForAnalyzeHands {
 //    private TreeTableColumn<HandInfo2, Number> col4;
 
 
-    private static ArrayList<TreeItem<HandInfo2>> getTreeItems(String folder) {
+    private static ObservableList<TreeItem<HandInfo2>> getTreeItems(String folder) {
         String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
         ArrayList<HandInfo> handInfoArray_old = SerializedTargetHand.getAllHandsInfoInFolder(path);
-        return getTreeItemsFromHandInfos(handInfoArray_old);
+        return convertToHandInfo2(handInfoArray_old);
     }
 
     //converts the derserialized class into something that can have simplestring properties etc.
-    private static ArrayList<TreeItem<HandInfo2>> getTreeItemsFromHandInfos(ArrayList<HandInfo> arr) {
-        ArrayList<TreeItem<HandInfo2>> treeItems = new ArrayList<>();
+    private static ObservableList<TreeItem<HandInfo2>> convertToHandInfo2(ArrayList<HandInfo> arr) {
+        ObservableList<TreeItem<HandInfo2>> treeItems = FXCollections.observableArrayList();
         for (int i = 0; i < arr.size(); i++) {
             HandInfo2 hi = new HandInfo2(arr.get(i));
             TreeItem<HandInfo2> item = new TreeItem<HandInfo2>(hi);

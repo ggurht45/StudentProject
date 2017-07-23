@@ -134,7 +134,9 @@ first small and easy goal to accomplish:
 
 
 
-    --set up text box to type and load folder name.
+    --set up text box to type and load folder name. --done
+    --use observable list
+    -- set up editable fields
 
 
 
