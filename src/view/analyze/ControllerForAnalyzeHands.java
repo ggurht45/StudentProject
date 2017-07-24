@@ -46,7 +46,6 @@ public class ControllerForAnalyzeHands {
         this.app = app;
         //make sure to save the data if the app is closed
         app.primaryStage.setOnCloseRequest(event -> {
-            System.out.println("close event is : " + event);
             //save the data if need to
             savetableData(treeItems, currentFolder);
         });
@@ -75,6 +74,7 @@ public class ControllerForAnalyzeHands {
     }
 
 
+    //helper method to get table data in arraylist format
     private static ArrayList<HandInfo> getHandInfoArrayList(ObservableList<TreeItem<HandInfo2>> items) {
         ArrayList<HandInfo> arr = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
@@ -256,6 +256,15 @@ public class ControllerForAnalyzeHands {
         lmHand1 = SerializedTargetHand.getHandFromString(file);
         uiHand1.setLoc(lmHand1);
     }
+
+    @FXML
+    void storeToCSV(ActionEvent event) {
+        System.out.println("storing data to csv file");
+        ArrayList<HandInfo> data = getHandInfoArrayList(treeItems);
+        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
+        SerializedTargetHand.storeToCSV(path, data);
+    }
+
 }
 
 

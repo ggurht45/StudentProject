@@ -139,6 +139,10 @@ first small and easy goal to accomplish:
     -- set up editable fields --done
     -- save data from table upon close or reloading of other folder -- done
 
+
+    -- csv
+    -- margin on table
+    -- think about how to keep data but refresh the class.
     -- attach "enter" event to save button
     -- fix bug about analyze button not showing up
     -- test with new file path saved.

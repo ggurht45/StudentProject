@@ -206,6 +206,8 @@ public class SerializedTargetHand {
         return arraylist;
     }
 
+
+    //helper method
     public static String getFolderPathHelperMethod(String shortNameForFolder) {
         return "dataOutput/" + shortNameForFolder + "/";
     }
@@ -345,6 +347,14 @@ public class SerializedTargetHand {
             e.printStackTrace();
         }
         return h;
+    }
+
+    public static void storeToCSV(String path, ArrayList<HandInfo> hands) {
+        System.out.println("serializedHand: saving data to csv");
+        String fileName = System.getProperty("user.home") + "/student.csv";
+        System.out.println("filename stared in home folder?: " + fileName);
+        CsvWriter.writeCsvFile(path + "_allHandsOnDeck.csv", hands);
+
     }
 
 }

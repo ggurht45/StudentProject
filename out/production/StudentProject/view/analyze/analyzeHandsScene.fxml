@@ -23,12 +23,15 @@
             </TreeTableView>
             <HBox prefHeight="54.0" prefWidth="273.0">
                <children>
-                  <JFXTextField fx:id="folderInputTextField" prefHeight="47.0" prefWidth="140.0">
+                  <JFXTextField fx:id="folderInputTextField" prefHeight="47.0" prefWidth="140.0" promptText="Folder name">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
                   </JFXTextField>
-                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="28.0" prefWidth="99.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Load" textAlignment="CENTER">
+                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="37.0" prefWidth="67.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Load" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -36,7 +39,18 @@
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="25.0" />
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="25.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="materialButton1" buttonType="RAISED" layoutX="180.0" layoutY="35.0" onAction="#storeToCSV" prefHeight="37.0" prefWidth="67.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="CSV" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
