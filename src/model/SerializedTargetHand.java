@@ -2,9 +2,7 @@ package model;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -353,8 +351,13 @@ public class SerializedTargetHand {
         System.out.println("serializedHand: saving data to csv");
         String fileName = System.getProperty("user.home") + "/student.csv";
         System.out.println("filename stared in home folder?: " + fileName);
-        CsvWriter.writeCsvFile(path + "_allHandsOnDeck.csv", hands);
+        CsvHelper.writeCsvFile(path + "_allHandsOnDeck.csv", hands);
 
+    }
+
+    public static ArrayList<HandInfo> readFromCSV(String fullFileName) {
+        System.out.println("serializedHand: reading from csv");
+        return CsvHelper.readCsvFile(fullFileName);
     }
 
 }

@@ -123,11 +123,11 @@ public class ControllerForAnalyzeHands {
     private static ObservableList<TreeItem<HandInfo2>> getTreeItems(String folder) {
         String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
         ArrayList<HandInfo> handInfoArray_old = SerializedTargetHand.getAllHandsInfoInFolder(path);
-        return convertToHandInfo2(handInfoArray_old);
+        return getListOfTreeItems(handInfoArray_old);
     }
 
     //converts the derserialized class into something that can have simplestring properties etc.
-    private static ObservableList<TreeItem<HandInfo2>> convertToHandInfo2(ArrayList<HandInfo> arr) {
+    private static ObservableList<TreeItem<HandInfo2>> getListOfTreeItems(ArrayList<HandInfo> arr) {
         ObservableList<TreeItem<HandInfo2>> treeItems = FXCollections.observableArrayList();
         for (int i = 0; i < arr.size(); i++) {
             HandInfo2 hi = new HandInfo2(arr.get(i));
@@ -263,6 +263,21 @@ public class ControllerForAnalyzeHands {
         ArrayList<HandInfo> data = getHandInfoArrayList(treeItems);
         String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
         SerializedTargetHand.storeToCSV(path, data);
+    }
+
+    @FXML
+    void readFromCSV(ActionEvent event) {
+        System.out.println("reading data from csv file");
+        String filename = "_allHandsOnDeck.csv";            //allow to be typed in from dialog
+        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
+        String fullFileName = path + filename;
+        ArrayList<HandInfo> data = SerializedTargetHand.readFromCSV(fullFileName);
+
+        //update table
+        treeItems = getListOfTreeItems(data);
+        root.getChildren().setAll(treeItems);
+        treeTableView.setRoot(root);
+
     }
 
 }

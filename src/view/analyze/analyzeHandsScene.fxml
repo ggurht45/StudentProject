@@ -31,7 +31,7 @@
                         <Font size="20.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="37.0" prefWidth="67.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Load" textAlignment="CENTER">
+                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="37.0" prefWidth="115.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Load Data" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -42,7 +42,11 @@
                         <Insets bottom="5.0" left="10.0" right="10.0" top="25.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="materialButton1" buttonType="RAISED" layoutX="180.0" layoutY="35.0" onAction="#storeToCSV" prefHeight="37.0" prefWidth="67.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="CSV" textAlignment="CENTER">
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="materialButton1" buttonType="RAISED" onAction="#storeToCSV" prefHeight="37.0" prefWidth="127.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Write to CSV" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -50,7 +54,18 @@
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" top="25.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="materialButton2" buttonType="RAISED" onAction="#readFromCSV" prefHeight="37.0" prefWidth="146.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Read from CSV" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
