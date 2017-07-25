@@ -249,12 +249,14 @@ public class ControllerForAnalyzeHands {
     @FXML
     void mouseClickedEvent(MouseEvent event) {
         TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
-        HandInfo2 h = treeItem.getValue();
-
-        //update hand1
-        String file = h.getHandFile();
-        lmHand1 = SerializedTargetHand.getHandFromString(file);
-        uiHand1.setLoc(lmHand1);
+        //only update if actually clicked on a row containing the hand
+        if(treeItem != null){
+            HandInfo2 h = treeItem.getValue();
+            //update hand
+            String file = h.getHandFile();
+            lmHand1 = SerializedTargetHand.getHandFromString(file);
+            uiHand1.setLoc(lmHand1);
+        }
     }
 
     @FXML
