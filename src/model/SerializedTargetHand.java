@@ -89,21 +89,29 @@ public class SerializedTargetHand {
 
         //check if a total list exists
         String fullFileName = outputFolder + "_allHandsOnDeck.csv";
-        if (new File(fullFileName).isFile()) {
-            System.out.println("csv file exists, add on to it");
-            ArrayList<HandInfo> arraylist = readFromCSV(fullFileName);
-            arraylist.add(handInfo);
-            //instead of serializing, use csv instead
-            writeToCSV(fullFileName, arraylist);
+        CsvHelper.writeHandInfoToFile(fullFileName, handInfo);
 
-        } else {
-            System.out.println("create csv file and add one item to it");
-            ArrayList<HandInfo> arraylist = new ArrayList<>();
-            arraylist.add(handInfo);
-            writeToCSV(fullFileName, arraylist);
-        }
 
-        printAllHandOnDeckArrayList(outputFolder);
+
+
+
+
+//        if (new File(fullFileName).isFile()) {
+//            System.out.println("csv file exists, add on to it");
+//            ArrayList<HandInfo> arraylist = readFromCSV(fullFileName);
+//            arraylist.add(handInfo);
+//            System.out.println("arraylist after new hand was added to it: " + arraylist);
+//            //instead of serializing, use csv instead
+//            writeToCSV(fullFileName, arraylist);
+//
+//        } else {
+//            System.out.println("create csv file and add one item to it");
+//            ArrayList<HandInfo> arraylist = new ArrayList<>();
+//            arraylist.add(handInfo);
+//            writeToCSV(fullFileName, arraylist);
+//        }
+
+//        printAllHandOnDeckArrayList(outputFolder);
 
     }
 
@@ -294,7 +302,7 @@ public class SerializedTargetHand {
     }
 
     public static void writeToCSV(String fullFilePath, ArrayList<HandInfo> hands) {
-        System.out.println("serializedHand: saving data to csv, fullFilePath: " + fullFilePath);
+        System.out.println("NEED TO CHECK THIS OVER LATER");
         CsvHelper.writeCsvFile(fullFilePath, hands);
 
     }

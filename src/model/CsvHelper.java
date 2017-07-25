@@ -1,9 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class CsvHelper {
     private static final String FILE_HEADER = getCSVHeader();//HandInfo.getCSVHeader();
 
     public static void writeCsvFile(String fileName, ArrayList<HandInfo> hands) {
-        System.out.println("*** in writer.\n fileName: " + fileName + "\nhands(0): " + hands.get(0) + "\n***");
+        System.out.println("*** in writer.\n fileName: " + fileName + "\nhands(all): " + hands + "\n***");
 
         FileWriter fileWriter = null;
 
@@ -43,6 +40,47 @@ public class CsvHelper {
                 fileWriter.append(s);
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
+
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    //create or add to existing file, the handinfo object passed in.
+    public static void writeHandInfoToFile(String fileName, HandInfo h) {
+        System.out.println("*** in writer.\n gonna write hand: " + h + "\nto file:" + fileName + "\n***");
+        FileWriter fileWriter = null;
+        try {
+
+            if (!(new File(fileName).isFile())) {
+                fileWriter = new FileWriter(fileName);
+                //creating a new csv file
+                System.out.println("new csv file being created");
+                fileWriter.append(FILE_HEADER.toString());      //Write the CSV file header
+                fileWriter.append(NEW_LINE_SEPARATOR);          //Add a new line separator after the header
+            }
+
+            //so if the file already exists must still load it. however if the fileWriter has already been initialized then this wont run
+            if (fileWriter == null) {
+                //hopefully this will open the file with the data kept in place.
+                fileWriter = new FileWriter(fileName, true);
+            }
+
+            System.out.println("adding hand now. header should have already been added when file was first created");
+            //add hand
+            String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+            fileWriter.append(s);
+            fileWriter.append(NEW_LINE_SEPARATOR);
 
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");

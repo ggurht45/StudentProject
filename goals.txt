@@ -146,10 +146,11 @@ first small and easy goal to accomplish:
     -- fix bug about loading csv vs loading .ser (fixing this bug may fix something else! also)
         --make new branch to fix it
 
+    -- fixed bug about hand gestures not showing up.
 
 
 
-    -- margin on table
+    -- margin on table --done
     -- think about how to keep data but refresh the class.
     -- attach "enter" event to save button
     -- fix bug about analyze button not showing up
