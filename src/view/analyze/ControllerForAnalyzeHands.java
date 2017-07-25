@@ -208,7 +208,7 @@ public class ControllerForAnalyzeHands {
         //uiHand1 setup
         uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
         //set the inital hand to first row's hand file
-        lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(1));
+        lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
         uiHand1.setLoc(lmHand1);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(4);
