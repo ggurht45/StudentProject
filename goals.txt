@@ -142,25 +142,20 @@ first small and easy goal to accomplish:
     -- bug about clicking outside of row --done
     -- rename table headers --done
     -- csv reading (load from anywhere on the computer). --done
+    -- bug about hand gestures not showing up. --done
+    -- analyze button keeps disappearing --done
+    -- margin on table --done
+    -- go to correct scene2 --done
 
+
+
+    -- no way to go back to main app from analyze scene
     -- fix bug about loading csv vs loading .ser (fixing this bug may fix something else! also)
         --make new branch to fix it
 
-    -- bug about hand gestures not showing up. --done
-
-
-    -- analyze button keeps disappearing
-    -- no way to go back to main app from analyze scene
-
-
-
-
-    -- margin on table --done
-
-
     -- think about how to keep data but refresh the class.
     -- attach "enter" event to save button
-    -- fix bug about analyze button not showing up
+    -- fix bug about analyze button not showing up --done
     -- test with new file path saved.
     -- save gesture also
     -- write if statement for folder not found.
