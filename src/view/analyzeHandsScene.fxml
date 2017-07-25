@@ -20,6 +20,9 @@
                   <TreeTableColumn fx:id="col2" maxWidth="104.33331298828125" prefWidth="104.33331298828125" text="Comments" />
                   <TreeTableColumn fx:id="col3" prefWidth="72.0" text="Result" />
               </columns>
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
             </TreeTableView>
             <HBox prefHeight="54.0" prefWidth="273.0">
                <children>

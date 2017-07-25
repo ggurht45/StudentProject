@@ -12,12 +12,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
-import javafx.scene.SubScene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,10 +30,7 @@ import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.SerializedTargetHand;
-import view.analyze.InfoBox;
-import view.analyze.LoadGesturesScene;
-import view.analyze.LoadGesturesScene2;
-import view.analyze.SaveBox;
+import view.analyze.*;
 import view.anatomy.UIHand;
 //import view.anatomy.UIHand_Full;
 import view.anatomy.UIHand_Simple;
@@ -199,8 +193,28 @@ public class LeapUIApp extends Application {
 //        LoadGesturesScene layout2 = new LoadGesturesScene(this);
 //        scene2 = layout2.getScene();
 
-        LoadGesturesScene2 rotateDemoLayout = new LoadGesturesScene2(this);
-        scene2 = rotateDemoLayout.getScene();
+//        LoadGesturesScene2 rotateDemoLayout = new LoadGesturesScene2(this);
+////        scene2 = rotateDemoLayout.getScene();
+
+        try {
+            //this uses the static load method. which is not what we want if we ever once in our life time want to access the
+            //controller associated with this fxml template file.
+//            Parent root = FXMLLoader.load(getClass().getResource("/view/analyze/analyzeHandsScene.fxml")); //Note the way to find resources manually.
+
+            //create an instance of the fxmlloader, this instance will be used to get controller objects for the fxml templates
+            //note, this is a special kind of loader that has a Specific kind fxml file attached to it
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("analyzeHandsScene.fxml"));
+            //note, this loader uses the "instance" load method, rather than the static load method.
+            Parent rootNode = fxmlLoader.load();
+            scene2 = new Scene(rootNode, ScreenWidth, ScreenHeight);
+
+            //get the controller file for the fxml file attached to the loader
+            ControllerForAnalyzeHands scene2Controller = (ControllerForAnalyzeHands) fxmlLoader.getController();
+            scene2Controller.setMainApp(this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -621,7 +635,7 @@ public class LeapUIApp extends Application {
             timeText.setVisible(false);
             aBar.setVisible(false);
             testButton.setVisible(true);
-            scene2Button.setCancelButton(true);
+            scene2Button.setVisible(true);
             return null;
         }
 

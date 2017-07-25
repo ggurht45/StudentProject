@@ -96,7 +96,7 @@ public class LoadGesturesScene2 {
 
             //create an instance of the fxmlloader, this instance will be used to get controller objects for the fxml templates
             //note, this is a special kind of loader that has a Specific kind fxml file attached to it
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("analyzeHandsScene.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../analyzeHandsScene.fxml"));
             //note, this loader uses the "instance" load method, rather than the static load method.
             Parent root = fxmlLoader.load();
             scene3 = new Scene(root, app.ScreenWidth, app.ScreenHeight);
