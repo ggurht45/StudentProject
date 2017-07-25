@@ -52,6 +52,7 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static double ScreenWidth = 800;
     public static double ScreenHeight = 800;
     public static UIHand userHand;

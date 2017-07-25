@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
+import javafx.stage.FileChooser;
 import model.HandInfo;
 import model.HandInfo2;
 import model.SerializedTargetHand;
@@ -29,6 +30,7 @@ import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 import view.anatomy.UIHand_SuperSimple;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -270,10 +272,21 @@ public class ControllerForAnalyzeHands {
     @FXML
     void readFromCSV(ActionEvent event) {
         System.out.println("reading data from csv file");
-        String filename = "_allHandsOnDeck.csv";            //allow to be typed in from dialog
-        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
-        String fullFileName = path + filename;
-        ArrayList<HandInfo> data = SerializedTargetHand.readFromCSV(fullFileName);
+        //get file from computer
+        FileChooser filechooser = new FileChooser();
+        filechooser.setTitle("Please choose CSV file..");
+        filechooser.setInitialDirectory(new File(app.ProjectDirectoryPath + "/dataOutput"));
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (.csv)", "*.csv");
+        filechooser.setSelectedExtensionFilter(filter);
+        File file = filechooser.showOpenDialog(app.primaryStage);
+        String filePath = file.getPath();
+        System.out.println("filePath is: " + filePath);
+
+
+//        String filename = "_allHandsOnDeck.csv";            //allow to be typed in from dialog
+//        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
+//        String fullFileName = path + filename;
+        ArrayList<HandInfo> data = SerializedTargetHand.readFromCSV(filePath);
 
         //update table
         treeItems = getListOfTreeItems(data);

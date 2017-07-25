@@ -138,12 +138,11 @@ first small and easy goal to accomplish:
     --use observable list --done
     -- set up editable fields --done
     -- save data from table upon close or reloading of other folder -- done
-
-
     -- csv writing --done
-    -- csv reading (load from anywhere on the computer).
     -- bug about clicking outside of row --done
     -- rename table headers --done
+
+    -- csv reading (load from anywhere on the computer).
 
     -- margin on table
     -- think about how to keep data but refresh the class.
