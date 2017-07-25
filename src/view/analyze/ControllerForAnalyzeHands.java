@@ -28,7 +28,6 @@ import model.SerializedTargetHand;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
-import view.anatomy.UIHand_SuperSimple;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class ControllerForAnalyzeHands {
         //make sure to save the data if the app is closed
         app.primaryStage.setOnCloseRequest(event -> {
             //save the data if need to
-            savetableData(treeItems, currentFolder);
+            savetableData2(treeItems, currentFolder);
         });
 
     }
@@ -61,7 +60,7 @@ public class ControllerForAnalyzeHands {
 
 
         //save data since it might have been changed; do this before updating name of folder
-        savetableData(treeItems, currentFolder);
+        savetableData2(treeItems, currentFolder);
 
         //validate that the input is a valid folder and update the currentfolder
         currentFolder = txt;
@@ -87,12 +86,21 @@ public class ControllerForAnalyzeHands {
     }
 
 
-    private static void savetableData(ObservableList<TreeItem<HandInfo2>> items, String folder) {
+//    private static void savetableData(ObservableList<TreeItem<HandInfo2>> items, String folder) {
+//        //get handInfo Arraylist
+//        ArrayList<HandInfo> arr = getHandInfoArrayList(items);
+//        //save data to file
+//        String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
+//        SerializedTargetHand.serialize(arr, path);
+//    }
+
+    //save to csv instead of .ser
+    private static void savetableData2(ObservableList<TreeItem<HandInfo2>> items, String folder) {
         //get handInfo Arraylist
         ArrayList<HandInfo> arr = getHandInfoArrayList(items);
         //save data to file
-        String path = SerializedTargetHand.getFolderPathHelperMethod(folder);
-        SerializedTargetHand.serialize(arr, path);
+        String fullFilePath = SerializedTargetHand.getCSVFilePathForFolder(folder);
+        SerializedTargetHand.writeToCSV(fullFilePath, arr);
     }
 
 
@@ -249,7 +257,7 @@ public class ControllerForAnalyzeHands {
     private AnchorPane centerPane;
 
     @FXML
-    void mouseClickedEvent(MouseEvent event) {
+    void rowClickedEvent(MouseEvent event) {
         TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
         //only update if actually clicked on a row containing the hand
         if(treeItem != null){
@@ -261,13 +269,13 @@ public class ControllerForAnalyzeHands {
         }
     }
 
-    @FXML
-    void storeToCSV(ActionEvent event) {
-        System.out.println("storing data to csv file");
-        ArrayList<HandInfo> data = getHandInfoArrayList(treeItems);
-        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
-        SerializedTargetHand.storeToCSV(path, data);
-    }
+//    @FXML
+//    void writeToCSV(ActionEvent event) {
+//        System.out.println("storing data to csv file");
+//        ArrayList<HandInfo> data = getHandInfoArrayList(treeItems);
+//        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
+//        SerializedTargetHand.storeToCSV(path, data);
+//    }
 
     @FXML
     void readFromCSV(ActionEvent event) {

@@ -28,7 +28,7 @@ public class CsvHelper {
     private static final String FILE_HEADER = getCSVHeader();//HandInfo.getCSVHeader();
 
     public static void writeCsvFile(String fileName, ArrayList<HandInfo> hands) {
-        System.out.println("*** in writer.\n fileName: " + fileName + "hands(0): " + hands.get(0) + "\n***");
+        System.out.println("*** in writer.\n fileName: " + fileName + "\nhands(0): " + hands.get(0) + "\n***");
 
         FileWriter fileWriter = null;
 
@@ -39,13 +39,10 @@ public class CsvHelper {
 
             //Write a new student object list to the CSV file
             for (HandInfo h : hands) {
-                System.out.println("get comma line from handinfo");
                 String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
                 fileWriter.append(s);
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
-
-            System.out.println("CSV file was created successfully");
 
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");

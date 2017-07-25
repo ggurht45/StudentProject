@@ -8,4 +8,3 @@ targets2/gesture7Left.hand
 targets2/gesture8Left.hand
 targets2/gesture9Left.hand
 targets2/gesture10Left.hand
-targets2/gesture11Left.hand

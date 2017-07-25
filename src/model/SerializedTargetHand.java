@@ -86,123 +86,61 @@ public class SerializedTargetHand {
 
         //create handInfo object and serialize.
         HandInfo handInfo = new HandInfo(fileNameWithPath + ".hand", comments, result);
-//        try {
-//            FileOutputStream fileOut = new FileOutputStream(fileNameWithPath + ".ser");
-//
-//            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//            out.writeObject(handInfo);
-//            out.close();
-//            fileOut.close();
-//            System.out.printf("Serialized handInfo");
-//        } catch (IOException i) {
-//            i.printStackTrace();
-//        }
 
         //check if a total list exists
-        if (new File(outputFolder + "_allHandsOnDeck.ser").isFile()) {
-            System.out.println("arraylist of hands info file already exists! ");
-
-            //try to get the all hands file and extract the arraylist and add onto it.
-            ArrayList<HandInfo> arraylist;
-            try {
-                FileInputStream fis = new FileInputStream(outputFolder + "_allHandsOnDeck.ser");
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                arraylist = (ArrayList) ois.readObject();
-                System.out.println("got arraylist from serialized file, size: " + arraylist.size());
-                ois.close();
-                fis.close();
-                //add the new HandInfo object to it.
-                arraylist.add(handInfo);
-
-                //then serialize it back and save it to the file again.
-                serialize(arraylist, outputFolder + "_allHandsOnDeck.ser");
-
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                return;
-            } catch (ClassNotFoundException c) {
-                System.out.println("Class not found");
-                c.printStackTrace();
-                return;
-            }
-
+        String fullFileName = outputFolder + "_allHandsOnDeck.csv";
+        if (new File(fullFileName).isFile()) {
+            System.out.println("csv file exists, add on to it");
+            ArrayList<HandInfo> arraylist = readFromCSV(fullFileName);
+            arraylist.add(handInfo);
+            //instead of serializing, use csv instead
+            writeToCSV(fullFileName, arraylist);
 
         } else {
-            System.out.println("arraylist handsInfo file doesnt exist yet. lets create it");
-            //create arraylist, add hand info objct to it, serialize arraylist
-            ArrayList<HandInfo> al = new ArrayList<>();
-            al.add(handInfo);
-
-            try {
-                FileOutputStream fos = new FileOutputStream(outputFolder + "_allHandsOnDeck.ser");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(al);
-                oos.close();
-                fos.close();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
+            System.out.println("create csv file and add one item to it");
+            ArrayList<HandInfo> arraylist = new ArrayList<>();
+            arraylist.add(handInfo);
+            writeToCSV(fullFileName, arraylist);
         }
 
-        //print if arraylist size is three
-//            if(arraylist.size()>2){
         printAllHandOnDeckArrayList(outputFolder);
-//            }
 
+    }
 
-        //deserializeArrayList
-//        HandInfo checkHandInfo = null;
-//        try {
-//            FileInputStream fileIn = new FileInputStream(fileNameWithPath + ".ser");
-//            ObjectInputStream in = new ObjectInputStream(fileIn);
-//            checkHandInfo = (HandInfo) in.readObject();
-//            in.close();
-//            fileIn.close();
-//        } catch (IOException i) {
-//            i.printStackTrace();
-//            return;
-//        } catch (ClassNotFoundException c) {
-//            System.out.println("HandInfo not found");
-//            c.printStackTrace();
-//            return;
+//    public static void serialize(ArrayList<HandInfo> ar, String fn) {
+//        //check if fn isDirectory;
+//        if ((new File(fn)).isDirectory()) {
+//            fn = getAllHandsFileName(fn);
 //        }
-
-    }
-
-    public static void serialize(ArrayList<HandInfo> ar, String fn) {
-        //check if fn isDirectory;
-        if ((new File(fn)).isDirectory()) {
-            fn = getAllHandsFileName(fn);
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(fn);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(ar);
-            oos.close();
-            fos.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    public static ArrayList<HandInfo> deserializeArrayList(String fn) {
-        ArrayList<HandInfo> arraylist = new ArrayList<>();
-        try {
-            FileInputStream fis = new FileInputStream(fn);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            arraylist = (ArrayList) ois.readObject();
-            ois.close();
-            fis.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException c) {
-            System.out.println("Class not found");
-            c.printStackTrace();
-            return null;
-        }
-        return arraylist;
-    }
+//        try {
+//            FileOutputStream fos = new FileOutputStream(fn);
+//            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//            oos.writeObject(ar);
+//            oos.close();
+//            fos.close();
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        }
+//    }
+//
+//    public static ArrayList<HandInfo> deserializeArrayList(String fn) {
+//        ArrayList<HandInfo> arraylist = new ArrayList<>();
+//        try {
+//            FileInputStream fis = new FileInputStream(fn);
+//            ObjectInputStream ois = new ObjectInputStream(fis);
+//            arraylist = (ArrayList) ois.readObject();
+//            ois.close();
+//            fis.close();
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//            return null;
+//        } catch (ClassNotFoundException c) {
+//            System.out.println("Class not found");
+//            c.printStackTrace();
+//            return null;
+//        }
+//        return arraylist;
+//    }
 
 
     //helper method
@@ -210,13 +148,21 @@ public class SerializedTargetHand {
         return "dataOutput/" + shortNameForFolder + "/";
     }
 
-    public static String getAllHandsFileName(String folderName) {
-        return folderName + "_allHandsOnDeck.ser";
+    //helper method to get the csv file associated with a certain folder
+    public static String getCSVFilePathForFolder(String shortNameForFolder) {
+        return getFolderPathHelperMethod(shortNameForFolder) + "_allHandsOnDeck.csv";
     }
 
-    //clean up this method later
+
+//    public static String getAllHandsFileName(String folderName) {
+//        return folderName + "_allHandsOnDeck.ser";
+//    }
+
+
     public static ArrayList<HandInfo> getAllHandsInfoInFolder(String folderName) {
-        return deserializeArrayList(folderName + "_allHandsOnDeck.ser");
+        //return hands built from csv file instead of .ser
+        String fullName = folderName + "_allHandsOnDeck.csv";
+        return readFromCSV(fullName);
     }
 
     public static void printAllHandOnDeckArrayList(String outputFolder) {
@@ -347,11 +293,9 @@ public class SerializedTargetHand {
         return h;
     }
 
-    public static void storeToCSV(String path, ArrayList<HandInfo> hands) {
-        System.out.println("serializedHand: saving data to csv");
-        String fileName = System.getProperty("user.home") + "/student.csv";
-        System.out.println("filename stared in home folder?: " + fileName);
-        CsvHelper.writeCsvFile(path + "_allHandsOnDeck.csv", hands);
+    public static void writeToCSV(String fullFilePath, ArrayList<HandInfo> hands) {
+        System.out.println("serializedHand: saving data to csv, fullFilePath: " + fullFilePath);
+        CsvHelper.writeCsvFile(fullFilePath, hands);
 
     }
 

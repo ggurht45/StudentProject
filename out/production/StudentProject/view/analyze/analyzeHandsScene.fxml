@@ -14,7 +14,7 @@
    <children>
       <VBox fx:id="theVBox" maxHeight="-Infinity" prefHeight="603.0" prefWidth="336.0">
          <children>
-            <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" onMouseClicked="#mouseClickedEvent" prefHeight="542.0" prefWidth="221.0">
+            <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" onMouseClicked="#rowClickedEvent" prefHeight="542.0" prefWidth="221.0">
               <columns>
                 <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="82.66668701171875" text="FilePath" />
                   <TreeTableColumn fx:id="col2" maxWidth="104.33331298828125" prefWidth="104.33331298828125" text="Comments" />
@@ -31,7 +31,7 @@
                         <Font size="20.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="37.0" prefWidth="115.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Load Data" textAlignment="CENTER">
+                  <JFXButton fx:id="materialButton" buttonType="RAISED" onAction="#sayHelloMaterial" prefHeight="37.0" prefWidth="156.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Read from CSV" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -40,32 +40,6 @@
                      </opaqueInsets>
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="25.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <JFXButton fx:id="materialButton1" buttonType="RAISED" onAction="#storeToCSV" prefHeight="37.0" prefWidth="127.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Write to CSV" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="materialButton2" buttonType="RAISED" onAction="#readFromCSV" prefHeight="37.0" prefWidth="146.0" ripplerFill="#3214f5" style="-fx-background-color: #669900;" text="Read from CSV" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                   </JFXButton>
                </children>
