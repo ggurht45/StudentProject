@@ -31,6 +31,7 @@ import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -261,7 +262,7 @@ public class ControllerForAnalyzeHands {
     void rowClickedEvent(MouseEvent event) {
         TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
         //only update if actually clicked on a row containing the hand
-        if(treeItem != null){
+        if (treeItem != null) {
             HandInfo2 h = treeItem.getValue();
             //update hand
             String file = h.getHandFile();
@@ -302,6 +303,27 @@ public class ControllerForAnalyzeHands {
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
 
+    }
+
+    @FXML
+    void saveToExternalCSVFile(ActionEvent event) {
+        System.out.println("saving csv to external file");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save to external CSV file...");
+        File file = fileChooser.showSaveDialog(app.primaryStage);
+        ArrayList<HandInfo> hands = getHandInfoArrayList(treeItems);
+        System.out.println("file being saved: " + file);
+        if (file != null) {
+            CsvHelper.writeCsvFile(file, hands);
+        } else {
+            System.out.println("the file specified is not null. can not write to this file");
+        }
+    }
+
+    @FXML
+    void goToMainScene(ActionEvent event) {
+        //go to main scene
+        app.primaryStage.setScene(app.scene);
     }
 
 }

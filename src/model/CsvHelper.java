@@ -55,6 +55,36 @@ public class CsvHelper {
         }
     }
 
+    public static void writeCsvFile(File file, ArrayList<HandInfo> hands) {
+        System.out.println("hello23");
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file);
+            fileWriter.append(FILE_HEADER.toString());      //Write the CSV file header
+            fileWriter.append(NEW_LINE_SEPARATOR);          //Add a new line separator after the header
+
+            //Write a new student object list to the CSV file
+            for (HandInfo h : hands) {
+                String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+                fileWriter.append(s);
+                fileWriter.append(NEW_LINE_SEPARATOR);
+            }
+
+            System.out.println("success!");
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     //create or add to existing file, the handinfo object passed in.
     public static void writeHandInfoToFile(String fileName, HandInfo h) {
