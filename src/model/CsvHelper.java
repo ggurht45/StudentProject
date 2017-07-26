@@ -12,7 +12,7 @@ public class CsvHelper {
     }
 
     public static String getCommaSeperatedToString(HandInfo h) {
-        return h.handFile + ", " + h.comments + ", " + h.result;
+        return h.handFile.trim() + ", " + h.comments.trim() + ", " + h.result.trim();
     }
     //END temporary for testing..
 
@@ -56,7 +56,6 @@ public class CsvHelper {
     }
 
     public static void writeCsvFile(File file, ArrayList<HandInfo> hands) {
-        System.out.println("hello23");
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file);
@@ -66,11 +65,10 @@ public class CsvHelper {
             //Write a new student object list to the CSV file
             for (HandInfo h : hands) {
                 String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+                System.out.println("total s:>>>>" + s + "<<<<");
                 fileWriter.append(s);
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
-
-            System.out.println("success!");
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();

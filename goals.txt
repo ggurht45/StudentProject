@@ -149,10 +149,15 @@ first small and easy goal to accomplish:
 
 
 
-    -- no way to go back to main app from analyze scene
+    -- no way to go back to main app from analyze scene --done
 
     -- fix bug about loading csv vs loading .ser (fixing this bug may fix something else! also)
         --make new branch to fix it
+
+    -- save data to external csv --done
+        -- make it so the save button opens in user's home directory
+        -- remove whitespace from strings
+
 
     -- think about how to keep data but refresh the class.
     -- attach "enter" event to save button
