@@ -51,6 +51,8 @@ public class LeapUIApp extends Application {
     public static String RightGesturesFile = "dataOutput/RightGestures.txt";
     public static String TestsFile = "dataOutput/AllTest.txt";
     public static String TargetHandsFile = "dataOutput/TargetHands.txt";
+    public static String TargetsPath = "dataOutput/targets/";
+    public static String Targets2Path = "dataOutput/targets2/";
 
     public static double ScreenWidth = 800;
     public static double ScreenHeight = 800;
@@ -261,7 +263,7 @@ public class LeapUIApp extends Application {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         System.out.println("enter was pressed, saving hand.");
-                        Frame f = (LoadGesturesScene.getHandFromString("targets/2015-05-05 08-17-01.hand")).frame(); //latestHand.frame();
+                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame(); //latestHand.frame();
 
                         //show alert box
                         SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
@@ -431,12 +433,12 @@ public class LeapUIApp extends Application {
 
 
         //compare targetHand 0 against another one.
-        String str1 = "targets/2015-05-05 08-17-01.hand";
-        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
-        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
-        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
-        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
-        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+        String str1 = LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand";
+        String str2 = LeapUIApp.TargetsPath + "2017-06-12 12-13-58.hand"; //should be very close to the 0th hand
+        String str3 = LeapUIApp.TargetsPath + "2017-06-12 12-18-33.hand"; //palm facing downwards
+        String str4 = LeapUIApp.TargetsPath + "2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+        String str5 = LeapUIApp.TargetsPath + "2017-06-12 12-23-19.hand"; //right hand palm, upwards
+        String str6 = LeapUIApp.TargetsPath + "2017-06-12 12-30-56.hand"; //palm facing down again
         comparer = new Comparer();
 
         compareTwoHands(str1, str2);

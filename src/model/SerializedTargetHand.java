@@ -11,6 +11,7 @@ import java.util.Calendar;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Leap;
 import view.LeapUIApp;
 
 
@@ -22,7 +23,7 @@ public class SerializedTargetHand {
         Calendar cal = Calendar.getInstance();
         cal.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-        String fileName = "targets/" + sdf.format(cal.getTime()) + ".hand";
+        String fileName = LeapUIApp.TargetsPath + sdf.format(cal.getTime()) + ".hand";
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileName), serializedFrame);
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(LeapUIApp.TargetHandsFile, true)));
@@ -193,7 +194,7 @@ public class SerializedTargetHand {
             side = "Right";
             indexFile = LeapUIApp.RightGesturesFile;
         }
-        String fileName = "targets2/" + gestureId + side + ".hand";
+        String fileName = LeapUIApp.Targets2Path + gestureId + side + ".hand";
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileName), serializedFrame);
         PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(indexFile, true)));
@@ -258,8 +259,11 @@ public class SerializedTargetHand {
             return hands;
         } catch (Exception e) {
             System.out.println("error happened while trying to getAllHands2");
+            e.printStackTrace();
+            System.out.println("returning null for Arraylist of hands!!!!!!!!!!!!!");
+            return null;
         }
-        return null;
+
     }
 
     public static ArrayList<String> getAllHands2Names(String fileName) {

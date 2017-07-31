@@ -171,12 +171,12 @@ public class DebugHelper {
 
 
     public static void printInfoManyHands() {
-        String str1 = "targets/2015-05-05 08-17-01.hand"; //normal facing up(1)
-        String str2 = "targets/2017-06-12 12-13-58.hand"; //should be very close to the 0th hand. normal facing up(2)
-        String str3 = "targets/2017-06-12 12-18-33.hand"; //palm facing downwards
-        String str4 = "targets/2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
-        String str5 = "targets/2017-06-12 12-23-19.hand"; //right hand palm, upwards
-        String str6 = "targets/2017-06-12 12-30-56.hand"; //palm facing down again
+        String str1 = LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand"; //normal facing up(1)
+        String str2 = LeapUIApp.TargetsPath + "2017-06-12 12-13-58.hand"; //should be very close to the 0th hand. normal facing up(2)
+        String str3 = LeapUIApp.TargetsPath + "2017-06-12 12-18-33.hand"; //palm facing downwards
+        String str4 = LeapUIApp.TargetsPath + "2017-06-12 12-21-01.hand"; //palm facing downwards and fingers pointing to right
+        String str5 = LeapUIApp.TargetsPath + "2017-06-12 12-23-19.hand"; //right hand palm, upwards
+        String str6 = LeapUIApp.TargetsPath + "2017-06-12 12-30-56.hand"; //palm facing down again
         List<String> msges = new ArrayList<String>(Arrays.asList("normal facing up(1)", "normal facing up(2)", "facing down", "facing down, fingers to right", "right hand palm upright", "facing down 2"));
         List<String> files = new ArrayList<String>(Arrays.asList(str1, str2, str3, str4, str5, str6));
 

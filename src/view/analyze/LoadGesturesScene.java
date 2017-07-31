@@ -50,7 +50,7 @@ public class LoadGesturesScene {
         Button loadHandButton = makeGenericButton("Load Hand", 0.4, 0.8);//new Button("Load Hand");
         loadHandButton.setOnAction(e -> {
             lh = getHandFromString(handToLoadFile);
-            th = getHandFromString("targets/2015-05-05 08-17-01.hand");
+            th = getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand");
             loadedHandUI.setLoc(lh);
             loadedHandUI.setVisible(true);
             targetHandUI.setLoc(th);

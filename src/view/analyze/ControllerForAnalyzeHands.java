@@ -225,7 +225,7 @@ public class ControllerForAnalyzeHands {
 
         //uiHand2 setup
         uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
-        lmHand2 = SerializedTargetHand.getHandFromString("targets2/gesture2Left.hand");
+        lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
         uiHand2.setLoc(lmHand2);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(12);
