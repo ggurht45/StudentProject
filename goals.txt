@@ -156,7 +156,7 @@ first small and easy goal to accomplish:
 
     -- save data to external csv --done
         -- make it so the save button opens in user's home directory
-        -- remove whitespace from strings
+        -- remove whitespace from strings --done
 
 
     -- think about how to keep data but refresh the class.

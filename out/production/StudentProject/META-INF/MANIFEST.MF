@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lib\jfoenix.jar lib\LeapJava.jar
+Main-Class: view.LeapUIApp
+
