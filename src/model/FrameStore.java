@@ -1,5 +1,7 @@
 package model;
 
+import view.LeapUIApp;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,7 +12,6 @@ import java.util.logging.Logger;
 
 public class FrameStore {
     public static final int MAX_FRAMES = 10;
-    private static final String tests_file = "AllTest.txt";
     static int numOfFrames = 0;
     static FrameWithScore[] arrayOfFrames = new FrameWithScore[MAX_FRAMES];
 
@@ -58,7 +59,7 @@ public class FrameStore {
             String fileName = i + ".frame";
             byte[] serializedFrame = arrayOfFrames[i].getFrame().serialize();
             Files.write(Paths.get(fileName), serializedFrame);
-            PrintWriter printer = new PrintWriter(tests_file);
+            PrintWriter printer = new PrintWriter(LeapUIApp.TestsFile);
             printer.println(fileName);
             printer.close();
         }

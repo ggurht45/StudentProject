@@ -11,13 +11,11 @@ import java.util.Calendar;
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Controller;
+import view.LeapUIApp;
 
 
 public class SerializedTargetHand {
     public static final int MAX_FRAMES = 10;
-    private static final String hands_file = "TargetHands.txt";
-    private static String leftGestures_file = "LeftGestures.txt";
-    private static String rightGestures_file = "RightGestures.txt";
 
 
     public static void Save(Frame f) throws IOException {
@@ -27,7 +25,7 @@ public class SerializedTargetHand {
         String fileName = "targets/" + sdf.format(cal.getTime()) + ".hand";
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileName), serializedFrame);
-        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(LeapUIApp.TargetHandsFile, true)));
         printer.println(fileName);
         printer.close();
     }
@@ -41,7 +39,7 @@ public class SerializedTargetHand {
         String fileName = "dataOutput/" + outFolder + "/" + typeOfGesture + "_" + sdf.format(cal.getTime()) + ".hand";
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileName), serializedFrame);
-        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(hands_file, true)));
+        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(LeapUIApp.TargetHandsFile, true)));
         printer.println(fileName);
         printer.close();
     }
@@ -190,10 +188,10 @@ public class SerializedTargetHand {
         String indexFile;
         if (leftHand) {
             side = "Left";
-            indexFile = leftGestures_file;
+            indexFile = LeapUIApp.LeftGesturesFile;
         } else {
             side = "Right";
-            indexFile = rightGestures_file;
+            indexFile = LeapUIApp.RightGesturesFile;
         }
         String fileName = "targets2/" + gestureId + side + ".hand";
         byte[] serializedFrame = f.serialize();
@@ -217,9 +215,9 @@ public class SerializedTargetHand {
 
     public static ArrayList<Hand> getAllHands() throws Exception {
 
-        File inFile = new File(hands_file);
+        File inFile = new File(LeapUIApp.TargetHandsFile);
         if (!inFile.exists())
-            throw new Exception("In file not found :" + hands_file); // No input file
+            throw new Exception("In file not found :" + LeapUIApp.TargetHandsFile); // No input file
 
         BufferedReader br = new BufferedReader(new FileReader(inFile));
 

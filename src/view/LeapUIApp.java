@@ -47,6 +47,11 @@ import model.SerializedTargetHand;
 
 public class LeapUIApp extends Application {
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
+    public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
+    public static String RightGesturesFile = "dataOutput/RightGestures.txt";
+    public static String TestsFile = "dataOutput/AllTest.txt";
+    public static String TargetHandsFile = "dataOutput/TargetHands.txt";
+
     public static double ScreenWidth = 800;
     public static double ScreenHeight = 800;
     public static UIHand userHand;
@@ -399,9 +404,9 @@ public class LeapUIApp extends Application {
                     new Thread(() -> {
                         try {
                             if (leftHandSelected) {
-                                selectHand(SerializedTargetHand.getAllHands2("LeftGestures.txt"));
+                                selectHand(SerializedTargetHand.getAllHands2(LeftGesturesFile));
                             } else {
-                                selectHand(SerializedTargetHand.getAllHands2("RightGestures.txt"));
+                                selectHand(SerializedTargetHand.getAllHands2(RightGesturesFile));
                             }
                         } catch (Exception e) {
                             // TODO Auto-generated catch block

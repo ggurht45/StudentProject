@@ -64,9 +64,9 @@ public class Control2 extends Controller implements ControllerInterface {
         try {
             ArrayList<Hand> arrayHands;
             if(LeapUIApp.leftHandSelected){
-                arrayHands = SerializedTargetHand.getAllHands2("LeftGestures.txt");
+                arrayHands = SerializedTargetHand.getAllHands2(LeapUIApp.LeftGesturesFile);
             }else{
-                arrayHands = SerializedTargetHand.getAllHands2("RightGestures.txt");
+                arrayHands = SerializedTargetHand.getAllHands2(LeapUIApp.RightGesturesFile);
             }
             h = LeapUIApp.selectHand(arrayHands);
         } catch (Exception e) {

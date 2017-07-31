@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.leapmotion.leap.Hand;
+import view.LeapUIApp;
 
 
 import java.util.logging.Level;
@@ -32,7 +33,7 @@ import java.util.logging.Logger;
 
 public class TargetHandStore {
 	public static final int  MAX_FRAMES = 10; 
-	private static final String hands_file = "TargetHands.txt";	
+
 	
 	
 	public static void Save(Hand h)
@@ -43,18 +44,17 @@ public class TargetHandStore {
     	String fileName=sdf.format(cal.getTime() )+".txt";
     	
 
-		try (
+		try{
 	      OutputStream file = new FileOutputStream(fileName);
 	      OutputStream buffer = new BufferedOutputStream(file);
 	      ObjectOutput output = new ObjectOutputStream(buffer);
-	     ){
 	      output.writeObject(h);
 		      try {
-			        File outFile = new  File(hands_file);
+			        File outFile = new  File(LeapUIApp.TargetHandsFile);
 			        if (!outFile.exists())										
 			        	outFile.createNewFile();
 			        Writer output2;
-			        output2 = new BufferedWriter(new FileWriter(hands_file, true));
+			        output2 = new BufferedWriter(new FileWriter(LeapUIApp.TargetHandsFile, true));
 			        output2.append(fileName+"\r\n");
 			        output2.close();
 		      }catch (IOException e) {
@@ -81,9 +81,9 @@ public class TargetHandStore {
 	
 	public static ArrayList<Hand> getAllHands() throws Exception{
 		
-		File inFile = new  File(hands_file);
+		File inFile = new  File(LeapUIApp.TargetHandsFile);
 		if (!inFile.exists()) 
-			throw new Exception("In file not found :"+hands_file);		// No input file
+			throw new Exception("In file not found :"+LeapUIApp.TargetHandsFile);		// No input file
 		
 		BufferedReader br = new BufferedReader(new FileReader( inFile));
 		

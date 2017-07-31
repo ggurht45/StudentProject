@@ -78,10 +78,8 @@ public class LoadGesturesScene {
 //        List<String> al = new ArrayList(Arrays.asList("normal facing up", "facing down", "facing down fingers to right", "right hand palm upright", "facing down 2"));
 
         //make a comboList
-        String lhGesturesFile = "LeftGestures.txt";
-        String rhGesturesFile = "RightGestures.txt";
-        List<Hand> handList = SerializedTargetHand.getAllHands2(lhGesturesFile);
-        List<String> fileList = SerializedTargetHand.getAllHands2Names(lhGesturesFile);
+        List<Hand> handList = SerializedTargetHand.getAllHands2(LeapUIApp.LeftGesturesFile);
+        List<String> fileList = SerializedTargetHand.getAllHands2Names(LeapUIApp.LeftGesturesFile);
 
         ObservableList<String> options = FXCollections.observableArrayList(fileList);
         ComboBox comboBox = new ComboBox(options);
