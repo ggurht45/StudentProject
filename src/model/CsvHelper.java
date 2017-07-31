@@ -19,7 +19,7 @@ public class CsvHelper {
 
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ",";
-    private static final String NEW_LINE_SEPARATOR = "\n";
+    private static final String NEW_LINE_SEPARATOR = System.lineSeparator();
 
     //CSV file header
     private static final String FILE_HEADER = getCSVHeader();//HandInfo.getCSVHeader();
