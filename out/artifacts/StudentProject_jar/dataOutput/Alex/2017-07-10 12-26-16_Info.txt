@@ -1,4 +1,0 @@
-dataOutput/Alex/2017-07-10 12-26-16.hand information
-	Comments: some new comments 
-	Result: Passed
-

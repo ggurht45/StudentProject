@@ -1,4 +1,0 @@
-dataOutput/General/2017-07-20 12-30-08.hand information
-	Comments: joey2
-	Result: Failed
-

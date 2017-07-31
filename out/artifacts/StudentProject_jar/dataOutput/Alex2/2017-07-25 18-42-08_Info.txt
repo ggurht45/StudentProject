@@ -1,4 +1,0 @@
-dataOutput/Alex2/2017-07-25 18-42-08.hand information
-	Comments: test0
-	Result: Passed
-

@@ -1,4 +1,0 @@
-dataOutput/Alex/2017-07-25 17-43-05.hand information
-	Comments: test97
-	Result: Passed
-
