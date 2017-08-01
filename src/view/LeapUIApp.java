@@ -98,9 +98,9 @@ public class LeapUIApp extends Application {
         stage.setMaximized(true);
 
         // The hand objects
-        userHand = new UIHand_Simple(Color.GREEN.darker(), false);
+        userHand = new UIHand_Simple(Color.BLUE.darker(), false);
         userHand.setVisible(false);
-        targetHand = new UIHand_Simple(Color.DARKRED, true);
+        targetHand = new UIHand_Simple(Color.GREEN.darker(), true);
         targetHand.setVisible(false);
         // targetHand.setChildrenOpacity(0.5); // TODO once javafx implements 3D opacity, check that this works correctly before removing comment
 

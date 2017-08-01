@@ -24,6 +24,7 @@ public class InfoBox {
 
         //Create two buttons
         Button saveButton = new Button("Save");
+        saveButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
 
         //Clicking will set answer and close window
         saveButton.setOnAction(e -> {

@@ -53,7 +53,7 @@ public class Control extends Controller implements ControllerInterface {
     }
 
     public void enterTrainingMode() {
-        System.out.println("enterTrainingMode called inside Control");
+        //System.out.println("enterTrainingMode called inside Control");
         selecting = true;
         select();                    //is this method the selection process?
         freeMode = false;
@@ -71,7 +71,7 @@ public class Control extends Controller implements ControllerInterface {
             }
             h = LeapUIApp.selectHand(arrayHands);
         } catch (Exception e) {
-            System.out.println("** Error happened while trying to select hand.");
+            ////System.out.println("** Error happened while trying to select hand.");
             e.printStackTrace();
         }
         if (h.isValid()) {
@@ -81,14 +81,14 @@ public class Control extends Controller implements ControllerInterface {
 
 
     public void staticStart(Hand storedHand) {
-        System.out.println("staticStart called");
+        ////System.out.println("staticStart called");
         testHand = storedHand;
         LeapUIApp.startStaticTest(storedHand);
         FrameStore.staticStart();
     }
 
     public void staticEnd() {
-        System.out.println("staticEnd called");
+        ////System.out.println("staticEnd called");
         LeapUIApp.endStaticTest(finalscore, finaltime, success); // returns after 10s
         try {
             FrameStore.staticEnd();
@@ -111,19 +111,19 @@ public class Control extends Controller implements ControllerInterface {
         //so basically, initially the condition that runs is the 2nd condition. then the 1st condition runs. then the 3rd condition will run. after
         //both 'selecting' and 'freeMode' are set to false.
         if (selecting) {
-            System.out.println("Recieve: 'selecting' is true. waiting for user to select hand");
+            //System.out.println("Recieve: 'selecting' is true. waiting for user to select hand");
             //do nothing with frame received, because in the process of selecting hand
         } else if (freeMode) {
             //so free mode seems to be when in between the staticEnd and the beginning of selection process.
-            System.out.println("Recieve: 'freeMode' is true. whatever that means");
+            //System.out.println("Recieve: 'freeMode' is true. whatever that means");
             if ((timestamp - displayStamp) > displayLimit) { //this will only fire after the set amount of time has passed
                 //the purpose this if clause seems to serve is to set the hands or their accuracy to null or 0.
-                System.out.println("Recieve: 'freeMode' is true. time > displayLimit case true");
+                //System.out.println("Recieve: 'freeMode' is true. time > displayLimit case true");
                 if (inFrame.hands().count() == 0) {
-                    System.out.println("Recieve: 'freeMode' is true. time > displayLimit, hands = 0");
+                    //System.out.println("Recieve: 'freeMode' is true. time > displayLimit, hands = 0");
                     LeapUIApp.setUser(null, 0);
                 } else {
-                    System.out.println("Recieve: 'freeMode' is true. time > displayLimit, hands accur =0");
+                    //System.out.println("Recieve: 'freeMode' is true. time > displayLimit, hands accur =0");
                     for (Hand h : inFrame.hands()) {
                         LeapUIApp.setUser(h, 0);
                     }
@@ -131,18 +131,18 @@ public class Control extends Controller implements ControllerInterface {
                 displayStamp = timestamp;
             }
         } else { // training mode
-            System.out.println("finally entered training mode. ");
+            //System.out.println("finally entered training mode. ");
             if (timeTracked) {
-                System.out.println("timeTracked is true");
+                //System.out.println("timeTracked is true");
                 if ((timestamp - testTime) > testLimit) { //as timestamp will increase, the difference will get larger. until this hits
-                    System.out.println("timeout after 30 secs");
+                    //System.out.println("timeout after 30 secs");
                     finalscore = maxscore;
                     finaltime = testLimit;
                     success = false;
                     staticEnd();
                 }
             } else {
-                System.out.println("timeTracked is false, about to set timeTracked to true");
+                //System.out.println("timeTracked is false, about to set timeTracked to true");
                 //if timeTracked is set to false, it will always be be set to True. cuz of the else. but the process gets started
                 //by this condition. because after timeTracked is set to true, the first if clause always runs.
                 testTime = timestamp; //testtime is set to the time of the first timestamp.

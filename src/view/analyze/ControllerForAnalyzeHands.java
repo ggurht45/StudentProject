@@ -245,7 +245,7 @@ public class ControllerForAnalyzeHands {
 
 
         //uiHand1 setup
-        uiHand1 = new UIHand_Simple(Color.GREEN.darker(), false);
+        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), false);
         //set the inital hand to first row's hand file
         lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
         uiHand1.setLoc(lmHand1);
@@ -253,7 +253,7 @@ public class ControllerForAnalyzeHands {
         uiHand1.setTranslateX(0);
 
         //uiHand2 setup
-        uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
+        uiHand2 = new UIHand_Simple(Color.GREEN.darker(), true);
         lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
         uiHand2.setLoc(lmHand2);
         uiHand2.setVisible(true);
