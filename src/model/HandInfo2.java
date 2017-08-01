@@ -147,6 +147,7 @@ public class HandInfo2 implements java.io.Serializable {
 
     @Override
     public String toString() {
+        //todo fix this string.
         String s = "HI2 toString\nFilename: " + handFile + "\n\tComments: " + comments + "\n\tResult: " + result;
         return s;
     }

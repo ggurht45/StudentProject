@@ -47,9 +47,10 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static ControllerForAnalyzeHands scene2Controller;
     public static HashMap<Hand, String> handToGestureType;
     public static String DEFAULT_FOLDER = "Test2";
-    public String userSpecifiedDirectory = DEFAULT_FOLDER; //updates as user names folders in savebox
+    public static String userSpecifiedDirectory = DEFAULT_FOLDER; //updates as user names folders in savebox
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
     public static String RightGesturesFile = "dataOutput/RightGestures.txt";
@@ -154,6 +155,7 @@ public class LeapUIApp extends Application {
         scene2Button = new Button("Analyze Data");
         scene2Button.setOnAction(e -> {
             //System.out.println("going to scene2");
+            scene2Controller.updateTable();
             primaryStage.setScene(scene2);
         });
 
@@ -220,7 +222,7 @@ public class LeapUIApp extends Application {
             scene2 = new Scene(rootNode, ScreenWidth, ScreenHeight);
 
             //get the controller file for the fxml file attached to the loader
-            ControllerForAnalyzeHands scene2Controller = (ControllerForAnalyzeHands) fxmlLoader.getController();
+            scene2Controller = (ControllerForAnalyzeHands) fxmlLoader.getController();
             scene2Controller.setMainApp(this);
 
         } catch (Exception e) {
@@ -264,32 +266,35 @@ public class LeapUIApp extends Application {
                     }
                 }
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    try {
-                        System.out.println("enter was pressed, saving hand.");
-
-                        //following line is for TESTING. dont forget to uncomment it later
-                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
-//                        Frame f = latestHand.frame();
-
-                        //show alert box
-                        SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
-                        System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
-
-                        userSpecifiedDirectory = SaveBox.directory;
-                        String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
-
-                        if (SaveBox.saved) {
-                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
-                        }
-                        else {
-                            System.out.println("INFO... NoT saving since save box was not saved or closed properly");
-                        }
-
-
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    saveHandDataOfficial();
+//                    try {
+//                        System.out.println("enter was pressed, saving hand.");
+//
+//                        saveHandDataOfficial();
+//
+//                        //following line is for TESTING. dont forget to uncomment it later
+//                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
+////                        Frame f = latestHand.frame();
+//
+//                        //show alert box
+//                        SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
+//                        System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
+//
+//                        userSpecifiedDirectory = SaveBox.directory;
+//                        String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
+//
+//                        if (SaveBox.saved) {
+//                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
+//                        }
+//                        else {
+//                            System.out.println("INFO... NoT saving since save box was not saved or closed properly");
+//                        }
+//
+//
+//                    } catch (IOException e) {
+//                        // TODO Auto-generated catch block
+//                        e.printStackTrace();
+//                    }
                 }
                 if (keyEvent.getCode().isDigitKey()) {
                     try {
@@ -487,6 +492,37 @@ public class LeapUIApp extends Application {
 //        }
 //        return h;
 //    }
+
+
+    public static void saveHandDataOfficial(){
+        try {
+            System.out.println("enter was pressed, saving hand.");
+
+
+            //following line is for TESTING. dont forget to uncomment it later
+            Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
+//                        Frame f = latestHand.frame();
+
+            //show alert box
+            SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
+            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
+
+            userSpecifiedDirectory = SaveBox.directory;
+            String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
+
+            if (SaveBox.saved) {
+                SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
+            }
+            else {
+                System.out.println("INFO... NoT saving since save box was not saved or closed properly");
+            }
+
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 
     public double compareTwoHands(String s1, String s2) {
@@ -741,6 +777,7 @@ public class LeapUIApp extends Application {
             try {
                 //save data
                 System.out.println("saving data 3432flsk31s ************");
+                saveHandDataOfficial();
 //                Frame f = latestHand.frame();
 //                System.out.println("frame: \n" + f.toString());
 //                //showImage();

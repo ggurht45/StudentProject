@@ -1,0 +1,6 @@
+dataOutput/Test2/2017-08-01 10-43-10.hand information
+	Name: master roshi
+	Gesture Type: defaultGestureType
+	Comments: training is fun
+	Result: Passed
+

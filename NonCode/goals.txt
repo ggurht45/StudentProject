@@ -155,21 +155,32 @@ first small and easy goal to accomplish:
 
     -- can save new data to a folder. --done
     -- can name the data,--30mins. 2:13, 6:20. lol sheesh. -done
+    -- only need save and end testing buttons. --done
+    -- connect save button --done
+    -- make sure when data is saved, it can be seen --done
 
-    -- only need save and end testing buttons.
-
-
-
-
+    -- clean up, remove unused folders
     -- also the type of gesture is stored -- 1h. 7:40.
+    -- style buttons, connect wiring
+    -- make table bigger and hidable
+    -- show notification if folder not found. alice for example.
+
+
+
+
+
+
+
+
+    -- comment out movebar
     -- by default should be named via counter value. -> can store in special object, property file. serializeble
 
 
 
 
-    -- style buttons, connect wiring
+
     -- make sure hands dont move around
-    -- make table bigger and hidable
+
     -- if no folder was typed and "load csv was clicked", allow user to choose file from computer.
     -- show error dialog box if failed to load folder or wrong folder was typed in.
 
@@ -177,11 +188,11 @@ first small and easy goal to accomplish:
     -- put left-right into a setting icon opens a dialog
     -- make it so the save button opens in user's home directory
     -- think about how to keep data but refresh the class.
-    -- attach "enter" event to save button
+    -- attach "enter" event to save button --done
     -- fix bug about analyze button not showing up --done
     -- test with new file path saved.
     -- save gesture also
-    -- write if statement for folder not found.
+
 
 
 

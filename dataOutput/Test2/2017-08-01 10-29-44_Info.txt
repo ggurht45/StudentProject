@@ -1,0 +1,6 @@
+dataOutput/Test2/2017-08-01 10-29-44.hand information
+	Name: krillen 
+	Gesture Type: defaultGestureType
+	Comments: training hard
+	Result: Passed
+

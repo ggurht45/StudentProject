@@ -52,7 +52,13 @@ public class ControllerForAnalyzeHands {
             //save the data if need to
             savetableData2(treeItems, currentFolder);
         });
+    }
 
+    public void updateTable(){
+        //update table to show new folder contents
+        treeItems = getTreeItems(currentFolder);
+        root.getChildren().setAll(treeItems);
+        treeTableView.setRoot(root);
     }
 
     @FXML
