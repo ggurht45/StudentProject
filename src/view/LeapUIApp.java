@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.jfoenix.controls.JFXButton;
 import controller.Comparer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -66,7 +67,7 @@ public class LeapUIApp extends Application {
     public static UIHand targetHand;
     public static AccuracyBar aBar;    // a bar to show the current accuracy of the user compared to the target
     public static SelectBar sBar;      // the buttons for selecting a target
-//    public static MoveBar mBar;        // the buttons for moving to next/prev a target
+    //    public static MoveBar mBar;        // the buttons for moving to next/prev a target
     public static Button testButton;   // a button to transition from free mode to training mode
     public static Text scoreText;      // displays the user's score at the end of a test
     public static Text timeText;       // displays the time a user took at the end of a test
@@ -79,8 +80,6 @@ public class LeapUIApp extends Application {
     public Stage primaryStage;
     public Scene scene, scene2;
     public static boolean leftHandSelected = true;
-
-
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -137,6 +136,7 @@ public class LeapUIApp extends Application {
                 new Thread(() -> control.enterTrainingMode()).start();
             }
         };
+        testButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
         testButton.setTranslateX(ScreenWidth * 4 / 5);
         testButton.setTranslateY(ScreenHeight * 4 / 5);
         testButton.setPrefHeight(50);
@@ -153,7 +153,9 @@ public class LeapUIApp extends Application {
 //            }
 //        };
 
-        scene2Button = new Button("Analyze Data");
+        scene2Button = new JFXButton("Analyze Data");
+        scene2Button.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
+//        scene2Button.
         scene2Button.setOnAction(e -> {
             //System.out.println("going to scene2");
             scene2Controller.updateTable();
@@ -495,14 +497,14 @@ public class LeapUIApp extends Application {
 //    }
 
 
-    public static void saveHandDataOfficial(){
+    public static void saveHandDataOfficial() {
         try {
             System.out.println("enter was pressed, saving hand.");
 
 
             //following line is for TESTING. dont forget to uncomment it later
-            Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
-//                        Frame f = latestHand.frame();
+//            Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
+            Frame f = latestHand.frame();
 
             //show alert box
             SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
@@ -513,8 +515,7 @@ public class LeapUIApp extends Application {
 
             if (SaveBox.saved) {
                 SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
-            }
-            else {
+            } else {
                 System.out.println("INFO... NoT saving since save box was not saved or closed properly");
             }
 
@@ -707,15 +708,18 @@ public class LeapUIApp extends Application {
             confirmed = false;
             index = 0;
 
+            double tmpVar = 4.3;
+
             prevButton = new Button("\u25c0 Previous") {
                 @Override
                 public void fire() {
                     prevHand();
                 }
             };
+            prevButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
             prevButton.setTranslateX(x);
             prevButton.setTranslateY(y);
-            prevButton.setPrefSize(width / 4, height);
+            prevButton.setPrefSize(width / tmpVar, height);
             prevButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
 
@@ -727,9 +731,10 @@ public class LeapUIApp extends Application {
                     save();
                 }
             };
+            saveButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
             saveButton.setTranslateX(x + width / 4);
             saveButton.setTranslateY(y);
-            saveButton.setPrefSize(width / 4, height);
+            saveButton.setPrefSize(width / tmpVar, height);
             saveButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
 
             endButton = new Button("End Testing") {
@@ -738,12 +743,11 @@ public class LeapUIApp extends Application {
                     endTesting();
                 }
             };
+            endButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
             endButton.setTranslateX(x + width * 2 / 4);
             endButton.setTranslateY(y);
-            endButton.setPrefSize(width / 4, height);
+            endButton.setPrefSize(width / tmpVar, height);
             endButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
-
-
 
 
 //            //things are starting to click. ^^
@@ -764,9 +768,10 @@ public class LeapUIApp extends Application {
                     nextHand();
                 }
             };
+            nextButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
             nextButton.setTranslateX(x + width * 3 / 4);
             nextButton.setTranslateY(y);
-            nextButton.setPrefSize(width / 4, height);
+            nextButton.setPrefSize(width / tmpVar, height);
             nextButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
             getChildren().addAll(prevButton, saveButton, endButton, nextButton);
