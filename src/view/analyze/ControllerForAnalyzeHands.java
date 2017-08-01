@@ -26,6 +26,7 @@ import model.CsvHelper;
 import model.HandInfo;
 import model.HandInfo2;
 import model.SerializedTargetHand;
+import view.DebugHelper;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
@@ -249,7 +250,7 @@ public class ControllerForAnalyzeHands {
         lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
         uiHand1.setLoc(lmHand1);
         uiHand1.setVisible(true);
-        uiHand1.setTranslateX(4);
+        uiHand1.setTranslateX(0);
 
         //uiHand2 setup
         uiHand2 = new UIHand_Simple(Color.BLUE.darker(), true);
@@ -257,6 +258,7 @@ public class ControllerForAnalyzeHands {
         uiHand2.setLoc(lmHand2);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(12);
+        uiHand2.setTranslateY(4);
 
 
         //camera and stuff
@@ -296,6 +298,10 @@ public class ControllerForAnalyzeHands {
             String file = h.getHandFile();
             lmHand1 = SerializedTargetHand.getHandFromString(file);
             uiHand1.setLoc(lmHand1);
+
+            //todo hard to determine position. work on this later
+//            DebugHelper.printHandInfo(lmHand1, "hand Info on lmHand1");
+//            DebugHelper.printNodeInfo(uiHand1, "uiHand1 info via debughelper");
         }
     }
 

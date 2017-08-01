@@ -160,7 +160,7 @@ first small and easy goal to accomplish:
     -- make sure when data is saved, it can be seen --done
 
     -- clean up, remove unused folders --done
-
+    -- did some perliminary work on positioning hands in analyze. --done
 
 
     -- style buttons, connect wiring
