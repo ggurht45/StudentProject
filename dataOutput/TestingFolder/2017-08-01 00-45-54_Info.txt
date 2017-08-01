@@ -1,4 +1,0 @@
-dataOutput/TestingFolder/2017-08-01 00-45-54.hand information
-	Comments: 3pounds
-	Result: Failed
-

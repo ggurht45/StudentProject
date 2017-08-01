@@ -1,4 +1,0 @@
-dataOutput/Alex/2017-07-25 17-34-20.hand information
-	Comments: testing csv save function 
-	Result: Passed
-

@@ -1,0 +1,6 @@
+dataOutput/Test2/2017-08-01 11-29-57.hand information
+	Name: vegeta
+	Gesture Type: defaultGestureType
+	Comments: over 9000!
+	Result: Passed
+

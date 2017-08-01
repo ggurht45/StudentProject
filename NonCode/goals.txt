@@ -159,12 +159,20 @@ first small and easy goal to accomplish:
     -- connect save button --done
     -- make sure when data is saved, it can be seen --done
 
-    -- clean up, remove unused folders
+    -- clean up, remove unused folders --done
     -- also the type of gesture is stored -- 1h. 7:40.
     -- style buttons, connect wiring
     -- make table bigger and hidable
     -- show notification if folder not found. alice for example.
+    -- fix bug in 1.3 -> creating data and then closing app. doesn't successfully store data in .csv.
+        -- it does. but because of the "saving on close operation" controller2 -> the saved data gets overridden.
+        -- check if current scene is scene2. only then do the saving operation. or when new data gets entered, run update on controller2
 
+    -- make bat file for win32.
+
+
+
+    -- fix bug about folder appearing everytime we make new data
 
 
 

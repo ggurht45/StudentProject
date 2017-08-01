@@ -1,4 +1,0 @@
-dataOutput/TestingFolder/2017-08-01 00-45-12.hand information
-	Comments: index finger
-	Result: Passed
-

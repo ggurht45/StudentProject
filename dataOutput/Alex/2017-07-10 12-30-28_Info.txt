@@ -1,4 +1,0 @@
-dataOutput/Alex/2017-07-10 12-30-28.hand information
-	Comments: 4th commebnts
-	Result: Passed
-

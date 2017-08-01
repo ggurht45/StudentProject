@@ -1,4 +1,0 @@
-dataOutput/Alex/2017-07-25 18-01-30.hand information
-	Comments: test100
-	Result: Passed
-

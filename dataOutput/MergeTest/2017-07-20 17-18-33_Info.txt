@@ -1,4 +1,0 @@
-dataOutput/MergeTest/2017-07-20 17-18-33.hand information
-	Comments: testingMerge
-	Result: Passed
-
