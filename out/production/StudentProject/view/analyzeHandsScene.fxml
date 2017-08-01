@@ -18,6 +18,7 @@
               <columns>
                   <TreeTableColumn fx:id="col0" prefWidth="75.0" text="Name" />
                 <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="82.66668701171875" text="FilePath" />
+                  <TreeTableColumn fx:id="gestureCol" prefWidth="75.0" text="Gesture" />
                   <TreeTableColumn fx:id="col2" maxWidth="104.33331298828125" prefWidth="104.33331298828125" text="Comments" />
                   <TreeTableColumn fx:id="col3" prefWidth="72.0" text="Result" />
               </columns>

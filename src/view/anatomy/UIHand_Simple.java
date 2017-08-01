@@ -136,7 +136,7 @@ public class UIHand_Simple extends UIHand {
         ViewMath.setCylinderByEndpoints(palmWrist, knuckles[0], pinkyBase);
         ViewMath.setPositionByVector(pinkyJoint, pinkyBase);
 
-//        tryAgain(h);
+        tryAgain(h);
     }
 
 

@@ -123,6 +123,10 @@ public class ControllerForAnalyzeHands {
     @FXML
     private TreeTableColumn<HandInfo2, String> col1;
 
+    //handfile string
+    @FXML
+    private TreeTableColumn<HandInfo2, String> gestureCol;
+
     //comments
     @FXML
     private TreeTableColumn<HandInfo2, String> col2;
@@ -165,7 +169,7 @@ public class ControllerForAnalyzeHands {
         //set pref height and width of container?
 
         //create root, and add items to it
-        root = new TreeItem<>(new HandInfo2("rootName", "rootFilename", "rootComments", "rootResult"));
+        root = new TreeItem<>(new HandInfo2("rootName", "rootFilename", "rootGestureType", "rootComments", "rootResult"));
         currentFolder = app.DEFAULT_FOLDER;
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
@@ -173,6 +177,7 @@ public class ControllerForAnalyzeHands {
         //doing weird stuff with lambdas; much shorter
         col0.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().name2Property());
         col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().handFile2Property());
+        gestureCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().gestureType2Property());
         col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().comments2Property());
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().result2Property());
 

@@ -274,7 +274,7 @@ public class LeapUIApp extends Application {
                         String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
                         if (SaveBox.comments != null) {
-                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, SaveBox.comments, SaveBox.passFail);
+                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
                         }
                         //comments will never be null
 //                        else {

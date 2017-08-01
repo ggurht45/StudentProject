@@ -129,8 +129,9 @@ public class CsvHelper {
     //Student attributes index
     private static final int HANDINFO_NAME_IDX = 0;
     private static final int HANDINFO_FILENAME_IDX = 1;
-    private static final int HANDINFO_COMMENTS_IDX = 2;
-    private static final int HANDINFO_RESULTS_IDX = 3;
+    private static final int HANDINFO_GESTURETYPE_IDX = 2;
+    private static final int HANDINFO_COMMENTS_IDX = 3;
+    private static final int HANDINFO_RESULTS_IDX = 4;
 
     public static ArrayList<HandInfo> readCsvFile(String fileName) {
 
@@ -149,7 +150,7 @@ public class CsvHelper {
                 String[] tokens = line.split(COMMA_DELIMITER);//Get all tokens available in line
                 if (tokens.length > 0) {
                     //Create a new student object and fill his  data
-                    HandInfo h = new HandInfo(tokens[HANDINFO_NAME_IDX], tokens[HANDINFO_FILENAME_IDX], tokens[HANDINFO_COMMENTS_IDX], tokens[HANDINFO_RESULTS_IDX]);
+                    HandInfo h = new HandInfo(tokens[HANDINFO_NAME_IDX], tokens[HANDINFO_FILENAME_IDX], tokens[HANDINFO_GESTURETYPE_IDX], tokens[HANDINFO_COMMENTS_IDX], tokens[HANDINFO_RESULTS_IDX]);
                     hands.add(h);
                 }
             }

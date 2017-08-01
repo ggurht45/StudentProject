@@ -46,7 +46,7 @@ public class SerializedTargetHand {
     }
 
     //use this function to save to a specific folder that may need to be created.
-    public static void Save4(Frame f, String name, String outputFolder, String comments, boolean passFail) throws IOException {
+    public static void Save4(Frame f, String name, String outputFolder, String gestureType, String comments, boolean passFail) throws IOException {
 //        System.out.println("inside save4");
         String result = (passFail ? "Passed" : "Failed");
 
@@ -79,6 +79,7 @@ public class SerializedTargetHand {
         PrintWriter printer3 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_Info.txt", true)));
         printer3.println(fileNameWithPath + ".hand information");
         printer3.println("\tName: " + name);
+        printer3.println("\tGesture Type: " + gestureType);
         printer3.println("\tComments: " + comments);
         printer3.println("\tResult: " + result);
         printer3.println();
@@ -86,7 +87,7 @@ public class SerializedTargetHand {
 
 
         //create handInfo object and serialize.
-        HandInfo handInfo = new HandInfo(name, fileNameWithPath + ".hand", comments, result);
+        HandInfo handInfo = new HandInfo(name, fileNameWithPath + ".hand", gestureType, comments, result);
 
         //check if a total list exists
         String fullFileName = outputFolder + "_allHandsOnDeck.csv";

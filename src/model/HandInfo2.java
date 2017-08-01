@@ -7,39 +7,40 @@ import javafx.beans.property.SimpleStringProperty;
 public class HandInfo2 implements java.io.Serializable {
     public String name;
     public String handFile;
+    public String gestureType;
     public String comments;
     public String result;
-    public int gestureType;
 
     public SimpleStringProperty name2;
     public SimpleStringProperty handFile2;
+    public SimpleStringProperty gestureType2;
     public SimpleStringProperty comments2;
     public SimpleStringProperty result2;
-    public SimpleIntegerProperty gestureType2;
 
     public HandInfo2(HandInfo hf){
-        this(hf.name, hf.handFile, hf.comments, hf.result);
+        this(hf.name, hf.handFile, hf.gestureType, hf.comments, hf.result);
     }
 
-    public HandInfo2(String n, String hf, String cm, String res) {
+    public HandInfo2(String n, String hf, String gt, String cm, String res) {
         name = n;
         handFile = hf;
+        gestureType = gt;
         comments = cm;
         result = res;
-        gestureType = -1;
+
 
         //simpleProperties.. overengineered solution
         name2 = new SimpleStringProperty(n);
         handFile2 = new SimpleStringProperty(hf);
         comments2 = new SimpleStringProperty(cm);
         result2 = new SimpleStringProperty(res);
-        gestureType2 = new SimpleIntegerProperty(-1);
+        gestureType2 = new SimpleStringProperty(gt);
     }
 
     //convert handinfo2 into handinfo
     public HandInfo convertToHandInfo(){
         //convert the properties to strings and construct handinfo object
-        return new HandInfo(this.getName2(), this.getHandFile2(), this.getComments2(), this.getResult2());
+        return new HandInfo(this.getName2(), this.getHandFile2(), this.getGestureType2(), this.getComments2(), this.getResult2());
     }
 
 
@@ -66,14 +67,6 @@ public class HandInfo2 implements java.io.Serializable {
 
     public void setResult(String result) {
         this.result = result;
-    }
-
-    public int getGestureType() {
-        return gestureType;
-    }
-
-    public void setGestureType(int gestureType) {
-        this.gestureType = gestureType;
     }
 
     public String getHandFile2() {
@@ -112,18 +105,6 @@ public class HandInfo2 implements java.io.Serializable {
         this.result2.set(result2);
     }
 
-    public int getGestureType2() {
-        return gestureType2.get();
-    }
-
-    public SimpleIntegerProperty gestureType2Property() {
-        return gestureType2;
-    }
-
-    public void setGestureType2(int gestureType2) {
-        this.gestureType2.set(gestureType2);
-    }
-
     public String getName() {
         return name;
     }
@@ -142,6 +123,26 @@ public class HandInfo2 implements java.io.Serializable {
 
     public void setName2(String name2) {
         this.name2.set(name2);
+    }
+
+    public String getGestureType() {
+        return gestureType;
+    }
+
+    public void setGestureType(String gestureType) {
+        this.gestureType = gestureType;
+    }
+
+    public String getGestureType2() {
+        return gestureType2.get();
+    }
+
+    public SimpleStringProperty gestureType2Property() {
+        return gestureType2;
+    }
+
+    public void setGestureType2(String gestureType2) {
+        this.gestureType2.set(gestureType2);
     }
 
     @Override
