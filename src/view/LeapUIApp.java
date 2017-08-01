@@ -660,6 +660,8 @@ public class LeapUIApp extends Application {
         private ArrayList<Hand> targets = null;
         private int index;
         private Button prevButton;
+        private Button saveButton;
+        private Button endButton;
         private Button confirmButton;
         private Button nextButton;
 
@@ -681,16 +683,43 @@ public class LeapUIApp extends Application {
 
 
             //things are starting to click. ^^
-            confirmButton = new Button("Begin Test") {
+            //todo this save button needs to do the same job as enter
+            saveButton = new Button("Save") {
                 @Override
                 public void fire() {
-                    confirm();
+                    save();
                 }
             };
-            confirmButton.setTranslateX(x + width / 4);
-            confirmButton.setTranslateY(y);
-            confirmButton.setPrefSize(width / 2, height);
-            confirmButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
+            saveButton.setTranslateX(x + width / 4);
+            saveButton.setTranslateY(y);
+            saveButton.setPrefSize(width / 4, height);
+            saveButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
+
+            endButton = new Button("End Testing") {
+                @Override
+                public void fire() {
+                    endTesting();
+                }
+            };
+            endButton.setTranslateX(x + width * 2 / 4);
+            endButton.setTranslateY(y);
+            endButton.setPrefSize(width / 4, height);
+            endButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
+
+
+
+//            //things are starting to click. ^^
+//            confirmButton = new Button("Begin Test") {
+//                @Override
+//                public void fire() {
+//                    confirm();
+//                }
+//            };
+//            confirmButton.setTranslateX(x + width / 4);
+//            confirmButton.setTranslateY(y);
+//            confirmButton.setPrefSize(width / 2, height);
+//            confirmButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
 
             nextButton = new Button("Next \u25b6") {
                 @Override
@@ -703,9 +732,41 @@ public class LeapUIApp extends Application {
             nextButton.setPrefSize(width / 4, height);
             nextButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-            getChildren().addAll(prevButton, confirmButton, nextButton);
+            getChildren().addAll(prevButton, saveButton, endButton, nextButton);
         }
 
+
+        synchronized void save() {
+            //todo, i think this should be wired to pressing enter.
+            try {
+                //save data
+                System.out.println("saving data 3432flsk31s ************");
+//                Frame f = latestHand.frame();
+//                System.out.println("frame: \n" + f.toString());
+//                //showImage();
+//                FingerList fingersInFrame = f.fingers();
+//                System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//
+//                //create a new kind of save function that is based on save3 and allows u to save into the folder called joe. u can type and make
+//                //folders as u go. as long as they have directories to be saved in. and the saving process should note the gesture type also. so
+//                //when it needs to be compared it can be appropriately compared. maybe that can be saved in files, serialized data?
+//
+//
+//                SerializedTargetHand.Save2(f, "General", "typeX");
+                System.out.println("saving data END ************");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        synchronized void endTesting() {
+            System.out.println("ending test, going back to main page 232391ksd");
+            control.staticEnd();
+            this.setVisible(false);
+            System.out.println("ending test mode END");
+        }
 
         //this is a synchronized method... nb
         public synchronized Hand select(ArrayList<Hand> arrayList) throws InterruptedException {
@@ -809,28 +870,29 @@ public class LeapUIApp extends Application {
             prevButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
 
-            //things are starting to click. ^^
-            saveButton = new Button("Save") {
-                @Override
-                public void fire() {
-                    save();
-                }
-            };
-            saveButton.setTranslateX(x + width / 4);
-            saveButton.setTranslateY(y);
-            saveButton.setPrefSize(width / 4, height);
-            saveButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
-
-            endButton = new Button("End Testing") {
-                @Override
-                public void fire() {
-                    endTesting();
-                }
-            };
-            endButton.setTranslateX(x + width * 2 / 4);
-            endButton.setTranslateY(y);
-            endButton.setPrefSize(width / 4, height);
-            endButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+//            //things are starting to click. ^^
+//            //todo this save button needs to do the same job as enter
+//            saveButton = new Button("Save") {
+//                @Override
+//                public void fire() {
+//                    save();
+//                }
+//            };
+//            saveButton.setTranslateX(x + width / 4);
+//            saveButton.setTranslateY(y);
+//            saveButton.setPrefSize(width / 4, height);
+//            saveButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
+//
+//            endButton = new Button("End Testing") {
+//                @Override
+//                public void fire() {
+//                    endTesting();
+//                }
+//            };
+//            endButton.setTranslateX(x + width * 2 / 4);
+//            endButton.setTranslateY(y);
+//            endButton.setPrefSize(width / 4, height);
+//            endButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
             nextButton = new Button("Next \u25b6") {
                 @Override
@@ -843,7 +905,7 @@ public class LeapUIApp extends Application {
             nextButton.setPrefSize(width / 4, height);
             nextButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-            getChildren().addAll(prevButton, saveButton, endButton, nextButton);
+            getChildren().addAll(prevButton, nextButton);
         }
 
 
@@ -877,38 +939,38 @@ public class LeapUIApp extends Application {
 //                return null;
 //            }
 //        }
-
-        synchronized void save() {
-            //todo, i think this should be wired to pressing enter.
-            try {
-                //save data
-                System.out.println("saving data 3sk3232fsadf ************");
-                Frame f = latestHand.frame();
-                System.out.println("frame: \n" + f.toString());
-                //showImage();
-                FingerList fingersInFrame = f.fingers();
-                System.out.println("number of fingers: \n" + fingersInFrame.count());
-                System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-
-                //create a new kind of save function that is based on save3 and allows u to save into the folder called joe. u can type and make
-                //folders as u go. as long as they have directories to be saved in. and the saving process should note the gesture type also. so
-                //when it needs to be compared it can be appropriately compared. maybe that can be saved in files, serialized data?
-
-
-                SerializedTargetHand.Save2(f, "General", "typeX");
-                System.out.println("saving data END ************");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        synchronized void endTesting() {
-            System.out.println("ending test mode");
-            control.staticEnd();
-            this.setVisible(false);
-            System.out.println("ending test mode END");
-        }
+//
+//        synchronized void save() {
+//            //todo, i think this should be wired to pressing enter.
+//            try {
+//                //save data
+//                System.out.println("saving data 3sk3232fsadf ************");
+//                Frame f = latestHand.frame();
+//                System.out.println("frame: \n" + f.toString());
+//                //showImage();
+//                FingerList fingersInFrame = f.fingers();
+//                System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//
+//                //create a new kind of save function that is based on save3 and allows u to save into the folder called joe. u can type and make
+//                //folders as u go. as long as they have directories to be saved in. and the saving process should note the gesture type also. so
+//                //when it needs to be compared it can be appropriately compared. maybe that can be saved in files, serialized data?
+//
+//
+//                SerializedTargetHand.Save2(f, "General", "typeX");
+//                System.out.println("saving data END ************");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//
+//        synchronized void endTesting() {
+//            System.out.println("ending test mode");
+//            control.staticEnd();
+//            this.setVisible(false);
+//            System.out.println("ending test mode END");
+//        }
 
         synchronized void prevHand() {
             if (targets != null && targets.size() > 0) {
