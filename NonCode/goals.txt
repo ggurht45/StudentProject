@@ -146,19 +146,21 @@ first small and easy goal to accomplish:
     -- analyze button keeps disappearing --done
     -- margin on table --done
     -- go to correct scene2 --done
-
-
-
     -- no way to go back to main app from analyze scene --done
-
     -- fix bug about loading csv vs loading .ser (fixing this bug may fix something else! also)
-        --make new branch to fix it
-
+    --make new branch to fix it --done
     -- save data to external csv --done
-        -- make it so the save button opens in user's home directory
-        -- remove whitespace from strings --done
+    -- remove whitespace from strings csv --done
 
 
+    -- can save new data to a folder.
+    -- can name the data,
+    -- by default should be named via counter value. -> can store in special object, property file. serializeble
+    -- style buttons, connect wiring
+
+
+    -- put left-right into a setting icon opens a dialog
+    -- make it so the save button opens in user's home directory
     -- think about how to keep data but refresh the class.
     -- attach "enter" event to save button
     -- fix bug about analyze button not showing up --done

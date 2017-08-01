@@ -1,0 +1,5 @@
+filePath, comments, result
+dataOutput/TestingFolder/2017-08-01 00-45-12.hand, index finger, Passed
+dataOutput/TestingFolder/2017-08-01 00-45-35.hand, peace sign, Passed
+dataOutput/TestingFolder/2017-08-01 00-45-54.hand, 3pounds, Failed
+dataOutput/TestingFolder/2017-08-01 00-46-42.hand, middle and thumb, Passed

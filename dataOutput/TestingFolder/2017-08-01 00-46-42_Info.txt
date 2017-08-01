@@ -1,0 +1,4 @@
+dataOutput/TestingFolder/2017-08-01 00-46-42.hand information
+	Comments: middle and thumb
+	Result: Passed
+

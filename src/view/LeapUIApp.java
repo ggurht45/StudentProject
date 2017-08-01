@@ -224,7 +224,6 @@ public class LeapUIApp extends Application {
         }
 
 
-
         //create references for the 2 different controls
         Control ctrl1 = new Control();
         Control2 ctrl2 = new Control2();
@@ -263,7 +262,8 @@ public class LeapUIApp extends Application {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         System.out.println("enter was pressed, saving hand.");
-                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame(); //latestHand.frame();
+//                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
+                        Frame f = latestHand.frame();
 
                         //show alert box
                         SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
