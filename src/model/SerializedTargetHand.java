@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import com.leapmotion.leap.Hand;
 import com.leapmotion.leap.Frame;
@@ -236,7 +238,20 @@ public class SerializedTargetHand {
 
     }
 
+    public static String extractGestureTypeFromFilePath(String path) {
+        String[] tokens = path.split("/");//todo maybe this wont work on other OS's, maybe use a better thing than /
+        String lastToken = tokens[tokens.length - 1];
+
+        tokens = lastToken.split(Pattern.quote(".")); //assume gestureType can't have "." in it
+        String gestureType = tokens[0];
+        System.out.println("extracted gestureType: " + gestureType);
+
+        return gestureType;
+    }
+
     public static ArrayList<Hand> getAllHands2(String fileName) {
+        //also create a hashmap that is stored in main app, that links each hand to a gesture type.
+        LeapUIApp.handToGestureType = new HashMap<>();
         try {
             File inFile = new File(fileName);
             if (!inFile.exists())
@@ -244,14 +259,18 @@ public class SerializedTargetHand {
 
             BufferedReader br = new BufferedReader(new FileReader(inFile));
 
-            ArrayList<Hand> hands = new ArrayList<Hand>();
+            ArrayList<Hand> hands = new ArrayList<>();
 
             try {
                 String line = br.readLine();
                 while (line != null) {
-                    hands.add(readFromFile(line));
+                    Hand h = readFromFile(line);
+                    String gestureType = extractGestureTypeFromFilePath(line);
+                    LeapUIApp.handToGestureType.put(h, gestureType);
+                    hands.add(h);
                     line = br.readLine();
                 }
+                System.out.println("created hashmap of hand->gestureType" + LeapUIApp.handToGestureType);
             } finally {
                 br.close();
             }

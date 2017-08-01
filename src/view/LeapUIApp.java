@@ -4,6 +4,7 @@ package view;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import controller.Comparer;
 import javafx.application.Application;
@@ -46,7 +47,9 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static HashMap<Hand, String> handToGestureType;
     public static String DEFAULT_FOLDER = "Test2";
+    public String userSpecifiedDirectory = DEFAULT_FOLDER; //updates as user names folders in savebox
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
     public static String RightGesturesFile = "dataOutput/RightGestures.txt";
@@ -75,7 +78,7 @@ public class LeapUIApp extends Application {
     public Scene scene, scene2;
     public static boolean leftHandSelected = true;
 
-    public String userSpecifiedDirectory = "General"; //default directory to save data to
+
 
 
 //	private Controller leapDevice; // XXX testing purposes only
@@ -263,8 +266,10 @@ public class LeapUIApp extends Application {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     try {
                         System.out.println("enter was pressed, saving hand.");
-//                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
-                        Frame f = latestHand.frame();
+
+                        //following line is for TESTING. dont forget to uncomment it later
+                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
+//                        Frame f = latestHand.frame();
 
                         //show alert box
                         SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
@@ -273,13 +278,12 @@ public class LeapUIApp extends Application {
                         userSpecifiedDirectory = SaveBox.directory;
                         String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
-                        if (SaveBox.comments != null) {
+                        if (SaveBox.saved) {
                             SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
                         }
-                        //comments will never be null
-//                        else {
-//                            SerializedTargetHand.Save4(f, dataOutputPath, "", SaveBox.passFail);
-//                        }
+                        else {
+                            System.out.println("INFO... NoT saving since save box was not saved or closed properly");
+                        }
 
 
                     } catch (IOException e) {
@@ -721,11 +725,15 @@ public class LeapUIApp extends Application {
                     wait();
                 }
                 //the wait is over, selection was confirmed. can return the selected hand
+                //todo this is where the gestureType should be updated
+                Hand selectedHand = targets.get(index);
+                System.out.println("selected hand, the corresponding gestureType is: " + handToGestureType.get(selectedHand));
                 return targets.get(index);
 
             }
             //returning null cuz the arraylist passed in was null or empty
             else {
+                System.out.println("ERROR, the arraylist passed into this select hand method was empty or null. ");
                 return null;
             }
         }
@@ -871,9 +879,10 @@ public class LeapUIApp extends Application {
 //        }
 
         synchronized void save() {
+            //todo, i think this should be wired to pressing enter.
             try {
                 //save data
-                System.out.println("saving data ************");
+                System.out.println("saving data 3sk3232fsadf ************");
                 Frame f = latestHand.frame();
                 System.out.println("frame: \n" + f.toString());
                 //showImage();
@@ -886,7 +895,7 @@ public class LeapUIApp extends Application {
                 //when it needs to be compared it can be appropriately compared. maybe that can be saved in files, serialized data?
 
 
-                SerializedTargetHand.Save2(latestHand.frame(), "General", "typeX");
+                SerializedTargetHand.Save2(f, "General", "typeX");
                 System.out.println("saving data END ************");
             } catch (Exception e) {
                 e.printStackTrace();

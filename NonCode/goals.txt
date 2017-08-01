@@ -154,13 +154,24 @@ first small and easy goal to accomplish:
 
 
     -- can save new data to a folder. --done
-    -- also the type of gesture is stored -- 1h. 7:40.
     -- can name the data,--30mins. 2:13, 6:20. lol sheesh. -done
+
+    -- only need save and end testing buttons.
+
+
+
+
+    -- also the type of gesture is stored -- 1h. 7:40.
     -- by default should be named via counter value. -> can store in special object, property file. serializeble
+
+
+
+
     -- style buttons, connect wiring
     -- make sure hands dont move around
-
-    -- show error dialog box if failed to load folder.
+    -- make table bigger and hidable
+    -- if no folder was typed and "load csv was clicked", allow user to choose file from computer.
+    -- show error dialog box if failed to load folder or wrong folder was typed in.
 
 
     -- put left-right into a setting icon opens a dialog

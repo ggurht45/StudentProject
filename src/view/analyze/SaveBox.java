@@ -11,6 +11,7 @@ public class SaveBox {
     // todo put everything in fxml
 
     //Create variable
+    public static boolean saved = false;
     public static String name = "";
     public static String comments = "";
     public static boolean passFail = true;
@@ -48,6 +49,7 @@ public class SaveBox {
             name = nameTextfield.getText();
             comments = textField.getText();
             directory = directoryTextField.getText();
+            saved = true;
             window.close();
         });
 
