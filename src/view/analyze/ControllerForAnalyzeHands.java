@@ -115,6 +115,10 @@ public class ControllerForAnalyzeHands {
     @FXML
     private TreeTableView<HandInfo2> treeTableView;
 
+    //name string
+    @FXML
+    private TreeTableColumn<HandInfo2, String> col0;
+
     //handfile string
     @FXML
     private TreeTableColumn<HandInfo2, String> col1;
@@ -150,6 +154,7 @@ public class ControllerForAnalyzeHands {
     }
 
 
+    //todo put this in a try catch, so if null pointer error happens we know where very quickly. and can make error code1
     private static String getFileStringPath(int rowIndex) {
         HandInfo2 h = treeItems.get(rowIndex).getValue();
         return h.getHandFile();
@@ -160,15 +165,27 @@ public class ControllerForAnalyzeHands {
         //set pref height and width of container?
 
         //create root, and add items to it
-        root = new TreeItem<>(new HandInfo2("rootFilename", "rootComments", "rootResult"));
-        currentFolder = "Alex";
+        root = new TreeItem<>(new HandInfo2("rootName", "rootFilename", "rootComments", "rootResult"));
+        currentFolder = app.DEFAULT_FOLDER;
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
 
         //doing weird stuff with lambdas; much shorter
+        col0.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().name2Property());
         col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().handFile2Property());
         col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().comments2Property());
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().result2Property());
+
+
+        //name column
+        col0.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        col0.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+            @Override
+            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+                h.getValue().setName2(event.getNewValue());
+            }
+        });
 
 
         //filepath column
@@ -279,6 +296,7 @@ public class ControllerForAnalyzeHands {
 //        SerializedTargetHand.storeToCSV(path, data);
 //    }
 
+    //todo get this work again
     @FXML
     void readFromCSV(ActionEvent event) {
         System.out.println("reading data from csv file");

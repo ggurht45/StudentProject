@@ -46,6 +46,7 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static String DEFAULT_FOLDER = "Test2";
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
     public static String RightGesturesFile = "dataOutput/RightGestures.txt";
@@ -273,10 +274,12 @@ public class LeapUIApp extends Application {
                         String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
                         if (SaveBox.comments != null) {
-                            SerializedTargetHand.Save4(f, dataOutputPath, SaveBox.comments, SaveBox.passFail);
-                        } else {
-                            SerializedTargetHand.Save4(f, dataOutputPath, "no comments", SaveBox.passFail);
+                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, SaveBox.comments, SaveBox.passFail);
                         }
+                        //comments will never be null
+//                        else {
+//                            SerializedTargetHand.Save4(f, dataOutputPath, "", SaveBox.passFail);
+//                        }
 
 
                     } catch (IOException e) {

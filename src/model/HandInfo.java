@@ -4,15 +4,27 @@ package model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+//todo since not doing serializing now, need to clean up this code. dont need another class for properties. can just use this one.
 public class HandInfo implements java.io.Serializable {
+    public String name;
     public String handFile;
     public String comments;
     public String result;
 
-    public HandInfo(String hf, String cm, String res) {
+    public HandInfo(String name, String hf, String cm, String res) {
+        this.name = name;
         handFile = hf;
         comments = cm;
         result = res;
+    }
+
+    //temporary for testing..
+    public static String getCSVHeader() {
+        return "name, filePath, comments, result";
+    }
+
+    public String getCommaSeperatedToString() {
+        return name.trim() + ", " + handFile.trim() + ", " + comments.trim() + ", " + result.trim();
     }
 
 //    public String getHandFile() {
@@ -41,7 +53,7 @@ public class HandInfo implements java.io.Serializable {
 
     @Override
     public String toString() {
-        String s = "Filename: " + handFile + "\n\tComments: " + comments + "\n\tResult: " + result;
+        String s = "Filepath: " + handFile + "\n\tName: " + name + "\n\tComments: " + comments + "\n\tResult: " + result;
         return s;
     }
 }

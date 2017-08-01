@@ -6,14 +6,14 @@ import java.util.List;
 
 public class CsvHelper {
 
-    //temporary for testing..
-    public static String getCSVHeader() {
-        return "filePath, comments, result";
-    }
-
-    public static String getCommaSeperatedToString(HandInfo h) {
-        return h.handFile.trim() + ", " + h.comments.trim() + ", " + h.result.trim();
-    }
+//    //temporary for testing..
+//    public static String getCSVHeader() {
+//        return "filePath, comments, result";
+//    }
+//
+//    public static String getCommaSeperatedToString(HandInfo h) {
+//        return h.handFile.trim() + ", " + h.comments.trim() + ", " + h.result.trim();
+//    }
     //END temporary for testing..
 
 
@@ -22,10 +22,10 @@ public class CsvHelper {
     private static final String NEW_LINE_SEPARATOR = System.lineSeparator();
 
     //CSV file header
-    private static final String FILE_HEADER = getCSVHeader();//HandInfo.getCSVHeader();
+    private static final String FILE_HEADER = HandInfo.getCSVHeader();
 
     public static void writeCsvFile(String fileName, ArrayList<HandInfo> hands) {
-        System.out.println("*** in writer.\n fileName: " + fileName + "\nhands(all): " + hands + "\n***");
+//        System.out.println("*** in writer.\n fileName: " + fileName + "\nhands(all): " + hands + "\n***");
 
         FileWriter fileWriter = null;
 
@@ -36,7 +36,7 @@ public class CsvHelper {
 
             //Write a new student object list to the CSV file
             for (HandInfo h : hands) {
-                String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+                String s = h.getCommaSeperatedToString();
                 fileWriter.append(s);
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
@@ -64,7 +64,7 @@ public class CsvHelper {
 
             //Write a new student object list to the CSV file
             for (HandInfo h : hands) {
-                String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+                String s = h.getCommaSeperatedToString();
                 System.out.println("total s:>>>>" + s + "<<<<");
                 fileWriter.append(s);
                 fileWriter.append(NEW_LINE_SEPARATOR);
@@ -86,14 +86,15 @@ public class CsvHelper {
 
     //create or add to existing file, the handinfo object passed in.
     public static void writeHandInfoToFile(String fileName, HandInfo h) {
-        System.out.println("*** in writer.\n gonna write hand: " + h + "\nto file:" + fileName + "\n***");
+//        System.out.println("*** in writer.\n gonna write hand: " + h + "\nto file:" + fileName + "\n***");
         FileWriter fileWriter = null;
         try {
 
+            //if file doesnt exist, make new file
             if (!(new File(fileName).isFile())) {
                 fileWriter = new FileWriter(fileName);
                 //creating a new csv file
-                System.out.println("new csv file being created");
+//                System.out.println("new csv file being created");
                 fileWriter.append(FILE_HEADER.toString());      //Write the CSV file header
                 fileWriter.append(NEW_LINE_SEPARATOR);          //Add a new line separator after the header
             }
@@ -106,7 +107,7 @@ public class CsvHelper {
 
             System.out.println("adding hand now. header should have already been added when file was first created");
             //add hand
-            String s = getCommaSeperatedToString(h);// h.getCommaSeperatedToString();
+            String s = h.getCommaSeperatedToString();
             fileWriter.append(s);
             fileWriter.append(NEW_LINE_SEPARATOR);
 
@@ -126,9 +127,10 @@ public class CsvHelper {
 
 
     //Student attributes index
-    private static final int HANDINFO_FILENAME_IDX = 0;
-    private static final int HANDINFO_COMMENTS_IDX = 1;
-    private static final int HANDINFO_RESULTS_IDX = 2;
+    private static final int HANDINFO_NAME_IDX = 0;
+    private static final int HANDINFO_FILENAME_IDX = 1;
+    private static final int HANDINFO_COMMENTS_IDX = 2;
+    private static final int HANDINFO_RESULTS_IDX = 3;
 
     public static ArrayList<HandInfo> readCsvFile(String fileName) {
 
@@ -147,7 +149,7 @@ public class CsvHelper {
                 String[] tokens = line.split(COMMA_DELIMITER);//Get all tokens available in line
                 if (tokens.length > 0) {
                     //Create a new student object and fill his  data
-                    HandInfo h = new HandInfo(tokens[HANDINFO_FILENAME_IDX], tokens[HANDINFO_COMMENTS_IDX], tokens[HANDINFO_RESULTS_IDX]);
+                    HandInfo h = new HandInfo(tokens[HANDINFO_NAME_IDX], tokens[HANDINFO_FILENAME_IDX], tokens[HANDINFO_COMMENTS_IDX], tokens[HANDINFO_RESULTS_IDX]);
                     hands.add(h);
                 }
             }

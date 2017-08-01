@@ -16,6 +16,7 @@
          <children>
             <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" onMouseClicked="#rowClickedEvent" prefHeight="542.0" prefWidth="221.0">
               <columns>
+                  <TreeTableColumn fx:id="col0" prefWidth="75.0" text="Name" />
                 <TreeTableColumn fx:id="col1" minWidth="0.0" prefWidth="82.66668701171875" text="FilePath" />
                   <TreeTableColumn fx:id="col2" maxWidth="104.33331298828125" prefWidth="104.33331298828125" text="Comments" />
                   <TreeTableColumn fx:id="col3" prefWidth="72.0" text="Result" />

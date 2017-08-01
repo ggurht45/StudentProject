@@ -46,14 +46,13 @@ public class SerializedTargetHand {
     }
 
     //use this function to save to a specific folder that may need to be created.
-    public static void Save4(Frame f, String outputFolder, String comments, boolean passFail) throws IOException {
-        System.out.println("inside save4");
+    public static void Save4(Frame f, String name, String outputFolder, String comments, boolean passFail) throws IOException {
+//        System.out.println("inside save4");
         String result = (passFail ? "Passed" : "Failed");
 
         Calendar cal = Calendar.getInstance();
         cal.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-
 
         String fileNameWithPath = outputFolder + sdf.format(cal.getTime());
 
@@ -64,19 +63,22 @@ public class SerializedTargetHand {
 //        System.out.println("getPath: " + fileDirectory.getPath());
         byte[] serializedFrame = f.serialize();
         Files.write(Paths.get(fileDirectory.getPath()), serializedFrame);
+
+        //todo clean up these later. they are not needed anymore.
         //printer for comments
-        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_comments.txt", true)));
-        printer.println(comments);
-        printer.close();
-
-        //printer for pass/fail
-        PrintWriter printer2 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_result.txt", true)));
-        printer2.println(result);
-        printer2.close();
-
+//        PrintWriter printer = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_comments.txt", true)));
+//        printer.println(comments);
+//        printer.close();
+//
+//        //printer for pass/fail
+//        PrintWriter printer2 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_result.txt", true)));
+//        printer2.println(result);
+//        printer2.close();
+//
         //ideal printer
         PrintWriter printer3 = new PrintWriter(new BufferedWriter(new FileWriter(fileNameWithPath + "_Info.txt", true)));
         printer3.println(fileNameWithPath + ".hand information");
+        printer3.println("\tName: " + name);
         printer3.println("\tComments: " + comments);
         printer3.println("\tResult: " + result);
         printer3.println();
@@ -84,15 +86,11 @@ public class SerializedTargetHand {
 
 
         //create handInfo object and serialize.
-        HandInfo handInfo = new HandInfo(fileNameWithPath + ".hand", comments, result);
+        HandInfo handInfo = new HandInfo(name, fileNameWithPath + ".hand", comments, result);
 
         //check if a total list exists
         String fullFileName = outputFolder + "_allHandsOnDeck.csv";
         CsvHelper.writeHandInfoToFile(fullFileName, handInfo);
-
-
-
-
 
 
 //        if (new File(fullFileName).isFile()) {
@@ -296,21 +294,25 @@ public class SerializedTargetHand {
     public static Hand getHandFromString(String s) {
         Hand h = null;
         try {
+            s = s.trim(); //todo temporary fix. fix this in handInfo. whenever returning string properties, trim them
+
             h = SerializedTargetHand.readFromFile(s);
         } catch (Exception e) {
+            System.out.println("ERROR, failed to load hand from this path>>>>" + s + "<<<<");
             e.printStackTrace();
         }
         return h;
     }
 
     public static void writeToCSV(String fullFilePath, ArrayList<HandInfo> hands) {
-        System.out.println("NEED TO CHECK THIS OVER LATER");
+//        System.out.println("NEED TO CHECK THIS OVER LATER");
+        //todo need to check over this later??
         CsvHelper.writeCsvFile(fullFilePath, hands);
 
     }
 
     public static ArrayList<HandInfo> readFromCSV(String fullFileName) {
-        System.out.println("serializedHand: reading from csv");
+//        System.out.println("serializedHand: reading from csv");
         return CsvHelper.readCsvFile(fullFileName);
     }
 

@@ -153,10 +153,14 @@ first small and easy goal to accomplish:
     -- remove whitespace from strings csv --done
 
 
-    -- can save new data to a folder.
+    -- can save new data to a folder. --done
+    -- also the type of gesture is stored --30mins. 2:13
     -- can name the data,
     -- by default should be named via counter value. -> can store in special object, property file. serializeble
     -- style buttons, connect wiring
+    -- make sure hands dont move around
+
+    -- show error dialog box if failed to load folder.
 
 
     -- put left-right into a setting icon opens a dialog
