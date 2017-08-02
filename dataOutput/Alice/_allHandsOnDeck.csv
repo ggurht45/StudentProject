@@ -1,0 +1,3 @@
+name, filePath, gesturetype, comments, result
+first gesture, dataOutput/Alice/2017-08-01 14-17-10.hand, defaultGestureType, pretty good, Passed
+gesture2, dataOutput/Alice/2017-08-01 14-17-43.hand, defaultGestureType, its ok, Passed

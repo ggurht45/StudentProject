@@ -1,0 +1,6 @@
+dataOutput/Alex/2017-08-01 14-17-59.hand information
+	Name: fadfadsf;
+	Gesture Type: defaultGestureType
+	Comments: afsdfa
+	Result: Failed
+

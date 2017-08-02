@@ -211,17 +211,22 @@ first small and easy goal to accomplish:
 
 
 
+----------------------------------------
+    dialog window for loading folders/data.
 
+    initial dialog box
+     id(folder), dob, date, education -> text field.
+        -naming convention -gestureXLeft, override bad gestures. comments -> empty string.
+        -some discreet out of the way interaction for possible comments/yes/no.
 
+     --rotating around the shown gestures.
+        --turn off or on button. stops by itself.
+        -- make user hand invisible during rotation.
+         --once rotation finishes and stops, user is able to try.
 
+     table enhancement.
 
-
-
-
-
-
-
-
+---------------------------------------
 
 
 

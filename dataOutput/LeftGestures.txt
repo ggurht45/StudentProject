@@ -8,3 +8,5 @@ dataOutput/targets2/gesture7Left.hand
 dataOutput/targets2/gesture8Left.hand
 dataOutput/targets2/gesture9Left.hand
 dataOutput/targets2/gesture10Left.hand
+dataOutput/targets2/badgestureLeft.hand
+dataOutput/targets2/newgestureLeft.hand

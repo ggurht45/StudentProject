@@ -1,0 +1,6 @@
+dataOutput/Alice/2017-08-01 14-17-10.hand information
+	Name: first gesture
+	Gesture Type: defaultGestureType
+	Comments: pretty good 
+	Result: Passed
+
