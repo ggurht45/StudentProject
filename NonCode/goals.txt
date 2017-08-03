@@ -164,6 +164,7 @@ first small and easy goal to accomplish:
 
 
     -- style buttons, connect wiring --done
+    -- make rotation button
     -- fix gestures
     -- make table bigger and hidable
     -- make bat file for win32. --done
@@ -186,7 +187,7 @@ first small and easy goal to accomplish:
 
 
 
-    -- comment out movebar
+    -- comment out movebar --done
     -- by default should be named via counter value. -> can store in special object, property file. serializeble
 
 
@@ -209,6 +210,13 @@ first small and easy goal to accomplish:
 
 
 
+
+
+-----------------**
+->i strongly desire to finish my project and do well on it.
+->i am willing to say no to distractions and stay up as much as i can to work on it.
+I will try my best to be happy when doing even the boring and uninteresting stuff for it.
+-----------------**
 
 
 ----------------------------------------

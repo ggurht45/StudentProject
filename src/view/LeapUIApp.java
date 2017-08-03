@@ -702,6 +702,7 @@ public class LeapUIApp extends Application {
         private Button endButton;
         private Button confirmButton;
         private Button nextButton;
+        private Button rotateButton;
 
         public SelectBar(double x, double y, double width, double height) {
             super();
@@ -774,7 +775,21 @@ public class LeapUIApp extends Application {
             nextButton.setPrefSize(width / tmpVar, height);
             nextButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-            getChildren().addAll(prevButton, saveButton, endButton, nextButton);
+            //rotate button
+            rotateButton = new Button("Rotate") {
+                @Override
+                public void fire() {
+                    System.out.println("rotate button clicked");
+                }
+            };
+            rotateButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
+            rotateButton.setTranslateX(x + (width * 1 / 2) - (width/8)) ; //center the button
+            System.out.println("button height: " + rotateButton.getHeight());
+            rotateButton.setTranslateY(y - (height + 15));
+            rotateButton.setPrefSize(width / tmpVar, height);
+            rotateButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
+
+            getChildren().addAll(prevButton, saveButton, endButton, nextButton, rotateButton);
         }
 
 
