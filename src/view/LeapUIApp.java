@@ -8,6 +8,9 @@ import java.util.HashMap;
 
 import com.jfoenix.controls.JFXButton;
 import controller.Comparer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -31,6 +34,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.SerializedTargetHand;
 import view.analyze.*;
 import view.anatomy.UIHand;
@@ -48,6 +52,7 @@ import model.SerializedTargetHand;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static Rotate rotateAroundY;
     public static ControllerForAnalyzeHands scene2Controller;
     public static HashMap<Hand, String> handToGestureType;
     public static String DEFAULT_FOLDER = "Test2";
@@ -106,7 +111,8 @@ public class LeapUIApp extends Application {
 
         // The 3D camera
         PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.getTransforms().addAll(new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
+        rotateAroundY = new Rotate(0, Rotate.Y_AXIS);
+        camera.getTransforms().addAll(rotateAroundY, new Translate(0, -5, -50), new Rotate(-10, Rotate.X_AXIS));
 
         // The 3D display
         Group group3D = new Group();
@@ -703,13 +709,27 @@ public class LeapUIApp extends Application {
         private Button confirmButton;
         private Button nextButton;
         private Button rotateButton;
+        private Timeline timeline;
 
         public SelectBar(double x, double y, double width, double height) {
             super();
             confirmed = false;
             index = 0;
-
             double tmpVar = 4.3;
+
+            //set up rotation timeline
+            Timeline timeline = new Timeline(
+                    new KeyFrame(
+                            Duration.seconds(0),
+                            new KeyValue(rotateAroundY.angleProperty(), 0)
+                    ),
+                    new KeyFrame(
+                            Duration.seconds(7),
+                            new KeyValue(rotateAroundY.angleProperty(), -360)
+                    )
+            );
+            timeline.setCycleCount(1);
+
 
             prevButton = new Button("\u25c0 Previous") {
                 @Override
@@ -750,19 +770,6 @@ public class LeapUIApp extends Application {
             endButton.setPrefSize(width / tmpVar, height);
             endButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
 
-
-//            //things are starting to click. ^^
-//            confirmButton = new Button("Begin Test") {
-//                @Override
-//                public void fire() {
-//                    confirm();
-//                }
-//            };
-//            confirmButton.setTranslateX(x + width / 4);
-//            confirmButton.setTranslateY(y);
-//            confirmButton.setPrefSize(width / 2, height);
-//            confirmButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 16));
-
             nextButton = new Button("Next \u25b6") {
                 @Override
                 public void fire() {
@@ -780,11 +787,12 @@ public class LeapUIApp extends Application {
                 @Override
                 public void fire() {
                     System.out.println("rotate button clicked");
+                    //play time line
+                    timeline.play();
                 }
             };
             rotateButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
-            rotateButton.setTranslateX(x + (width * 1 / 2) - (width/8)) ; //center the button
-            System.out.println("button height: " + rotateButton.getHeight());
+            rotateButton.setTranslateX(x + (width * 1 / 2) - (width / 8)); //center the button
             rotateButton.setTranslateY(y - (height + 15));
             rotateButton.setPrefSize(width / tmpVar, height);
             rotateButton.setFont(Font.font(STYLESHEET_MODENA, FontWeight.BOLD, 15));
