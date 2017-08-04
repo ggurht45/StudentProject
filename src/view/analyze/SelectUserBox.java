@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
-public class PatientBox {
+public class SelectUserBox {
 
 
     public static String id;
@@ -72,6 +72,6 @@ public class PatientBox {
         window.showAndWait();
 
 
-        return ((id == null) || (id == ""))? false : true;
+        return ((id == null) || (id == "")) ? false : true;
     }
 }

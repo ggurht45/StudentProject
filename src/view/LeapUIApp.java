@@ -15,8 +15,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,11 +22,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -50,7 +45,6 @@ import com.leapmotion.leap.*;
 import controller.Control;
 import controller.Control2;
 import controller.ControllerInterface;
-import model.SerializedTargetHand;
 
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
@@ -138,7 +132,7 @@ public class LeapUIApp extends Application {
             @Override
             public void fire() {
                 System.out.println("* entering test mode btn clicked");
-                boolean goodResult = PatientBox.display();
+                boolean goodResult = SelectUserBox.display();
                 if (goodResult) {
                     //do as before
                     setVisible(false);
