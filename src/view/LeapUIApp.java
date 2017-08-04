@@ -138,9 +138,8 @@ public class LeapUIApp extends Application {
             @Override
             public void fire() {
                 System.out.println("* entering test mode btn clicked");
-                InfoBox.display("Gesture Name", "Please name this gesture:");
-
-                if (InfoBox.name != null) {
+                boolean goodResult = PatientBox.display();
+                if (goodResult) {
                     //do as before
                     setVisible(false);
                     userHand.setVisible(false);
@@ -148,7 +147,7 @@ public class LeapUIApp extends Application {
                     //makes a new thread, passing it a lambda function and then it calls start on that thread.
                     new Thread(() -> control.enterTrainingMode()).start();
                 } else {
-                    System.out.println("aborting going to test mode");
+                    System.out.println("aborting going to test mode ");
                 }
 
 
