@@ -11,8 +11,8 @@ public class SelectUserBox {
 
 
     public static String id;
-    public static String dob;
     public static String currentDate;
+    public static String dob;
     public static String edu;
 
 
@@ -36,13 +36,13 @@ public class SelectUserBox {
         idLabel.setText("ID");
         TextField idField = new TextField();
 
-        Label dobLabel = new Label();
-        dobLabel.setText("Date of Birth");
-        TextField dobField = new TextField();
-
         Label currentDateLabel = new Label();
         currentDateLabel.setText("Date");
         TextField currentDateField = new TextField();
+
+        Label dobLabel = new Label();
+        dobLabel.setText("Date of Birth");
+        TextField dobField = new TextField();
 
         Label eduLabel = new Label();
         eduLabel.setText("Education");
@@ -55,9 +55,13 @@ public class SelectUserBox {
         //Clicking will set answer and close window
         enterTestingBtn.setOnAction(e -> {
             id = idField.getText();
-            dob = dobField.getText();
             currentDate = currentDateField.getText();
+            dob = dobField.getText();
             edu = eduField.getText();
+
+            User u = new User(id, currentDate, dob, edu);
+            System.out.println("csv header of user class: " + User.csvHeader());
+            System.out.println("csv line of user: " + u.csvLine());
             window.close();
         });
 
@@ -65,7 +69,7 @@ public class SelectUserBox {
         VBox layout = new VBox(10);
 
         //Add buttons
-        layout.getChildren().addAll(jfxCombo, idLabel, idField, dobLabel, dobField, currentDateLabel, currentDateField, eduLabel, eduField, enterTestingBtn);
+        layout.getChildren().addAll(jfxCombo, idLabel, idField, currentDateLabel, currentDateField, dobLabel, dobField, eduLabel, eduField, enterTestingBtn);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);
