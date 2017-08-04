@@ -3,7 +3,9 @@
 package view;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import com.jfoenix.controls.JFXButton;
@@ -16,6 +18,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -731,6 +734,18 @@ public class LeapUIApp extends Application {
             timeline.setCycleCount(1);
 
 
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Calendar cal = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String time = sdf.format(cal.getTime());
+                    System.out.println("animation finished: " + time);
+                    userHand.setVisible(true);
+                }
+            });
+
+
             prevButton = new Button("\u25c0 Previous") {
                 @Override
                 public void fire() {
@@ -786,9 +801,17 @@ public class LeapUIApp extends Application {
             rotateButton = new Button("Rotate") {
                 @Override
                 public void fire() {
+                    Calendar cal = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String time = sdf.format(cal.getTime());
+
+                    System.out.println("animation started: " + time);
+
+                    userHand.setVisible(false);
 //                    System.out.println("rotate button clicked");
                     //play time line
                     timeline.play();
+//                    userHand.setVisible(true);
                 }
             };
             rotateButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");

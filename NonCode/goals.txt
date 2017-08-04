@@ -220,7 +220,7 @@ I will try my best to be happy when doing even the boring and uninteresting stuf
 
 
 ----------------------------------------
-    dialog window for loading folders/data.
+    dialog window for loading folders/data. --done
 
     initial dialog box
      id(folder), dob, date, education -> text field.
