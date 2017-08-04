@@ -138,11 +138,20 @@ public class LeapUIApp extends Application {
             @Override
             public void fire() {
                 System.out.println("* entering test mode btn clicked");
-                setVisible(false);
-                userHand.setVisible(false);
-                scene2Button.setVisible(false);
-                //makes a new thread, passing it a lambda function and then it calls start on that thread.
-                new Thread(() -> control.enterTrainingMode()).start();
+                InfoBox.display("Gesture Name", "Please name this gesture:");
+
+                if (InfoBox.name != null) {
+                    //do as before
+                    setVisible(false);
+                    userHand.setVisible(false);
+                    scene2Button.setVisible(false);
+                    //makes a new thread, passing it a lambda function and then it calls start on that thread.
+                    new Thread(() -> control.enterTrainingMode()).start();
+                } else {
+                    System.out.println("aborting going to test mode");
+                }
+
+
             }
         };
         testButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
