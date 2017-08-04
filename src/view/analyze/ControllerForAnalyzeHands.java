@@ -62,26 +62,26 @@ public class ControllerForAnalyzeHands {
         treeTableView.setRoot(root);
     }
 
-    @FXML
-    void sayHelloMaterial(ActionEvent event) {
-        //get the input from the text field on the press of the button
-        String txt = folderInputTextField.getText();
-
-
-        //save data since it might have been changed; do this before updating name of folder
-        savetableData2(treeItems, currentFolder);
-
-        //validate that the input is a valid folder and update the currentfolder
-        currentFolder = txt;
-
-        //update table to show new folder contents
-        treeItems = getTreeItems(txt);
-        root.getChildren().setAll(treeItems);
-        treeTableView.setRoot(root);
-
-        //set text input to empty again
-        folderInputTextField.setText("");
-    }
+//    @FXML
+//    void sayHelloMaterial(ActionEvent event) {
+//        //get the input from the text field on the press of the button
+//        String txt = folderInputTextField.getText();
+//
+//
+//        //save data since it might have been changed; do this before updating name of folder
+//        savetableData2(treeItems, currentFolder);
+//
+//        //validate that the input is a valid folder and update the currentfolder
+//        currentFolder = txt;
+//
+//        //update table to show new folder contents
+//        treeItems = getTreeItems(txt);
+//        root.getChildren().setAll(treeItems);
+//        treeTableView.setRoot(root);
+//
+//        //set text input to empty again
+//        folderInputTextField.setText("");
+//    }
 
 
     //helper method to get table data in arraylist format
@@ -315,7 +315,7 @@ public class ControllerForAnalyzeHands {
 
     //todo get this work again
     @FXML
-    void readFromCSV(ActionEvent event) {
+    void loadDataIntoTable(ActionEvent event) {
         System.out.println("reading data from csv file");
         //get file from computer
         FileChooser filechooser = new FileChooser();
