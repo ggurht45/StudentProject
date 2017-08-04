@@ -786,7 +786,7 @@ public class LeapUIApp extends Application {
             rotateButton = new Button("Rotate") {
                 @Override
                 public void fire() {
-                    System.out.println("rotate button clicked");
+//                    System.out.println("rotate button clicked");
                     //play time line
                     timeline.play();
                 }

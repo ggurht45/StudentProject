@@ -244,7 +244,7 @@ public class SerializedTargetHand {
 
         tokens = lastToken.split(Pattern.quote(".")); //assume gestureType can't have "." in it
         String gestureType = tokens[0];
-        System.out.println("extracted gestureType: " + gestureType);
+//        System.out.println("extracted gestureType: " + gestureType);
 
         return gestureType;
     }
@@ -270,7 +270,7 @@ public class SerializedTargetHand {
                     hands.add(h);
                     line = br.readLine();
                 }
-                System.out.println("created hashmap of hand->gestureType" + LeapUIApp.handToGestureType);
+//                System.out.println("created hashmap of hand->gestureType" + LeapUIApp.handToGestureType);
             } finally {
                 br.close();
             }
