@@ -60,8 +60,8 @@ public class SelectUserBox {
             edu = eduField.getText();
 
             User u = new User(id, currentDate, dob, edu);
-            System.out.println("csv header of user class: " + User.csvHeader());
-            System.out.println("csv line of user: " + u.csvLine());
+//            System.out.println("csv header of user class: " + User.csvHeader());
+//            System.out.println("csv line of user: " + u.csvLine());
             window.close();
         });
 

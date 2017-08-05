@@ -151,54 +151,64 @@ first small and easy goal to accomplish:
     --make new branch to fix it --done
     -- save data to external csv --done
     -- remove whitespace from strings csv --done
-
-
     -- can save new data to a folder. --done
     -- can name the data,--30mins. 2:13, 6:20. lol sheesh. -done
     -- only need save and end testing buttons. --done
     -- connect save button --done
     -- make sure when data is saved, it can be seen --done
-
     -- clean up, remove unused folders --done
     -- did some perliminary work on positioning hands in analyze. --done
-
-
     -- style buttons, connect wiring --done
-    -- make rotation button
+
+
+    -- make rotation button --done
+    -- make bat file for win32. --done
+
+    -- think about what needs to be stored in table. --done, dont need to change much code.
+    -- make savebox very minimal. label of gestureName, comments, result, on enter saves
+    -- save data to folder specified by user
+    -- also allow user to select folder from dialog box.
+    -- make button to show user info on table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     -- fix gestures
     -- make table bigger and hidable
-    -- make bat file for win32. --done
     -- also the type of gesture is stored -- 1h. 7:40.
-
     -- show notification if folder not found. alice for example.
     -- fix bug in 1.3 -> creating data and then closing app. doesn't successfully store data in .csv.
         -- it does. but because of the "saving on close operation" controller2 -> the saved data gets overridden.
         -- check if current scene is scene2. only then do the saving operation. or when new data gets entered, run update on controller2
 
-
-
     -- style savebox
-
     -- fix bug about folder appearing everytime we make new data
-
-
-
-
-
-
 
     -- comment out movebar --done
     -- by default should be named via counter value. -> can store in special object, property file. serializeble
-
-
-
-
 
     -- make sure hands dont move around
 
     -- if no folder was typed and "load csv was clicked", allow user to choose file from computer.
     -- show error dialog box if failed to load folder or wrong folder was typed in.
-
 
     -- put left-right into a setting icon opens a dialog
     -- make it so the save button opens in user's home directory
@@ -223,14 +233,16 @@ I will try my best to be happy when doing even the boring and uninteresting stuf
     dialog window for loading folders/data. --done
 
     initial dialog box
-     id(folder), dob, date, education -> text field.
+     --user
+        id(folder), dob, date, education -> text field.
+     --hand
         -naming convention -gestureXLeft, override bad gestures. comments -> empty string.
         -some discreet out of the way interaction for possible comments/yes/no.
 
      --rotating around the shown gestures.
-        --turn off or on button. stops by itself.
-        -- make user hand invisible during rotation.
-         --once rotation finishes and stops, user is able to try.
+        --turn off or on button. stops by itself. --done
+        -- make user hand invisible during rotation. --didnt work. will ignore for now
+         --once rotation finishes and stops, user is able to try.--see above
 
      table enhancement.
 

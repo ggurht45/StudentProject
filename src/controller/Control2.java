@@ -52,7 +52,7 @@ public class Control2 extends Controller implements ControllerInterface {
     }
 
     public void enterTrainingMode() {
-        System.out.println("enterTrainingMode called inside Control2");
+//        System.out.println("enterTrainingMode called inside Control2");
         selecting = true;
         select();                    //is this method the selection process?
         freeMode = false;
@@ -80,14 +80,14 @@ public class Control2 extends Controller implements ControllerInterface {
 
 
     public void staticStart(Hand storedHand) {
-        System.out.println("test start");
+//        System.out.println("test start");
         testHand = storedHand;
         LeapUIApp.startStaticTest(storedHand);
         FrameStore.staticStart();
     }
 
     public void staticEnd() {
-        System.out.println("static end called from manual control2");
+//        System.out.println("static end called from manual control2");
         LeapUIApp.endStaticTest2();
         try {
             FrameStore.staticEnd();

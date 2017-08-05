@@ -52,7 +52,7 @@ public class LeapUIApp extends Application {
     public static Rotate rotateAroundY;
     public static ControllerForAnalyzeHands scene2Controller;
     public static HashMap<Hand, String> handToGestureType;
-    public static String DEFAULT_FOLDER = "Test2";
+    public static String DEFAULT_FOLDER = "General";
     public static String userSpecifiedDirectory = DEFAULT_FOLDER; //updates as user names folders in savebox
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
@@ -131,7 +131,7 @@ public class LeapUIApp extends Application {
         testButton = new Button("Enter Test Mode") {
             @Override
             public void fire() {
-                System.out.println("* entering test mode btn clicked");
+//                System.out.println("* entering test mode btn clicked");
                 boolean goodResult = SelectUserBox.display();
                 if (goodResult) {
                     //do as before
@@ -141,7 +141,7 @@ public class LeapUIApp extends Application {
                     //makes a new thread, passing it a lambda function and then it calls start on that thread.
                     new Thread(() -> control.enterTrainingMode()).start();
                 } else {
-                    System.out.println("aborting going to test mode ");
+                    System.out.println("aborted going to test mode ");
                 }
 
 
@@ -255,18 +255,18 @@ public class LeapUIApp extends Application {
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.G) {
                     try {
-                        System.out.println("saving official gesture");
+//                        System.out.println("saving official gesture");
                         Frame f = latestHand.frame();
 
                         //for debugging
-                        System.out.println("frame: \n" + f.toString());
+//                        System.out.println("frame: \n" + f.toString());
                         FingerList fingersInFrame = f.fingers();
-                        System.out.println("number of fingers: \n" + fingersInFrame.count());
-                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                        System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                        System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
 
                         //show alert box
                         InfoBox.display("Gesture Name", "Please name this gesture:");
-                        System.out.println("name: " + InfoBox.name + " leftHand: " + InfoBox.leftHand);
+//                        System.out.println("name: " + InfoBox.name + " leftHand: " + InfoBox.leftHand);
 
                         if (InfoBox.name != null) {
                             SerializedTargetHand.Save3(f, InfoBox.name, InfoBox.leftHand);
@@ -514,18 +514,18 @@ public class LeapUIApp extends Application {
 
 
             //following line is for TESTING. dont forget to uncomment it later
-//            Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
-            Frame f = latestHand.frame();
+            Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
+//            Frame f = latestHand.frame();
 
             //show alert box
-            SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
-            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
+            SaveBox.display();//"Result and Comments", "Any comments:", userSpecifiedDirectory);
+//            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
 
-            userSpecifiedDirectory = SaveBox.directory;
+            userSpecifiedDirectory = DEFAULT_FOLDER;//SaveBox.directory;
             String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
             if (SaveBox.saved) {
-                SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
+                SerializedTargetHand.Save4(f, "defaultGestureName", dataOutputPath, SaveBox.comments, SaveBox.passFail);
             } else {
                 System.out.println("INFO... NoT saving since save box was not saved or closed properly");
             }
@@ -577,7 +577,7 @@ public class LeapUIApp extends Application {
     }
 
     public static void endStaticTest2() {
-        System.out.println("endStaticTest2 called");
+//        System.out.println("endStaticTest2 called");
         Platform.runLater(new StaticEndTask());
     }
 
@@ -853,10 +853,10 @@ public class LeapUIApp extends Application {
         }
 
         synchronized void endTesting() {
-            System.out.println("ending test, going back to main page 232391ksd");
+//            System.out.println("ending test, going back to main page 232391ksd");
             control.staticEnd();
             this.setVisible(false);
-            System.out.println("ending test mode END");
+//            System.out.println("ending test mode END");
         }
 
         //this is a synchronized method... nb
@@ -879,7 +879,7 @@ public class LeapUIApp extends Application {
                 //the wait is over, selection was confirmed. can return the selected hand
                 //todo this is where the gestureType should be updated
                 Hand selectedHand = targets.get(index);
-                System.out.println("selected hand, the corresponding gestureType is: " + handToGestureType.get(selectedHand));
+//                System.out.println("selected hand, the corresponding gestureType is: " + handToGestureType.get(selectedHand));
                 return targets.get(index);
 
             }
@@ -899,7 +899,7 @@ public class LeapUIApp extends Application {
         synchronized void prevHand() {
             if (targets != null && targets.size() > 0) {
                 index = (--index + targets.size()) % targets.size();
-                System.out.println(index);
+//                System.out.println(index);
                 targetHand.setLoc(targets.get(index));
             }
         }

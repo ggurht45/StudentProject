@@ -17,28 +17,28 @@ public class SaveBox {
     public static boolean passFail = true;
     public static String directory = "General";
 
-    public static String display(String title, String message, String initialDirectory) {
+    public static String display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
+        window.setTitle("Saving Gesture");
         window.setMinWidth(350);
 
 
         //name the file
         Label nameLabel = new Label();
         nameLabel.setText("Name");
-        TextField nameTextfield = new TextField();
+//        TextField nameTextfield = new TextField();
 
         //comments. todo: fix later. should not have comments like this.
         Label label = new Label();
-        label.setText(message);
+        label.setText("default Name");
         TextField textField = new TextField();
 
         //save to directory
-        Label directorylabel = new Label();
-        directorylabel.setText("Output Folder");
-        TextField directoryTextField = new TextField();
-        directoryTextField.setText(initialDirectory);
+//        Label directorylabel = new Label();
+//        directorylabel.setText("Output Folder");
+//        TextField directoryTextField = new TextField();
+//        directoryTextField.setText(initialDirectory);
 
 
         //Create two buttons
@@ -46,9 +46,9 @@ public class SaveBox {
         saveButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
         //Clicking will set answer and close window
         saveButton.setOnAction(e -> {
-            name = nameTextfield.getText();
+//            name = nameTextfield.getText();
             comments = textField.getText();
-            directory = directoryTextField.getText();
+//            directory = directoryTextField.getText();
             saved = true;
             window.close();
         });
@@ -56,10 +56,10 @@ public class SaveBox {
 
         //radio buttons for left right
         ToggleGroup lfGroup = new ToggleGroup();
-        RadioButton leftRadio = new RadioButton("Passed");
+        RadioButton leftRadio = new RadioButton("Yes");
         leftRadio.setToggleGroup(lfGroup);
         leftRadio.setOnAction(e -> passFail = true);
-        RadioButton rightRadio = new RadioButton("Failed");
+        RadioButton rightRadio = new RadioButton("No");
         rightRadio.setToggleGroup(lfGroup);
         rightRadio.setOnAction(e -> passFail = false);
 
@@ -67,7 +67,8 @@ public class SaveBox {
         VBox layout = new VBox(10);
 
         //Add buttons
-        layout.getChildren().addAll(nameLabel, nameTextfield, label, textField, directorylabel, directoryTextField, leftRadio, rightRadio, saveButton);
+//        layout.getChildren().addAll(nameLabel, nameTextfield, label, textField, directorylabel, directoryTextField, leftRadio, rightRadio, saveButton);
+        layout.getChildren().addAll(nameLabel, label, textField, leftRadio, rightRadio, saveButton);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);

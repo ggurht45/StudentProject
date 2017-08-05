@@ -130,9 +130,9 @@ public class ControllerForAnalyzeHands {
     @FXML
     private TreeTableColumn<HandInfo2, String> col1;
 
-    //handfile string
-    @FXML
-    private TreeTableColumn<HandInfo2, String> gestureCol;
+//    //handfile string
+//    @FXML
+//    private TreeTableColumn<HandInfo2, String> gestureCol;
 
     //comments
     @FXML
@@ -184,20 +184,20 @@ public class ControllerForAnalyzeHands {
         //doing weird stuff with lambdas; much shorter
         col0.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().name2Property());
         col1.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().handFile2Property());
-        gestureCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().gestureType2Property());
+//        gestureCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().gestureType2Property());
         col2.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().comments2Property());
         col3.setCellValueFactory((TreeTableColumn.CellDataFeatures<HandInfo2, String> param) -> param.getValue().getValue().result2Property());
 
 
-        //name column
-        col0.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-        col0.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
-            @Override
-            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
-                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
-                h.getValue().setName2(event.getNewValue());
-            }
-        });
+//        //name column
+//        col0.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+//        col0.setOnEditCommit(new EventHandler<TreeTableColumn.CellEditEvent<HandInfo2, String>>() {
+//            @Override
+//            public void handle(TreeTableColumn.CellEditEvent<HandInfo2, String> event) {
+//                TreeItem<HandInfo2> h = treeTableView.getTreeItem(event.getTreeTablePosition().getRow());
+//                h.getValue().setName2(event.getNewValue());
+//            }
+//        });
 
 
         //filepath column
@@ -225,8 +225,8 @@ public class ControllerForAnalyzeHands {
 
         //setting up col2 to display choice of true/false
         ObservableList<String> list = FXCollections.observableArrayList();
-        list.add("Passed");
-        list.add("Failed");
+        list.add("Yes");
+        list.add("No");
         col3.setCellFactory(ChoiceBoxTreeTableCell.forTreeTableColumn(list));
 
 //        commit the edit event
