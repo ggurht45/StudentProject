@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-05 23-38-51.hand information
+	Name: defaultGestureName
+	Comments: coments t1
+	Result: Yes
+

@@ -168,7 +168,7 @@ public class LeapUIApp extends Application {
         scene2Button.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
 //        scene2Button.
         scene2Button.setOnAction(e -> {
-            //System.out.println("going to scene2");
+            System.out.println("going to analyzedata scene");
             scene2Controller.initializeTableWithData();
             primaryStage.setScene(scene2);
         });

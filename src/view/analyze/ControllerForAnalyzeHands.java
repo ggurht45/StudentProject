@@ -55,11 +55,14 @@ public class ControllerForAnalyzeHands {
         });
     }
 
-    public void initializeTableWithData(){
+    public void initializeTableWithData() {
         //update table to show new folder contents
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
+
+        //make sure to set the hands also
+        displayHands();
     }
 
 //    @FXML
@@ -171,6 +174,22 @@ public class ControllerForAnalyzeHands {
         return h.getHandFile();
     }
 
+    private static void displayHands() {
+        if (treeItems.size() > 0) {
+            //set the inital hand to first row's hand file
+            lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
+            uiHand1.setLoc(lmHand1);
+            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
+            uiHand2.setLoc(lmHand2);
+            uiHand1.setVisible(true);
+            uiHand2.setVisible(true);
+        } else {
+            uiHand1.setVisible(false);
+            uiHand2.setVisible(false);
+        }
+    }
+
+
     @FXML
     public void initialize() throws Exception {
         //set pref height and width of container?
@@ -255,17 +274,7 @@ public class ControllerForAnalyzeHands {
         uiHand2.setTranslateX(12);
         uiHand2.setTranslateY(4);
 
-
-        if(treeItems.size() > 0){
-            //set the inital hand to first row's hand file
-            lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
-            uiHand1.setLoc(lmHand1);
-            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
-            uiHand2.setLoc(lmHand2);
-        }else{
-            uiHand1.setVisible(false);
-            uiHand2.setVisible(false);
-        }
+        displayHands();
 
 
         //camera and stuff
@@ -331,19 +340,24 @@ public class ControllerForAnalyzeHands {
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV files (.csv)", "*.csv");
         filechooser.setSelectedExtensionFilter(filter);
         File file = filechooser.showOpenDialog(app.primaryStage);
-        String filePath = file.getPath();
-        System.out.println("filePath is: " + filePath);
+        if (file != null) {
+            String filePath = file.getPath();
+            System.out.println("filePath is: " + filePath);
 
 
 //        String filename = "_allHandsOnDeck.csv";            //allow to be typed in from dialog
 //        String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
 //        String fullFileName = path + filename;
-        ArrayList<HandInfo> data = SerializedTargetHand.readFromCSV(filePath);
+            ArrayList<HandInfo> data = SerializedTargetHand.readFromCSV(filePath);
 
-        //update table
-        treeItems = getListOfTreeItems(data);
-        root.getChildren().setAll(treeItems);
-        treeTableView.setRoot(root);
+            //update table
+            treeItems = getListOfTreeItems(data);
+            root.getChildren().setAll(treeItems);
+            treeTableView.setRoot(root);
+        } else {
+            System.out.println("seems like no file was chosen, file is null");
+        }
+
 
     }
 

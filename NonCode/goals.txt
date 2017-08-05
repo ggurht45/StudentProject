@@ -165,14 +165,25 @@ first small and easy goal to accomplish:
     -- make bat file for win32. --done
 
     -- think about what needs to be stored in table. --done, dont need to change much code.
-    -- fix bug about table not loading if there is no data or no file called _allHandsOnDeck.
-    -- fix bug about data not getting saved when edited from table.
-    --
+    -- fix bug about table not loading if there is no data or no file called _allHandsOnDeck. --done
+    -- fix bug about going to analyze page and not seeing hands --done
+    -- fix bug about clicking on non row(was actually about dialoge box not closing with file) --done
+    -- fix bug about data not getting saved when edited from table.--done
+
+
+
+
 
     -- make savebox very minimal. label of gestureName, comments, result, on enter saves
-
     -- save data to folder specified by user
     -- also allow user to select folder from dialog box.
+
+
+
+
+
+
+
     -- make button to show user info on table
 
 
