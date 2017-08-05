@@ -55,7 +55,7 @@ public class ControllerForAnalyzeHands {
         });
     }
 
-    public void updateTable(){
+    public void initializeTableWithData(){
         //update table to show new folder contents
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
@@ -246,19 +246,26 @@ public class ControllerForAnalyzeHands {
 
         //uiHand1 setup
         uiHand1 = new UIHand_Simple(Color.BLUE.darker(), false);
-        //set the inital hand to first row's hand file
-        lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
-        uiHand1.setLoc(lmHand1);
         uiHand1.setVisible(true);
         uiHand1.setTranslateX(0);
 
         //uiHand2 setup
         uiHand2 = new UIHand_Simple(Color.GREEN.darker(), true);
-        lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
-        uiHand2.setLoc(lmHand2);
         uiHand2.setVisible(true);
         uiHand2.setTranslateX(12);
         uiHand2.setTranslateY(4);
+
+
+        if(treeItems.size() > 0){
+            //set the inital hand to first row's hand file
+            lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
+            uiHand1.setLoc(lmHand1);
+            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
+            uiHand2.setLoc(lmHand2);
+        }else{
+            uiHand1.setVisible(false);
+            uiHand2.setVisible(false);
+        }
 
 
         //camera and stuff
@@ -357,6 +364,8 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     void goToMainScene(ActionEvent event) {
+        savetableData2(treeItems, currentFolder);
+        System.out.println("has the data been saved yet? going to main.");
         //go to main scene
         app.primaryStage.setScene(app.scene);
     }

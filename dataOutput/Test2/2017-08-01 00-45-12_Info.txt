@@ -1,6 +1,0 @@
-dataOutput/Test2/2017-08-01 00-45-12.hand information
-    Name: someName
-    Gesture Type: defaultGestureType
-	Comments: index finger
-	Result: Passed
-

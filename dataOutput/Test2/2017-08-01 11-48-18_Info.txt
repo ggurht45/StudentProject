@@ -1,6 +1,0 @@
-dataOutput/Test2/2017-08-01 11-48-18.hand information
-	Name: testingDefaultHand
-	Gesture Type: defaultGestureType
-	Comments: no comments for now
-	Result: Passed
-

@@ -1,6 +1,0 @@
-dataOutput/Test2/2017-08-01 10-46-21.hand information
-	Name: yamcha
-	Gesture Type: defaultGestureType
-	Comments: also likes training
-	Result: Passed
-

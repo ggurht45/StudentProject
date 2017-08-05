@@ -2,6 +2,7 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CsvHelper {
@@ -140,6 +141,7 @@ public class CsvHelper {
         try {
             //initial stuff
             String line = "";
+
             fileReader = new BufferedReader(new FileReader(fileName));            //Create the file reader
             hands = new ArrayList();                                              //list of hands
             fileReader.readLine();                                                //Read the CSV file header to skip it
@@ -154,12 +156,22 @@ public class CsvHelper {
                 }
             }
             return hands;       //return arraylist of hands
+
+        } catch (FileNotFoundException e) {
+            System.out.println("could not find the file was trying to load in csvhelper, filename: " + fileName + " so returning empty arraylist");
+            return new ArrayList<HandInfo>();
+//            e.printStackTrace();
         } catch (Exception e) {
             System.out.println("Error in CsvFileReader !!!");
             e.printStackTrace();
         } finally {
             try {
-                fileReader.close();
+                if (fileReader != null) {
+                    fileReader.close();
+                } else {
+                    System.out.println("fileReader in csvHelper is null so not closing it");
+                }
+
             } catch (IOException e) {
                 System.out.println("Error while closing fileReader !!!");
                 e.printStackTrace();

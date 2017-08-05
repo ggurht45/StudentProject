@@ -1,6 +1,0 @@
-dataOutput/Joe/2017-08-01 14-24-44.hand information
-	Name: bad gesture
-	Gesture Type: defaultGestureType
-	Comments: pretty bad
-	Result: Failed
-

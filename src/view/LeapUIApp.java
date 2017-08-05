@@ -169,7 +169,7 @@ public class LeapUIApp extends Application {
 //        scene2Button.
         scene2Button.setOnAction(e -> {
             //System.out.println("going to scene2");
-            scene2Controller.updateTable();
+            scene2Controller.initializeTableWithData();
             primaryStage.setScene(scene2);
         });
 

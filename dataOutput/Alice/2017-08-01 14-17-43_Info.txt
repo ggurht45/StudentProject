@@ -1,6 +1,0 @@
-dataOutput/Alice/2017-08-01 14-17-43.hand information
-	Name: gesture2
-	Gesture Type: defaultGestureType
-	Comments: its ok
-	Result: Passed
-
