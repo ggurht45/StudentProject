@@ -1,2 +1,4 @@
 gestureName, filePath, comments, result
-defaultGestureName, dataOutput/General/2017-08-06 18-35-35.hand, commentt1, Yes
+gesture1Left, dataOutput/General/2017-08-06 19-15-45.hand, comments t1, Yes
+gesture3Left, dataOutput/General/2017-08-06 19-15-54.hand, comments t2, No
+gesture1Right, dataOutput/General/2017-08-06 19-16-11.hand, comments t3, No

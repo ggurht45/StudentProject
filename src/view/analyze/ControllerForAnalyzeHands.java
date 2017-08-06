@@ -169,19 +169,22 @@ public class ControllerForAnalyzeHands {
     }
 
 
-    //todo put this in a try catch, so if null pointer error happens we know where very quickly. and can make error code1
-    private static String getFileStringPath(int rowIndex) {
-        HandInfo2 h = treeItems.get(rowIndex).getValue();
-        return h.getHandFile();
-    }
+//    private static String getFileStringPath(int rowIndex) {
+//        HandInfo2 h = treeItems.get(rowIndex).getValue();
+//        return h.getHandFile();
+//    }
 
     private static void displayHands() {
         if (treeItems.size() > 0) {
             //set the inital hand to first row's hand file
-            lmHand1 = SerializedTargetHand.getHandFromString(getFileStringPath(0));
+            HandInfo2 handInfo = treeItems.get(0).getValue();
+
+            lmHand1 = SerializedTargetHand.getHandFromString(handInfo.getHandFile());
             uiHand1.setLoc(lmHand1);
-            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + "gesture2Left.hand");
+            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + handInfo.getName() + ".hand");
             uiHand2.setLoc(lmHand2);
+
+            //make them visible
             uiHand1.setVisible(true);
             uiHand2.setVisible(true);
         } else {
@@ -315,6 +318,10 @@ public class ControllerForAnalyzeHands {
             String file = h.getHandFile();
             lmHand1 = SerializedTargetHand.getHandFromString(file);
             uiHand1.setLoc(lmHand1);
+
+            //update target hand
+            lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + h.getName() + ".hand");
+            uiHand2.setLoc(lmHand2);
 
             //todo hard to determine position. work on this later
 //            DebugHelper.printHandInfo(lmHand1, "hand Info on lmHand1");

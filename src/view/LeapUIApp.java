@@ -49,6 +49,7 @@ import controller.ControllerInterface;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static int currentGestureNumber = 1;
     public static boolean dataCollectionEnabled;
     public static Rotate rotateAroundY;
     public static ControllerForAnalyzeHands scene2Controller;
@@ -519,15 +520,18 @@ public class LeapUIApp extends Application {
                 Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
 //            Frame f = latestHand.frame();
 
+                //name the gesture appropriately; format: gesture2Left
+                String gestureName = leftHandSelected ? "gesture" + currentGestureNumber + "Left" : "gesture" + currentGestureNumber + "Right";
+
                 //show alert box
-                SaveBox.display();//"Result and Comments", "Any comments:", userSpecifiedDirectory);
+                SaveBox.display(gestureName);//"Result and Comments", "Any comments:", userSpecifiedDirectory);
 //            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
 
                 userSpecifiedDirectory = DEFAULT_FOLDER;//SaveBox.directory;
                 String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
                 if (SaveBox.saved) {
-                    SerializedTargetHand.Save4(f, "defaultGestureName", dataOutputPath, SaveBox.comments, SaveBox.passFail);
+                    SerializedTargetHand.Save4(f, gestureName, dataOutputPath, SaveBox.comments, SaveBox.passFail);
                 } else {
                     System.out.println("INFO... NoT saving since save box was not saved or closed properly");
                 }
@@ -723,6 +727,7 @@ public class LeapUIApp extends Application {
             super();
             confirmed = false;
             index = 0;
+            currentGestureNumber = index + 1;
             double tmpVar = 4.3;
 
             //set up rotation timeline
@@ -860,6 +865,7 @@ public class LeapUIApp extends Application {
         synchronized void endTesting() {
 //            System.out.println("ending test, going back to main page 232391ksd");
             dataCollectionEnabled = false;
+            currentGestureNumber = 1;
             control.staticEnd();
             this.setVisible(false);
 //            System.out.println("ending test mode END");
@@ -905,6 +911,7 @@ public class LeapUIApp extends Application {
         synchronized void prevHand() {
             if (targets != null && targets.size() > 0) {
                 index = (--index + targets.size()) % targets.size();
+                currentGestureNumber = index + 1;
 //                System.out.println(index);
                 System.out.println("new index of (prev) hand in Array: " + index);
                 targetHand.setLoc(targets.get(index));
@@ -914,6 +921,7 @@ public class LeapUIApp extends Application {
         synchronized void nextHand() {
             if (targets != null && targets.size() > 0) {
                 index = ++index % targets.size();
+                currentGestureNumber = index + 1;
                 System.out.println("new index of (next) hand in Array: " + index);
                 targetHand.setLoc(targets.get(index));
             }

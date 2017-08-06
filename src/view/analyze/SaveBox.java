@@ -17,7 +17,7 @@ public class SaveBox {
     public static boolean passFail = true;
     public static String directory = "General";
 
-    public static String display() {
+    public static String display(String gestureName) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Saving Gesture");
@@ -26,12 +26,12 @@ public class SaveBox {
 
         //name the file
         Label nameLabel = new Label();
-        nameLabel.setText("Name");
+        nameLabel.setText(gestureName);
 //        TextField nameTextfield = new TextField();
 
         //comments. todo: fix later. should not have comments like this.
         Label label = new Label();
-        label.setText("default Name");
+        label.setText("Any comments:");
         TextField textField = new TextField();
 
         //save to directory
@@ -54,6 +54,9 @@ public class SaveBox {
         });
 
 
+        Label resultLabel = new Label();
+        resultLabel.setText("Result: ");
+
         //radio buttons for left right
         ToggleGroup lfGroup = new ToggleGroup();
         RadioButton leftRadio = new RadioButton("Yes");
@@ -68,7 +71,7 @@ public class SaveBox {
 
         //Add buttons
 //        layout.getChildren().addAll(nameLabel, nameTextfield, label, textField, directorylabel, directoryTextField, leftRadio, rightRadio, saveButton);
-        layout.getChildren().addAll(nameLabel, label, textField, leftRadio, rightRadio, saveButton);
+        layout.getChildren().addAll(nameLabel, label, textField, resultLabel, leftRadio, rightRadio, saveButton);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);

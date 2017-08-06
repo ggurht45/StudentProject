@@ -176,6 +176,8 @@ first small and easy goal to accomplish:
     -- find a way to know which gesture is being worked on --done
     -- only allow saving from test screen. --done
     -- found bug again. data getting overridden if we dont go to the analyze screen. need to fix this asap! --done
+
+
     -- save current gesture, show its name in savebox label
 
 
