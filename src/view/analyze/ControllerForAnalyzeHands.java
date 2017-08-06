@@ -50,8 +50,11 @@ public class ControllerForAnalyzeHands {
         this.app = app;
         //make sure to save the data if the app is closed
         app.primaryStage.setOnCloseRequest(event -> {
+            //get latest array of items
+            String path = SerializedTargetHand.getFolderPathHelperMethod(currentFolder);
+            ArrayList<HandInfo> latestHands = SerializedTargetHand.getAllHandsInfoInFolder(path);
             //save the data if need to
-            savetableData2(treeItems, currentFolder);
+            savetableData2(latestHands, currentFolder);
         });
     }
 
@@ -107,9 +110,7 @@ public class ControllerForAnalyzeHands {
 //    }
 
     //save to csv instead of .ser
-    private static void savetableData2(ObservableList<TreeItem<HandInfo2>> items, String folder) {
-        //get handInfo Arraylist
-        ArrayList<HandInfo> arr = getHandInfoArrayList(items);
+    private static void savetableData2(ArrayList<HandInfo> arr, String folder) {
         //save data to file
         String fullFilePath = SerializedTargetHand.getCSVFilePathForFolder(folder);
         SerializedTargetHand.writeToCSV(fullFilePath, arr);
@@ -378,7 +379,9 @@ public class ControllerForAnalyzeHands {
 
     @FXML
     void goToMainScene(ActionEvent event) {
-        savetableData2(treeItems, currentFolder);
+        //get handInfo Arraylist
+        ArrayList<HandInfo> arr = getHandInfoArrayList(treeItems);
+        savetableData2(arr, currentFolder);
 //        System.out.println("has the data been saved yet? going to main.");
         //go to main scene
         app.primaryStage.setScene(app.scene);

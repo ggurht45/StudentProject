@@ -49,6 +49,7 @@ import controller.ControllerInterface;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static boolean dataCollectionEnabled;
     public static Rotate rotateAroundY;
     public static ControllerForAnalyzeHands scene2Controller;
     public static HashMap<Hand, String> handToGestureType;
@@ -135,6 +136,7 @@ public class LeapUIApp extends Application {
                 boolean goodResult = SelectUserBox.display();
                 if (goodResult) {
                     //do as before
+                    dataCollectionEnabled = true;
                     setVisible(false);
                     userHand.setVisible(false);
                     scene2Button.setVisible(false);
@@ -510,27 +512,28 @@ public class LeapUIApp extends Application {
 
     public static void saveHandDataOfficial() {
         try {
-            System.out.println("enter was pressed, saving hand.");
+//            System.out.println("enter was pressed, saving hand, dataCollectionEnabled: " + dataCollectionEnabled);
+            if (dataCollectionEnabled) {
 
-
-            //following line is for TESTING. dont forget to uncomment it later
-            Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
+                //following line is for TESTING. dont forget to uncomment it later
+                Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
 //            Frame f = latestHand.frame();
 
-            //show alert box
-            SaveBox.display();//"Result and Comments", "Any comments:", userSpecifiedDirectory);
+                //show alert box
+                SaveBox.display();//"Result and Comments", "Any comments:", userSpecifiedDirectory);
 //            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
 
-            userSpecifiedDirectory = DEFAULT_FOLDER;//SaveBox.directory;
-            String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
+                userSpecifiedDirectory = DEFAULT_FOLDER;//SaveBox.directory;
+                String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
-            if (SaveBox.saved) {
-                SerializedTargetHand.Save4(f, "defaultGestureName", dataOutputPath, SaveBox.comments, SaveBox.passFail);
-            } else {
-                System.out.println("INFO... NoT saving since save box was not saved or closed properly");
+                if (SaveBox.saved) {
+                    SerializedTargetHand.Save4(f, "defaultGestureName", dataOutputPath, SaveBox.comments, SaveBox.passFail);
+                } else {
+                    System.out.println("INFO... NoT saving since save box was not saved or closed properly");
+                }
+
+
             }
-
-
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -856,6 +859,7 @@ public class LeapUIApp extends Application {
 
         synchronized void endTesting() {
 //            System.out.println("ending test, going back to main page 232391ksd");
+            dataCollectionEnabled = false;
             control.staticEnd();
             this.setVisible(false);
 //            System.out.println("ending test mode END");

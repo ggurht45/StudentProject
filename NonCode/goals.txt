@@ -170,11 +170,18 @@ first small and easy goal to accomplish:
     -- fix bug about clicking on non row(was actually about dialoge box not closing with file) --done
     -- fix bug about data not getting saved when edited from table.--done
 
+    -- make savebox very minimal. label of gestureName, comments, result --done
+
+
+    -- find a way to know which gesture is being worked on --done
+    -- only allow saving from test screen. --done
+    -- found bug again. data getting overridden if we dont go to the analyze screen. need to fix this asap! --done
+    -- save current gesture, show its name in savebox label
 
 
 
 
-    -- make savebox very minimal. label of gestureName, comments, result, on enter saves
+    -- make savebox look a little better and save on enter
     -- save data to folder specified by user
     -- also allow user to select folder from dialog box.
 
