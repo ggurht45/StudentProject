@@ -168,7 +168,7 @@ public class LeapUIApp extends Application {
         scene2Button.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
 //        scene2Button.
         scene2Button.setOnAction(e -> {
-            System.out.println("going to analyzedata scene");
+//            System.out.println("going to analyzedata scene");
             scene2Controller.initializeTableWithData();
             primaryStage.setScene(scene2);
         });
@@ -751,6 +751,7 @@ public class LeapUIApp extends Application {
             prevButton = new Button("\u25c0 Previous") {
                 @Override
                 public void fire() {
+                    System.out.println("previous button clicked");
                     prevHand();
                 }
             };
@@ -790,6 +791,7 @@ public class LeapUIApp extends Application {
             nextButton = new Button("Next \u25b6") {
                 @Override
                 public void fire() {
+                    System.out.println("going to next hand");
                     nextHand();
                 }
             };
@@ -900,6 +902,7 @@ public class LeapUIApp extends Application {
             if (targets != null && targets.size() > 0) {
                 index = (--index + targets.size()) % targets.size();
 //                System.out.println(index);
+                System.out.println("new index of (prev) hand in Array: " + index);
                 targetHand.setLoc(targets.get(index));
             }
         }
@@ -907,6 +910,7 @@ public class LeapUIApp extends Application {
         synchronized void nextHand() {
             if (targets != null && targets.size() > 0) {
                 index = ++index % targets.size();
+                System.out.println("new index of (next) hand in Array: " + index);
                 targetHand.setLoc(targets.get(index));
             }
         }

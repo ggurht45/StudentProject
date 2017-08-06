@@ -379,7 +379,7 @@ public class ControllerForAnalyzeHands {
     @FXML
     void goToMainScene(ActionEvent event) {
         savetableData2(treeItems, currentFolder);
-        System.out.println("has the data been saved yet? going to main.");
+//        System.out.println("has the data been saved yet? going to main.");
         //go to main scene
         app.primaryStage.setScene(app.scene);
     }
