@@ -54,7 +54,7 @@ public class LeapUIApp extends Application {
     public static Rotate rotateAroundY;
     public static ControllerForAnalyzeHands scene2Controller;
     public static HashMap<Hand, String> handToGestureType;
-    public static String DEFAULT_FOLDER = "General";
+    public static String DEFAULT_FOLDER = "TestData";
     public static String userSpecifiedDirectory = DEFAULT_FOLDER; //updates as user names folders in savebox
     public static String ProjectDirectoryPath = System.getProperty("user.dir");
     public static String LeftGesturesFile = "dataOutput/LeftGestures.txt";
@@ -518,7 +518,7 @@ public class LeapUIApp extends Application {
 
                 //following line is for TESTING. dont forget to uncomment it later
                 Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
-//            Frame f = latestHand.frame();
+//                Frame f = latestHand.frame();
 
                 //name the gesture appropriately; format: gesture2Left
                 String gestureName = leftHandSelected ? "gesture" + currentGestureNumber + "Left" : "gesture" + currentGestureNumber + "Right";

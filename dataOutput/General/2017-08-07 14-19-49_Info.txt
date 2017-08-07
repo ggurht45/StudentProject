@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-07 14-19-49.hand information
+	Name: gesture1Left
+	Comments: bestTry
+	Result: Yes
+

@@ -30,24 +30,24 @@ public class Comparer {
 
 	//all the appropriate weights added up.
 	private double weight_pinky() {return weight_pinky_proximal + weight_pinky_distal + weight_pinky_intermediate;}
-	
+
 	private double weight_ring(){
 		return weight_ring_proximal + weight_ring_distal + weight_ring_intermediate;
 	}
-	
+
 	private double weight_middle(){
 		return weight_middle_proximal + weight_middle_distal + weight_middle_intermediate;
 	}
-	
+
 	private double weight_index(){
 		return weight_index_proximal + weight_index_distal + weight_index_intermediate;
 	}
-	
+
 	private double weight_thumb(){
 		return weight_thumb_proximal + weight_thumb_distal + weight_thumb_intermediate;
 	}
-	
-	
+
+
 	//returns a number between 0,1. cos(ang) ang is less than 90.
 	//determines if ANY two angles are close to each other 89,87 would return 1. so would 43, 39. etc.
 	private double compareAngles(float angle1, float angle2) {
@@ -89,6 +89,10 @@ public class Comparer {
 			return 0; //not sure why this returns 0. what if both hands are not left?
 	}
 
+	public static double compareStatic(Hand h1, Hand h2){
+		Comparer var = new Comparer();
+		return var.compare(h1, h2);
+	}
 	// wrist in normal position (i.e. not turned)
 	private Boolean wristNormal(Hand h) {
 		if (h.isLeft())

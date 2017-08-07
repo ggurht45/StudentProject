@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-07 14-20-10.hand information
+	Name: gesture1Left
+	Comments: oneFingerOff
+	Result: Yes
+

@@ -5,6 +5,7 @@ import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Finger.Type;
 import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
+import model.SerializedTargetHand;
 
 import java.util.HashMap;
 
@@ -32,12 +33,12 @@ public class Comparer2 {
         HashMap<String, String> fingerPoseMap = new HashMap<>();
         if (leftHanded) {
             switch (gestureNumber) {
-                case 3:
+                case 10:
                     fingerPoseMap.put("index", "straight");
                     fingerPoseMap.put("pinky", "straight");
                     fingerPoseMap.put("middle", "curved");
                     fingerPoseMap.put("ring", "curved");
-                    fingerPoseMap.put("thumb", "curved");
+                    fingerPoseMap.put("thumb", "thumb");
                     break;
                 default:
                     System.out.println("no default fingerPoses");
@@ -129,7 +130,16 @@ public class Comparer2 {
         return grades;
     }
 
-    public double compare(Hand h1, Hand h2, String gestureType) {
+    private static double cumulativeGrade(HashMap<String, Double> fingersGradeMap) {
+        double grade = 0;
+        for (String key : fingersGradeMap.keySet()) {
+            grade = grade + fingersGradeMap.get(key);
+        }
+        grade = grade / 5.0;//five fingers
+        return grade;
+    }
+
+    public static double compare(Hand h1, Hand h2, String gestureType) {
 
         FingerList fingerList = h1.fingers();
         if (fingerList.count() == 5) {
@@ -137,14 +147,16 @@ public class Comparer2 {
             HashMap<String, Finger> fingerMap = getFingerHashMap(fingerList);
 
             //deconstruct from gestureType what kind of gesture we are dealing with
-            //assume gesture 3, left hand. rock sign
+            //assume gesture 10, left hand. rock sign
             boolean leftHanded = true;
-            int gestureNumber = 3;
+            int gestureNumber = 10;
 
             //want the pinky and index to be straight, middle and ring to be fully curved. (thumb touching middle)
             HashMap<String, String> fingerPoseMap = getFingerPoseMap(leftHanded, gestureNumber);
             HashMap<String, Double> fingersGradedMap = getFingersGradedMap(fingerMap, fingerPoseMap);
             System.out.println(fingersGradedMap);
+
+            double totalGrade = cumulativeGrade(fingersGradedMap);
 
 
             //straight -- angles between each consecutive bone in finger must be 0 degrees. (or 180, check that later)
@@ -152,10 +164,33 @@ public class Comparer2 {
             //thumb -- tip of thumb has to be within the (max min) x,y,z of any center point of any bone in the finger. calculate max and min xyz values.
 
 
-            return 0;
+            return totalGrade;
         }
         System.out.println("number of fingers in hand is not 5");
         return -1;
+    }
+
+    private static Has
+    public static void main(String[] args) {
+        System.out.println("testing main method");
+        String path = "dataOutput/targets2/gesture10Left.hand";
+        Hand target = SerializedTargetHand.getHandFromString(path);
+        String p1 = "dataOutput/TestData/2017-08-07 14-18-05.hand"; // besttry
+        String p2 = "dataOutput/TestData/2017-08-07 14-17-52.hand"; // closedfist
+        String p3 = "dataOutput/TestData/2017-08-07 14-18-20.hand"; // openPalm
+        String p4 = "dataOutput/TestData/2017-08-07 14-18-42.hand"; // oneFingerOff
+        String p5 = "dataOutput/TestData/2017-08-07 14-19-30.hand"; // oneFingerOff2
+        Hand h1 = SerializedTargetHand.getHandFromString(p1);
+        Hand h2 = SerializedTargetHand.getHandFromString(p2);
+        Hand h3 = SerializedTargetHand.getHandFromString(p3);
+        Hand h4 = SerializedTargetHand.getHandFromString(p4);
+        Hand h5 = SerializedTargetHand.getHandFromString(p5);
+
+        //get test hands
+        HashMap<String, Hand> hands = getTestHands();
+        double grade1 = Comparer.compareStatic(h1, target);
+        double grade2 = compare(h1, h1, "notimplementedyet");
+        System.out.println("grade1: " + grade1 + " grade2: " + grade2);
     }
 
 }

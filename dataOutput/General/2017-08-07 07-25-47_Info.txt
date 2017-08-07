@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-07 07-25-47.hand information
+	Name: gesture10Left
+	Comments: rocksign
+	Result: Yes
+

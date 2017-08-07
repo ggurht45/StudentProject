@@ -1,0 +1,9 @@
+gestureName, filePath, comments, result
+gesture10Left, dataOutput/TestData/2017-08-07 14-17-52.hand, closedFist, Yes
+gesture10Left, dataOutput/TestData/2017-08-07 14-18-05.hand, bestTry, Yes
+gesture10Left, dataOutput/TestData/2017-08-07 14-18-20.hand, openPalm, Yes
+gesture10Left, dataOutput/TestData/2017-08-07 14-18-42.hand, oneFingerOff, Yes
+gesture10Left, dataOutput/TestData/2017-08-07 14-19-30.hand, oneFingerOff2, Yes
+gesture1Left, dataOutput/TestData/2017-08-07 14-19-49.hand, bestTry, Yes
+gesture1Left, dataOutput/TestData/2017-08-07 14-20-10.hand, oneFingerOff, Yes
+gesture1Left, dataOutput/TestData/2017-08-07 14-20-27.hand, curvyFinger, Yes
