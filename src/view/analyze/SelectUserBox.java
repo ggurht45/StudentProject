@@ -9,6 +9,8 @@ import javafx.geometry.*;
 import model.CsvHelper;
 import view.LeapUIApp;
 
+import java.util.ArrayList;
+
 public class SelectUserBox {
 
 
@@ -66,6 +68,9 @@ public class SelectUserBox {
 
             //write to csv
             CsvHelper.writeUserToFile(LeapUIApp.ALL_USERS_FILE, u);
+
+            ArrayList<User> users = CsvHelper.readUsersFromFile(LeapUIApp.ALL_USERS_FILE);
+            System.out.println("users: " + users);
             window.close();
         });
 

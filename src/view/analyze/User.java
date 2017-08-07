@@ -78,4 +78,8 @@ public class User {
     public void setEdu(String edu) {
         this.edu.set(edu);
     }
+
+    public String toString(){
+        return "User: " + this.csvLine() + " <<";
+    }
 }

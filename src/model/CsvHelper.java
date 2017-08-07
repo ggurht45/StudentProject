@@ -221,4 +221,46 @@ public class CsvHelper {
         String line = u.csvLine();
         writeLineToFileHelperMethod(filename, header, line);
     }
+
+    private static ArrayList<String> readCsvFileIntoArraylistOfStringsHelperMethod(String filename) {
+        BufferedReader fileReader = null;
+        ArrayList<String> lines = null;
+        try {
+            String line = "";
+            fileReader = new BufferedReader(new FileReader(filename));
+            lines = new ArrayList();
+            fileReader.readLine(); //header
+
+            while ((line = fileReader.readLine()) != null) {
+                lines.add(line);
+            }
+            return lines;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lines;
+    }
+
+    public static ArrayList<User> readUsersFromFile(String filename) {
+        ArrayList<String> lines = readCsvFileIntoArraylistOfStringsHelperMethod(filename);
+        //convert each line into user
+        ArrayList<User> users = new ArrayList<>();
+        for (String line : lines) {
+            String[] tokens = line.split(COMMA_DELIMITER);
+            if (tokens.length > 0) {
+                User u = new User(tokens[0], tokens[1], tokens[2], tokens[3]); //0-3 = id, currentdate, dob, edu
+                users.add(u);
+            }
+        }
+        return users;
+    }
 }
