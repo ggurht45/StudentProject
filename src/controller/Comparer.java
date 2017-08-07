@@ -62,10 +62,10 @@ public class Comparer {
 			x += compareAngles(angleWristArm(h1), angleWristArm(h2))* weight_wrist;
 
 			//five fingers "proximal". compare always returns between 0,1. * the weight
-			x += compareAngles(anglePinkyProximal(h1), anglePinkyProximal(h2))*weight_pinky_proximal;
-			x += compareAngles(angleRingProximal(h1), angleRingProximal(h2))* weight_ring_proximal;
-			x += compareAngles(angleMiddleProximal(h1), angleMiddleProximal(h2))* weight_middle_proximal;
-			x += compareAngles(angleIndexProximal(h1), angleIndexProximal(h2))* weight_index_proximal;
+			x += compareAngles(anglePinkyProximal(h1), anglePinkyProximal(h2))*weight_pinky_proximal;//0-1*weight. in perfect world match will be 1*weight,
+			x += compareAngles(angleRingProximal(h1), angleRingProximal(h2))* weight_ring_proximal;//so if each one matches perfectly... eventually x will
+			x += compareAngles(angleMiddleProximal(h1), angleMiddleProximal(h2))* weight_middle_proximal;//equal totalweight. and then at end x/totalweight =1
+			x += compareAngles(angleIndexProximal(h1), angleIndexProximal(h2))* weight_index_proximal; //which would be a perfect match
 			x += compareAngles(angleThumbProximal(h1), angleThumbProximal(h2))* weight_thumb_proximal;
 
 			//five fingers "intermediate"

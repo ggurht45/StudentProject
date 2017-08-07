@@ -49,10 +49,39 @@ public class Comparer2 {
         } else return new HashMap<String, String>();
     }
 
+    private static HashMap<String, Bone> getHashMapOfBonesFromFinger(Finger f){
+        HashMap<String, Bone> h = new HashMap<>();
+        h.put("distal", f.bone(Bone.Type.TYPE_DISTAL));                     //closest to tip
+        h.put("intermediate", f.bone(Bone.Type.TYPE_INTERMEDIATE));         //2nd closest to tip
+        h.put("proximal", f.bone(Bone.Type.TYPE_PROXIMAL));                 //3rd to tip
+        h.put("metacarpal", f.bone(Bone.Type.TYPE_METACARPAL));             //closest to palm
+        return h;
+    }
+
+    private static double calculateStraightnessOfFinger(Finger f){
+
+        //bone variables for easy access
+        HashMap<String, Bone> b = getHashMapOfBonesFromFinger(f);
+        Bone d = b.get("distal");
+        Bone i = b.get("intermediate");
+        Bone p = b.get("proximal");
+        Bone m = b.get("metacarpal");
+
+        //find angle between bones; using their direction vector
+        double angle1 = m.direction().angleTo(p.direction());
+        angle1 = Math.toDegrees(angle1);
+        double angle2 = p.direction().angleTo(i.direction());
+        angle2 = Math.toDegrees(angle2);
+        double angle3 = i.direction().angleTo(d.direction());
+        angle3 = Math.toDegrees(angle3);
+        return 0;
+    }
+
     private static double gradeFinger(String fingerType, Finger f, String pose) {
         //straight pose
         if(pose.equals("straight")){
-            return .5;
+            double d = calculateStraightnessOfFinger(f);
+            return d;
         }
 
         //curved pose
@@ -96,6 +125,11 @@ public class Comparer2 {
             HashMap<String, String> fingerPoseMap = getFingerPoseMap(leftHanded, gestureNumber);
             HashMap<String, Double> fingersGradedMap = getFingersGradedMap(fingerMap, fingerPoseMap);
             System.out.println(fingersGradedMap);
+
+
+            //straight -- angles between each consecutive bone in finger must be 0 degrees. (or 180, check that later)
+            //curved -- max "" 90 degrees, min "" 45. maybe 30 for bone nearest wrist. think about thumb
+            //thumb -- tip of thumb has to be within the (max min) x,y,z of any center point of any bone in the finger. calculate max and min xyz values.
 
 
             return 0;
