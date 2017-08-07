@@ -49,7 +49,7 @@ public class Comparer2 {
         } else return new HashMap<String, String>();
     }
 
-    private static HashMap<String, Bone> getHashMapOfBonesFromFinger(Finger f){
+    private static HashMap<String, Bone> getHashMapOfBonesFromFinger(Finger f) {
         HashMap<String, Bone> h = new HashMap<>();
         h.put("distal", f.bone(Bone.Type.TYPE_DISTAL));                     //closest to tip
         h.put("intermediate", f.bone(Bone.Type.TYPE_INTERMEDIATE));         //2nd closest to tip
@@ -58,8 +58,22 @@ public class Comparer2 {
         return h;
     }
 
-    private static double calculateStraightnessOfFinger(Finger f){
+    private static double angleBetweenBones(Bone a, Bone b) {
+        double angle = a.direction().angleTo(b.direction());
+        angle = Math.toDegrees(angle);
+        if (angle > 90) {
+            System.out.println("setting greater angle (" + angle + ") to 90 for angle btw bone: " + a + ", and bone: " + b);
+            angle = 90;
+        }
+        //nb. not else
+        if (angle < 0) {
+            System.out.println("setting lesser angle (" + angle + ") to 0 for angle btw bone: " + a + ", and bone: " + b);
+            angle = 0;
+        }
+        return angle;
+    }
 
+    private static double getSumOfThreeAnglesBetweenFingerBones(Finger f) {
         //bone variables for easy access
         HashMap<String, Bone> b = getHashMapOfBonesFromFinger(f);
         Bone d = b.get("distal");
@@ -67,31 +81,37 @@ public class Comparer2 {
         Bone p = b.get("proximal");
         Bone m = b.get("metacarpal");
 
-        //find angle between bones; using their direction vector
-        double angle1 = m.direction().angleTo(p.direction());
-        angle1 = Math.toDegrees(angle1);
-        double angle2 = p.direction().angleTo(i.direction());
-        angle2 = Math.toDegrees(angle2);
-        double angle3 = i.direction().angleTo(d.direction());
-        angle3 = Math.toDegrees(angle3);
-        return 0;
+        //find angle between bones; using their direction vector; we want the these angles to be as close to zero as possible(for straight fingers);
+        // NOTE: this is different from compareAngles method in Comparer class.
+        double angle1 = angleBetweenBones(m, p);
+        double angle2 = angleBetweenBones(p, i);
+        double angle3 = angleBetweenBones(i, d);
+
+        //return addition of angles
+        return angle1 + angle2 + angle3;
+    }
+
+    private static double calculateStraightnessOfFinger(Finger f) {
+        double sumOfAngles = getSumOfThreeAnglesBetweenFingerBones(f);
+        //best case = 0; worst case is: 90+90+90 = 270.
+        double score = sumOfAngles / 270;           //closer to 0 means a better score. (ie. weird scale)
+        return 1 - score;                          //conventional scale: 0 = bad, 1 = good.
+    }
+
+    private static double calculateCurvednessOfFinger(Finger f) {
+        double sumOfAngles = getSumOfThreeAnglesBetweenFingerBones(f);
+        //best case is: 90+90+90 = 270; worst case = 0;
+        return sumOfAngles / 270;           //closer to 1 means a better score
     }
 
     private static double gradeFinger(String fingerType, Finger f, String pose) {
-        //straight pose
-        if(pose.equals("straight")){
-            double d = calculateStraightnessOfFinger(f);
-            return d;
+        if (pose.equals("straight")) {
+            return calculateStraightnessOfFinger(f);
+        } else if (pose.equals("curved")) {
+            return calculateCurvednessOfFinger(f);
+        } else if (pose.equals("thumb")) {
+            return 1; //best possible value for now
         }
-
-        //curved pose
-        if(pose.equals("curved")){
-            return .75;
-        }
-
-        //special case for thumb
-
-
         return 0;
     }
 

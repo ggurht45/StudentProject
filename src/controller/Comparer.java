@@ -49,6 +49,7 @@ public class Comparer {
 	
 	
 	//returns a number between 0,1. cos(ang) ang is less than 90.
+	//determines if ANY two angles are close to each other 89,87 would return 1. so would 43, 39. etc.
 	private double compareAngles(float angle1, float angle2) {
 		double differenceBtwAngles = Math.abs(angle1-angle2);
 		double tmp = Math.min(differenceBtwAngles, Math.PI/4); //pi is 180 degrees. so tmp can be at most 45
