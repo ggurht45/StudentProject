@@ -177,12 +177,26 @@ first small and easy goal to accomplish:
     -- only allow saving from test screen. --done
     -- found bug again. data getting overridden if we dont go to the analyze screen. need to fix this asap! --done
 
+    -- start working on comparing method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     -- save current gesture, show its name in savebox label
-
-
-
-
     -- make savebox look a little better and save on enter
     -- save data to folder specified by user
     -- also allow user to select folder from dialog box.
