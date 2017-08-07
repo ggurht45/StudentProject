@@ -200,6 +200,9 @@ first small and easy goal to accomplish:
     if one finger is off score should be multiplied by .1 or 0-> make it very easy to not pass the gesture if one finger is totally off
      if one finger is pretty close to good, then the finger score should be moved closer to 1 --> if in general fingers are good, should have an easy scale.
 
+     --really need to get the log and linear scale to work well.
+     --for thumb i could also consider just trying to use angles as previously done in compare1
+
 
      --why compare2 is better:
         --doesnt rely on target hand. allows for a more standardized results.

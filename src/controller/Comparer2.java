@@ -7,6 +7,7 @@ import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
 import model.SerializedTargetHand;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Comparer2 {
@@ -154,7 +155,7 @@ public class Comparer2 {
             //want the pinky and index to be straight, middle and ring to be fully curved. (thumb touching middle)
             HashMap<String, String> fingerPoseMap = getFingerPoseMap(leftHanded, gestureNumber);
             HashMap<String, Double> fingersGradedMap = getFingersGradedMap(fingerMap, fingerPoseMap);
-            System.out.println(fingersGradedMap);
+//            System.out.println(fingersGradedMap);
 
             double totalGrade = cumulativeGrade(fingersGradedMap);
 
@@ -170,27 +171,51 @@ public class Comparer2 {
         return -1;
     }
 
-    private static Has
+    private static HashMap<String, Hand> getTestHands() {
+        HashMap<String, Hand> testHands = new HashMap<>();
+        HashMap<String, String> nicknamePaths = new HashMap<>();
+
+        //can easily add here
+        nicknamePaths.put("besttry", "dataOutput/TestData/2017-08-07 14-18-05.hand");
+        nicknamePaths.put("closedfist", "dataOutput/TestData/2017-08-07 14-17-52.hand");
+        nicknamePaths.put("openPalm", "dataOutput/TestData/2017-08-07 14-18-20.hand");
+        nicknamePaths.put("oneFingerOff", "dataOutput/TestData/2017-08-07 14-18-42.hand");
+        nicknamePaths.put("oneFingerOff2", "dataOutput/TestData/2017-08-07 14-19-30.hand");
+
+        for (String nickname : nicknamePaths.keySet()) {
+            String path = nicknamePaths.get(nickname);
+            Hand h = SerializedTargetHand.getHandFromString(path);
+            testHands.put(nickname, h);
+        }
+        return testHands;
+    }
+
+    //using strings cuz java doesn't have tuples; and im too lazy to write class
+    private static HashMap<String, String> getGradesForTestHands(HashMap<String, Hand> testHands, Hand target) {
+        HashMap<String, String> gradesMap = new HashMap<>();
+
+        for (String nickname : testHands.keySet()) {
+            Hand h = testHands.get(nickname);
+            double grade1 = Comparer.compareStatic(h, target);
+            double grade2 = compare(h, h, "gestureTypeNotImplemented yet");
+            String stringGrade = "Grade1: " + grade1 + ", Grade2: " + grade2 + "\n";
+            gradesMap.put(nickname, stringGrade);
+        }
+        return gradesMap;
+    }
+
     public static void main(String[] args) {
         System.out.println("testing main method");
         String path = "dataOutput/targets2/gesture10Left.hand";
         Hand target = SerializedTargetHand.getHandFromString(path);
-        String p1 = "dataOutput/TestData/2017-08-07 14-18-05.hand"; // besttry
-        String p2 = "dataOutput/TestData/2017-08-07 14-17-52.hand"; // closedfist
-        String p3 = "dataOutput/TestData/2017-08-07 14-18-20.hand"; // openPalm
-        String p4 = "dataOutput/TestData/2017-08-07 14-18-42.hand"; // oneFingerOff
-        String p5 = "dataOutput/TestData/2017-08-07 14-19-30.hand"; // oneFingerOff2
-        Hand h1 = SerializedTargetHand.getHandFromString(p1);
-        Hand h2 = SerializedTargetHand.getHandFromString(p2);
-        Hand h3 = SerializedTargetHand.getHandFromString(p3);
-        Hand h4 = SerializedTargetHand.getHandFromString(p4);
-        Hand h5 = SerializedTargetHand.getHandFromString(p5);
 
         //get test hands
         HashMap<String, Hand> hands = getTestHands();
-        double grade1 = Comparer.compareStatic(h1, target);
-        double grade2 = compare(h1, h1, "notimplementedyet");
-        System.out.println("grade1: " + grade1 + " grade2: " + grade2);
+
+        //get grades for all test hands; using strings cuz java doesn't have tuples
+        HashMap<String, String> grades = getGradesForTestHands(hands, target);
+
+        System.out.println(grades);
     }
 
 }
