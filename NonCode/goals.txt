@@ -183,33 +183,6 @@ first small and easy goal to accomplish:
     -- selecting row by mouse should fire row clicked event also
 
 
-    gesture1Left:
-     dataOutput/General/2017-08-07 14-19-49.hand --best try
-     dataOutput/General/2017-08-07 14-20-10.hand --oneFingerOff
-     dataOutput/General/2017-08-07 14-20-27.hand --curvy finger
-
-    gesture10Left:
-     dataOutput/General/2017-08-07 14-19-30.hand --onefingerOff2 (showing middle and pinky)
-     dataOutput/General/2017-08-07 14-18-42.hand --onefingerOff(showing only pinky)
-     dataOutput/General/2017-08-07 14-18-20.hand --openPalm
-     dataOutput/General/2017-08-07 14-18-05.hand --best try
-     dataOutput/General/2017-08-07 14-17-52.hand --closedFist
-
-
-    --new idea to improve compare2:
-    if one finger is off score should be multiplied by .1 or 0-> make it very easy to not pass the gesture if one finger is totally off
-     if one finger is pretty close to good, then the finger score should be moved closer to 1 --> if in general fingers are good, should have an easy scale.
-
-     --really need to get the log and linear scale to work well.
-     --for thumb i could also consider just trying to use angles as previously done in compare1
-
-
-     --why compare2 is better:
-        --doesnt rely on target hand. allows for a more standardized results.
-        --takes each gesture specifically and allows for parameterization (hopefully).
-
-
-
 
 
 
@@ -295,6 +268,20 @@ first small and easy goal to accomplish:
 I will try my best to be happy when doing even the boring and uninteresting stuff for it.
 -----------------**
 
+
+************************************************
+    --new idea to improve compare2:
+    if one finger is off score should be multiplied by .1 or 0-> make it very easy to not pass the gesture if one finger is totally off
+     if one finger is pretty close to good, then the finger score should be moved closer to 1 --> if in general fingers are good, should have an easy scale.
+
+     --really need to get the log and linear scale to work well.
+     --for thumb i could also consider just trying to use angles as previously done in compare1
+
+
+     --why compare2 is better:
+        --doesnt rely on target hand. allows for a more standardized results.
+        --takes each gesture specifically and allows for parameterization (hopefully).
+************************************************
 
 ----------------------------------------
     dialog window for loading folders/data. --done

@@ -1,5 +1,7 @@
 package model;
 
+import view.analyze.User;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -179,5 +181,44 @@ public class CsvHelper {
         }
 
         return hands;
+    }
+
+    //todo this method could be used in writeHandInfoToFile also. could refractor later
+    private static void writeLineToFileHelperMethod(String fileName, String header, String line) {
+        FileWriter fileWriter = null;
+        try {
+            //if file doesnt exist, make new file
+            if (!(new File(fileName).isFile())) {
+                fileWriter = new FileWriter(fileName);
+                fileWriter.append(header);
+                fileWriter.append(NEW_LINE_SEPARATOR);          //Add a new line separator after the header
+            }
+
+            //If the file already exists must still load it. however if the fileWriter has already been initialized then this wont run
+            if (fileWriter == null) {
+                fileWriter = new FileWriter(fileName, true);
+            }
+
+            //add line of data
+            fileWriter.append(line);
+            fileWriter.append(NEW_LINE_SEPARATOR);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public static void writeUserToFile(String filename, User u) {
+        String header = u.csvHeader();
+        String line = u.csvLine();
+        writeLineToFileHelperMethod(filename, header, line);
     }
 }

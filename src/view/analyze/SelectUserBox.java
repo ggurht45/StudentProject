@@ -6,6 +6,8 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
+import model.CsvHelper;
+import view.LeapUIApp;
 
 public class SelectUserBox {
 
@@ -25,6 +27,7 @@ public class SelectUserBox {
 
         //drop down
         JFXComboBox<Label> jfxCombo = new JFXComboBox<>();
+        //get users from file and then populate this with their ids.
         jfxCombo.getItems().add(new Label("ID 1"));
         jfxCombo.getItems().add(new Label("ID 2"));
         jfxCombo.getItems().add(new Label("ID 3"));
@@ -60,8 +63,9 @@ public class SelectUserBox {
             edu = eduField.getText();
 
             User u = new User(id, currentDate, dob, edu);
-//            System.out.println("csv header of user class: " + User.csvHeader());
-//            System.out.println("csv line of user: " + u.csvLine());
+
+            //write to csv
+            CsvHelper.writeUserToFile(LeapUIApp.ALL_USERS_FILE, u);
             window.close();
         });
 
