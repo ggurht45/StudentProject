@@ -200,6 +200,7 @@ public class ControllerForAnalyzeHands {
 
         //create root, and add items to it
         root = new TreeItem<>(new HandInfo2("rootName", "rootFilename", "rootGestureType", "rootComments", "rootResult"));
+        System.out.println("defaultFolderset(controller-analyze-hands): " + app.DEFAULT_FOLDER);
         currentFolder = app.DEFAULT_FOLDER;
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);

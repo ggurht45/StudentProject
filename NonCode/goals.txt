@@ -172,15 +172,17 @@ first small and easy goal to accomplish:
 
     -- make savebox very minimal. label of gestureName, comments, result --done
 
-
     -- find a way to know which gesture is being worked on --done
     -- only allow saving from test screen. --done
     -- found bug again. data getting overridden if we dont go to the analyze screen. need to fix this asap! --done
 
 
+    -- start working on comparing method --done
+    -- load users into combo box
+    -- save hands into user's folder
+    -- selecting row by mouse should fire row clicked event alsos
+    -- make comparing method better
 
-    -- start working on comparing method
-    -- selecting row by mouse should fire row clicked event also
 
 
 

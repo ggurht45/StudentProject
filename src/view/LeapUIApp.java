@@ -135,9 +135,11 @@ public class LeapUIApp extends Application {
             @Override
             public void fire() {
 //                System.out.println("* entering test mode btn clicked");
-                boolean goodResult = SelectUserBox.display();
-                if (goodResult) {
+                SelectUserBox.display();
+                System.out.println("successfully closed selectBox: " + SelectUserBox.successfulClose + " selectedUser: " + SelectUserBox.selectedUser);
+                if (SelectUserBox.successfulClose) {
                     //do as before
+                    DEFAULT_FOLDER = SelectUserBox.selectedUser.getId();
                     dataCollectionEnabled = true;
                     setVisible(false);
                     userHand.setVisible(false);
@@ -528,6 +530,7 @@ public class LeapUIApp extends Application {
                 SaveBox.display(gestureName);//"Result and Comments", "Any comments:", userSpecifiedDirectory);
 //            System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
 
+                System.out.println("defaultFolderset(savedataoffical): " + DEFAULT_FOLDER);
                 userSpecifiedDirectory = DEFAULT_FOLDER;//SaveBox.directory;
                 String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
 
