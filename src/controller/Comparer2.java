@@ -30,25 +30,25 @@ public class Comparer2 {
         return fingerMap;
     }
 
-    public static HashMap<String, String> getFingerPoseMap(boolean leftHanded, int gestureNumber) {
+    public static HashMap<String, String> getFingerPoseMap(int gestureNumber) {
         HashMap<String, String> fingerPoseMap = new HashMap<>();
-        if (leftHanded) {
-            switch (gestureNumber) {
-                case 10:
-                    fingerPoseMap.put("index", "straight");
-                    fingerPoseMap.put("pinky", "straight");
-                    fingerPoseMap.put("middle", "curved");
-                    fingerPoseMap.put("ring", "curved");
-                    fingerPoseMap.put("thumb", "thumb");
-                    break;
-                default:
-                    System.out.println("no default fingerPoses");
-                    //nothing here
-            }
+//        if (leftHanded) { //left right shouldn't matter since both hands follow same gesture signatures.
+        switch (gestureNumber) {
+            case 10:
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("thumb", "thumb");
+                break;
+            default:
+                System.out.println("no default fingerPoses");
+                //nothing here
+        }
 
 
-            return fingerPoseMap;
-        } else return new HashMap<String, String>();
+        return fingerPoseMap;
+//        } else return new HashMap<String, String>();
     }
 
     private static HashMap<String, Bone> getHashMapOfBonesFromFinger(Finger f) {
@@ -143,8 +143,10 @@ public class Comparer2 {
     public static double compare(Hand h1, Hand h2, String gestureType) {
 
         FingerList fingerList = h1.fingers();
+
+        //make sure you have five fingers
         if (fingerList.count() == 5) {
-            //get all the fingers into a hashmap
+            //get all the fingers into a hashmap, named by their common name
             HashMap<String, Finger> fingerMap = getFingerHashMap(fingerList);
 
             //deconstruct from gestureType what kind of gesture we are dealing with
@@ -153,7 +155,7 @@ public class Comparer2 {
             int gestureNumber = 10;
 
             //want the pinky and index to be straight, middle and ring to be fully curved. (thumb touching middle)
-            HashMap<String, String> fingerPoseMap = getFingerPoseMap(leftHanded, gestureNumber);
+            HashMap<String, String> fingerPoseMap = getFingerPoseMap(gestureNumber);
             HashMap<String, Double> fingersGradedMap = getFingersGradedMap(fingerMap, fingerPoseMap);
 //            System.out.println(fingersGradedMap);
 
@@ -176,13 +178,17 @@ public class Comparer2 {
         HashMap<String, String> nicknamePaths = new HashMap<>();
 
         //can easily add here
-        nicknamePaths.put("besttry", "dataOutput/TestData/2017-08-07 14-18-05.hand");
-        nicknamePaths.put("closedfist", "dataOutput/TestData/2017-08-07 14-17-52.hand");
-        nicknamePaths.put("openPalm", "dataOutput/TestData/2017-08-07 14-18-20.hand");
-        nicknamePaths.put("oneFingerOff", "dataOutput/TestData/2017-08-07 14-18-42.hand");
-        nicknamePaths.put("oneFingerOff2", "dataOutput/TestData/2017-08-07 14-19-30.hand");
+//        nicknamePaths.put("besttry", "dataOutput/TestData/2017-08-07 14-18-05.hand");
+//        nicknamePaths.put("closedfist", "dataOutput/TestData/2017-08-07 14-17-52.hand");
+//        nicknamePaths.put("openPalm", "dataOutput/TestData/2017-08-07 14-18-20.hand");
+//        nicknamePaths.put("oneFingerOff", "dataOutput/TestData/2017-08-07 14-18-42.hand");
+//        nicknamePaths.put("oneFingerOff2", "dataOutput/TestData/2017-08-07 14-19-30.hand");
+
+        //testing right hand
+        nicknamePaths.put("besttry", "dataOutput/targets2/gesture1Right.hand");
 
         for (String nickname : nicknamePaths.keySet()) {
+            //get hand for a path and link that hand to a nickname
             String path = nicknamePaths.get(nickname);
             Hand h = SerializedTargetHand.getHandFromString(path);
             testHands.put(nickname, h);
@@ -206,7 +212,8 @@ public class Comparer2 {
 
     public static void main(String[] args) {
         System.out.println("testing main method");
-        String path = "dataOutput/targets2/gesture10Left.hand";
+//        String path = "dataOutput/targets2/gesture10Left.hand";
+        String path = "dataOutput/targets2/gesture10Right.hand";
         Hand target = SerializedTargetHand.getHandFromString(path);
 
         //get test hands

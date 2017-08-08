@@ -1,0 +1,5 @@
+dataOutput/rightHandId1/2017-08-08 05-34-53.hand information
+	Name: gesture2Right
+	Comments: r2
+	Result: Yes
+

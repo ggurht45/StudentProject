@@ -121,8 +121,9 @@ public class SelectUserBox {
         Scene scene = new Scene(layout);
         window.setScene(scene);
         window.showAndWait();
-
-
+//        window.setX(LeapUIApp.ScreenWidth - 30);
+//        window.setY(LeapUIApp.ScreenHeight - 30);
+//        window.addEventHandler(new EventHandler<>());
 //        return ((id == null) || (id == "")) ? false : true;
     }
 }

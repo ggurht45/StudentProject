@@ -178,12 +178,26 @@ first small and easy goal to accomplish:
 
 
     -- start working on comparing method --done
-    -- load users into combo box
-    -- save hands into user's folder
+    -- load users into combo box --done
+    -- save hands into user's folder --done
+
+
+    -- test right hand comparisons --done
+    -- pressing enter should close gesture save box, and load save box to the side
+    -- multiple saves of same gesture should take the latest gesture.
+    -- left right toggle style and hiding
     -- selecting row by mouse should fire row clicked event alsos
+
+
+    -- cols showing comparison results
     -- make comparing method better
 
 
+-----positioning hands
+Given a node that is part of an active scene graph (i.e. displayed on the screen),
+Bounds bounds = node.localToScreen(node.getBoundsInLocal());
+will give the bounds of the node in screen coordinates. You can then call
+getMinX(), getMaxX(), getWidth(), getMinY(), getMaxY(), and getHeight() is needed to position your dialog as required.
 
 
 

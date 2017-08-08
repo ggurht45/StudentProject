@@ -1,0 +1,5 @@
+dataOutput/testid1/2017-08-08 05-51-52.hand information
+	Name: gesture1Left
+	Comments: ;klklk
+	Result: Yes
+
