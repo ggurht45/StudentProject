@@ -301,6 +301,15 @@ public class ControllerForAnalyzeHands {
 
         //put 2D and 3D subScenes together; and make it into a scene
         container.getChildren().setAll(new Group(sub3D, sub2D));//new Group(sub3D, sub2D); // sub2D is second, as we want it overlaid, not underlaid
+
+        //add a listener to pick up on events when a row gets selected:
+        treeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                TreeItem<HandInfo2> row = treeTableView.getSelectionModel().getSelectedItem();
+                System.out.println("new row was selected (handinfo2 obj): " + row.getValue());
+                updateDispalyedHandsByRow(row);
+            }
+        });
     }
 
     @FXML
@@ -309,10 +318,7 @@ public class ControllerForAnalyzeHands {
     @FXML
     private AnchorPane centerPane;
 
-    @FXML
-    void rowClickedEvent(MouseEvent event) {
-        TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
-        //only update if actually clicked on a row containing the hand
+    private static void updateDispalyedHandsByRow(TreeItem<HandInfo2> treeItem) {
         if (treeItem != null) {
             HandInfo2 h = treeItem.getValue();
             //update hand
@@ -327,7 +333,15 @@ public class ControllerForAnalyzeHands {
             //todo hard to determine position. work on this later
 //            DebugHelper.printHandInfo(lmHand1, "hand Info on lmHand1");
 //            DebugHelper.printNodeInfo(uiHand1, "uiHand1 info via debughelper");
+
         }
+    }
+
+    @FXML
+    void rowClickedEvent(MouseEvent event) {
+        TreeItem<HandInfo2> treeItem = treeTableView.getSelectionModel().getSelectedItem();
+        //only update if actually clicked on a row containing the hand
+        updateDispalyedHandsByRow(treeItem);
     }
 
 //    @FXML
