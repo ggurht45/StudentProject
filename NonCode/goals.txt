@@ -190,9 +190,9 @@ first small and easy goal to accomplish:
     -- left right toggle hiding --done
 
     -- the folder selected should automatically become the default folder. --done
-    -- General should become a user automatically added
-    -- display user's name on table
-    -- also show the default folder in the list dropdown. 
+    -- General should become a user automatically added --done (added it manually to file)
+    -- display user's name on table 
+    -- also show the default folder in the list dropdown.
     -- move target hand a little bit higher in analyze scene
     -- allow for rotation on analyze scene.
     -- multiple saves of same gesture should take the latest gesture.
