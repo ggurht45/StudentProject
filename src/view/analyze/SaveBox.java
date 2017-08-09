@@ -27,7 +27,7 @@ public class SaveBox {
         window.close();
     }
 
-    public static String display(String gestureName) {
+    public static void display(String gestureName) {
         window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Saving Gesture");
@@ -81,19 +81,18 @@ public class SaveBox {
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
         window.setScene(scene);
-        window.showAndWait();
-
 
         //set event handler for ENTER key
         scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
+                    System.out.println("enter pressed on savebox");
                     successfulClose(textField);
                 }
             }
         });
 
-        return comments;
+        window.showAndWait();
     }
 }

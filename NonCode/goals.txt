@@ -183,13 +183,17 @@ first small and easy goal to accomplish:
 
 
     -- test right hand comparisons --done
-    -- pressing enter should close gesture save box, and load save box to the side
-    -- left right arrows to goto next previous gesture
+    -- pressing enter should close gesture save box, and load save box to the side --done
+    -- left right arrows to goto next previous gesture --done
+    -- selecting row by mouse should fire row clicked event alsos --done
+
+    -- left right toggle style and hiding
+    -- the folder selected should automatically become the default folder.
+    -- also show the default folder in the list dropdown.
     -- move target hand a little bit higher in analyze scene
     -- allow for rotation on analyze scene.
-    -- left right toggle style and hiding
     -- multiple saves of same gesture should take the latest gesture.
-    -- selecting row by mouse should fire row clicked event alsos --done
+
 
 
     -- cols showing comparison results
