@@ -58,6 +58,7 @@ public class ControllerForAnalyzeHands {
 
     public void initializeTableWithData() {
         //update table to show new folder contents
+        currentFolder = LeapUIApp.DEFAULT_FOLDER; //folder might have changed.
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
@@ -275,7 +276,7 @@ public class ControllerForAnalyzeHands {
         targetUIHand = new UIHand_Simple(Color.GREEN.darker(), true);
         targetUIHand.setVisible(true);
         targetUIHand.setTranslateX(12);
-        targetUIHand.setTranslateY(-4);
+        targetUIHand.setTranslateY(-2);
 
         displayHands();
 

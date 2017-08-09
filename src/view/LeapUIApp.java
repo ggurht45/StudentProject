@@ -49,6 +49,8 @@ import controller.ControllerInterface;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static RadioButton leftRadio;
+    public static RadioButton rightRadio;
     public static String ALL_USERS_FILE = "dataOutput/AllUsers.csv";
     public static int currentGestureNumber = 1;
     public static boolean dataCollectionEnabled;
@@ -144,6 +146,8 @@ public class LeapUIApp extends Application {
                     setVisible(false);
                     userHand.setVisible(false);
                     scene2Button.setVisible(false);
+                    leftRadio.setVisible(false);
+                    rightRadio.setVisible(false);
                     //makes a new thread, passing it a lambda function and then it calls start on that thread.
                     new Thread(() -> control.enterTrainingMode()).start();
                 } else {
@@ -187,8 +191,9 @@ public class LeapUIApp extends Application {
 
 
         //going radio button approach
+//        Group radioButtonsNode = new Group();
         ToggleGroup lfGroup = new ToggleGroup();
-        RadioButton leftRadio = new RadioButton("Left Hand");
+        leftRadio = new RadioButton("Left Hand");
         leftRadio.setToggleGroup(lfGroup);
         leftRadio.setSelected(true);
         leftRadio.setTranslateX(ScreenWidth * 1 / 5);
@@ -197,7 +202,7 @@ public class LeapUIApp extends Application {
             leftHandSelected = true;
 //            System.out.println("left selected; leftHandSelected: " + leftHandSelected);
         });
-        RadioButton rightRadio = new RadioButton("Right Hand");
+        rightRadio = new RadioButton("Right Hand");
         rightRadio.setToggleGroup(lfGroup);
         rightRadio.setTranslateX(ScreenWidth * 8 / 10);
         rightRadio.setTranslateY(ScreenHeight * 1 / 10);
@@ -556,6 +561,8 @@ public class LeapUIApp extends Application {
             aBar.setVisible(false);
             testButton.setVisible(true);
             scene2Button.setVisible(true);
+            leftRadio.setVisible(true);
+            rightRadio.setVisible(true);
             return null;
         }
 
