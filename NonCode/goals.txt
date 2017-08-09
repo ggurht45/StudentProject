@@ -184,9 +184,12 @@ first small and easy goal to accomplish:
 
     -- test right hand comparisons --done
     -- pressing enter should close gesture save box, and load save box to the side
-    -- multiple saves of same gesture should take the latest gesture.
+    -- left right arrows to goto next previous gesture
+    -- move target hand a little bit higher in analyze scene
+    -- allow for rotation on analyze scene.
     -- left right toggle style and hiding
-    -- selecting row by mouse should fire row clicked event alsos
+    -- multiple saves of same gesture should take the latest gesture.
+    -- selecting row by mouse should fire row clicked event alsos --done
 
 
     -- cols showing comparison results
@@ -199,9 +202,10 @@ Bounds bounds = node.localToScreen(node.getBoundsInLocal());
 will give the bounds of the node in screen coordinates. You can then call
 getMinX(), getMaxX(), getWidth(), getMinY(), getMaxY(), and getHeight() is needed to position your dialog as required.
 
+*(need to find a place on the hand, lets say palm position(pp), and subtract everything from it. <<--can write this up in the paper also
 
-
-
+so (pp) will be high or low. like 10 or 3. we move it down to zero. so translate -10, or -3. <-- this translation will be a variable amount. depending on the pp
+so a finger or a joint will be only moved down 3 or 10 also. hopefully this idea will work. (can test on analyze scene first)
 
 
 

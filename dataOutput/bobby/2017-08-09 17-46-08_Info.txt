@@ -1,0 +1,5 @@
+dataOutput/bobby/2017-08-09 17-46-08.hand information
+	Name: gesture2Left
+	Comments: cc1
+	Result: Yes
+

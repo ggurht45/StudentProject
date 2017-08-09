@@ -285,169 +285,147 @@ public class LeapUIApp extends Application {
                         e.printStackTrace();
                     }
                 }
+                if (keyEvent.getCode() == KeyCode.LEFT) {
+                    sBar.prevHand();
+                }
+                if (keyEvent.getCode() == KeyCode.RIGHT) {
+                    sBar.nextHand();
+                }
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     saveHandDataOfficial();
+                }
+//                if (keyEvent.getCode().isDigitKey()) {
 //                    try {
-//                        System.out.println("enter was pressed, saving hand.");
-//
-//                        saveHandDataOfficial();
-//
-//                        //following line is for TESTING. dont forget to uncomment it later
-//                        Frame f = (LoadGesturesScene.getHandFromString(LeapUIApp.TargetsPath + "2015-05-05 08-17-01.hand")).frame();
-////                        Frame f = latestHand.frame();
-//
-//                        //show alert box
-//                        SaveBox.display("Result and Comments", "Any comments:", userSpecifiedDirectory);
-//                        System.out.println("comments: " + SaveBox.comments + " passFail: " + SaveBox.passFail);
-//
-//                        userSpecifiedDirectory = SaveBox.directory;
-//                        String dataOutputPath = "dataOutput/" + userSpecifiedDirectory + "/";
-//
-//                        if (SaveBox.saved) {
-//                            SerializedTargetHand.Save4(f, SaveBox.name, dataOutputPath, "defaultGestureType", SaveBox.comments, SaveBox.passFail);
+//                        if (keyEvent.getCode() == KeyCode.DIGIT0) {
+//                            System.out.println("0 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "0", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT1) {
+//                            System.out.println("1 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "1", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT2) {
+//                            System.out.println("2 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "2", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT3) {
+//                            System.out.println("3 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "3", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT4) {
+//                            System.out.println("4 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "4", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT5) {
+//                            System.out.println("5 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "5", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT6) {
+//                            System.out.println("6 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "6", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT7) {
+//                            System.out.println("7 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "7", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT8) {
+//                            System.out.println("8 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "8", "typeA");
+//                        } else if (keyEvent.getCode() == KeyCode.DIGIT9) {
+//                            System.out.println("9 KEY was pressed,gonna save into correct folder");
+//                            Frame f = latestHand.frame();
+//                            System.out.println("frame: \n" + f.toString());
+//                            //showImage();
+//                            FingerList fingersInFrame = f.fingers();
+//                            System.out.println("number of fingers: \n" + fingersInFrame.count());
+//                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
+//                            SerializedTargetHand.Save2(latestHand.frame(), "9", "typeA");
+//                        } else {
+//                            System.out.println("hmm.. not sure which digit key was pressed");
 //                        }
-//                        else {
-//                            System.out.println("INFO... NoT saving since save box was not saved or closed properly");
-//                        }
-//
 //
 //                    } catch (IOException e) {
 //                        // TODO Auto-generated catch block
 //                        e.printStackTrace();
 //                    }
-                }
-                if (keyEvent.getCode().isDigitKey()) {
-                    try {
-                        if (keyEvent.getCode() == KeyCode.DIGIT0) {
-                            System.out.println("0 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "0", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT1) {
-                            System.out.println("1 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "1", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT2) {
-                            System.out.println("2 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "2", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT3) {
-                            System.out.println("3 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "3", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT4) {
-                            System.out.println("4 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "4", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT5) {
-                            System.out.println("5 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "5", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT6) {
-                            System.out.println("6 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "6", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT7) {
-                            System.out.println("7 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "7", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT8) {
-                            System.out.println("8 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "8", "typeA");
-                        } else if (keyEvent.getCode() == KeyCode.DIGIT9) {
-                            System.out.println("9 KEY was pressed,gonna save into correct folder");
-                            Frame f = latestHand.frame();
-                            System.out.println("frame: \n" + f.toString());
-                            //showImage();
-                            FingerList fingersInFrame = f.fingers();
-                            System.out.println("number of fingers: \n" + fingersInFrame.count());
-                            System.out.println("extended fingers: \n" + fingersInFrame.extended().count());
-                            SerializedTargetHand.Save2(latestHand.frame(), "9", "typeA");
-                        } else {
-                            System.out.println("hmm.. not sure which digit key was pressed");
-                        }
-
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-                if (keyEvent.getCode() == KeyCode.D) {
-                    try {
-                        System.out.println("D was pressed, going into developer mode");
-                        //try setting control dynamically
-                        if (!AUTOMATIC_MODE) {
-                            System.out.println("setting control to ctrl1 dynamically");
-                            AUTOMATIC_MODE = true;
-                            control = ctrl1;
-                        } else {
-                            System.out.println("setting control to ctrl2222 dynamically");
-                            AUTOMATIC_MODE = false;
-                            control = ctrl2;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (keyEvent.getCode() == KeyCode.M) {
-                    new Thread(() -> {
-                        try {
-                            if (leftHandSelected) {
-                                selectHand(SerializedTargetHand.getAllHands2(LeftGesturesFile));
-                            } else {
-                                selectHand(SerializedTargetHand.getAllHands2(RightGesturesFile));
-                            }
-                        } catch (Exception e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                    }).start();
-                }
+//                }
+//                if (keyEvent.getCode() == KeyCode.D) {
+//                    try {
+//                        System.out.println("D was pressed, going into developer mode");
+//                        //try setting control dynamically
+//                        if (!AUTOMATIC_MODE) {
+//                            System.out.println("setting control to ctrl1 dynamically");
+//                            AUTOMATIC_MODE = true;
+//                            control = ctrl1;
+//                        } else {
+//                            System.out.println("setting control to ctrl2222 dynamically");
+//                            AUTOMATIC_MODE = false;
+//                            control = ctrl2;
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                if (keyEvent.getCode() == KeyCode.M) {
+//                    new Thread(() -> {
+//                        try {
+//                            if (leftHandSelected) {
+//                                selectHand(SerializedTargetHand.getAllHands2(LeftGesturesFile));
+//                            } else {
+//                                selectHand(SerializedTargetHand.getAllHands2(RightGesturesFile));
+//                            }
+//                        } catch (Exception e) {
+//                            // TODO Auto-generated catch block
+//                            e.printStackTrace();
+//                        }
+//                    }).start();
+//                }
             }//END      public void handle(KeyEvent keyEvent) method
         });
 

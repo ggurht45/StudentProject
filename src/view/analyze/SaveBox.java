@@ -1,5 +1,8 @@
 package view.analyze;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
@@ -9,6 +12,7 @@ import javafx.geometry.*;
 public class SaveBox {
 
     // todo put everything in fxml
+    private static Stage window;
 
     //Create variable
     public static boolean saved = false;
@@ -17,8 +21,14 @@ public class SaveBox {
     public static boolean passFail = true;
     public static String directory = "General";
 
+    private static void successfulClose(TextField textField) {
+        comments = textField.getText();
+        saved = true;
+        window.close();
+    }
+
     public static String display(String gestureName) {
-        Stage window = new Stage();
+        window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Saving Gesture");
         window.setMinWidth(350);
@@ -46,11 +56,7 @@ public class SaveBox {
         saveButton.setStyle("-fx-background-color: #669900; -jfx-button-type: RAISED");
         //Clicking will set answer and close window
         saveButton.setOnAction(e -> {
-//            name = nameTextfield.getText();
-            comments = textField.getText();
-//            directory = directoryTextField.getText();
-            saved = true;
-            window.close();
+            successfulClose(textField);
         });
 
 
@@ -77,6 +83,16 @@ public class SaveBox {
         window.setScene(scene);
         window.showAndWait();
 
+
+        //set event handler for ENTER key
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    successfulClose(textField);
+                }
+            }
+        });
 
         return comments;
     }

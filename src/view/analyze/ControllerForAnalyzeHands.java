@@ -26,13 +26,11 @@ import model.CsvHelper;
 import model.HandInfo;
 import model.HandInfo2;
 import model.SerializedTargetHand;
-import view.DebugHelper;
 import view.LeapUIApp;
 import view.anatomy.UIHand;
 import view.anatomy.UIHand_Simple;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -41,9 +39,9 @@ public class ControllerForAnalyzeHands {
     private static ObservableList<TreeItem<HandInfo2>> treeItems;
     private static TreeItem<HandInfo2> root;
     private static String currentFolder;
-    private static UIHand uiHand1;
+    private static UIHand userUIHand;
     private static Hand lmHand1;
-    private static UIHand uiHand2;
+    private static UIHand targetUIHand;
     private static Hand lmHand2;
 
     public void setMainApp(LeapUIApp app) {
@@ -180,16 +178,16 @@ public class ControllerForAnalyzeHands {
             HandInfo2 handInfo = treeItems.get(0).getValue();
 
             lmHand1 = SerializedTargetHand.getHandFromString(handInfo.getHandFile());
-            uiHand1.setLoc(lmHand1);
+            userUIHand.setLoc(lmHand1);
             lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + handInfo.getName() + ".hand");
-            uiHand2.setLoc(lmHand2);
+            targetUIHand.setLoc(lmHand2);
 
             //make them visible
-            uiHand1.setVisible(true);
-            uiHand2.setVisible(true);
+            userUIHand.setVisible(true);
+            targetUIHand.setVisible(true);
         } else {
-            uiHand1.setVisible(false);
-            uiHand2.setVisible(false);
+            userUIHand.setVisible(false);
+            targetUIHand.setVisible(false);
         }
     }
 
@@ -268,16 +266,16 @@ public class ControllerForAnalyzeHands {
         treeTableView.setShowRoot(false);
 
 
-        //uiHand1 setup
-        uiHand1 = new UIHand_Simple(Color.BLUE.darker(), false);
-        uiHand1.setVisible(true);
-        uiHand1.setTranslateX(0);
+        //userUIHand setup
+        userUIHand = new UIHand_Simple(Color.BLUE.darker(), false);
+        userUIHand.setVisible(true);
+        userUIHand.setTranslateX(0);
 
-        //uiHand2 setup
-        uiHand2 = new UIHand_Simple(Color.GREEN.darker(), true);
-        uiHand2.setVisible(true);
-        uiHand2.setTranslateX(12);
-        uiHand2.setTranslateY(4);
+        //targetUIHand setup
+        targetUIHand = new UIHand_Simple(Color.GREEN.darker(), true);
+        targetUIHand.setVisible(true);
+        targetUIHand.setTranslateX(12);
+        targetUIHand.setTranslateY(-4);
 
         displayHands();
 
@@ -289,7 +287,7 @@ public class ControllerForAnalyzeHands {
         // The 3D display
         Group group3D = new Group();
         group3D.getChildren().add(camera);
-        group3D.getChildren().addAll(uiHand1, uiHand2);
+        group3D.getChildren().addAll(userUIHand, targetUIHand);
         SubScene sub3D = new SubScene(group3D, app.ScreenWidth, app.ScreenHeight, true, SceneAntialiasing.BALANCED); // "true" gives us a depth buffer
         sub3D.setFill(Color.LAVENDER);
         sub3D.setCamera(camera);
@@ -324,15 +322,15 @@ public class ControllerForAnalyzeHands {
             //update hand
             String file = h.getHandFile();
             lmHand1 = SerializedTargetHand.getHandFromString(file);
-            uiHand1.setLoc(lmHand1);
+            userUIHand.setLoc(lmHand1);
 
             //update target hand
             lmHand2 = SerializedTargetHand.getHandFromString(LeapUIApp.Targets2Path + h.getName() + ".hand");
-            uiHand2.setLoc(lmHand2);
+            targetUIHand.setLoc(lmHand2);
 
             //todo hard to determine position. work on this later
 //            DebugHelper.printHandInfo(lmHand1, "hand Info on lmHand1");
-//            DebugHelper.printNodeInfo(uiHand1, "uiHand1 info via debughelper");
+//            DebugHelper.printNodeInfo(userUIHand, "userUIHand info via debughelper");
 
         }
     }
