@@ -49,6 +49,7 @@ import controller.ControllerInterface;
 // XXX to run: java -Djava.library.path="D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\x64" -classpath ".;D:\Software\Leap SDK\LeapDeveloperKit_2.2.2+24469_win\LeapSDK\lib\*" view.LeapUIApp
 
 public class LeapUIApp extends Application {
+    public static User currentUser;
     public static RadioButton leftRadio;
     public static RadioButton rightRadio;
     public static String ALL_USERS_FILE = "dataOutput/AllUsers.csv";

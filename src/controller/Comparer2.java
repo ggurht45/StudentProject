@@ -8,7 +8,11 @@ import com.leapmotion.leap.Hand;
 import model.SerializedTargetHand;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.regex.Pattern;
+
+import static java.io.File.separator;
 
 public class Comparer2 {
 
@@ -212,17 +216,25 @@ public class Comparer2 {
 
     public static void main(String[] args) {
         System.out.println("testing main method");
-//        String path = "dataOutput/targets2/gesture10Left.hand";
-        String path = "dataOutput/targets2/gesture10Right.hand";
-        Hand target = SerializedTargetHand.getHandFromString(path);
+////        String path = "dataOutput/targets2/gesture10Left.hand";
+//        String path = "dataOutput/targets2/gesture10Right.hand";
+//        Hand target = SerializedTargetHand.getHandFromString(path);
+//
+//        //get test hands
+//        HashMap<String, Hand> hands = getTestHands();
+//
+//        //get grades for all test hands; using strings cuz java doesn't have tuples
+//        HashMap<String, String> grades = getGradesForTestHands(hands, target);
+//
+//        System.out.println(grades);
 
-        //get test hands
-        HashMap<String, Hand> hands = getTestHands();
+        String separator = "\\";
+        String filepath = "C:\\Users\\jahangir\\IdeaProjects\\StudentProject\\dataOutput\\alice\\_allHandsOnDeck.csv";
+        String[] arrValues = filepath.split(Pattern.quote(separator));
+        System.out.println(Arrays.toString(arrValues));
+        System.out.println("folder: " + arrValues[arrValues.length - 2]);
+        System.out.println("seperator: " + separator);
 
-        //get grades for all test hands; using strings cuz java doesn't have tuples
-        HashMap<String, String> grades = getGradesForTestHands(hands, target);
-
-        System.out.println(grades);
     }
 
 }

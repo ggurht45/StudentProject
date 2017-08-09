@@ -92,6 +92,7 @@ public class SelectUserBox {
                 User u = new User(id, currentDate, dob, edu);
                 CsvHelper.writeUserToFile(LeapUIApp.ALL_USERS_FILE, u);
                 selectedUser = u;
+                LeapUIApp.currentUser = selectedUser;
             } else {
                 successfulClose = false;
             }
@@ -105,6 +106,7 @@ public class SelectUserBox {
         loadUserBtn.setOnAction(e -> {
             if (selectedUser != null) {
                 successfulClose = true;
+                LeapUIApp.currentUser = selectedUser;
             } else {
                 successfulClose = false;
             }

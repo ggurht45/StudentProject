@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,6 +14,14 @@
    <children>
       <VBox fx:id="theVBox" maxHeight="-Infinity" prefHeight="603.0" prefWidth="336.0">
          <children>
+            <Label fx:id="currentFolderLabel" prefHeight="32.0" prefWidth="283.0" text="Folder: ">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
             <TreeTableView fx:id="treeTableView" maxHeight="1.7976931348623157E308" onMouseClicked="#rowClickedEvent" prefHeight="542.0" prefWidth="221.0">
               <columns>
                   <TreeTableColumn fx:id="col0" prefWidth="75.0" text="Gesture" />

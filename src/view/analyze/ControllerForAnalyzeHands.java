@@ -32,6 +32,7 @@ import view.anatomy.UIHand_Simple;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class ControllerForAnalyzeHands {
@@ -59,6 +60,7 @@ public class ControllerForAnalyzeHands {
     public void initializeTableWithData() {
         //update table to show new folder contents
         currentFolder = LeapUIApp.DEFAULT_FOLDER; //folder might have changed.
+        currentFolderLabel.setText("Folder: " + currentFolder);
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
         treeTableView.setRoot(root);
@@ -201,6 +203,7 @@ public class ControllerForAnalyzeHands {
         root = new TreeItem<>(new HandInfo2("rootName", "rootFilename", "rootGestureType", "rootComments", "rootResult"));
         System.out.println("defaultFolderset(controller-analyze-hands): " + app.DEFAULT_FOLDER);
         currentFolder = app.DEFAULT_FOLDER;
+        currentFolderLabel.setText("Folder: " + currentFolder);
         treeItems = getTreeItems(currentFolder);
         root.getChildren().setAll(treeItems);
 
@@ -305,7 +308,6 @@ public class ControllerForAnalyzeHands {
         treeTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 TreeItem<HandInfo2> row = treeTableView.getSelectionModel().getSelectedItem();
-                System.out.println("new row was selected (handinfo2 obj): " + row.getValue());
                 updateDispalyedHandsByRow(row);
             }
         });
@@ -354,6 +356,11 @@ public class ControllerForAnalyzeHands {
     //todo get this work again
     @FXML
     void loadDataIntoTable(ActionEvent event) {
+
+        //save current data as it might have changed
+        ArrayList<HandInfo> arr = getHandInfoArrayList(treeItems);
+        savetableData2(arr, currentFolder);
+
         System.out.println("reading data from csv file");
         //get file from computer
         FileChooser filechooser = new FileChooser();
@@ -365,6 +372,9 @@ public class ControllerForAnalyzeHands {
         if (file != null) {
             String filePath = file.getPath();
             System.out.println("filePath is: " + filePath);
+            String separator = "\\";
+            String[] tokens = filePath.split(Pattern.quote(separator));
+            System.out.println("folder!!: " + tokens[tokens.length - 2]);
 
 
 //        String filename = "_allHandsOnDeck.csv";            //allow to be typed in from dialog
@@ -376,6 +386,9 @@ public class ControllerForAnalyzeHands {
             treeItems = getListOfTreeItems(data);
             root.getChildren().setAll(treeItems);
             treeTableView.setRoot(root);
+            currentFolder = tokens[tokens.length - 2];
+            currentFolderLabel.setText("Folder: " + currentFolder);
+            LeapUIApp.DEFAULT_FOLDER = currentFolder;
         } else {
             System.out.println("seems like no file was chosen, file is null");
         }
@@ -408,6 +421,8 @@ public class ControllerForAnalyzeHands {
         app.primaryStage.setScene(app.scene);
     }
 
+    @FXML
+    private Label currentFolderLabel;
 }
 
 
