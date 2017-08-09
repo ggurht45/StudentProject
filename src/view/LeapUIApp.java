@@ -372,8 +372,8 @@ public class LeapUIApp extends Application {
             if (dataCollectionEnabled) {
 
                 //following line is for TESTING. dont forget to uncomment it later
-                Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
-//                Frame f = latestHand.frame();
+//                Frame f = (SerializedTargetHand.getHandFromString(LeapUIApp.DataOutputPath + "General/defaultTestingHand.hand")).frame();
+                Frame f = latestHand.frame();
 
                 //name the gesture appropriately; format: gesture2Left
                 String gestureName = leftHandSelected ? "gesture" + currentGestureNumber + "Left" : "gesture" + currentGestureNumber + "Right";
