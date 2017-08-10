@@ -1,5 +1,0 @@
-dataOutput/bobby/2017-08-09 17-31-49.hand information
-	Name: gesture3Left
-	Comments: c2
-	Result: Yes
-

@@ -1,5 +1,0 @@
-dataOutput/testid2/2017-08-08 05-19-58.hand information
-	Name: gesture1Left
-	Comments: c1
-	Result: Yes
-

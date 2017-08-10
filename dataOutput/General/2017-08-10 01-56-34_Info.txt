@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-10 01-56-34.hand information
+	Name: gesture10Right
+	Comments: 
+	Result: Yes
+

@@ -1,10 +1,3 @@
 id, currentDate, dob, edu
 General, date1, date2, na
-testid1, asdf, asdf2, adsf3
-testid2, asdf21, asdf22, asdf23
-testid3, asdf31, adsf32, asdf33
-testid3, asdf, asdf, asdf
-rightHandId1, asdf, asdf, asdf
-alice, some dat, some date, adsfasddf
-bobby, asomer, asdfasd, asafdsf
-yamcha, , , 
+Alice, August 9th, August 9th 1970, college

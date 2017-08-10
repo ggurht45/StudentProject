@@ -1,12 +1,21 @@
 gestureName, filePath, comments, result
-gesture1Left, dataOutput/bobby/2017-08-09 17-31-37.hand, c1, Yes
-gesture3Left, dataOutput/bobby/2017-08-09 17-31-49.hand, c2, Yes
-gesture4Left, dataOutput/bobby/2017-08-09 17-31-56.hand, c3, No
-gesture2Left, dataOutput/bobby/2017-08-09 17-46-08.hand, cc1, Yes
-gesture1Left, dataOutput/bobby/2017-08-09 17-58-08.hand, cc2, Yes
-gesture3Left, dataOutput/bobby/2017-08-09 17-58-37.hand, cc3, Yes
-gesture4Left, dataOutput/bobby/2017-08-09 17-58-41.hand, , Yes
-gesture5Left, dataOutput/bobby/2017-08-09 18-10-32.hand, test, Yes
-gesture7Left, dataOutput/bobby/2017-08-09 18-10-39.hand, test2, Yes
-gesture3Right, dataOutput/bobby/2017-08-09 18-11-00.hand, test3, Yes
-gesture1Left, dataOutput/bobby/2017-08-09 20-48-14.hand, t3 goku!, Yes
+gesture1Left, dataOutput/General/2017-08-10 01-50-09.hand, c1, Yes
+gesture2Left, dataOutput/General/2017-08-10 01-50-31.hand, c2, Yes
+gesture3Left, dataOutput/General/2017-08-10 01-50-41.hand, c3, Yes
+gesture4Left, dataOutput/General/2017-08-10 01-50-55.hand, c4, Yes
+gesture5Left, dataOutput/General/2017-08-10 01-51-08.hand, c5, Yes
+gesture6Left, dataOutput/General/2017-08-10 01-51-44.hand, c6, Yes
+gesture7Left, dataOutput/General/2017-08-10 01-51-54.hand, c7, Yes
+gesture8Left, dataOutput/General/2017-08-10 01-52-05.hand, c8, Yes
+gesture9Left, dataOutput/General/2017-08-10 01-52-19.hand, c9, Yes
+gesture10Left, dataOutput/General/2017-08-10 01-52-39.hand, c10, Yes
+gesture1Right, dataOutput/General/2017-08-10 01-53-51.hand, c1, Yes
+gesture2Right, dataOutput/General/2017-08-10 01-54-00.hand, c2, Yes
+gesture3Right, dataOutput/General/2017-08-10 01-54-13.hand, c3, Yes
+gesture4Right, dataOutput/General/2017-08-10 01-54-22.hand, c4, Yes
+gesture5Right, dataOutput/General/2017-08-10 01-54-43.hand, c5, Yes
+gesture6Right, dataOutput/General/2017-08-10 01-55-24.hand, c6, Yes
+gesture7Right, dataOutput/General/2017-08-10 01-55-44.hand, c7, Yes
+gesture8Right, dataOutput/General/2017-08-10 01-56-06.hand, c8, Yes
+gesture9Right, dataOutput/General/2017-08-10 01-56-25.hand, c9, Yes
+gesture10Right, dataOutput/General/2017-08-10 01-56-34.hand, c10, Yes

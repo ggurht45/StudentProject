@@ -1,5 +1,0 @@
-dataOutput/rightHandId1/2017-08-08 05-34-40.hand information
-	Name: gesture1Right
-	Comments: r1
-	Result: Yes
-

@@ -1,0 +1,5 @@
+dataOutput/General/2017-08-10 01-51-44.hand information
+	Name: gesture6Left
+	Comments: c6
+	Result: Yes
+

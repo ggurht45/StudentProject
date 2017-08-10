@@ -194,13 +194,14 @@ first small and easy goal to accomplish:
     -- display user's name on table --done
     -- before loading a new folder, make sure to save data as it might have changed --done
     -- also show the default folder in the list dropdown. --nah..
-    -- move target hand a little bit higher in analyze scene
-    -- allow for rotation on analyze scene.
-    -- multiple saves of same gesture should take the latest gesture.
     -- gestures 10, should fix any bad ones. --done
 
 
 
+--------------------->do later
+    -- move target hand a little bit higher in analyze scene
+    -- allow for rotation on analyze scene.
+    -- multiple saves of same gesture should take the latest gesture.
     -- cols showing comparison results
     -- make comparing method better
 
