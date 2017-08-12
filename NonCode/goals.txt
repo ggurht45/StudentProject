@@ -337,6 +337,36 @@ I will try my best to be happy when doing even the boring and uninteresting stuf
 
 
 
+Write report to be thorough enought so that a new student will be able to pick it up and understand and apply it.
+
+
+meeting thursday:
+Mismatch - checkbox. default is yes.
+
+export to csv.
+
+buttons white writing.
+
+write documentation.
+ command level instructions. with screenshots. and explanations with what they represent. "load folder" "save to csv" "allhandscsv"
+
+
+put the comparisons into the table.
+parameterization. --> future work.()
+
+
+bug about closing quickly and data not getting saved.
+
+
+
+
+
+
+
+
+
+
+
 
 
 

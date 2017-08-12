@@ -38,36 +38,20 @@ public class ViewMath {
     }
 
 
-    //note: by convention, counter-clockwise rotation is positive. 10 angle rotation means rotate in counterclockwise direction
-    //when looking in the negative direction of the axis. (- z for example)
+    //This method rotates a given JavaFx node to point in the direction passed in
     public static void setRotationByVector(Node node, Vector direction) {
-        //the "corrected" direction switches the zaxis to negative. because fingers point into the screen but z axis extends outward from the screen
+        //Correct the direction to correspond to JavaFx Coordinate system
         Vector correctedDirection = new Vector(direction.getX(), direction.getY(), -direction.getZ());
-//        System.out.println("correctedDirection: " + correctedDirection);
 
-        //angle is the angle to the of the 'corrected' direction to the y-axis
-        //not sure why its then multiplying it by 57ish.. oh! it converting from radians to degrees.
-        //the angleTo method returns angle in radians. to convert it radians we must multiply that by 180 and then take
-        //the result and divide it by Pi. mks
-        double angle = correctedDirection.angleTo(Vector.yAxis()) * 180 / Math.PI;    //angle in degrees.
-//        System.out.println("angle in setRotationByVector: " + angle);
+        //Find the angle of the direction to the y-axis; in degrees
+        double angle = correctedDirection.angleTo(Vector.yAxis()) * 180 / Math.PI;
 
-        //just takes a vector and converts it to point3d. the vector it converts is the cross the cross product to the y-axis
-        //so this code.. kinda already does what i want. or does it? then how come i was able to show hand pointed to the right?
-        //it makes sense why cross product should be the axis of rotation. oh, and the counter-clockwise rotation
-        //gets taken care of by the fact that we have -z direction. try using the right hand rule to visualize it
-        //axis can be located anywhere in space. but when an object rotates, this axis is can be pictured to be going through
-        //the center of the object
-        //it chooses the y-axis cuz that is the original "direction" of the cylinder. top/down. we are going from that axis to another axis
-        //the "corrected" direction axis. getting the cross product. a cross b is NOT the same as  (b x a). its the opposite direction.
+        //Find the axis of rotation by taking the cross product of the corrected direction with the y-axix
         Point3D axis = vectorToPoint(correctedDirection.cross(Vector.yAxis()));
-//        System.out.println("rotation axis: " + axis);
+
+        //Set the axis and angle of rotation on the Node object
         node.setRotate(angle);
         node.setRotationAxis(axis);
-
-
-        //get a second "hand" set its direction approximately. also set h1. set both hands.
-        //change into the second hand's direction
     }
 
     public static void setRotationByVector2(Node node, Vector direction, Vector orginalAxis) {
