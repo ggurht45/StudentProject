@@ -1,3 +1,61 @@
+gesture1Left, dataOutput/General/2017-08-10 01-50-09.hand, c1, Yes, AngleScore: 0.8203290023217176, ComponentsScore: 0.7569646730021217
+gesture2Left, dataOutput/General/2017-08-10 01-50-31.hand, c2, Yes, AngleScore: 0.8712535685344976, ComponentsScore: 0.7776881890212921
+gesture3Left, dataOutput/General/2017-08-10 01-50-41.hand, c3, Yes, AngleScore: 0.8925040703641773, ComponentsScore: 0.8128360242758357
+gesture4Left, dataOutput/General/2017-08-10 01-50-55.hand, c4, Yes, AngleScore: 0.8664849186848027, ComponentsScore: 0.7149363046031648
+gesture5Left, dataOutput/General/2017-08-10 01-51-08.hand, c5, Yes, AngleScore: 0.9333810521103175, ComponentsScore: 0.7544349746761736
+gesture6Left, dataOutput/General/2017-08-10 01-51-44.hand, c6, Yes, AngleScore: 0.7785164679391239, ComponentsScore: 0.7636324458641316
+gesture7Left, dataOutput/General/2017-08-10 01-51-54.hand, c7, Yes, AngleScore: 0.7400574784525709, ComponentsScore: 0.4978084684697649
+gesture8Left, dataOutput/General/2017-08-10 01-52-05.hand, c8, Yes, AngleScore: 0.8631781992035149, ComponentsScore: 0.7209857278247112
+gesture9Left, dataOutput/General/2017-08-10 01-52-19.hand, c9, Yes, AngleScore: 0.9482467130434669, ComponentsScore: 0.6777038198744911
+gesture10Left, dataOutput/General/2017-08-10 01-52-39.hand, c10, Yes, AngleScore: 0.8873437111181551, ComponentsScore: 0.6456650084255733
+gesture1Right, dataOutput/General/2017-08-10 01-53-51.hand, c1, Yes, AngleScore: 0.7550794669228298, ComponentsScore: 0.6123431842956891
+gesture2Right, dataOutput/General/2017-08-10 01-54-00.hand, c2, Yes, AngleScore: 0.8794131878059528, ComponentsScore: 0.7483227248074134
+gesture3Right, dataOutput/General/2017-08-10 01-54-13.hand, c3, Yes, AngleScore: 0.9608538605912145, ComponentsScore: 0.6990829783423147
+gesture4Right, dataOutput/General/2017-08-10 01-54-22.hand, c4, Yes, AngleScore: 0.8650740299112639, ComponentsScore: 0.765917161674077
+gesture5Right, dataOutput/General/2017-08-10 01-54-43.hand, c5, Yes, AngleScore: 0.8901956809659859, ComponentsScore: 0.8155590762487691
+gesture6Right, dataOutput/General/2017-08-10 01-55-24.hand, c6, Yes, AngleScore: 0.8986107128604334, ComponentsScore: 0.7960509935660612
+gesture7Right, dataOutput/General/2017-08-10 01-55-44.hand, c7, Yes, AngleScore: 0.8632189070487806, ComponentsScore: 0.7524318815552308
+gesture8Right, dataOutput/General/2017-08-10 01-56-06.hand, c8, Yes, AngleScore: 0.8445471357868508, ComponentsScore: 0.6692820029558857
+gesture9Right, dataOutput/General/2017-08-10 01-56-25.hand, c9, Yes, AngleScore: 0.9342390981280769, ComponentsScore: 0.782873219137229
+gesture10Right, dataOutput/General/2017-08-10 01-56-34.hand, c10, Yes, AngleScore: 0.6953531672955594, ComponentsScore: 0.6705453529271305
+
+
+gesture1Left, dataOutput/General/2017-08-10 01-50-09.hand, c1, Yes, AngleScore: 0.8203290023217176, ComponentsScore: 0.7569646730021217
+gesture2Left, dataOutput/General/2017-08-10 01-50-31.hand, c2, Yes, AngleScore: 0.8712535685344976, ComponentsScore: 0.7948108565514845
+gesture3Left, dataOutput/General/2017-08-10 01-50-41.hand, c3, Yes, AngleScore: 0.8925040703641773, ComponentsScore: 0.8216931065010403
+gesture4Left, dataOutput/General/2017-08-10 01-50-55.hand, c4, Yes, AngleScore: 0.8664849186848027, ComponentsScore: 0.7149363046031648
+gesture5Left, dataOutput/General/2017-08-10 01-51-08.hand, c5, Yes, AngleScore: 0.9333810521103175, ComponentsScore: 0.7622077361808789
+gesture6Left, dataOutput/General/2017-08-10 01-51-44.hand, c6, Yes, AngleScore: 0.7785164679391239, ComponentsScore: 0.7779667709356434
+gesture7Left, dataOutput/General/2017-08-10 01-51-54.hand, c7, Yes, AngleScore: 0.7400574784525709, ComponentsScore: 0.5195896227027956
+gesture8Left, dataOutput/General/2017-08-10 01-52-05.hand, c8, Yes, AngleScore: 0.8631781992035149, ComponentsScore: 0.7285088686432111
+gesture9Left, dataOutput/General/2017-08-10 01-52-19.hand, c9, Yes, AngleScore: 0.9482467130434669, ComponentsScore: 0.7012656312463018
+gesture10Left, dataOutput/General/2017-08-10 01-52-39.hand, c10, Yes, AngleScore: 0.8873437111181551, ComponentsScore: 0.664724022317575
+gesture1Right, dataOutput/General/2017-08-10 01-53-51.hand, c1, Yes, AngleScore: 0.7550794669228298, ComponentsScore: 0.6123431842956891
+gesture2Right, dataOutput/General/2017-08-10 01-54-00.hand, c2, Yes, AngleScore: 0.8794131878059528, ComponentsScore: 0.7658694243926915
+gesture3Right, dataOutput/General/2017-08-10 01-54-13.hand, c3, Yes, AngleScore: 0.9608538605912145, ComponentsScore: 0.7215314733148088
+gesture4Right, dataOutput/General/2017-08-10 01-54-22.hand, c4, Yes, AngleScore: 0.8650740299112639, ComponentsScore: 0.765917161674077
+gesture5Right, dataOutput/General/2017-08-10 01-54-43.hand, c5, Yes, AngleScore: 0.8901956809659859, ComponentsScore: 0.8262546250099794
+gesture6Right, dataOutput/General/2017-08-10 01-55-24.hand, c6, Yes, AngleScore: 0.8986107128604334, ComponentsScore: 0.8028537074807971
+gesture7Right, dataOutput/General/2017-08-10 01-55-44.hand, c7, Yes, AngleScore: 0.8632189070487806, ComponentsScore: 0.7621677078801337
+gesture8Right, dataOutput/General/2017-08-10 01-56-06.hand, c8, Yes, AngleScore: 0.8445471357868508, ComponentsScore: 0.6745988291772608
+gesture9Right, dataOutput/General/2017-08-10 01-56-25.hand, c9, Yes, AngleScore: 0.9342390981280769, ComponentsScore: 0.7969020682872577
+gesture10Right, dataOutput/General/2017-08-10 01-56-34.hand, c10, Yes, AngleScore: 0.6953531672955594, ComponentsScore: 0.6880597686747336
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --------------------------------------------normal facing up(1)
 direction (rounded u.vec): (0.01, 0.72, -0.69)
 d normalized: (0.01, 0.72, -0.69)

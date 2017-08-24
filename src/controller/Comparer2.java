@@ -1,10 +1,7 @@
 package controller;
 
-import com.leapmotion.leap.Bone;
-import com.leapmotion.leap.Finger;
+import com.leapmotion.leap.*;
 import com.leapmotion.leap.Finger.Type;
-import com.leapmotion.leap.FingerList;
-import com.leapmotion.leap.Hand;
 import model.HandInfo;
 import model.SerializedTargetHand;
 
@@ -174,25 +171,97 @@ public class Comparer2 {
     private static double calculateStraightnessOfFinger(Finger f) {
         double sumOfAngles = getSumOfThreeAnglesBetweenFingerBones(f);
         //best case = 0; worst case is: 90+90+90 = 270.
+        sumOfAngles = sumOfAngles - 30;
         double score = sumOfAngles / 270;           //closer to 0 means a better score. (ie. weird scale)
-        return 1 - score;                          //conventional scale: 0 = bad, 1 = good.
+        score = 1 - score;                          //conventional scale: 0 = bad, 1 = good.
+
+        if (score < 0) {
+            score = 0;
+        }
+        if (score > 1) {
+            score = 1;
+        }
+        return score;
     }
 
     private static double calculateCurvednessOfFinger(Finger f) {
         double sumOfAngles = getSumOfThreeAnglesBetweenFingerBones(f);
-        //best case is: 90+90+90 = 270; worst case = 0;
-        return sumOfAngles / 270;           //closer to 1 means a better score
+
+        //best case is: 90+90+90 = 270; adjusted bestcase = 210; worst case = 0;
+        double score = sumOfAngles / 210;           //closer to 1 means a better score
+
+        if (score < 0) {
+            score = 0;
+        }
+        if (score > 1) {
+            score = 1;
+        }
+        return score;
     }
 
-    private static double gradeFinger(String fingerType, Finger f, String pose) {
+    private static double getThumbScore(Finger thumb, Finger f) {
+
+        //bones in thumb and finger
+        HashMap<String, Bone> thumbMap = getHashMapOfBonesFromFinger(thumb);
+        HashMap<String, Bone> fingerMap = getHashMapOfBonesFromFinger(f);
+
+        //get center point of thumb's tip bone
+        Vector thumbTip = thumbMap.get("distal").center();
+
+        //finger bones
+        Bone d = fingerMap.get("distal");
+        Bone i = fingerMap.get("intermediate");
+        Bone p = fingerMap.get("proximal");
+
+        //finger bones center points
+        Vector fingerCenter1 = d.center();
+        Vector fingerCenter2 = i.center();
+        Vector fingerCenter3 = p.center();
+
+        //length of bones
+        float smallestBoneLength = (Math.min(Math.min(d.length(), i.length()), p.length()));
+
+
+        //find distances to tip bones of finger
+        float d1 = thumbTip.distanceTo(fingerCenter1);
+        float d2 = thumbTip.distanceTo(fingerCenter2);
+        float d3 = thumbTip.distanceTo(fingerCenter3);
+        double minDistance = (double) (Math.min(Math.min(d1, d2), d3));
+
+
+        //scale and score
+        double distanceScaledByBoneLength = minDistance / (smallestBoneLength * 5);
+        double score = 1 - distanceScaledByBoneLength;
+
+
+        if (score < 0) {
+            score = 0;
+        }
+        if (score > 1) {
+            score = 1;
+        }
+        return score;
+    }
+
+
+    private static double gradeFinger(HashMap<String, Finger> fingerMap, Finger f, String pose) {
         if (pose.equals("straight")) {
             return calculateStraightnessOfFinger(f);
         } else if (pose.equals("curved")) {
             return calculateCurvednessOfFinger(f);
         } else if (pose.equals("thumb")) {
-            return 1; //best possible value for now
+            return calculateStraightnessOfFinger(f);
         }
-        return 0;
+        //these conditions deal with thumb touching other fingers
+        else {
+            Finger theFingerThumbTouches = fingerMap.get(pose);
+            return getThumbScore(f, theFingerThumbTouches);
+        }
+
+////
+////        else if (pose.equals("thumb")) {
+////            return calculateStraightnessOfFinger(f);
+////        }
     }
 
     private static HashMap<String, Double> getFingersGradedMap(HashMap<String, Finger> fingerMap, HashMap<String, String> fingerPoseMap) {
@@ -203,7 +272,7 @@ public class Comparer2 {
         for (String fingerName : fingerMap.keySet()) {
             Finger f = fingerMap.get(fingerName);
             String pose = fingerPoseMap.get(fingerName);
-            double grade = gradeFinger(fingerName, f, pose);
+            double grade = gradeFinger(fingerMap, f, pose);
             grades.put(fingerName, grade);
         }
         return grades;
@@ -242,67 +311,16 @@ public class Comparer2 {
         return -1;
     }
 
-    private static HashMap<String, Hand> getTestHands() {
-        HashMap<String, Hand> testHands = new HashMap<>();
-        HashMap<String, String> nicknamePaths = new HashMap<>();
-
-        //can easily add here
-//        nicknamePaths.put("besttry", "dataOutput/TestData/2017-08-07 14-18-05.hand");
-//        nicknamePaths.put("closedfist", "dataOutput/TestData/2017-08-07 14-17-52.hand");
-//        nicknamePaths.put("openPalm", "dataOutput/TestData/2017-08-07 14-18-20.hand");
-//        nicknamePaths.put("oneFingerOff", "dataOutput/TestData/2017-08-07 14-18-42.hand");
-//        nicknamePaths.put("oneFingerOff2", "dataOutput/TestData/2017-08-07 14-19-30.hand");
-
-        //testing right hand
-        nicknamePaths.put("besttry", "dataOutput/targets2/gesture1Right.hand");
-
-        for (String nickname : nicknamePaths.keySet()) {
-            //get hand for a path and link that hand to a nickname
-            String path = nicknamePaths.get(nickname);
-            Hand h = SerializedTargetHand.getHandFromString(path);
-            testHands.put(nickname, h);
-        }
-        return testHands;
-    }
-
-//    //using strings cuz java doesn't have tuples; and im too lazy to write class
-//    private static HashMap<String, String> getGradesForTestHands(HashMap<String, Hand> testHands, Hand target) {
-//        HashMap<String, String> gradesMap = new HashMap<>();
-//
-//        for (String nickname : testHands.keySet()) {
-//            Hand h = testHands.get(nickname);
-//            double grade1 = Comparer.compareStatic(h, target);
-//            double grade2 = compare(h, h, "gestureTypeNotImplemented yet");
-//            String stringGrade = "Grade1: " + grade1 + ", Grade2: " + grade2 + "\n";
-//            gradesMap.put(nickname, stringGrade);
-//        }
-//        return gradesMap;
-//    }
-
     public static void main(String[] args) {
-
-////        String path = "dataOutput/targets2/gesture10Left.hand";
-//        String path = "dataOutput/targets2/gesture10Right.hand";
-//        Hand target = SerializedTargetHand.getHandFromString(path);
-//
-//        //get test hands
-//        HashMap<String, Hand> hands = getTestHands();
-//
-//        //get grades for all test hands; using strings cuz java doesn't have tuples
-//        HashMap<String, String> grades = getGradesForTestHands(hands, target);
-//
-//        System.out.println(grades);
-
-
         // get all Hand info objects from file.
         String fullfilename = SerializedTargetHand.getCSVFilePathForFolder("General");//"dataOutput/General/_allHandsOnDeck.csv";
         ArrayList<HandInfo> hands = SerializedTargetHand.readFromCSV(fullfilename);
 
 //        ArrayList<HandInfo> handsTesting = new ArrayList<>();
-//        handsTesting.add(hands.get(0));
-//        handsTesting.add(hands.get(1));
-//        handsTesting.add(hands.get(10));
-//        handsTesting.add(hands.get(11));
+//        handsTesting.add(hands.get(7));
+////        handsTesting.add(hands.get(1));
+////        handsTesting.add(hands.get(10));
+////        handsTesting.add(hands.get(11));
 //
 //        // print out all scores for the hands.
 //        for (HandInfo h : handsTesting) {
