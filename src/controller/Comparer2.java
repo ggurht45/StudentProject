@@ -5,6 +5,7 @@ import com.leapmotion.leap.Finger;
 import com.leapmotion.leap.Finger.Type;
 import com.leapmotion.leap.FingerList;
 import com.leapmotion.leap.Hand;
+import model.HandInfo;
 import model.SerializedTargetHand;
 
 import java.util.ArrayList;
@@ -215,7 +216,7 @@ public class Comparer2 {
     }
 
     public static void main(String[] args) {
-        System.out.println("testing main method");
+
 ////        String path = "dataOutput/targets2/gesture10Left.hand";
 //        String path = "dataOutput/targets2/gesture10Right.hand";
 //        Hand target = SerializedTargetHand.getHandFromString(path);
@@ -228,13 +229,22 @@ public class Comparer2 {
 //
 //        System.out.println(grades);
 
-        String separator = "\\";
-        String filepath = "C:\\Users\\jahangir\\IdeaProjects\\StudentProject\\dataOutput\\alice\\_allHandsOnDeck.csv";
-        String[] arrValues = filepath.split(Pattern.quote(separator));
-        System.out.println(Arrays.toString(arrValues));
-        System.out.println("folder: " + arrValues[arrValues.length - 2]);
-        System.out.println("seperator: " + separator);
 
+        // get all Hand info objects from file.
+        String path = "dataOutput/targets2/gesture10Left.hand";
+//        String path = "dataOutput/targets2/gesture10Right.hand";
+        Hand target = SerializedTargetHand.getHandFromString(path);
+        String fullfilename = SerializedTargetHand.getCSVFilePathForFolder("General");//"dataOutput/General/_allHandsOnDeck.csv";
+        ArrayList<HandInfo> hands = SerializedTargetHand.readFromCSV(fullfilename);
+
+        // print out all scores for the hands.
+        for (HandInfo h : hands) {
+            Hand lmh = SerializedTargetHand.getHandFromString(h.handFile);
+            double s1 = Comparer.compareStatic(lmh, target);
+            double s2 = compare(lmh, lmh, "gestureTypeNotImplemented yet");
+            String line = h.getCommaSeperatedToString() + ", Score1: " + s1 + ", Score2: " + s2;
+            System.out.println(line);
+        }
     }
 
 }
