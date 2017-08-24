@@ -35,16 +35,89 @@ public class Comparer2 {
         return fingerMap;
     }
 
-    public static HashMap<String, String> getFingerPoseMap(int gestureNumber) {
+    public static HashMap<String, String> getFingerPoseMap(String gestureType) {
         HashMap<String, String> fingerPoseMap = new HashMap<>();
 //        if (leftHanded) { //left right shouldn't matter since both hands follow same gesture signatures.
-        switch (gestureNumber) {
-            case 10:
+        switch (gestureType) {
+            case "gesture1Left":
+            case "gesture1Right":
                 fingerPoseMap.put("index", "straight");
-                fingerPoseMap.put("pinky", "straight");
                 fingerPoseMap.put("middle", "curved");
                 fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "curved");
                 fingerPoseMap.put("thumb", "thumb");
+                break;
+            case "gesture2Left":
+            case "gesture2Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "straight");
+                fingerPoseMap.put("ring", "straight");
+                fingerPoseMap.put("pinky", "curved");
+                fingerPoseMap.put("thumb", "pinky");
+                break;
+            case "gesture3Left":
+            case "gesture3Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "straight");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "middle");
+                break;
+            case "gesture4Left":
+            case "gesture4Right":
+                fingerPoseMap.put("index", "curved");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "thumb");
+                break;
+            case "gesture5Left":
+            case "gesture5Right":
+                fingerPoseMap.put("index", "curved");
+                fingerPoseMap.put("middle", "straight");
+                fingerPoseMap.put("ring", "straight");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "index");
+                break;
+            case "gesture6Left":
+            case "gesture6Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "straight");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "curved");
+                fingerPoseMap.put("thumb", "ring");
+                break;
+            case "gesture7Left":
+            case "gesture7Right":
+                fingerPoseMap.put("index", "curved");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "middle");
+                break;
+            case "gesture8Left":
+            case "gesture8Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "curved");
+                fingerPoseMap.put("thumb", "middle");
+                break;
+            case "gesture9Left":
+            case "gesture9Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "straight");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "ring");
+                break;
+            case "gesture10Left":
+            case "gesture10Right":
+                fingerPoseMap.put("index", "straight");
+                fingerPoseMap.put("middle", "curved");
+                fingerPoseMap.put("ring", "curved");
+                fingerPoseMap.put("pinky", "straight");
+                fingerPoseMap.put("thumb", "middle");
                 break;
             default:
                 System.out.println("no default fingerPoses");
@@ -69,12 +142,12 @@ public class Comparer2 {
         double angle = a.direction().angleTo(b.direction());
         angle = Math.toDegrees(angle);
         if (angle > 90) {
-            System.out.println("setting greater angle (" + angle + ") to 90 for angle btw bone: " + a + ", and bone: " + b);
+//            System.out.println("setting greater angle (" + angle + ") to 90 for angle btw bone: " + a + ", and bone: " + b);
             angle = 90;
         }
         //nb. not else
         if (angle < 0) {
-            System.out.println("setting lesser angle (" + angle + ") to 0 for angle btw bone: " + a + ", and bone: " + b);
+//            System.out.println("setting lesser angle (" + angle + ") to 0 for angle btw bone: " + a + ", and bone: " + b);
             angle = 0;
         }
         return angle;
@@ -127,11 +200,11 @@ public class Comparer2 {
             System.out.println("ERROR: EXPECTED SIZE TO BE FIVE!");
         }
         HashMap<String, Double> grades = new HashMap<>();
-        for (String key : fingerMap.keySet()) {
-            Finger f = fingerMap.get(key);
-            String pose = fingerPoseMap.get(key);
-            double grade = gradeFinger(key, f, pose);
-            grades.put(key, grade);
+        for (String fingerName : fingerMap.keySet()) {
+            Finger f = fingerMap.get(fingerName);
+            String pose = fingerPoseMap.get(fingerName);
+            double grade = gradeFinger(fingerName, f, pose);
+            grades.put(fingerName, grade);
         }
         return grades;
     }
@@ -145,32 +218,23 @@ public class Comparer2 {
         return grade;
     }
 
-    public static double compare(Hand h1, Hand h2, String gestureType) {
-
-        FingerList fingerList = h1.fingers();
+    // left/right doesnt matter
+    //straight -- angles between each consecutive bone in finger must be 0 degrees. (or 180, check that later)
+    //curved -- max "" 90 degrees, min "" 45. maybe 30 for bone nearest wrist. think about thumb
+    //thumb -- tip of thumb has to be within the (max min) x,y,z of any center point of any bone in the finger. calculate max and min xyz values.
+    public static double compare(Hand h, String gestureType) {
+        FingerList fingerList = h.fingers();
 
         //make sure you have five fingers
         if (fingerList.count() == 5) {
             //get all the fingers into a hashmap, named by their common name
             HashMap<String, Finger> fingerMap = getFingerHashMap(fingerList);
 
-            //deconstruct from gestureType what kind of gesture we are dealing with
-            //assume gesture 10, left hand. rock sign
-            boolean leftHanded = true;
-            int gestureNumber = 10;
-
             //want the pinky and index to be straight, middle and ring to be fully curved. (thumb touching middle)
-            HashMap<String, String> fingerPoseMap = getFingerPoseMap(gestureNumber);
+            HashMap<String, String> fingerPoseMap = getFingerPoseMap(gestureType);
             HashMap<String, Double> fingersGradedMap = getFingersGradedMap(fingerMap, fingerPoseMap);
-//            System.out.println(fingersGradedMap);
 
             double totalGrade = cumulativeGrade(fingersGradedMap);
-
-
-            //straight -- angles between each consecutive bone in finger must be 0 degrees. (or 180, check that later)
-            //curved -- max "" 90 degrees, min "" 45. maybe 30 for bone nearest wrist. think about thumb
-            //thumb -- tip of thumb has to be within the (max min) x,y,z of any center point of any bone in the finger. calculate max and min xyz values.
-
 
             return totalGrade;
         }
@@ -201,19 +265,19 @@ public class Comparer2 {
         return testHands;
     }
 
-    //using strings cuz java doesn't have tuples; and im too lazy to write class
-    private static HashMap<String, String> getGradesForTestHands(HashMap<String, Hand> testHands, Hand target) {
-        HashMap<String, String> gradesMap = new HashMap<>();
-
-        for (String nickname : testHands.keySet()) {
-            Hand h = testHands.get(nickname);
-            double grade1 = Comparer.compareStatic(h, target);
-            double grade2 = compare(h, h, "gestureTypeNotImplemented yet");
-            String stringGrade = "Grade1: " + grade1 + ", Grade2: " + grade2 + "\n";
-            gradesMap.put(nickname, stringGrade);
-        }
-        return gradesMap;
-    }
+//    //using strings cuz java doesn't have tuples; and im too lazy to write class
+//    private static HashMap<String, String> getGradesForTestHands(HashMap<String, Hand> testHands, Hand target) {
+//        HashMap<String, String> gradesMap = new HashMap<>();
+//
+//        for (String nickname : testHands.keySet()) {
+//            Hand h = testHands.get(nickname);
+//            double grade1 = Comparer.compareStatic(h, target);
+//            double grade2 = compare(h, h, "gestureTypeNotImplemented yet");
+//            String stringGrade = "Grade1: " + grade1 + ", Grade2: " + grade2 + "\n";
+//            gradesMap.put(nickname, stringGrade);
+//        }
+//        return gradesMap;
+//    }
 
     public static void main(String[] args) {
 
@@ -231,18 +295,30 @@ public class Comparer2 {
 
 
         // get all Hand info objects from file.
-        String path = "dataOutput/targets2/gesture10Left.hand";
-//        String path = "dataOutput/targets2/gesture10Right.hand";
-        Hand target = SerializedTargetHand.getHandFromString(path);
         String fullfilename = SerializedTargetHand.getCSVFilePathForFolder("General");//"dataOutput/General/_allHandsOnDeck.csv";
         ArrayList<HandInfo> hands = SerializedTargetHand.readFromCSV(fullfilename);
 
-        // print out all scores for the hands.
+//        ArrayList<HandInfo> handsTesting = new ArrayList<>();
+//        handsTesting.add(hands.get(0));
+//        handsTesting.add(hands.get(1));
+//        handsTesting.add(hands.get(10));
+//        handsTesting.add(hands.get(11));
+//
+//        // print out all scores for the hands.
+//        for (HandInfo h : handsTesting) {
+
         for (HandInfo h : hands) {
+            //leap motion hand
             Hand lmh = SerializedTargetHand.getHandFromString(h.handFile);
-            double s1 = Comparer.compareStatic(lmh, target);
-            double s2 = compare(lmh, lmh, "gestureTypeNotImplemented yet");
-            String line = h.getCommaSeperatedToString() + ", Score1: " + s1 + ", Score2: " + s2;
+
+            //get correct target to compare against
+            String targetPath = "dataOutput/targets2/" + h.name + ".hand";
+            Hand correctTarget = SerializedTargetHand.getHandFromString(targetPath);
+
+            //get scores
+            double s1 = Comparer.compareStatic(lmh, correctTarget);
+            double s2 = compare(lmh, h.name);
+            String line = h.getCommaSeperatedToString() + ", AngleScore: " + s1 + ", ComponentsScore: " + s2;
             System.out.println(line);
         }
     }
