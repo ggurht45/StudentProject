@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static java.io.File.separator;
@@ -315,11 +316,10 @@ public class Comparer2 {
     }
 
 
-    private static void outputFolderScores(String f) {
+    private static HashMap<String, ArrayList<String>> outputFolderScores(HashMap<String, ArrayList<String>> ghashmap, String f) {
         // get all Hand info objects from file.
         String fullfilename = SerializedTargetHand.getCSVFilePathForFolder(f);
         ArrayList<HandInfo> hands = SerializedTargetHand.readFromCSV(fullfilename);
-
 
         //print folder name
         System.out.println("Folder: " + f);
@@ -334,29 +334,61 @@ public class Comparer2 {
 //        handsTesting.add(hands.get(7));
 //        for (HandInfo h : handsTesting) {
 
+            String gestureType = h.name;
+
             //leap motion hand
             Hand lmh = SerializedTargetHand.getHandFromString(h.handFile);
 
             //get correct target to compare against
-            String targetPath = "dataOutput/targets2/" + h.name + ".hand";
+            String targetPath = "dataOutput/targets2/" + gestureType + ".hand";
             Hand correctTarget = SerializedTargetHand.getHandFromString(targetPath);
 
             //get scores
             int s1 = Comparer.compareStatic(lmh, correctTarget);
-            int s2 = compare(lmh, h.name);
+            int s2 = compare(lmh, gestureType);
             String line = h.getCommaSeperatedToString() + ", " + s1 + ", " + s2;
+
+            //add to ghashmap
+            if (ghashmap.containsKey(gestureType)) {
+                ghashmap.get(gestureType).add(line);
+            } else {
+                ArrayList<String> a = new ArrayList<>();
+                a.add(line);
+                ghashmap.put(gestureType, a);
+            }
+
             System.out.println(line);
         }
         System.out.println();
+        return ghashmap;
     }
 
     public static void main(String[] args) throws Exception {
         //put run output to file
-        PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+        PrintStream out = new PrintStream(new FileOutputStream("outputByFolderName.txt"));
+        PrintStream out2 = new PrintStream(new FileOutputStream("outputByGestureType.txt"));
         System.setOut(out);
 
-        outputFolderScores("General");
-        outputFolderScores("Alice");
+        //initialize hashmap for gesturetypes
+        HashMap<String, ArrayList<String>> ghashmap = new HashMap<>();
+
+
+        ghashmap = outputFolderScores(ghashmap, "General");
+        ghashmap = outputFolderScores(ghashmap, "Alice");
+
+        //print by gesture types
+        System.setOut(out2);
+        List<String> gestureTypesInOrder = Arrays.asList("gesture1Left", "gesture2Left", "gesture3Left", "gesture4Left", "gesture5Left", "gesture6Left", "gesture7Left", "gesture8Left", "gesture9Left", "gesture10Left", "gesture1Right", "gesture2Right", "gesture3Right", "gesture4Right", "gesture5Right", "gesture6Right", "gesture7Right", "gesture8Right", "gesture9Right", "gesture10Right");
+        for (String gestureType : gestureTypesInOrder) {
+            System.out.println(gestureType);
+            //print all lines in list
+            for(String line: ghashmap.get(gestureType)){
+                System.out.println(line);
+            }
+            System.out.println();
+        }
+        System.out.println();
+
 
     }
 
