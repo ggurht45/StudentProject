@@ -1,0 +1,5 @@
+dataOutput/Alex/2017-08-18 12-56-43.hand information
+	Name: gesture4Right
+	Comments: 
+	Result: Yes
+

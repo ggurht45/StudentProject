@@ -1,0 +1,5 @@
+dataOutput/Jacqueline/2017-08-10 16-11-04.hand information
+	Name: gesture9Left
+	Comments: 
+	Result: Yes
+

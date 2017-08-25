@@ -373,8 +373,15 @@ public class Comparer2 {
         HashMap<String, ArrayList<String>> ghashmap = new HashMap<>();
 
 
+        //my testing
         ghashmap = outputFolderScores(ghashmap, "General");
-        ghashmap = outputFolderScores(ghashmap, "Alice");
+        //Nik's data
+        ghashmap = outputFolderScores(ghashmap, "Alex");
+        ghashmap = outputFolderScores(ghashmap, "Jacqueline");
+        ghashmap = outputFolderScores(ghashmap, "Stefan");
+        //my data collection
+        ghashmap = outputFolderScores(ghashmap, "test1");
+
 
         //print by gesture types
         System.setOut(out2);

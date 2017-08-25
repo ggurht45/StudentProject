@@ -1,0 +1,5 @@
+dataOutput/Stefan/2017-08-23 17-38-38.hand information
+	Name: gesture2Left
+	Comments: 
+	Result: Yes
+

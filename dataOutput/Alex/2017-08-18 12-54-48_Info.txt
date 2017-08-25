@@ -1,0 +1,5 @@
+dataOutput/Alex/2017-08-18 12-54-48.hand information
+	Name: gesture1Left
+	Comments: 
+	Result: Yes
+

@@ -24,10 +24,15 @@ public class HandInfo implements java.io.Serializable {
     }
 
     public String getCommaSeperatedToString() {
-        if(name.trim().equalsIgnoreCase("gesture10Right")){
-            return name.trim() + ", " + handFile.trim() + ", " + comments.trim() + ", " + result.trim();
+        if ((comments.trim()).equalsIgnoreCase("")){
+            comments = "na";
         }
-        return name.trim() + ", " + handFile.trim() + ",\t " + comments.trim() + ", " + result.trim();
+        //if comments = 2 result -> no.
+
+//        if(name.trim().equalsIgnoreCase("gesture10Right")){
+        return name.trim() + ", " + handFile.trim() + ", " + comments.trim() + ", " + result.trim();
+//        }
+//        return name.trim() + ", " + handFile.trim() + ",\t " + comments.trim() + ", " + result.trim();
     }
 
     @Override
