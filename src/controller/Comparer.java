@@ -89,9 +89,11 @@ public class Comparer {
 			return 0; //not sure why this returns 0. what if both hands are not left?
 	}
 
-	public static double compareStatic(Hand h1, Hand h2){
+	public static int compareStatic(Hand h1, Hand h2){
 		Comparer var = new Comparer();
-		return var.compare(h1, h2);
+		double d =  var.compare(h1, h2);
+		int score = (int)(d*100.0);
+		return score;
 	}
 	// wrist in normal position (i.e. not turned)
 	private Boolean wristNormal(Hand h) {

@@ -5,6 +5,8 @@ import com.leapmotion.leap.Finger.Type;
 import model.HandInfo;
 import model.SerializedTargetHand;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -291,7 +293,7 @@ public class Comparer2 {
     //straight -- angles between each consecutive bone in finger must be 0 degrees. (or 180, check that later)
     //curved -- max "" 90 degrees, min "" 45. maybe 30 for bone nearest wrist. think about thumb
     //thumb -- tip of thumb has to be within the (max min) x,y,z of any center point of any bone in the finger. calculate max and min xyz values.
-    public static double compare(Hand h, String gestureType) {
+    public static int compare(Hand h, String gestureType) {
         FingerList fingerList = h.fingers();
 
         //make sure you have five fingers
@@ -305,27 +307,33 @@ public class Comparer2 {
 
             double totalGrade = cumulativeGrade(fingersGradedMap);
 
-            return totalGrade;
+            int score = (int) (totalGrade * 100.0);
+            return score;
         }
         System.out.println("number of fingers in hand is not 5");
         return -1;
     }
 
-    public static void main(String[] args) {
+
+    private static void outputFolderScores(String f) {
         // get all Hand info objects from file.
-        String fullfilename = SerializedTargetHand.getCSVFilePathForFolder("General");//"dataOutput/General/_allHandsOnDeck.csv";
+        String fullfilename = SerializedTargetHand.getCSVFilePathForFolder(f);
         ArrayList<HandInfo> hands = SerializedTargetHand.readFromCSV(fullfilename);
 
+
+        //print folder name
+        System.out.println("Folder: " + f);
+
+        //print header
+        String header = HandInfo.getCSVHeader() + ", AngleScore, ComponentsScore";
+        System.out.println(header);
+
+        //print data
+        for (HandInfo h : hands) {
 //        ArrayList<HandInfo> handsTesting = new ArrayList<>();
 //        handsTesting.add(hands.get(7));
-////        handsTesting.add(hands.get(1));
-////        handsTesting.add(hands.get(10));
-////        handsTesting.add(hands.get(11));
-//
-//        // print out all scores for the hands.
 //        for (HandInfo h : handsTesting) {
 
-        for (HandInfo h : hands) {
             //leap motion hand
             Hand lmh = SerializedTargetHand.getHandFromString(h.handFile);
 
@@ -334,11 +342,22 @@ public class Comparer2 {
             Hand correctTarget = SerializedTargetHand.getHandFromString(targetPath);
 
             //get scores
-            double s1 = Comparer.compareStatic(lmh, correctTarget);
-            double s2 = compare(lmh, h.name);
-            String line = h.getCommaSeperatedToString() + ", AngleScore: " + s1 + ", ComponentsScore: " + s2;
+            int s1 = Comparer.compareStatic(lmh, correctTarget);
+            int s2 = compare(lmh, h.name);
+            String line = h.getCommaSeperatedToString() + ", " + s1 + ", " + s2;
             System.out.println(line);
         }
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws Exception {
+        //put run output to file
+        PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+        System.setOut(out);
+
+        outputFolderScores("General");
+        outputFolderScores("Alice");
+
     }
 
 }
