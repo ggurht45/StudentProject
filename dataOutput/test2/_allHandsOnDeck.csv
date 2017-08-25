@@ -1,0 +1,21 @@
+gestureName, filePath, comments, result
+gesture1Right, dataOutput/test2/2017-08-22 22-40-59.hand, 1, Yes
+gesture2Right, dataOutput/test2/2017-08-22 22-41-53.hand, 1, Yes
+gesture3Right, dataOutput/test2/2017-08-22 22-42-48.hand, 1, Yes
+gesture4Right, dataOutput/test2/2017-08-22 22-43-07.hand, 1, Yes
+gesture5Right, dataOutput/test2/2017-08-22 22-43-26.hand, 1, Yes
+gesture6Right, dataOutput/test2/2017-08-22 22-43-43.hand, 1, Yes
+gesture7Right, dataOutput/test2/2017-08-22 22-44-01.hand, 1, Yes
+gesture8Right, dataOutput/test2/2017-08-22 22-44-19.hand, 1, Yes
+gesture9Right, dataOutput/test2/2017-08-22 22-44-49.hand, 1, Yes
+gesture10Right, dataOutput/test2/2017-08-22 22-45-08.hand, 1, Yes
+gesture1Left, dataOutput/test2/2017-08-22 22-45-46.hand, 1, Yes
+gesture2Left, dataOutput/test2/2017-08-22 22-46-26.hand, 1, Yes
+gesture3Left, dataOutput/test2/2017-08-22 22-46-50.hand, 1, Yes
+gesture4Left, dataOutput/test2/2017-08-22 22-47-12.hand, 1, Yes
+gesture5Left, dataOutput/test2/2017-08-22 22-47-49.hand, 1, Yes
+gesture6Left, dataOutput/test2/2017-08-22 22-48-14.hand, 1, Yes
+gesture7Left, dataOutput/test2/2017-08-22 22-51-11.hand, 1, Yes
+gesture8Left, dataOutput/test2/2017-08-22 22-51-54.hand, 1, Yes
+gesture9Left, dataOutput/test2/2017-08-22 22-52-48.hand, 1, Yes
+gesture10Left, dataOutput/test2/2017-08-22 22-53-14.hand, 1, Yes

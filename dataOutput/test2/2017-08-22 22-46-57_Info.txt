@@ -1,0 +1,5 @@
+dataOutput/test2/2017-08-22 22-46-57.hand information
+	Name: gesture3Left
+	Comments: 2
+	Result: Yes
+

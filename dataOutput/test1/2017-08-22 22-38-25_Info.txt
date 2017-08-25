@@ -1,0 +1,5 @@
+dataOutput/test1/2017-08-22 22-38-25.hand information
+	Name: gesture7Right
+	Comments: 1
+	Result: Yes
+

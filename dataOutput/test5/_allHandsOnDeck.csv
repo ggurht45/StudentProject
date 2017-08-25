@@ -1,0 +1,21 @@
+gestureName, filePath, comments, result
+gesture1Right, dataOutput/test5/2017-08-23 00-22-17.hand, , Yes
+gesture2Right, dataOutput/test5/2017-08-23 00-22-51.hand, , Yes
+gesture3Right, dataOutput/test5/2017-08-23 00-23-06.hand, , Yes
+gesture4Right, dataOutput/test5/2017-08-23 00-23-36.hand, , Yes
+gesture5Right, dataOutput/test5/2017-08-23 00-23-52.hand, , Yes
+gesture6Right, dataOutput/test5/2017-08-23 00-23-59.hand, , Yes
+gesture7Right, dataOutput/test5/2017-08-23 00-24-22.hand, , Yes
+gesture8Right, dataOutput/test5/2017-08-23 00-24-54.hand, , Yes
+gesture9Right, dataOutput/test5/2017-08-23 00-25-30.hand, , Yes
+gesture10Right, dataOutput/test5/2017-08-23 00-25-48.hand, , Yes
+gesture1Left, dataOutput/test5/2017-08-23 00-26-20.hand, , Yes
+gesture2Left, dataOutput/test5/2017-08-23 00-26-35.hand, , Yes
+gesture3Left, dataOutput/test5/2017-08-23 00-26-45.hand, , Yes
+gesture4Left, dataOutput/test5/2017-08-23 00-26-52.hand, , Yes
+gesture5Left, dataOutput/test5/2017-08-23 00-27-36.hand, , Yes
+gesture6Left, dataOutput/test5/2017-08-23 00-27-45.hand, , Yes
+gesture7Left, dataOutput/test5/2017-08-23 00-28-01.hand, , Yes
+gesture8Left, dataOutput/test5/2017-08-23 00-28-09.hand, , Yes
+gesture9Left, dataOutput/test5/2017-08-23 00-28-19.hand, , Yes
+gesture10Left, dataOutput/test5/2017-08-23 00-28-31.hand, , Yes

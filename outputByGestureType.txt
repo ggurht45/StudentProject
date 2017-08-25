@@ -4,6 +4,14 @@ gesture1Left, dataOutput/Alex/2017-08-18 12-54-48.hand, na, Yes, 93, 94
 gesture1Left, dataOutput/Alex/2017-08-18 12-58-08.hand, na, Yes, 78, 78
 gesture1Left, dataOutput/Jacqueline/2017-08-10 16-07-08.hand, na, Yes, 79, 86
 gesture1Left, dataOutput/Stefan/2017-08-23 17-38-35.hand, na, Yes, 76, 75
+gesture1Left, dataOutput/test1/2017-08-22 22-31-02.hand, 1, Yes, 77, 92
+gesture1Left, dataOutput/test2/2017-08-22 22-45-46.hand, 1, Yes, 96, 94
+gesture1Left, dataOutput/test3/2017-08-22 23-28-55.hand, 1, Yes, 84, 77
+gesture1Left, dataOutput/test4/2017-08-23 00-00-55.hand, 1, Yes, 95, 91
+gesture1Left, dataOutput/test5/2017-08-23 00-26-20.hand, na, Yes, 80, 89
+gesture1Left, dataOutput/test6/2017-08-24 02-27-53.hand, na, Yes, 80, 92
+gesture1Left, dataOutput/test1/2017-08-22 22-31-26.hand, 2, No, 56, 61
+gesture1Left, dataOutput/test2/2017-08-22 22-45-53.hand, 2, No, 70, 73
 
 gesture2Left
 gesture2Left, dataOutput/General/2017-08-10 01-50-31.hand, c2, Yes, 87, 85
@@ -11,6 +19,14 @@ gesture2Left, dataOutput/Alex/2017-08-18 12-54-56.hand, na, Yes, 82, 81
 gesture2Left, dataOutput/Alex/2017-08-18 12-58-11.hand, na, Yes, 78, 80
 gesture2Left, dataOutput/Jacqueline/2017-08-10 16-07-28.hand, na, Yes, 93, 83
 gesture2Left, dataOutput/Stefan/2017-08-23 17-38-38.hand, na, Yes, 84, 88
+gesture2Left, dataOutput/test1/2017-08-22 22-31-42.hand, 1, Yes, 88, 87
+gesture2Left, dataOutput/test2/2017-08-22 22-46-26.hand, 1, Yes, 87, 88
+gesture2Left, dataOutput/test3/2017-08-22 23-30-13.hand, 1, Yes, 75, 70
+gesture2Left, dataOutput/test4/2017-08-23 00-01-17.hand, na, Yes, 96, 91
+gesture2Left, dataOutput/test5/2017-08-23 00-26-35.hand, na, Yes, 85, 85
+gesture2Left, dataOutput/test6/2017-08-24 02-28-41.hand, na, Yes, 90, 89
+gesture2Left, dataOutput/test1/2017-08-22 22-31-51.hand, 2, No, 81, 81
+gesture2Left, dataOutput/test2/2017-08-22 22-46-32.hand, 2, No, 83, 70
 
 gesture3Left
 gesture3Left, dataOutput/General/2017-08-10 01-50-41.hand, c3, Yes, 89, 91
@@ -18,6 +34,14 @@ gesture3Left, dataOutput/Alex/2017-08-18 12-55-01.hand, na, Yes, 94, 84
 gesture3Left, dataOutput/Alex/2017-08-18 12-58-15.hand, na, Yes, 87, 87
 gesture3Left, dataOutput/Jacqueline/2017-08-10 16-08-05.hand, na, Yes, 91, 89
 gesture3Left, dataOutput/Stefan/2017-08-23 17-38-42.hand, na, Yes, 84, 88
+gesture3Left, dataOutput/test1/2017-08-22 22-32-07.hand, 1, Yes, 93, 90
+gesture3Left, dataOutput/test2/2017-08-22 22-46-50.hand, 1, Yes, 85, 80
+gesture3Left, dataOutput/test3/2017-08-22 23-30-38.hand, 1, Yes, 85, 91
+gesture3Left, dataOutput/test4/2017-08-23 00-02-52.hand, na, Yes, 58, 76
+gesture3Left, dataOutput/test5/2017-08-23 00-26-45.hand, na, Yes, 81, 90
+gesture3Left, dataOutput/test6/2017-08-24 02-29-02.hand, na, Yes, 75, 85
+gesture3Left, dataOutput/test1/2017-08-22 22-32-15.hand, 2, No, 91, 79
+gesture3Left, dataOutput/test2/2017-08-22 22-46-57.hand, 2, No, 66, 58
 
 gesture4Left
 gesture4Left, dataOutput/General/2017-08-10 01-50-55.hand, c4, Yes, 86, 88
@@ -25,6 +49,14 @@ gesture4Left, dataOutput/Alex/2017-08-18 12-55-06.hand, na, Yes, 96, 92
 gesture4Left, dataOutput/Alex/2017-08-18 12-58-17.hand, na, Yes, 96, 97
 gesture4Left, dataOutput/Jacqueline/2017-08-10 16-09-39.hand, na, Yes, 94, 96
 gesture4Left, dataOutput/Stefan/2017-08-23 17-38-45.hand, na, Yes, 78, 76
+gesture4Left, dataOutput/test1/2017-08-22 22-33-12.hand, 1, Yes, 95, 97
+gesture4Left, dataOutput/test2/2017-08-22 22-47-12.hand, 1, Yes, 95, 94
+gesture4Left, dataOutput/test3/2017-08-22 23-31-12.hand, 1, Yes, 94, 92
+gesture4Left, dataOutput/test4/2017-08-23 00-03-46.hand, na, Yes, 71, 80
+gesture4Left, dataOutput/test5/2017-08-23 00-26-52.hand, na, Yes, 95, 96
+gesture4Left, dataOutput/test6/2017-08-24 02-29-28.hand, na, Yes, 95, 94
+gesture4Left, dataOutput/test1/2017-08-22 22-33-23.hand, 2, No, 84, 94
+gesture4Left, dataOutput/test2/2017-08-22 22-47-18.hand, 2, No, 83, 82
 
 gesture5Left
 gesture5Left, dataOutput/General/2017-08-10 01-51-08.hand, c5, Yes, 93, 86
@@ -32,6 +64,14 @@ gesture5Left, dataOutput/Alex/2017-08-18 12-55-10.hand, na, Yes, 11, 94
 gesture5Left, dataOutput/Alex/2017-08-18 12-58-20.hand, na, Yes, 14, 94
 gesture5Left, dataOutput/Jacqueline/2017-08-10 16-09-58.hand, na, Yes, 84, 85
 gesture5Left, dataOutput/Stefan/2017-08-23 17-38-48.hand, na, Yes, 84, 88
+gesture5Left, dataOutput/test1/2017-08-22 22-33-49.hand, 1, Yes, 4, 92
+gesture5Left, dataOutput/test2/2017-08-22 22-47-49.hand, 1, Yes, 13, 94
+gesture5Left, dataOutput/test3/2017-08-22 23-31-42.hand, 1, Yes, 10, 92
+gesture5Left, dataOutput/test4/2017-08-23 00-04-04.hand, na, Yes, 90, 86
+gesture5Left, dataOutput/test5/2017-08-23 00-27-36.hand, na, Yes, 83, 89
+gesture5Left, dataOutput/test6/2017-08-24 02-30-15.hand, na, Yes, 82, 91
+gesture5Left, dataOutput/test1/2017-08-22 22-33-57.hand, 2, No, 7, 57
+gesture5Left, dataOutput/test2/2017-08-22 22-47-54.hand, 2, No, 82, 79
 
 gesture6Left
 gesture6Left, dataOutput/General/2017-08-10 01-51-44.hand, c6, Yes, 77, 87
@@ -39,6 +79,14 @@ gesture6Left, dataOutput/Alex/2017-08-18 12-55-14.hand, na, Yes, 80, 71
 gesture6Left, dataOutput/Alex/2017-08-18 12-58-23.hand, na, Yes, 79, 74
 gesture6Left, dataOutput/Jacqueline/2017-08-10 16-10-14.hand, na, Yes, 93, 92
 gesture6Left, dataOutput/Stefan/2017-08-23 17-38-51.hand, na, Yes, 88, 83
+gesture6Left, dataOutput/test1/2017-08-22 22-34-05.hand, 1, Yes, 77, 76
+gesture6Left, dataOutput/test2/2017-08-22 22-48-14.hand, 1, Yes, 93, 87
+gesture6Left, dataOutput/test3/2017-08-22 23-32-23.hand, 1, Yes, 88, 79
+gesture6Left, dataOutput/test4/2017-08-23 00-04-35.hand, na, Yes, 82, 82
+gesture6Left, dataOutput/test5/2017-08-23 00-27-45.hand, na, Yes, 88, 85
+gesture6Left, dataOutput/test6/2017-08-24 02-30-40.hand, na, Yes, 98, 93
+gesture6Left, dataOutput/test1/2017-08-22 22-34-10.hand, 2, No, 8, 46
+gesture6Left, dataOutput/test2/2017-08-22 22-48-25.hand, 2, No, 82, 78
 
 gesture7Left
 gesture7Left, dataOutput/General/2017-08-10 01-51-54.hand, c7, Yes, 74, 61
@@ -46,6 +94,14 @@ gesture7Left, dataOutput/Alex/2017-08-18 12-55-20.hand, na, Yes, 2, 90
 gesture7Left, dataOutput/Alex/2017-08-18 12-58-27.hand, na, Yes, 4, 85
 gesture7Left, dataOutput/Jacqueline/2017-08-10 16-10-38.hand, na, Yes, 88, 88
 gesture7Left, dataOutput/Stefan/2017-08-23 17-38-55.hand, na, Yes, 0, 79
+gesture7Left, dataOutput/test1/2017-08-22 22-34-28.hand, 1, Yes, 0, 81
+gesture7Left, dataOutput/test2/2017-08-22 22-51-11.hand, 1, Yes, 0, 75
+gesture7Left, dataOutput/test3/2017-08-22 23-32-46.hand, 1, Yes, 0, 78
+gesture7Left, dataOutput/test4/2017-08-23 00-04-57.hand, na, Yes, 81, 92
+gesture7Left, dataOutput/test5/2017-08-23 00-28-01.hand, na, Yes, 0, 86
+gesture7Left, dataOutput/test6/2017-08-24 02-31-04.hand, na, Yes, 71, 79
+gesture7Left, dataOutput/test1/2017-08-22 22-34-34.hand, 2, No, 0, 80
+gesture7Left, dataOutput/test2/2017-08-22 22-51-31.hand, 2, No, 0, 85
 
 gesture8Left
 gesture8Left, dataOutput/General/2017-08-10 01-52-05.hand, c8, Yes, 86, 86
@@ -53,14 +109,29 @@ gesture8Left, dataOutput/Alex/2017-08-18 12-55-25.hand, na, Yes, 82, 80
 gesture8Left, dataOutput/Alex/2017-08-18 12-58-32.hand, na, Yes, 78, 74
 gesture8Left, dataOutput/Jacqueline/2017-08-10 16-10-46.hand, na, Yes, 91, 79
 gesture8Left, dataOutput/Stefan/2017-08-23 17-38-58.hand, na, Yes, 8, 81
+gesture8Left, dataOutput/test1/2017-08-22 22-34-46.hand, 1, Yes, 93, 90
+gesture8Left, dataOutput/test2/2017-08-22 22-51-54.hand, 1, Yes, 96, 87
+gesture8Left, dataOutput/test3/2017-08-22 23-33-15.hand, 1, Yes, 95, 82
+gesture8Left, dataOutput/test4/2017-08-23 00-05-08.hand, na, Yes, 91, 87
+gesture8Left, dataOutput/test5/2017-08-23 00-28-09.hand, na, Yes, 91, 91
+gesture8Left, dataOutput/test6/2017-08-24 02-31-19.hand, na, Yes, 93, 82
+gesture8Left, dataOutput/test1/2017-08-22 22-34-53.hand, 2, No, 3, 43
+gesture8Left, dataOutput/test2/2017-08-22 22-51-59.hand, 2, No, 71, 57
 
 gesture9Left
 gesture9Left, dataOutput/General/2017-08-10 01-52-19.hand, c9, Yes, 94, 79
 gesture9Left, dataOutput/Alex/2017-08-18 12-55-36.hand, na, Yes, 92, 84
 gesture9Left, dataOutput/Alex/2017-08-18 12-58-35.hand, na, Yes, 82, 82
-gesture9Left, dataOutput/Jacqueline/2017-08-10 16-10-59.hand, na, Yes, 91, 82
 gesture9Left, dataOutput/Jacqueline/2017-08-10 16-11-04.hand, na, Yes, 93, 89
 gesture9Left, dataOutput/Stefan/2017-08-23 17-39-03.hand, na, Yes, 86, 84
+gesture9Left, dataOutput/test1/2017-08-22 22-35-08.hand, 1, Yes, 85, 89
+gesture9Left, dataOutput/test2/2017-08-22 22-52-48.hand, 1, Yes, 94, 89
+gesture9Left, dataOutput/test3/2017-08-22 23-33-41.hand, 1, Yes, 94, 84
+gesture9Left, dataOutput/test4/2017-08-23 00-06-18.hand, na, Yes, 81, 71
+gesture9Left, dataOutput/test5/2017-08-23 00-28-19.hand, na, Yes, 92, 87
+gesture9Left, dataOutput/test6/2017-08-24 02-31-39.hand, na, Yes, 92, 91
+gesture9Left, dataOutput/test1/2017-08-22 22-35-20.hand, 2, No, 49, 70
+gesture9Left, dataOutput/test2/2017-08-22 22-52-55.hand, 2, No, 90, 82
 
 gesture10Left
 gesture10Left, dataOutput/General/2017-08-10 01-52-39.hand, c10, Yes, 88, 75
@@ -68,6 +139,14 @@ gesture10Left, dataOutput/Alex/2017-08-18 12-55-46.hand, na, Yes, 73, 71
 gesture10Left, dataOutput/Alex/2017-08-18 12-58-39.hand, na, Yes, 80, 76
 gesture10Left, dataOutput/Jacqueline/2017-08-10 16-11-14.hand, na, Yes, 93, 83
 gesture10Left, dataOutput/Stefan/2017-08-23 17-39-06.hand, na, Yes, 71, 80
+gesture10Left, dataOutput/test1/2017-08-22 22-35-43.hand, 1, Yes, 65, 89
+gesture10Left, dataOutput/test2/2017-08-22 22-53-14.hand, 1, Yes, 86, 71
+gesture10Left, dataOutput/test3/2017-08-22 23-33-56.hand, 1, Yes, 78, 82
+gesture10Left, dataOutput/test4/2017-08-23 00-06-36.hand, na, Yes, 70, 80
+gesture10Left, dataOutput/test5/2017-08-23 00-28-31.hand, na, Yes, 90, 89
+gesture10Left, dataOutput/test6/2017-08-24 02-31-57.hand, na, Yes, 73, 86
+gesture10Left, dataOutput/test1/2017-08-22 22-35-50.hand, 2, No, 77, 82
+gesture10Left, dataOutput/test2/2017-08-22 22-53-22.hand, 2, No, 80, 75
 
 gesture1Right
 gesture1Right, dataOutput/General/2017-08-10 01-53-51.hand, c1, Yes, 75, 70
@@ -75,6 +154,14 @@ gesture1Right, dataOutput/Alex/2017-08-18 12-56-27.hand, na, Yes, 83, 92
 gesture1Right, dataOutput/Alex/2017-08-18 12-57-11.hand, na, Yes, 72, 81
 gesture1Right, dataOutput/Jacqueline/2017-08-10 16-01-11.hand, na, Yes, 5, 94
 gesture1Right, dataOutput/Stefan/2017-08-23 17-37-33.hand, na, Yes, 77, 77
+gesture1Right, dataOutput/test1/2017-08-22 22-36-22.hand, 1, Yes, 74, 75
+gesture1Right, dataOutput/test2/2017-08-22 22-40-59.hand, 1, Yes, 81, 91
+gesture1Right, dataOutput/test3/2017-08-22 23-34-34.hand, 1, Yes, 88, 98
+gesture1Right, dataOutput/test4/2017-08-23 00-07-17.hand, na, Yes, 73, 83
+gesture1Right, dataOutput/test5/2017-08-23 00-22-17.hand, na, Yes, 88, 98
+gesture1Right, dataOutput/test6/2017-08-24 02-32-58.hand, na, Yes, 90, 97
+gesture1Right, dataOutput/test1/2017-08-22 22-36-28.hand, 2, No, 56, 67
+gesture1Right, dataOutput/test2/2017-08-22 22-41-06.hand, 2, No, 53, 68
 
 gesture2Right
 gesture2Right, dataOutput/General/2017-08-10 01-54-00.hand, c2, Yes, 87, 84
@@ -82,6 +169,14 @@ gesture2Right, dataOutput/Alex/2017-08-18 12-56-34.hand, na, Yes, 92, 82
 gesture2Right, dataOutput/Alex/2017-08-18 12-57-14.hand, na, Yes, 90, 89
 gesture2Right, dataOutput/Jacqueline/2017-08-10 16-02-04.hand, na, Yes, 14, 86
 gesture2Right, dataOutput/Stefan/2017-08-23 17-37-38.hand, na, Yes, 84, 76
+gesture2Right, dataOutput/test1/2017-08-22 22-36-38.hand, 1, Yes, 87, 87
+gesture2Right, dataOutput/test2/2017-08-22 22-41-53.hand, 1, Yes, 5, 76
+gesture2Right, dataOutput/test3/2017-08-22 23-34-48.hand, 1, Yes, 82, 79
+gesture2Right, dataOutput/test4/2017-08-23 00-08-06.hand, na, Yes, 86, 84
+gesture2Right, dataOutput/test5/2017-08-23 00-22-51.hand, na, Yes, 3, 88
+gesture2Right, dataOutput/test6/2017-08-24 02-33-07.hand, na, Yes, 14, 85
+gesture2Right, dataOutput/test1/2017-08-22 22-36-45.hand, 2, No, 8, 63
+gesture2Right, dataOutput/test2/2017-08-22 22-41-59.hand, 2, No, 2, 68
 
 gesture3Right
 gesture3Right, dataOutput/General/2017-08-10 01-54-13.hand, c3, Yes, 96, 81
@@ -89,6 +184,14 @@ gesture3Right, dataOutput/Alex/2017-08-18 12-56-39.hand, na, Yes, 84, 90
 gesture3Right, dataOutput/Alex/2017-08-18 12-57-22.hand, na, Yes, 78, 84
 gesture3Right, dataOutput/Jacqueline/2017-08-10 16-02-35.hand, na, Yes, 82, 89
 gesture3Right, dataOutput/Stefan/2017-08-23 17-37-42.hand, na, Yes, 82, 85
+gesture3Right, dataOutput/test1/2017-08-22 22-37-06.hand, 1, Yes, 78, 85
+gesture3Right, dataOutput/test2/2017-08-22 22-42-48.hand, 1, Yes, 90, 86
+gesture3Right, dataOutput/test3/2017-08-22 23-35-01.hand, 1, Yes, 98, 89
+gesture3Right, dataOutput/test4/2017-08-23 00-08-36.hand, na, Yes, 95, 84
+gesture3Right, dataOutput/test5/2017-08-23 00-23-06.hand, na, Yes, 91, 83
+gesture3Right, dataOutput/test6/2017-08-24 02-33-35.hand, na, Yes, 87, 89
+gesture3Right, dataOutput/test1/2017-08-22 22-37-30.hand, 2, No, 65, 53
+gesture3Right, dataOutput/test2/2017-08-22 22-42-54.hand, 2, No, 59, 70
 
 gesture4Right
 gesture4Right, dataOutput/General/2017-08-10 01-54-22.hand, c4, Yes, 86, 90
@@ -96,6 +199,14 @@ gesture4Right, dataOutput/Alex/2017-08-18 12-56-43.hand, na, Yes, 93, 98
 gesture4Right, dataOutput/Alex/2017-08-18 12-57-26.hand, na, Yes, 88, 93
 gesture4Right, dataOutput/Jacqueline/2017-08-10 16-02-51.hand, na, Yes, 90, 94
 gesture4Right, dataOutput/Stefan/2017-08-23 17-37-46.hand, na, Yes, 81, 82
+gesture4Right, dataOutput/test1/2017-08-22 22-37-44.hand, 1, Yes, 72, 75
+gesture4Right, dataOutput/test2/2017-08-22 22-43-07.hand, 1, Yes, 64, 86
+gesture4Right, dataOutput/test3/2017-08-22 23-35-24.hand, 1, Yes, 94, 88
+gesture4Right, dataOutput/test4/2017-08-23 00-08-48.hand, na, Yes, 77, 87
+gesture4Right, dataOutput/test5/2017-08-23 00-23-36.hand, na, Yes, 0, 88
+gesture4Right, dataOutput/test6/2017-08-24 02-34-03.hand, na, Yes, 93, 95
+gesture4Right, dataOutput/test1/2017-08-22 22-37-51.hand, 2, No, 69, 60
+gesture4Right, dataOutput/test2/2017-08-22 22-43-15.hand, 2, No, 58, 75
 
 gesture5Right
 gesture5Right, dataOutput/General/2017-08-10 01-54-43.hand, c5, Yes, 89, 91
@@ -103,6 +214,14 @@ gesture5Right, dataOutput/Alex/2017-08-18 12-56-47.hand, na, Yes, 96, 89
 gesture5Right, dataOutput/Alex/2017-08-18 12-57-31.hand, na, Yes, 97, 89
 gesture5Right, dataOutput/Jacqueline/2017-08-10 16-03-01.hand, na, Yes, 91, 83
 gesture5Right, dataOutput/Stefan/2017-08-23 17-37-49.hand, na, Yes, 94, 93
+gesture5Right, dataOutput/test1/2017-08-22 22-37-59.hand, 1, Yes, 88, 85
+gesture5Right, dataOutput/test2/2017-08-22 22-43-26.hand, 1, Yes, 85, 85
+gesture5Right, dataOutput/test3/2017-08-22 23-35-36.hand, 1, Yes, 96, 89
+gesture5Right, dataOutput/test4/2017-08-23 00-09-14.hand, na, Yes, 80, 73
+gesture5Right, dataOutput/test5/2017-08-23 00-23-52.hand, na, Yes, 83, 89
+gesture5Right, dataOutput/test6/2017-08-24 02-34-14.hand, na, Yes, 87, 66
+gesture5Right, dataOutput/test1/2017-08-22 22-38-04.hand, 2, No, 68, 78
+gesture5Right, dataOutput/test2/2017-08-22 22-43-33.hand, 2, No, 66, 78
 
 gesture6Right
 gesture6Right, dataOutput/General/2017-08-10 01-55-24.hand, c6, Yes, 89, 91
@@ -110,6 +229,14 @@ gesture6Right, dataOutput/Alex/2017-08-18 12-56-51.hand, na, Yes, 5, 79
 gesture6Right, dataOutput/Alex/2017-08-18 12-57-34.hand, na, Yes, 78, 88
 gesture6Right, dataOutput/Jacqueline/2017-08-10 16-03-12.hand, na, Yes, 73, 81
 gesture6Right, dataOutput/Stefan/2017-08-23 17-37-53.hand, na, Yes, 8, 71
+gesture6Right, dataOutput/test1/2017-08-22 22-38-10.hand, 1, Yes, 87, 89
+gesture6Right, dataOutput/test2/2017-08-22 22-43-43.hand, 1, Yes, 82, 74
+gesture6Right, dataOutput/test3/2017-08-22 23-35-57.hand, 1, Yes, 83, 89
+gesture6Right, dataOutput/test4/2017-08-23 00-09-21.hand, na, Yes, 76, 85
+gesture6Right, dataOutput/test5/2017-08-23 00-23-59.hand, na, Yes, 83, 92
+gesture6Right, dataOutput/test6/2017-08-24 02-34-39.hand, na, Yes, 86, 92
+gesture6Right, dataOutput/test1/2017-08-22 22-38-15.hand, 2, No, 66, 67
+gesture6Right, dataOutput/test2/2017-08-22 22-43-50.hand, 2, No, 76, 64
 
 gesture7Right
 gesture7Right, dataOutput/General/2017-08-10 01-55-44.hand, c7, Yes, 86, 90
@@ -117,6 +244,14 @@ gesture7Right, dataOutput/Alex/2017-08-18 12-56-54.hand, na, Yes, 84, 91
 gesture7Right, dataOutput/Alex/2017-08-18 12-57-40.hand, na, Yes, 86, 89
 gesture7Right, dataOutput/Jacqueline/2017-08-10 16-03-27.hand, na, Yes, 81, 87
 gesture7Right, dataOutput/Stefan/2017-08-23 17-37-58.hand, na, Yes, 54, 71
+gesture7Right, dataOutput/test1/2017-08-22 22-38-25.hand, 1, Yes, 76, 69
+gesture7Right, dataOutput/test2/2017-08-22 22-44-01.hand, 1, Yes, 85, 78
+gesture7Right, dataOutput/test3/2017-08-22 23-36-26.hand, 1, Yes, 83, 82
+gesture7Right, dataOutput/test4/2017-08-23 00-09-31.hand, na, Yes, 87, 82
+gesture7Right, dataOutput/test5/2017-08-23 00-24-22.hand, na, Yes, 87, 88
+gesture7Right, dataOutput/test6/2017-08-24 02-35-28.hand, na, Yes, 87, 88
+gesture7Right, dataOutput/test1/2017-08-22 22-38-32.hand, 2, No, 37, 28
+gesture7Right, dataOutput/test2/2017-08-22 22-44-12.hand, 2, No, 78, 78
 
 gesture8Right
 gesture8Right, dataOutput/General/2017-08-10 01-56-06.hand, c8, Yes, 84, 78
@@ -124,6 +259,14 @@ gesture8Right, dataOutput/Alex/2017-08-18 12-56-58.hand, na, Yes, 80, 73
 gesture8Right, dataOutput/Alex/2017-08-18 12-57-43.hand, na, Yes, 87, 84
 gesture8Right, dataOutput/Jacqueline/2017-08-10 16-03-46.hand, na, Yes, 75, 70
 gesture8Right, dataOutput/Stefan/2017-08-23 17-38-03.hand, na, Yes, 85, 82
+gesture8Right, dataOutput/test1/2017-08-22 22-38-39.hand, 1, Yes, 96, 89
+gesture8Right, dataOutput/test2/2017-08-22 22-44-19.hand, 1, Yes, 97, 92
+gesture8Right, dataOutput/test3/2017-08-22 23-36-48.hand, 1, Yes, 8, 74
+gesture8Right, dataOutput/test4/2017-08-23 00-09-41.hand, na, Yes, 94, 87
+gesture8Right, dataOutput/test5/2017-08-23 00-24-54.hand, na, Yes, 73, 83
+gesture8Right, dataOutput/test6/2017-08-24 02-35-52.hand, na, Yes, 95, 93
+gesture8Right, dataOutput/test1/2017-08-22 22-38-47.hand, 2, No, 59, 73
+gesture8Right, dataOutput/test2/2017-08-22 22-44-29.hand, 2, No, 79, 60
 
 gesture9Right
 gesture9Right, dataOutput/General/2017-08-10 01-56-25.hand, c9, Yes, 93, 87
@@ -131,6 +274,14 @@ gesture9Right, dataOutput/Alex/2017-08-18 12-57-02.hand, na, Yes, 81, 89
 gesture9Right, dataOutput/Alex/2017-08-18 12-57-46.hand, na, Yes, 79, 83
 gesture9Right, dataOutput/Jacqueline/2017-08-10 16-05-05.hand, na, Yes, 92, 92
 gesture9Right, dataOutput/Stefan/2017-08-23 17-38-07.hand, na, Yes, 82, 84
+gesture9Right, dataOutput/test1/2017-08-22 22-38-56.hand, 1, Yes, 88, 84
+gesture9Right, dataOutput/test2/2017-08-22 22-44-49.hand, 1, Yes, 72, 76
+gesture9Right, dataOutput/test3/2017-08-22 23-37-18.hand, 1, Yes, 93, 86
+gesture9Right, dataOutput/test4/2017-08-23 00-10-19.hand, na, Yes, 74, 78
+gesture9Right, dataOutput/test5/2017-08-23 00-25-30.hand, na, Yes, 90, 88
+gesture9Right, dataOutput/test6/2017-08-24 02-37-52.hand, na, Yes, 84, 87
+gesture9Right, dataOutput/test1/2017-08-22 22-39-02.hand, 2, No, 53, 69
+gesture9Right, dataOutput/test2/2017-08-22 22-44-57.hand, 2, No, 53, 79
 
 gesture10Right
 gesture10Right, dataOutput/General/2017-08-10 01-56-34.hand, c10, Yes, 69, 79
@@ -138,5 +289,13 @@ gesture10Right, dataOutput/Alex/2017-08-18 12-57-05.hand, na, Yes, 79, 84
 gesture10Right, dataOutput/Alex/2017-08-18 12-57-49.hand, na, Yes, 83, 82
 gesture10Right, dataOutput/Jacqueline/2017-08-10 16-05-36.hand, na, Yes, 73, 81
 gesture10Right, dataOutput/Stefan/2017-08-23 17-38-16.hand, na, Yes, 84, 81
+gesture10Right, dataOutput/test1/2017-08-22 22-39-20.hand, 1, Yes, 81, 87
+gesture10Right, dataOutput/test2/2017-08-22 22-45-08.hand, 1, Yes, 84, 84
+gesture10Right, dataOutput/test3/2017-08-22 23-38-31.hand, 1, Yes, 91, 91
+gesture10Right, dataOutput/test4/2017-08-23 00-10-30.hand, na, Yes, 80, 80
+gesture10Right, dataOutput/test5/2017-08-23 00-25-48.hand, na, Yes, 86, 79
+gesture10Right, dataOutput/test6/2017-08-24 02-36-47.hand, na, Yes, 91, 85
+gesture10Right, dataOutput/test1/2017-08-22 22-39-27.hand, 2, No, 58, 65
+gesture10Right, dataOutput/test2/2017-08-22 22-45-15.hand, 2, No, 86, 87
 
 

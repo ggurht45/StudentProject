@@ -1,0 +1,5 @@
+dataOutput/test6/2017-08-24 02-34-03.hand information
+	Name: gesture4Right
+	Comments: 
+	Result: Yes
+

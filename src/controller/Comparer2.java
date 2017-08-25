@@ -381,6 +381,13 @@ public class Comparer2 {
         ghashmap = outputFolderScores(ghashmap, "Stefan");
         //my data collection
         ghashmap = outputFolderScores(ghashmap, "test1");
+        ghashmap = outputFolderScores(ghashmap, "test2");
+        ghashmap = outputFolderScores(ghashmap, "test3");
+        ghashmap = outputFolderScores(ghashmap, "test4");
+        ghashmap = outputFolderScores(ghashmap, "test5");
+        ghashmap = outputFolderScores(ghashmap, "test6");
+        ghashmap = outputFolderScores(ghashmap, "test7");
+        ghashmap = outputFolderScores(ghashmap, "test8");
 
 
         //print by gesture types
